@@ -1,7 +1,6 @@
 import { FC, Fragment } from 'react';
 
-import { useBodyOverflow } from '../../../hooks';
-import { useAppDispatch, useAppSelector } from '../../../store/hooks';
+import { useAppDispatch, useAppSelector, useBodyOverflow } from '../../../hooks';
 import { closeMobileMenu, toggleMobileMenu } from '../../../store/slices';
 
 import './button-burger.scss';

@@ -1,13 +1,4 @@
-export interface IPATHS {
-  main: string;
-  booksAll: string;
-  booksCategory: string;
-  bookPage: string;
-  profile: string;
-  terms: string;
-  contract: string;
-  any: string;
-}
+import { IPATHS } from './constants.interface';
 
 export const PATHS: IPATHS = {
   main: '/',

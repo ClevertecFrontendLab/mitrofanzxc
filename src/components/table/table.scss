@@ -47,9 +47,9 @@ th.subtitle_large {
   }
 
   @media (max-width: $breakpoint-xs-min) {
-    font-size: 12px;
+    font-size: $base * 3;
     font-weight: $fw-medium;
-    line-height: 16px;
+    line-height: $base * 4;
     letter-spacing: 0.2px;
   }
 }
@@ -61,8 +61,8 @@ td.body_large {
   }
 
   @media (max-width: $breakpoint-xs-min) {
-    font-size: 12px;
-    line-height: 16px;
+    font-size: $base * 3;
+    line-height: $base * 4;
     letter-spacing: 0.2px;
     padding-bottom: 14px;
   }
@@ -76,6 +76,6 @@ td {
   }
 
   @media (max-width: $breakpoint-sm-min) {
-    padding-left: 40px;
+    padding-left: $base * 10;
   }
 }

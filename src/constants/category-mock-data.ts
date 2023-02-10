@@ -1,7 +1,4 @@
-export interface ICategoryMockData {
-  eng: string;
-  ru: string;
-}
+import { ICategoryMockData } from './constants.interface';
 
 export const CategoryMockData: ICategoryMockData[] = [
   {

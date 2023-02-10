@@ -1,15 +1,8 @@
-import { FC, MouseEvent } from 'react';
+import { FC } from 'react';
+
+import { IButtonPrimary } from './button-primary.interface';
 
 import './button-primary.scss';
-
-export interface IButtonPrimary {
-  type: 'primary' | 'secondary';
-  title: string;
-  className?: string;
-  disabled?: boolean;
-  onClick?: () => void | ((event: MouseEvent<HTMLButtonElement>) => void);
-  dataTestId?: string;
-}
 
 export const ButtonPrimary: FC<IButtonPrimary> = ({ type, title, className, disabled, onClick, dataTestId }) => (
   <button

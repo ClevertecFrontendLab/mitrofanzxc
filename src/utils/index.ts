@@ -6,3 +6,21 @@ export { translateCategoryTitle } from './translate-category-title';
 export { divideTableData } from './divide-table-data';
 export { sortData } from './sort-data';
 export { validateTextField } from './validate-text-field';
+export { interceptRequest } from './intercept-request';
+export type {
+  TArrayDivideTableData,
+  TArrayGetUniqueCategories,
+  TPartDivideTableDate,
+  TTypeConvertToDate,
+  TTypeSortData,
+  IArrayICreateNavData,
+  IConvertToDate,
+  ICreateNavData,
+  IDivideTableData,
+  IGetAmountOfBooks,
+  IGetUniqueCategories,
+  IInterceptRequest,
+  ISortData,
+  ITranslateCategoryTitle,
+  IValidateTextField,
+} from './utils.interface';

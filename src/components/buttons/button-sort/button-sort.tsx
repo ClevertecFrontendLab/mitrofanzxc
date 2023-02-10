@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { useAppDispatch, useAppSelector } from '../../../store/hooks';
+import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { changeCatalogSortState } from '../../../store/slices';
 import { Sprite } from '../..';
 

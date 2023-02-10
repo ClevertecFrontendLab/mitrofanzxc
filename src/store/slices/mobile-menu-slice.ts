@@ -1,9 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-export interface IMobileMenuState {
-  isMobileMenuOpen: boolean;
-  isAccordionMenuOpen: boolean;
-}
+import { IMobileMenuState } from './slices.interface';
 
 const initialState: IMobileMenuState = {
   isMobileMenuOpen: false,

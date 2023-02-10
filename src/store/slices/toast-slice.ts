@@ -1,10 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-export interface IToastState {
-  isToastOpen: boolean;
-  isToastError: boolean;
-  typeToastError: 'connection' | 'changes' | 'default';
-}
+import { IToastState } from './slices.interface';
 
 const initialState: IToastState = {
   isToastOpen: false,

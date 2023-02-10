@@ -1,6 +1,6 @@
-import { ICatalogMockData } from '../constants';
+import { IGetAmountOfBooks } from './utils.interface';
 
-export const getAmountOfBooks = (data: ICatalogMockData[], category: string) => {
+export const getAmountOfBooks: IGetAmountOfBooks = (data, category) => {
   if (data && data.length > 0) {
     return data.filter((item) => item.category === category).length;
   }

@@ -2,8 +2,8 @@ import { FC, useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import { CatalogMockData, CategoryMockData, PATHS } from '../../constants';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { closeAccordionMenu, closeMobileMenu, toggleAccordionMenu } from '../../store/slices';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { closeAccordionMenu, closeMobileMenu, closeToast, toggleAccordionMenu } from '../../store/slices';
 import { createNavData, translateCategoryTitle } from '../../utils';
 import { Sprite } from '..';
 
@@ -28,6 +28,7 @@ export const Nav: FC = () => {
   const handleTerms = () => {
     dispatch(closeMobileMenu());
     dispatch(closeAccordionMenu());
+    dispatch(closeToast());
   };
 
   // Ограничитель по количетсву символов в карточке, в зависимости от ширины экрана

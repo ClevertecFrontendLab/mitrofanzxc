@@ -32,8 +32,8 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 24px;
-  height: 24px;
+  width: $base * 6;
+  height: $base * 6;
   background-color: $color-white;
   border: 1px solid $color-grey-black-40;
   border-radius: 6px;

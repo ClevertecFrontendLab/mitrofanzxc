@@ -3,49 +3,7 @@ import bookImg2 from '../assets/book-2.png';
 import bookImg3 from '../assets/book-3.png';
 import userImg from '../assets/user-review.png';
 
-export interface IReviews {
-  id: string;
-  src: string;
-  author: string;
-  timestamp: number;
-  rating: number | null | undefined;
-  description: string | null | undefined;
-}
-
-export interface IImages {
-  id: string;
-  src: string;
-}
-
-export interface IStatus {
-  message: 'free' | 'busy' | 'reserved';
-  timestamp: number | null | undefined;
-}
-
-export interface IInfo {
-  publishingHouse: string | null | undefined;
-  year: string | null | undefined;
-  pages: string | null | undefined;
-  binding: string | null | undefined;
-  format: string | null | undefined;
-  genre: string | null | undefined;
-  weight: string | null | undefined;
-  isbn: string | null | undefined;
-  manufacturer: string | null | undefined;
-}
-
-export interface ICatalogMockData {
-  id: string;
-  category: string;
-  rating: number | null | undefined;
-  title: string;
-  author: string;
-  images: IImages[] | null | undefined;
-  status: IStatus;
-  descrtption: string | null | undefined;
-  info: IInfo;
-  reviews: IReviews[];
-}
+import { ICatalogMockData } from './constants.interface';
 
 export const CatalogMockData: ICatalogMockData[] = [
   {

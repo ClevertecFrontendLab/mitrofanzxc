@@ -1,27 +1,36 @@
-import { ChangeEvent, FC, KeyboardEvent, useRef, useState } from 'react';
+import { ChangeEvent, FC, FocusEvent, KeyboardEvent, useRef } from 'react';
 
-import { useAppDispatch } from '../../store/hooks';
-import { searchCatalogByTitle } from '../../store/slices';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { handleIsInputSearchOpen, searchCatalogByTitle, setInputSearchValue } from '../../store/slices';
 import { Sprite } from '..';
 
 import './input-search.scss';
 
 export const InputSearch: FC = () => {
-  const [inputSearchValue, setInputSearchValue] = useState<string>('');
-  const dispatch = useAppDispatch();
+  const { inputSearchValue, isInputSearchOpen } = useAppSelector((state) => state.catalog);
   const inputSearchRef = useRef<HTMLInputElement>(null);
+  const dispatch = useAppDispatch();
 
-  const handleInputSearch = (event: ChangeEvent<HTMLInputElement>) => {
+  const changeInputSearch = (event: ChangeEvent<HTMLInputElement>) => {
     const target = event.target as HTMLInputElement;
     const { value } = target;
 
-    setInputSearchValue(value);
-    dispatch(searchCatalogByTitle(inputSearchValue));
+    dispatch(setInputSearchValue(value));
+    dispatch(searchCatalogByTitle());
+  };
+
+  const blurInputSearch = (event: FocusEvent<HTMLInputElement>) => {
+    const target = event.target as HTMLInputElement;
+    const { value } = target;
+
+    if (!value) {
+      dispatch(handleIsInputSearchOpen(false));
+    }
   };
 
   const handleKeyboardInputSearch = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
-      dispatch(searchCatalogByTitle(inputSearchValue));
+      dispatch(searchCatalogByTitle());
     }
   };
 
@@ -29,14 +38,18 @@ export const InputSearch: FC = () => {
     if (inputSearchRef && inputSearchRef.current) {
       inputSearchRef.current.focus();
     }
+
+    dispatch(handleIsInputSearchOpen(true));
   };
 
   const handleButtonCancel = () => {
-    setInputSearchValue('');
+    dispatch(setInputSearchValue(''));
+    dispatch(handleIsInputSearchOpen(false));
+    dispatch(searchCatalogByTitle());
   };
 
   return (
-    <div className='input-search'>
+    <div className={`input-search ${isInputSearchOpen ? 'input-search_active' : ''}`}>
       <button type='button' className='button-search' onClick={handleButtonSearch} data-test-id='button-search-open'>
         <Sprite id='search' className='button-search__logo' />
       </button>
@@ -47,8 +60,9 @@ export const InputSearch: FC = () => {
         id='input-search'
         placeholder='Поиск книги или автора...'
         value={inputSearchValue}
-        onChange={handleInputSearch}
+        onChange={changeInputSearch}
         onKeyDown={handleKeyboardInputSearch}
+        onBlur={blurInputSearch}
         ref={inputSearchRef}
         data-test-id='input-search'
       />

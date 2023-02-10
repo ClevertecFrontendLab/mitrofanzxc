@@ -1,10 +1,8 @@
 import { FC } from 'react';
 
-import './terms-page.scss';
+import { ITermsPage } from './terms-page.interface';
 
-export interface ITermsPage {
-  contentView: string;
-}
+import './terms-page.scss';
 
 export const TermsPage: FC<ITermsPage> = ({ contentView }) => (
   <section className='terms-page'>

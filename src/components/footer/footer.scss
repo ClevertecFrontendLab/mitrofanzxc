@@ -5,14 +5,14 @@
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  row-gap: 16px;
+  row-gap: $base * 4;
   margin-top: 62px;
-  padding: 16px 0 16px 0;
+  padding: $base * 4 0 $base * 4 0;
   border-top: 1px solid $color-grey-black-20;
 
   @media (max-width: $breakpoint-sm-min) {
     justify-content: center;
-    padding: 16px 0 8px 0;
+    padding: $base * 4 0 $base * 2 0;
     text-align: center;
   }
 }
@@ -20,7 +20,7 @@
 .socials {
   display: flex;
   align-items: center;
-  column-gap: 24px;
+  column-gap: $base * 6;
 }
 
 .socials__link {
@@ -30,7 +30,7 @@
 }
 
 .socials__logo {
-  width: 24px;
-  height: 24px;
+  width: $base * 6;
+  height: $base * 6;
   fill: $color-dark;
 }

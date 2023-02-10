@@ -1,9 +1,6 @@
-export interface ITitlesMockData {
-  eng: string;
-  ru: string;
-}
+import { ICategoryMockData } from './constants.interface';
 
-export const TitlesMockData: ITitlesMockData[] = [
+export const TitlesMockData: ICategoryMockData[] = [
   {
     eng: 'books',
     ru: 'Библиотека',

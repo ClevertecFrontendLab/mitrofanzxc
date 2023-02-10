@@ -2,31 +2,31 @@
 
 .terms-page {
   @media (max-width: $breakpoint-xxs-min) {
-    margin-top: 16px;
+    margin-top: $base * 4;
   }
 }
 
 .terms-list__item {
   &:first-child {
-    margin-top: 32px;
+    margin-top: $base * 8;
 
     @media (max-width: $breakpoint-xxs-min) {
-      margin-top: 24px;
+      margin-top: $base * 6;
     }
   }
 }
 
 .nesting-lvl_1 {
-  margin-top: 16px;
+  margin-top: $base * 4;
   padding-left: 30px;
 }
 
 .nesting-lvl_2 {
-  margin-top: 16px;
-  padding-left: 60px;
+  margin-top: $base * 4;
+  padding-left: $base * 15;
 }
 
 .nesting-lvl_3 {
-  margin-top: 16px;
+  margin-top: $base * 4;
   padding-left: 90px;
 }

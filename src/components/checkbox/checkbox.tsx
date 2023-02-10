@@ -1,11 +1,8 @@
 import { FC, useState } from 'react';
 
-import './checkbox.scss';
+import { ICheckbox } from './checkbox.interface';
 
-export interface ICheckbox {
-  id: string;
-  value: string;
-}
+import './checkbox.scss';
 
 export const Checkbox: FC<ICheckbox> = ({ id, value }) => {
   const [isChecked, setIsChecked] = useState<boolean>(false);

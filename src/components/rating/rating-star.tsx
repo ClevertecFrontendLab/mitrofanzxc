@@ -2,10 +2,7 @@ import { FC } from 'react';
 
 import { Sprite } from '..';
 
-export interface IRatingStar {
-  id: string;
-  spriteId: string;
-}
+import { IRatingStar } from './rating.interface';
 
 export const RatingStar: FC<IRatingStar> = ({ id, spriteId }) => (
   <li key={id} className='rating__item'>

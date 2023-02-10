@@ -1,11 +1,11 @@
+import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
-export interface ILoaderState {
-  isLoaderOpen: boolean;
-}
+import { ILoaderState } from './slices.interface';
 
 const initialState: ILoaderState = {
-  isLoaderOpen: false,
+  isLoading: false,
+  isSuccess: false,
 };
 
 export const loaderSlice = createSlice({
@@ -13,15 +13,15 @@ export const loaderSlice = createSlice({
   name: 'loader',
   initialState,
   reducers: {
-    openLoader: (state) => {
-      state.isLoaderOpen = true;
+    handleLoading: (state, action: PayloadAction<boolean>) => {
+      state.isLoading = action.payload;
     },
-    closeLoader: (state) => {
-      state.isLoaderOpen = false;
+    handleSuccess: (state, action: PayloadAction<boolean>) => {
+      state.isSuccess = action.payload;
     },
   },
 });
 
-export const { openLoader, closeLoader } = loaderSlice.actions;
+export const { handleLoading, handleSuccess } = loaderSlice.actions;
 /* eslint-disable-next-line import/no-default-export */
 export default loaderSlice.reducer;

@@ -4,18 +4,18 @@
   position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  row-gap: 24px;
+  row-gap: $base * 6;
   column-gap: 21.5px;
-  margin-top: 32px;
+  margin-top: $base * 8;
 
   @media (max-width: $breakpoint-xl-min) {
     grid-template-columns: 1fr 1fr 1fr;
   }
 
   @media (max-width: $breakpoint-lg-min) {
-    row-gap: 32px;
+    row-gap: $base * 8;
     column-gap: 35px;
-    margin-top: 24px;
+    margin-top: $base * 6;
   }
 
   @media (max-width: $breakpoint-md-min) {
@@ -24,8 +24,8 @@
 
   @media (max-width: $breakpoint-sm-min) {
     grid-template-columns: 1fr 1fr;
-    column-gap: 16px;
-    row-gap: 16px;
+    column-gap: $base * 4;
+    row-gap: $base * 4;
   }
 
   @media (max-width: $breakpoint-xxs-min) {
@@ -36,7 +36,7 @@
   > .h3 {
     position: absolute;
     transform: translate(-50%, -50%);
-    top: 200px;
+    top: $base * 50;
     left: 50%;
     width: 100%;
     color: $color-grey-black-40;
@@ -55,14 +55,14 @@
 .catalog_list {
   display: grid;
   grid-template-columns: 1fr;
-  row-gap: 16px;
-  margin-top: 32px;
+  row-gap: $base * 4;
+  margin-top: $base * 8;
 
   @media (max-width: $breakpoint-md-min) {
-    margin-top: 24px;
+    margin-top: $base * 6;
   }
 
   @media (max-width: $breakpoint-xxs-min) {
-    margin-top: 16px;
+    margin-top: $base * 4;
   }
 }

@@ -5,11 +5,9 @@ import { v4 as uuidv4 } from 'uuid';
 import { TableHeaderMockData } from '../../constants';
 import { translateCategoryTitle } from '../../utils';
 
-import './table.scss';
+import { ITable } from './table.interface';
 
-export interface ITable {
-  data: Array<[string, string | null | undefined]> | null;
-}
+import './table.scss';
 
 export const Table: FC<ITable> = ({ data }) => (
   <table className='table'>

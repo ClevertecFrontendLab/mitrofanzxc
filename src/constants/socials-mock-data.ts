@@ -1,8 +1,4 @@
-export interface ISocialsMockData {
-  id: string;
-  link: string;
-  src: string;
-}
+import { ISocialsMockData } from './constants.interface';
 
 export const SocialsMockData: ISocialsMockData[] = [
   {

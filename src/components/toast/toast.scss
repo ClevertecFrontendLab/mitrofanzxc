@@ -2,30 +2,30 @@
 
 .toast {
   position: fixed;
-  top: 104px;
+  top: $base * 26;
   left: -150%;
   transform: translate(-50%, -50%);
-  z-index: 2;
+  z-index: 3;
   max-width: 1110px;
   width: 100%;
-  padding: 24px 32px;
+  padding: $base * 6 $base * 8;
   border-radius: 5px;
   border-width: 1.5px;
   border-style: solid;
   transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.35);
 
   @media (max-width: $breakpoint-lg-min) {
-    width: calc(100vw - 20px);
+    width: calc(100vw - $base * 5);
   }
 
   @media (max-width: $breakpoint-md-min) {
-    max-width: 640px;
-    padding: 24px 16px;
+    max-width: $base * 160;
+    padding: $base * 6 $base * 4;
   }
 
   @media (max-width: $breakpoint-xxs-min) {
-    max-width: 280px;
-    padding: 12px 16px;
+    max-width: $base * 70;
+    padding: $base * 3 $base * 4;
   }
 }
 
@@ -47,10 +47,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  column-gap: 24px;
+  column-gap: $base * 6;
 
   @media (max-width: $breakpoint-md-min) {
-    column-gap: 12px;
+    column-gap: $base * 3;
   }
 
   @media (max-width: $breakpoint-xxs-min) {
@@ -70,13 +70,14 @@
 }
 
 .toast__logo {
-  min-width: 32px;
-  max-width: 32px;
-  height: 32px;
+  min-width: $base * 8;
+  max-width: $base * 8;
+  height: $base * 8;
+  cursor: pointer;
 
   @media (max-width: $breakpoint-md-min) {
-    min-width: 24px;
-    max-width: 24px;
-    height: 24px;
+    min-width: $base * 6;
+    max-width: $base * 6;
+    height: $base * 6;
   }
 }

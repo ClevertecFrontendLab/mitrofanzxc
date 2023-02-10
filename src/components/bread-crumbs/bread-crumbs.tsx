@@ -1,18 +1,16 @@
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
 
-import { CategoryMockData, ICatalogMockData } from '../../constants';
-import { useAppDispatch } from '../../store/hooks';
+import { CategoryMockData } from '../../constants';
+import { useAppDispatch } from '../../hooks';
 import { openAccordionMenu } from '../../store/slices';
 import { translateCategoryTitle } from '../../utils';
 
+import { IBreadCrumbs } from './bread-crumbs.interface';
+
 import './bread-crumbs.scss';
 
-export interface IBreadCrumbs {
-  bookInfo: ICatalogMockData | undefined;
-}
-
-export const BreadCrumbs: FC<IBreadCrumbs> = ({ bookInfo }) => {
+export const BreadCrumbs: FC<IBreadCrumbs> = ({ bookInfo, isSuccess }) => {
   const dispatch = useAppDispatch();
 
   const handleBreadCrumbCategory = () => {
@@ -31,13 +29,15 @@ export const BreadCrumbs: FC<IBreadCrumbs> = ({ bookInfo }) => {
           >
             {translateCategoryTitle(bookInfo, CategoryMockData)}
           </Link>
-          <Link
-            to={`/books/${bookInfo ? bookInfo.category : 'all'}/${bookInfo ? bookInfo.id : ''}`}
-            className='body_small display_inline'
-            data-test-id='breadcrumbs-link'
-          >
-            {bookInfo ? bookInfo.title : 'Книга'}
-          </Link>
+          {bookInfo && bookInfo.title && isSuccess && (
+            <Link
+              to={`/books/${bookInfo ? bookInfo.category : 'all'}/${bookInfo ? bookInfo.id : ''}`}
+              className='body_small display_inline'
+              data-test-id='breadcrumbs-link'
+            >
+              {bookInfo.title}
+            </Link>
+          )}
         </div>
       </div>
     </div>

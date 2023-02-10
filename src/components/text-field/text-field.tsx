@@ -1,19 +1,13 @@
 import { ChangeEvent, FC, useState } from 'react';
 
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { setTextFieldError, setTextFieldValue } from '../../store/slices';
-import { IForm } from '../../store/slices/registration-slice';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { IForm, setTextFieldError, setTextFieldValue } from '../../store/slices';
 import { validateTextField } from '../../utils';
 import { Sprite } from '..';
 
-import './text-field.scss';
+import { ITextField } from './text-field.interface';
 
-export interface ITextField {
-  type: string;
-  id: 'login' | 'password' | 'firstName' | 'lastName' | 'phone' | 'email' | 'contractNumber' | 'contractOwner';
-  placeholder: string;
-  message?: string;
-}
+import './text-field.scss';
 
 export const TextField: FC<ITextField> = ({ type, id, placeholder, message }) => {
   const [isEyeOpen, setIsEyeOpen] = useState<boolean>(false);

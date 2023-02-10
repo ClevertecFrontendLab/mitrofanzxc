@@ -2,12 +2,9 @@ import { FC } from 'react';
 
 import { Sprite } from '../..';
 
-import './button-login.scss';
+import { IButtonLogin } from './button-login.interface';
 
-export interface IButtonLogin {
-  title: string;
-  onClick: () => void;
-}
+import './button-login.scss';
 
 export const ButtonLogin: FC<IButtonLogin> = ({ title, onClick }) => (
   <button type='button' className='button-login button_small_mobile' onClick={onClick}>

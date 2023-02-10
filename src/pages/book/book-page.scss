@@ -6,7 +6,7 @@
     'book-page__img-wrapper book-page__info'
     'book-page__img-wrapper book-page__description'
     'book-page__img-wrapper book-page__description';
-  grid-template-columns: minmax(136px, 0.7fr) minmax(136px, 1fr);
+  grid-template-columns: minmax($base * 34, 0.7fr) minmax($base * 34, 1fr);
   column-gap: 30px;
   margin-top: 42px;
 
@@ -15,7 +15,7 @@
       'book-page__img-wrapper book-page__info'
       'book-page__img-wrapper book-page__info'
       'book-page__description book-page__description';
-    grid-template-columns: minmax(136px, 136px) minmax(136px, 1fr);
+    grid-template-columns: minmax($base * 34, $base * 34) minmax($base * 34, 1fr);
     margin-top: 47px;
   }
 
@@ -29,14 +29,14 @@
       'book-page__img-wrapper'
       'book-page__info'
       'book-page__description';
-    grid-template-columns: minmax(136px, 1fr);
+    grid-template-columns: minmax($base * 34, 1fr);
   }
 
   .book-page__header {
     @media (max-width: $breakpoint-md-min) {
-      font-size: 16px;
+      font-size: $base * 4;
       font-weight: $fw-semi-bold;
-      line-height: 24px;
+      line-height: $base * 6;
       letter-spacing: 0.1px;
     }
   }
@@ -91,25 +91,25 @@
   max-width: 635px;
 
   @media (max-width: 370px) {
-    margin-top: 20px;
+    margin-top: $base * 5;
   }
 
   .h3 {
     @media (max-width: $breakpoint-lg-min) {
-      font-size: 24px;
+      font-size: $base * 6;
       line-height: 30px;
     }
 
     @media (max-width: $breakpoint-xs-min) {
       font-size: 18px;
-      line-height: 28px;
+      line-height: $base * 7;
     }
   }
 
   .button {
     width: 350px;
-    height: 52px;
-    margin-top: 32px;
+    height: $base * 13;
+    margin-top: $base * 8;
     border-radius: 30px;
 
     @media (max-width: $breakpoint-lg-min) {
@@ -121,9 +121,9 @@
     }
 
     @media (max-width: $breakpoint-xs-min) {
-      height: 40px;
+      height: $base * 10;
       margin-top: 41px;
-      font-size: 12px;
+      font-size: $base * 3;
     }
   }
 }
@@ -131,16 +131,16 @@
 .book-page__detail {
   .book-page__header {
     @media (max-width: $breakpoint-md-min) {
-      font-size: 16px;
+      font-size: $base * 4;
       font-weight: $fw-semi-bold;
-      line-height: 24px;
+      line-height: $base * 6;
       letter-spacing: 0.1px;
     }
   }
 
   .button-primary {
     width: 350px;
-    height: 52px;
+    height: $base * 13;
     margin-top: 42px;
     border-radius: 30px;
 
@@ -149,8 +149,8 @@
     }
 
     @media (max-width: $breakpoint-xs-min) {
-      height: 40px;
-      font-size: 12px;
+      height: $base * 10;
+      font-size: $base * 3;
     }
   }
 
@@ -162,37 +162,37 @@
     margin-top: 62px;
 
     &:first-child {
-      margin-top: 28px;
+      margin-top: $base * 7;
 
       @media (max-width: $breakpoint-md-min) {
-        margin-top: 52px;
+        margin-top: $base * 13;
       }
 
       @media (max-width: $breakpoint-xs-min) {
-        margin-top: 44px;
+        margin-top: $base * 11;
         padding-bottom: 9px;
       }
     }
 
     &:nth-child(5) {
       @media (max-width: $breakpoint-xs-min) {
-        margin-top: 44px;
+        margin-top: $base * 11;
       }
     }
 
     @media (max-width: $breakpoint-md-min) {
-      margin-top: 52px;
+      margin-top: $base * 13;
     }
 
     @media (max-width: $breakpoint-xs-min) {
-      margin-top: 28px;
+      margin-top: $base * 7;
       padding-bottom: 9px;
     }
   }
 
   .accordion {
     justify-content: flex-start;
-    column-gap: 24px;
+    column-gap: $base * 6;
     margin-top: 62px;
     padding-bottom: 15px;
     border-bottom: 1px solid $color-grey-black-10;
@@ -205,7 +205,7 @@
 
       .body_small {
         color: $color-grey-black-40;
-        line-height: 24px;
+        line-height: $base * 6;
       }
     }
   }
@@ -240,7 +240,7 @@
 }
 
 .book-page__author {
-  margin-top: 24px;
+  margin-top: $base * 6;
 
   @media (max-width: $breakpoint-lg-min) {
     margin-top: 33px;
@@ -256,7 +256,7 @@
 
   @media (max-width: $breakpoint-xs-min) {
     margin-top: 9px;
-    font-size: 12px;
+    font-size: $base * 3;
     font-weight: $fw-regular;
   }
 }
@@ -275,11 +275,11 @@
   }
 
   .body_large {
-    margin-top: 16px;
+    margin-top: $base * 4;
 
     @media (max-width: $breakpoint-xs-min) {
-      margin-top: 8px;
-      font-size: 12px;
+      margin-top: $base * 2;
+      font-size: $base * 3;
       font-weight: $fw-regular;
       line-height: 18px;
     }
@@ -298,17 +298,16 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  column-gap: 24px;
+  column-gap: $base * 6;
   width: fit-content;
-  margin-top: 16px;
+  margin-top: $base * 4;
 
   @media (max-width: $breakpoint-xs-min) {
     width: 100%;
     margin-top: 10px;
   }
 
-  .rating,
-  .rating_null {
+  .rating {
     margin-top: 0;
   }
 
@@ -325,11 +324,11 @@
   align-items: flex-start;
   justify-content: space-between;
   row-gap: 10px;
-  column-gap: 80px;
-  margin-top: 16px;
+  column-gap: $base * 20;
+  margin-top: $base * 4;
 
   @media (max-width: $breakpoint-md-min) {
-    column-gap: 20px;
+    column-gap: $base * 5;
   }
 
   @media (max-width: $breakpoint-sm-min) {
@@ -344,11 +343,11 @@
 .review-list {
   display: none;
   max-width: 730px;
-  margin-top: 16px;
+  margin-top: $base * 4;
 
   .rating {
     @media (max-width: $breakpoint-xs-min) {
-      column-gap: 12px;
+      column-gap: $base * 3;
       margin-top: 14px;
     }
   }

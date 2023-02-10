@@ -1,9 +1,6 @@
-import { ICatalogMockData, ICategoryMockData, ITableHeaderMockData, ITitlesMockData } from '../constants';
+import { ITranslateCategoryTitle } from './utils.interface';
 
-export const translateCategoryTitle = (
-  data: ICatalogMockData | string | undefined,
-  categories: ICategoryMockData[] | ITableHeaderMockData[] | ITitlesMockData[]
-) => {
+export const translateCategoryTitle: ITranslateCategoryTitle = (data, categories) => {
   if (data && typeof data === 'object') {
     const ruTitle = categories.find(({ eng }) => eng === data.category);
 
@@ -18,5 +15,5 @@ export const translateCategoryTitle = (
     }
   }
 
-  return 'Категория';
+  return 'Все книги';
 };

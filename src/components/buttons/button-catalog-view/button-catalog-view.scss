@@ -22,8 +22,8 @@
   }
 
   @media (max-width: $breakpoint-xs-min) {
-    width: 32px;
-    height: 32px;
+    width: $base * 8;
+    height: $base * 8;
   }
 }
 

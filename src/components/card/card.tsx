@@ -1,15 +1,12 @@
 import { FC, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { ICatalogMockData } from '../../constants';
 import { convertToDate } from '../../utils';
 import { ButtonPrimary, Rating, Sprite } from '..';
 
-import './card.scss';
+import { ICard } from './card.interface';
 
-export interface ICard extends ICatalogMockData {
-  catalogView: 'grid' | 'list';
-}
+import './card.scss';
 
 export const Card: FC<ICard> = ({ id, category, rating, title, author, images, status, catalogView }) => {
   const [limiter, SetLimiter] = useState<number>(54);

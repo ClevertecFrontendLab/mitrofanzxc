@@ -8,17 +8,17 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  column-gap: 120px;
-  padding: 32px 0 15px 0;
+  column-gap: $base * 30;
+  padding: $base * 8 0 15px 0;
 
   @media (max-width: $breakpoint-lg-min) {
     justify-content: flex-start;
-    column-gap: 28px;
-    padding: 32px 0 22px 0;
+    column-gap: $base * 7;
+    padding: $base * 8 0 22px 0;
   }
 
   @media (max-width: $breakpoint-xxs-min) {
-    padding: 24px 0 24px 0;
+    padding: $base * 6 0 $base * 6 0;
   }
 }
 
@@ -38,16 +38,52 @@
 
 .logo {
   width: 165px;
-  height: 40px;
+  height: $base * 10;
 }
 
 .profile {
+  position: relative;
   display: flex;
   align-items: center;
   column-gap: 16px;
 
+  // Пока непонятно, надо ли это вообще будет
+  // &:hover {
+  //   .nav__profile {
+  //     top: 100%;
+  //     opacity: 1;
+  //   }
+  // }
+
   @media (max-width: $breakpoint-lg-min) {
     display: none;
+  }
+
+  .nav__profile {
+    position: absolute;
+    top: -300%;
+    right: 0;
+    z-index: 4;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 270px;
+    height: $base * 38;
+    padding: $base * 8 $base * 6 $base * 8 $base * 6;
+    text-align: end;
+    background: $color-white;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    box-shadow: 0px 2px 4px rgba(191, 196, 201, 0.2), 0px 3px 4px rgba(191, 196, 201, 0.18),
+      0px 1px 5px rgba(191, 196, 201, 0.24);
+    opacity: 0;
+    transition: all $transition-01;
+
+    .h5.nav__item {
+      display: block;
+      width: auto;
+      margin: 0;
+    }
   }
 }
 

@@ -10,16 +10,7 @@
 .catalog-menu__item {
   display: flex;
   align-items: center;
-  column-gap: 16px;
-
-  &:nth-child(1):has(.input-search__field:is(:focus)) {
-    @media (max-width: $breakpoint-xs-min) {
-      + .catalog-menu__item {
-        position: absolute;
-        z-index: -1;
-      }
-    }
-  }
+  column-gap: $base * 4;
 
   input[type='radio'] {
     opacity: 0;
@@ -29,6 +20,11 @@
     transform: translate(-50%, -50%);
     cursor: pointer;
   }
+}
+
+.catalog-menu__item_active {
+  position: absolute;
+  z-index: -1;
 }
 
 .button-catalog-view:has(input[type='radio']:checked) {

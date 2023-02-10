@@ -1,30 +1,7 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
-export interface ITextField {
-  isError: boolean;
-  value: string;
-}
-
-export interface IForm {
-  login: ITextField;
-  password: ITextField;
-  firstName: ITextField;
-  lastName: ITextField;
-  phone: ITextField;
-  email: ITextField;
-  contractNumber: ITextField;
-  contractOwner: ITextField;
-}
-
-export interface IRegistrationState {
-  isFlowOpen: boolean;
-  isRegistration: boolean;
-  isPasswordRecovery: boolean;
-  isLetterReceived: boolean;
-  formStep: number;
-  form: IForm;
-}
+import { IForm, IRegistrationState } from './slices.interface';
 
 const initialState: IRegistrationState = {
   isFlowOpen: false,

@@ -2,6 +2,8 @@
 
 .loader {
   position: fixed;
+  top: 0;
+  left: 0;
   z-index: 99;
   display: flex;
   align-items: center;
@@ -19,6 +21,11 @@
   width: 70px;
   height: 70px;
   animation: progress 2s linear infinite;
+
+  @media (max-width: $breakpoint-md-min) {
+    width: 23px;
+    height: 23px;
+  }
 }
 
 .circle__wrapper {
@@ -29,12 +36,12 @@
 .circle__bg {
   fill: none;
   stroke: transparent;
-  stroke-width: 4px;
+  stroke-width: $base;
 }
 
 .circle__stroke {
   fill: none;
-  stroke-width: 4px;
+  stroke-width: $base;
   stroke-linecap: round;
 }
 

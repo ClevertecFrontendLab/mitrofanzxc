@@ -1,21 +1,19 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
-import { CatalogMockData, ICatalogMockData } from '../../constants';
-import { sortData } from '../../utils';
+import { TCatalogView } from '../../components';
+import { CatalogMockData } from '../../constants';
+import { sortData, TTypeSortData } from '../../utils';
 
-export interface ICatalogSlice {
-  catalogView: 'grid' | 'list';
-  initialData: ICatalogMockData[];
-  catalogData: ICatalogMockData[];
-  catalogSortState: 'default' | 'descending' | 'ascending';
-}
+import { ICatalogState } from './slices.interface';
 
-const initialState: ICatalogSlice = {
+const initialState: ICatalogState = {
   catalogView: 'grid',
   initialData: CatalogMockData,
   catalogData: [],
   catalogSortState: 'default',
+  inputSearchValue: '',
+  isInputSearchOpen: false,
 };
 
 export const catalogSlice = createSlice({
@@ -23,13 +21,13 @@ export const catalogSlice = createSlice({
   name: 'catalogView',
   initialState,
   reducers: {
-    changeCatalogView: (state, action: PayloadAction<'grid' | 'list'>) => {
+    changeCatalogView: (state, action: PayloadAction<TCatalogView>) => {
       state.catalogView = action.payload;
     },
-    sortCatalogByRating: (state, action: PayloadAction<'default' | 'descending' | 'ascending'>) => {
-      state.catalogData = [...state.initialData].sort(sortData(action.payload));
+    sortCatalogByRating: (state, action: PayloadAction<TTypeSortData>) => {
+      state.catalogData = state.catalogData.sort(sortData(action.payload));
     },
-    changeCatalogSortState: (state, action: PayloadAction<'default' | 'descending' | 'ascending'>) => {
+    changeCatalogSortState: (state, action: PayloadAction<TTypeSortData>) => {
       state.catalogSortState = action.payload;
     },
     filterCatalogByCategory: (state, action: PayloadAction<string>) => {
@@ -39,10 +37,20 @@ export const catalogSlice = createSlice({
         state.catalogData = [...state.initialData].filter((element) => element.category === action.payload);
       }
     },
-    searchCatalogByTitle: (state, action: PayloadAction<string>) => {
-      state.catalogData = [...state.initialData].filter((element) =>
-        element.title.toLocaleLowerCase().includes(action.payload.toLocaleLowerCase().trim())
-      );
+    setInputSearchValue: (state, action: PayloadAction<string>) => {
+      state.inputSearchValue = action.payload;
+    },
+    searchCatalogByTitle: (state) => {
+      if (!state.inputSearchValue || !state.inputSearchValue.length) {
+        state.catalogData = [...state.initialData];
+      } else {
+        state.catalogData = [...state.initialData].filter((element) =>
+          element.title.toLocaleLowerCase().includes(state.inputSearchValue.toLocaleLowerCase())
+        );
+      }
+    },
+    handleIsInputSearchOpen: (state, action: PayloadAction<boolean>) => {
+      state.isInputSearchOpen = action.payload;
     },
   },
 });
@@ -52,7 +60,9 @@ export const {
   sortCatalogByRating,
   changeCatalogSortState,
   filterCatalogByCategory,
+  setInputSearchValue,
   searchCatalogByTitle,
+  handleIsInputSearchOpen,
 } = catalogSlice.actions;
 /* eslint-disable-next-line import/no-default-export */
 export default catalogSlice.reducer;

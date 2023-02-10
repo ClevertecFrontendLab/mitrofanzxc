@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import profileLogo from '../../assets/authorized.png';
 import { PATHS, TitlesMockData } from '../../constants';
 import { translateCategoryTitle } from '../../utils';
-import { ButtonBurger, Registration, Sprite } from '..';
+import { ButtonBurger, Sprite } from '..';
 
 import './header.scss';
 
@@ -16,7 +16,6 @@ export const Header: FC = () => {
 
   return (
     <header className='header'>
-      <Registration />
       <div className='wrapper'>
         <div className='header__wrapper'>
           <Link to={main} className='header__logo'>
@@ -32,6 +31,12 @@ export const Header: FC = () => {
               <Link to={profile} className='profile__wrapper filter-shadow'>
                 <img src={profileLogo} alt='profileLogo' className='profile__logo' />
               </Link>
+              <div className='nav__profile'>
+                <Link to={profile} className='h5 nav__item'>
+                  Профиль
+                </Link>
+                <h5 className='h5 nav__item'>Выход</h5>
+              </div>
             </div>
           </div>
         </div>

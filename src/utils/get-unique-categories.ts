@@ -1,7 +1,7 @@
-import { ICatalogMockData } from '../constants';
+import { IGetUniqueCategories, TArrayGetUniqueCategories } from './utils.interface';
 
-export const getUniqueCategories = (data: ICatalogMockData[]) => {
-  const arr = [];
+export const getUniqueCategories: IGetUniqueCategories = (data) => {
+  const arr: TArrayGetUniqueCategories = [];
 
   if (data && data.length > 0) {
     for (let i = 0; i < data.length; i += 1) {

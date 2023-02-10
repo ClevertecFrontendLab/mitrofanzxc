@@ -3,7 +3,9 @@ export {
   sortCatalogByRating,
   changeCatalogSortState,
   filterCatalogByCategory,
+  setInputSearchValue,
   searchCatalogByTitle,
+  handleIsInputSearchOpen,
 } from './catalog-slice';
 export { openToast, closeToast, addErrorToToast, removeErrorFromToast } from './toast-slice';
 export {
@@ -14,7 +16,7 @@ export {
   closeAccordionMenu,
   toggleAccordionMenu,
 } from './mobile-menu-slice';
-export { openLoader, closeLoader } from './loader-slice';
+export { handleLoading, handleSuccess } from './loader-slice';
 export {
   openFlow,
   closeFlow,
@@ -29,3 +31,14 @@ export {
   setTextFieldValue,
   setTextFieldError,
 } from './registration-slice';
+export { openModal, closeModal } from './modal-slice';
+export type {
+  ICatalogState,
+  IForm,
+  ILoaderState,
+  IMobileMenuState,
+  IModalState,
+  IRegistrationState,
+  ITextField,
+  IToastState,
+} from './slices.interface';

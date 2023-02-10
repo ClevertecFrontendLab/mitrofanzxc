@@ -1,6 +1,6 @@
 import { FC, Fragment } from 'react';
 
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import {
   closePasswordRecovery,
   closeRegistration,

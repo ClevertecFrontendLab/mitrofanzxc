@@ -8,7 +8,7 @@
   }
 
   @media (max-width: $breakpoint-xs-min) {
-    margin-top: 32px;
+    margin-top: $base * 8;
   }
 
   .rating {
@@ -19,7 +19,7 @@
 .review__user-info {
   display: grid;
   grid-template-areas: 'review__user-logo review__user-name review__user-date';
-  column-gap: 24px;
+  column-gap: $base * 6;
   width: fit-content;
 
   @media (max-width: $breakpoint-md-min) {
@@ -53,6 +53,6 @@
   margin-top: 22px;
 
   @media (max-width: $breakpoint-xs-min) {
-    margin-top: 12px;
+    margin-top: $base * 3;
   }
 }

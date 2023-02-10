@@ -1,4 +1,6 @@
-export const convertToDate = (timestamp: number, type: 'full' | 'short') => {
+import { IConvertToDate } from './utils.interface';
+
+export const convertToDate: IConvertToDate = (timestamp, type) => {
   switch (type) {
     case 'full':
       return new Date(timestamp).toLocaleString('ru-RU', {

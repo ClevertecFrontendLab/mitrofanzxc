@@ -1,16 +1,12 @@
 import { ChangeEvent, FC } from 'react';
 
-import { useAppDispatch, useAppSelector } from '../../../store/hooks';
+import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { changeCatalogView } from '../../../store/slices';
 import { Sprite } from '../..';
 
-import './button-catalog-view.scss';
+import { IButtonCatalogView } from './button-catalog-view.interface';
 
-export interface IButtonCatalogView {
-  id: 'grid' | 'list';
-  value: 'grid' | 'list';
-  dataTestId: string;
-}
+import './button-catalog-view.scss';
 
 export const ButtonCatalogView: FC<IButtonCatalogView> = ({ id, value, dataTestId }) => {
   const { catalogView } = useAppSelector((state) => state.catalog);

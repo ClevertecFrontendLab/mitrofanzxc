@@ -2,14 +2,11 @@ import { FC, Fragment, useState } from 'react';
 import { Navigation, Pagination, Scrollbar, Thumbs } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-import { ICatalogMockData } from '../../constants';
 import { Sprite } from '..';
 
-import './slider.scss';
+import { ISlider } from './slider.interface';
 
-export interface ISlider {
-  data: ICatalogMockData | undefined;
-}
+import './slider.scss';
 
 export const Slider: FC<ISlider> = ({ data }) => {
   /* eslint-disable-next-line @typescript-eslint/no-explicit-any */

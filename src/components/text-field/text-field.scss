@@ -13,8 +13,8 @@
   font-size: 1rem;
   background-color: $color-grey-black-5;
   border: none;
-  border-top-right-radius: 4px;
-  border-top-left-radius: 4px;
+  border-top-right-radius: $base;
+  border-top-left-radius: $base;
   border-bottom: 1px solid $color-grey-black-20;
   transition: border-color $transition-02 ease;
   caret-color: var(--color__accent);
@@ -104,7 +104,7 @@
 }
 
 .text-field__message {
-  padding-left: 12px;
+  padding-left: $base * 3;
   color: $color-grey-black-40;
 }
 
@@ -118,19 +118,19 @@
 
 .text-field__icon-wrapper {
   position: absolute;
-  top: 20px;
+  top: $base * 5;
   right: 16px;
   display: flex;
   align-items: center;
-  column-gap: 4px;
+  column-gap: $base;
 }
 
 .text-field__icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 24px;
-  height: 24px;
+  width: $base * 6;
+  height: $base * 6;
 }
 
 .text-field__icon_check {

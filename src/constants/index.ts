@@ -1,12 +1,19 @@
 export { PATHS } from './paths';
-export type { IPATHS } from './paths';
 export { CategoryMockData } from './category-mock-data';
-export type { ICategoryMockData } from './category-mock-data';
 export { CatalogMockData } from './catalog-mock-data';
-export type { ICatalogMockData, IReviews } from './catalog-mock-data';
 export { SocialsMockData } from './socials-mock-data';
-export type { ISocialsMockData } from './socials-mock-data';
 export { TableHeaderMockData } from './table-header-mock-data';
-export type { ITableHeaderMockData } from './table-header-mock-data';
 export { TitlesMockData } from './titles-mock-data';
-export type { ITitlesMockData } from './titles-mock-data';
+export type {
+  TMessage,
+  TNumberAble,
+  TStringAble,
+  ICatalogMockData,
+  ICategoryMockData,
+  IImages,
+  IInfo,
+  IPATHS,
+  IReviews,
+  ISocialsMockData,
+  IStatus,
+} from './constants.interface';

@@ -20,8 +20,8 @@
   align-items: center;
   justify-content: center;
   grid-area: profile-section__avatar;
-  width: 160px;
-  height: 160px;
+  width: $base * 40;
+  height: $base * 40;
   border-radius: 50%;
   overflow: hidden;
 
@@ -75,8 +75,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  width: $base * 8;
+  height: $base * 8;
   stroke: $color-white;
 }
 
@@ -95,7 +95,7 @@
   grid-template-columns: repeat(2, 1fr);
   column-gap: 30px;
   row-gap: 36px;
-  margin-top: 32px;
+  margin-top: $base * 8;
 }
 
 .credentials__buttons {

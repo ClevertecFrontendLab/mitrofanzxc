@@ -1,9 +1,6 @@
-export interface ITableHeaderMockData {
-  eng: string;
-  ru: string;
-}
+import { ICategoryMockData } from './constants.interface';
 
-export const TableHeaderMockData: ITableHeaderMockData[] = [
+export const TableHeaderMockData: ICategoryMockData[] = [
   {
     eng: 'publishingHouse',
     ru: 'Издательство',

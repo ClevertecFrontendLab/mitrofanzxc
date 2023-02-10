@@ -26,11 +26,11 @@ body {
   padding-left: 10px;
 
   @media (max-width: $breakpoint-md-min) {
-    max-width: 660px;
+    max-width: $base * 165;
   }
 
   @media (max-width: $breakpoint-xxs-min) {
-    max-width: 308px;
+    max-width: $base * 77;
   }
 }
 
@@ -46,7 +46,7 @@ body {
   }
 
   @media (max-width: $breakpoint-md-min) {
-    margin-top: 32px;
+    margin-top: $base * 8;
   }
 
   @media (max-width: $breakpoint-xxs-min) {

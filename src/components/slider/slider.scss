@@ -14,7 +14,7 @@
 }
 
 .swiper-2 {
-  margin-top: 12px;
+  margin-top: $base * 3;
 
   @media (max-width: $breakpoint-md-min) {
     display: none;
@@ -42,7 +42,7 @@
 .swiper-pagination-bullet {
   width: 7px !important;
   height: 7px !important;
-  margin: 0 4px !important;
+  margin: 0 $base !important;
   border-radius: 50% !important;
   background: $color-grey-black-20 !important;
   opacity: 1 !important;
@@ -57,7 +57,7 @@
 .swiper-button-prev,
 .swiper-button-next {
   top: 0 !important;
-  width: 40px !important;
+  width: $base * 10 !important;
   height: 100% !important;
   margin-top: 0 !important;
   color: transparent !important;
@@ -100,7 +100,7 @@
 
 .swiper-scrollbar-horizontal {
   position: static !important;
-  margin-top: 8px;
+  margin-top: $base * 2;
   transition: all $transition-02;
 
   @media (max-width: $breakpoint-md-min) {
@@ -110,7 +110,7 @@
 
 .swiper-scrollbar-drag {
   background: $color-grey-black-40 !important;
-  border-radius: 4px !important;
+  border-radius: $base !important;
 }
 
 .thumbs {

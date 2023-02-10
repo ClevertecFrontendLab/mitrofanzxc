@@ -1,7 +1,8 @@
 import { FC } from 'react';
 
 import unauthorizedImg from '../../assets/unauthorized.png';
-import { ButtonPrimary, Sprite, TextField } from '../../components';
+import { ButtonPrimary, Card, Sprite, TextField } from '../../components';
+import { CatalogMockData } from '../../constants';
 
 import './profile-page.scss';
 
@@ -49,6 +50,9 @@ export const ProfilePage: FC = () => (
       <div className='credentials'>
         <h4 className='h4'>Забронированная книга</h4>
         <p className='body_large'>Здесь вы можете просмотреть забронированную книгу, а так же отменить бронь</p>
+        {CatalogMockData && CatalogMockData.length > 0 && (
+          <Card key={CatalogMockData[0].id} catalogView='list' {...CatalogMockData[0]} />
+        )}
       </div>
       <div className='credentials'>
         <h4 className='h4'>Книга которую взяли</h4>
