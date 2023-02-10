@@ -1,0 +1,123 @@
+@import '../../styles/constants.scss';
+
+.input-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 350px;
+  background-color: $color-white;
+  border-radius: 20px;
+  box-shadow: 0px 2px 4px rgba(191, 196, 201, 0.2), 0px 3px 4px rgba(191, 196, 201, 0.18),
+    0px 1px 5px rgba(191, 196, 201, 0.24);
+  overflow: hidden;
+
+  @media (max-width: $breakpoint-md-min) {
+    width: 274px;
+  }
+
+  @media (max-width: $breakpoint-xs-min) {
+    width: 32px;
+    height: 32px;
+
+    &:has(.input-search__field:is(:focus)) {
+      position: relative;
+      z-index: 2;
+      width: calc(100vw - 20px);
+
+      .button-search {
+        position: absolute;
+        z-index: -1;
+      }
+
+      ~ .button-sort {
+        position: absolute;
+        z-index: -1;
+      }
+
+      .input-search__field {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.input-search_active {
+  position: absolute;
+  z-index: 2;
+  width: calc(100vw - 20px);
+}
+
+.input-search__field {
+  width: 100%;
+  padding: 10px 0 10px 8px;
+  border: none;
+  border-radius: 20px;
+  color: $color-dark;
+  caret-color: $color-orange;
+  outline-color: $color-orange;
+
+  &::placeholder {
+    color: $color-grey-black-40;
+  }
+
+  &::-webkit-search-cancel-button {
+    display: none;
+  }
+
+  @media (max-width: $breakpoint-xs-min) {
+    opacity: 0;
+    padding: 8px 0 8px 8px;
+  }
+}
+
+.button-search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 16px;
+
+  @media (max-width: $breakpoint-xs-min) {
+    margin-left: 0px;
+    padding: 8px;
+  }
+}
+
+.button-search:has(+ .input-search__field:is(:focus)) {
+  @media (max-width: $breakpoint-xs-min) {
+    display: none;
+  }
+
+  .button-search__logo {
+    fill: $color-orange;
+  }
+}
+
+.input-search__field:is(:focus) {
+  & + .button-cancel {
+    opacity: 1;
+  }
+}
+
+.button-search__logo {
+  width: 16px;
+  height: 16px;
+  fill: $color-grey-black-40;
+}
+
+.button-cancel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 16px;
+  opacity: 0;
+
+  @media (max-width: $breakpoint-xxs-min) {
+    margin-right: 0px;
+  }
+}
+
+.button-cancel__logo {
+  width: 16px;
+  height: 16px;
+  fill: $color-orange;
+}

@@ -1,0 +1,68 @@
+@import '../../styles/constants.scss';
+
+.catalog {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  row-gap: 24px;
+  column-gap: 21.5px;
+  margin-top: 32px;
+
+  @media (max-width: $breakpoint-xl-min) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  @media (max-width: $breakpoint-lg-min) {
+    row-gap: 32px;
+    column-gap: 35px;
+    margin-top: 24px;
+  }
+
+  @media (max-width: $breakpoint-md-min) {
+    grid-template-columns: repeat(3, minmax(1px, 190px));
+  }
+
+  @media (max-width: $breakpoint-sm-min) {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 16px;
+    row-gap: 16px;
+  }
+
+  @media (max-width: $breakpoint-xxs-min) {
+    grid-template-columns: 1fr;
+    margin-top: 19px;
+  }
+
+  > .h3 {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 200px;
+    left: 50%;
+    width: 100%;
+    color: $color-grey-black-40;
+    text-align: center;
+
+    @media (max-width: $breakpoint-lg-min) {
+      top: 226px;
+    }
+
+    @media (max-width: $breakpoint-xs-min) {
+      top: 134px;
+    }
+  }
+}
+
+.catalog_list {
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 16px;
+  margin-top: 32px;
+
+  @media (max-width: $breakpoint-md-min) {
+    margin-top: 24px;
+  }
+
+  @media (max-width: $breakpoint-xxs-min) {
+    margin-top: 16px;
+  }
+}

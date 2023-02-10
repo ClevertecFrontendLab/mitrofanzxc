@@ -1,0 +1,32 @@
+@import '../../styles/constants.scss';
+
+.terms-page {
+  @media (max-width: $breakpoint-xxs-min) {
+    margin-top: 16px;
+  }
+}
+
+.terms-list__item {
+  &:first-child {
+    margin-top: 32px;
+
+    @media (max-width: $breakpoint-xxs-min) {
+      margin-top: 24px;
+    }
+  }
+}
+
+.nesting-lvl_1 {
+  margin-top: 16px;
+  padding-left: 30px;
+}
+
+.nesting-lvl_2 {
+  margin-top: 16px;
+  padding-left: 60px;
+}
+
+.nesting-lvl_3 {
+  margin-top: 16px;
+  padding-left: 90px;
+}

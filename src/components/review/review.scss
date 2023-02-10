@@ -1,0 +1,58 @@
+@import '../../styles/constants.scss';
+
+.review {
+  margin-top: 43px;
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  @media (max-width: $breakpoint-xs-min) {
+    margin-top: 32px;
+  }
+
+  .rating {
+    margin-top: 18px;
+  }
+}
+
+.review__user-info {
+  display: grid;
+  grid-template-areas: 'review__user-logo review__user-name review__user-date';
+  column-gap: 24px;
+  width: fit-content;
+
+  @media (max-width: $breakpoint-md-min) {
+    grid-template-areas:
+      'review__user-logo review__user-name'
+      'review__user-logo review__user-date';
+  }
+
+  @media (max-width: $breakpoint-xs-min) {
+    column-gap: 18px;
+  }
+}
+
+.review__user-logo {
+  grid-area: review__user-logo;
+
+  @media (max-width: $breakpoint-md-min) {
+    align-self: center;
+  }
+}
+
+.review__user-name {
+  grid-area: review__user-name;
+}
+
+.review__user-date {
+  grid-area: review__user-date;
+}
+
+.review__description {
+  margin-top: 22px;
+
+  @media (max-width: $breakpoint-xs-min) {
+    margin-top: 12px;
+  }
+}

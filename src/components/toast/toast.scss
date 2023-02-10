@@ -1,0 +1,82 @@
+@import '../../styles/constants.scss';
+
+.toast {
+  position: fixed;
+  top: 104px;
+  left: -150%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  max-width: 1110px;
+  width: 100%;
+  padding: 24px 32px;
+  border-radius: 5px;
+  border-width: 1.5px;
+  border-style: solid;
+  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.35);
+
+  @media (max-width: $breakpoint-lg-min) {
+    width: calc(100vw - 20px);
+  }
+
+  @media (max-width: $breakpoint-md-min) {
+    max-width: 640px;
+    padding: 24px 16px;
+  }
+
+  @media (max-width: $breakpoint-xxs-min) {
+    max-width: 280px;
+    padding: 12px 16px;
+  }
+}
+
+.toast_success {
+  background-color: $color-positive-background;
+  border-color: $color-positive;
+}
+
+.toast_error {
+  background-color: $color-negative-background;
+  border-color: $color-negative;
+}
+
+.toast_active {
+  left: 50%;
+}
+
+.toast__wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: 24px;
+
+  @media (max-width: $breakpoint-md-min) {
+    column-gap: 12px;
+  }
+
+  @media (max-width: $breakpoint-xxs-min) {
+    align-items: flex-start;
+  }
+
+  .subtitle_large {
+    @media (max-width: $breakpoint-md-min) {
+      font-size: 14px;
+      line-height: 18px;
+    }
+  }
+}
+
+.toast__wrapper + .toast__logo {
+  fill: $color-dark;
+}
+
+.toast__logo {
+  min-width: 32px;
+  max-width: 32px;
+  height: 32px;
+
+  @media (max-width: $breakpoint-md-min) {
+    min-width: 24px;
+    max-width: 24px;
+    height: 24px;
+  }
+}

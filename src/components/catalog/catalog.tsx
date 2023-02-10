@@ -1,0 +1,35 @@
+import { FC, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { filterCatalogByCategory, sortCatalogByRating } from '../../store/slices';
+import { Card } from '..';
+
+import './catalog.scss';
+
+export const Catalog: FC = () => {
+  const { category } = useParams();
+  const { catalogView, catalogData, catalogSortState } = useAppSelector((state) => state.catalog);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (category) {
+      dispatch(filterCatalogByCategory(category));
+    }
+    /* eslint-disable-next-line react-hooks/exhaustive-deps */
+  }, [category]);
+
+  useEffect(() => {
+    dispatch(sortCatalogByRating(catalogSortState));
+    /* eslint-disable-next-line react-hooks/exhaustive-deps */
+  }, [catalogSortState]);
+
+  return (
+    <section className={`${catalogView === 'grid' ? 'catalog' : 'catalog_list'}`}>
+      {catalogData &&
+        catalogData.length > 0 &&
+        catalogData.map((element) => <Card key={element.id} catalogView={catalogView} {...element} />)}
+      {(!catalogData || catalogData.length <= 0) && <h3 className='h3'>По запросу ничего не найдено</h3>}
+    </section>
+  );
+};

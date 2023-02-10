@@ -1,0 +1,179 @@
+@import './constants.scss';
+
+.h1 {
+  font-size: 52px;
+  font-weight: $fw-medium;
+  line-height: 64px;
+  letter-spacing: 0.2px;
+
+  @media (max-width: $breakpoint-xs-min) {
+    font-size: 42px;
+    line-height: 40px;
+  }
+}
+
+.h2 {
+  font-size: 44px;
+  font-weight: $fw-semi-bold;
+  line-height: 54px;
+
+  @media (max-width: $breakpoint-xs-min) {
+    font-size: 26px;
+    line-height: 36px;
+  }
+}
+
+.h3 {
+  font-size: 32px;
+  font-weight: $fw-bold;
+  line-height: 40px;
+  letter-spacing: 0.1px;
+
+  @media (max-width: $breakpoint-xs-min) {
+    font-size: 18px;
+    line-height: 28px;
+  }
+}
+
+.h4 {
+  font-size: 24px;
+  font-weight: $fw-bold;
+  line-height: 30px;
+  letter-spacing: 0.1px;
+}
+
+.h5 {
+  font-size: 18px;
+  font-weight: $fw-bold;
+  line-height: 28px;
+  letter-spacing: 0.1px;
+}
+
+.subtitle_large {
+  font-size: 16px;
+  font-weight: $fw-semi-bold;
+  line-height: 24px;
+  letter-spacing: 0.1px;
+}
+
+.subtitle_small {
+  font-size: 14px;
+  font-weight: $fw-semi-bold;
+  line-height: 18px;
+  letter-spacing: 0.1px;
+}
+
+.body_large {
+  font-size: 16px;
+  font-weight: $fw-regular;
+  line-height: 24px;
+  letter-spacing: 0.1px;
+
+  @media (max-width: $breakpoint-xs-min) {
+    font-size: 15px;
+    line-height: 20px;
+  }
+}
+
+.body_small {
+  font-size: 14px;
+  font-weight: $fw-regular;
+  line-height: 18px;
+  letter-spacing: 0.1px;
+
+  @media (max-width: $breakpoint-xs-min) {
+    font-size: 12px;
+    letter-spacing: 0px;
+  }
+}
+
+.info_large {
+  font-size: 12px;
+  font-weight: $fw-medium;
+  line-height: 16px;
+  letter-spacing: 0.2px;
+}
+
+.info_small {
+  font-size: 12px;
+  font-weight: $fw-regular;
+  line-height: 16px;
+  letter-spacing: 0.2px;
+}
+
+.button_large {
+  font-size: 16px;
+  font-weight: $fw-semi-bold;
+  line-height: 24px;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+
+  @media (max-width: $breakpoint-xs-min) {
+    font-size: 16px;
+    line-height: 20px;
+  }
+}
+
+.button_small {
+  font-size: 14px;
+  font-weight: $fw-semi-bold;
+  line-height: 18px;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+
+  @media (max-width: $breakpoint-xs-min) {
+    font-size: 12px;
+  }
+}
+
+.button_small_mobile {
+  font-size: 12px;
+  font-weight: $fw-semi-bold;
+  line-height: 18px;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+}
+
+.color-grey-black-40 {
+  color: $color-grey-black-40;
+}
+
+.color-grey-black-70 {
+  color: $color-grey-black-70;
+}
+
+.fs-s {
+  font-size: $fs-s;
+}
+
+.fs-m {
+  font-size: $fs-m;
+}
+
+.fs-l {
+  font-size: $fs-l;
+}
+
+.fs-xl {
+  font-size: $fs-xl;
+}
+
+.fs-xxl {
+  font-size: $fs-xxl;
+}
+
+.fs-xxxl {
+  font-size: $fs-xxxl;
+}
+
+.fw-regular {
+  font-weight: $fw-regular;
+}
+
+.fw-medium {
+  font-weight: $fw-medium;
+}
+
+.fw-bold {
+  font-weight: $fw-bold;
+}

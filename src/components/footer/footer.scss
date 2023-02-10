@@ -1,0 +1,36 @@
+@import '../../styles/constants.scss';
+
+.footer__wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  row-gap: 16px;
+  margin-top: 62px;
+  padding: 16px 0 16px 0;
+  border-top: 1px solid $color-grey-black-20;
+
+  @media (max-width: $breakpoint-sm-min) {
+    justify-content: center;
+    padding: 16px 0 8px 0;
+    text-align: center;
+  }
+}
+
+.socials {
+  display: flex;
+  align-items: center;
+  column-gap: 24px;
+}
+
+.socials__link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.socials__logo {
+  width: 24px;
+  height: 24px;
+  fill: $color-dark;
+}

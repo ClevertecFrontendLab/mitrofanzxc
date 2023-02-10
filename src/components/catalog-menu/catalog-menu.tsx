@@ -1,0 +1,18 @@
+import { FC } from 'react';
+
+import { ButtonCatalogView, ButtonSort, InputSearch } from '..';
+
+import './catalog-menu.scss';
+
+export const CatalogMenu: FC = () => (
+  <section className='catalog-menu'>
+    <div className='catalog-menu__item'>
+      <InputSearch />
+      <ButtonSort />
+    </div>
+    <div className='catalog-menu__item'>
+      <ButtonCatalogView id='grid' value='grid' dataTestId='button-menu-view-window' />
+      <ButtonCatalogView id='list' value='list' dataTestId='button-menu-view-list' />
+    </div>
+  </section>
+);

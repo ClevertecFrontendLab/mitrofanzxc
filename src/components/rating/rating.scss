@@ -1,0 +1,62 @@
+@import '../../styles/constants.scss';
+
+.rating-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  row-gap: 16px;
+  margin-top: 24px;
+
+  @media (max-width: $breakpoint-xs-min) {
+    margin-top: 3px;
+  }
+
+  .button-primary {
+    @media (max-width: $breakpoint-xs-min) {
+      width: 100%;
+      padding: 0;
+    }
+  }
+
+  .button-secondary {
+    @media (max-width: $breakpoint-xs-min) {
+      width: 100%;
+      padding: 0;
+    }
+  }
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+  margin-top: 16px;
+
+  @media (max-width: $breakpoint-sm-min) {
+    column-gap: 8px;
+  }
+
+  @media (max-width: $breakpoint-xs-min) {
+    column-gap: 6px;
+  }
+
+  @media (max-width: $breakpoint-xxs-min) {
+    column-gap: 11px;
+  }
+}
+
+.rating__item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rating__logo {
+  width: 20px;
+  height: 19px;
+}
+
+.rating_null {
+  margin-top: 16px;
+}

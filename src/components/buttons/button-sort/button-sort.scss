@@ -1,0 +1,65 @@
+@import '../.././../styles/constants.scss';
+
+.button-sort {
+  display: flex;
+  align-items: center;
+  padding: 10px 16px;
+  background-color: $color-white;
+  border-radius: 20px;
+  box-shadow: 0px 2px 4px rgba(191, 196, 201, 0.2), 0px 3px 4px rgba(191, 196, 201, 0.18),
+    0px 1px 5px rgba(191, 196, 201, 0.24);
+  transition: all $transition-02;
+
+  &:hover {
+    box-shadow: 0px 3px 4px rgba(222, 125, 11, 0.2), 0px 1px 10px rgba(249, 89, 8, 0.2);
+  }
+
+  &:active {
+    .button-sort__logo {
+      fill: $color-orange;
+    }
+
+    .body_small {
+      color: $color-orange;
+    }
+  }
+
+  @media (max-width: $breakpoint-sm-min) {
+    padding: 11px;
+  }
+
+  @media (max-width: $breakpoint-xs-min) {
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 8px;
+  }
+
+  .body_small {
+    color: $color-grey-black-40;
+
+    @media (max-width: $breakpoint-sm-min) {
+      display: none;
+    }
+  }
+}
+
+.button-sort__logo {
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+  fill: $color-grey-black-40;
+  transition: all $transition-02;
+
+  @media (max-width: $breakpoint-sm-min) {
+    margin-right: 0px;
+  }
+
+  @media (max-width: $breakpoint-xxs-min) {
+    margin-right: 0px;
+  }
+}
+
+.button-sort__logo_ascending {
+  transform: rotate(180deg);
+}
