@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { BreadCrumbs, ButtonPrimary, Loader, Nav, Rating, Review, Slider, Table, Toast } from '../../components';
 import { CatalogMockData } from '../../constants';
 import { useAppSelector, useToast } from '../../hooks';
-import { useGetBook } from '../../store/services';
+import { getBook } from '../../store/services';
 import { convertToDate, divideTableData } from '../../utils';
 
 import './book-page.scss';
@@ -20,7 +20,7 @@ export const BookPage: FC = () => {
     setIsAccordionReviewsOpen(!isAccordionReviewsOpen);
   };
 
-  useGetBook('1');
+  getBook('2');
 
   useToast({ isLoading, isSuccess });
 
@@ -28,7 +28,7 @@ export const BookPage: FC = () => {
     <section>
       <BreadCrumbs bookInfo={bookInfo} isSuccess={isSuccess} />
       {isLoading && !isSuccess && <Loader />}
-      {!isLoading && !isSuccess && <Toast isToastError={true} typeToastError='connection' />}
+      {!isLoading && !isSuccess && <Toast isToastError={true} typeToastError='connection' dataTestId='error' />}
       {!isLoading && isSuccess && (
         <Fragment>
           <div className='wrapper'>

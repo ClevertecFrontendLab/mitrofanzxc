@@ -8,7 +8,7 @@ import { IToast } from './toast.interface';
 
 import './toast.scss';
 
-export const Toast: FC<IToast> = ({ isToastError, typeToastError }) => {
+export const Toast: FC<IToast> = ({ isToastError, typeToastError, dataTestId }) => {
   const { isToastOpen } = useAppSelector((state) => state.toast);
   const dispatch = useAppDispatch();
 
@@ -17,7 +17,10 @@ export const Toast: FC<IToast> = ({ isToastError, typeToastError }) => {
   };
 
   return (
-    <div className={`toast ${isToastError ? 'toast_error' : 'toast_success'} ${isToastOpen ? 'toast_active' : ''}`}>
+    <div
+      className={`toast ${isToastError ? 'toast_error' : 'toast_success'} ${isToastOpen ? 'toast_active' : ''}`}
+      data-test-id={dataTestId}
+    >
       <div className='toast__wrapper'>
         <div className='toast__wrapper'>
           <Sprite id={`${isToastError ? 'warning-circle-fill' : 'check-circle-fill'}`} className='toast__logo' />

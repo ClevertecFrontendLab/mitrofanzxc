@@ -2,7 +2,7 @@ import { FC, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector, useToast } from '../../hooks';
-import { useGetAllBooks } from '../../store/services';
+import { getAllBooks } from '../../store/services';
 import { filterCatalogByCategory, sortCatalogByRating } from '../../store/slices';
 import { Card, Loader, Toast } from '..';
 
@@ -14,7 +14,7 @@ export const Catalog: FC = () => {
   const { isLoading, isSuccess } = useAppSelector((state) => state.loader);
   const dispatch = useAppDispatch();
 
-  useGetAllBooks();
+  getAllBooks();
 
   useEffect(() => {
     if (category) {
@@ -33,7 +33,7 @@ export const Catalog: FC = () => {
   return (
     <section className={`${catalogView === 'grid' ? 'catalog' : 'catalog_list'}`}>
       {isLoading && !isSuccess && <Loader />}
-      {!isLoading && !isSuccess && <Toast isToastError={true} typeToastError='connection' />}
+      {!isLoading && !isSuccess && <Toast isToastError={true} typeToastError='connection' dataTestId='error' />}
       {!isLoading && (!catalogData || catalogData.length <= 0) && <h3 className='h3'>По запросу ничего не найдено</h3>}
       {!isLoading &&
         isSuccess &&

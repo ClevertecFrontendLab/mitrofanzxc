@@ -11,7 +11,7 @@ export const injectStore = (_store: ToolkitStore) => {
 };
 
 export const cleverlandConfig = axios.create({
-  baseURL: 'https://dummyjson.com',
+  baseURL: 'https://strapi.cleverland.by',
 });
 
 cleverlandConfig.interceptors.request.use(
