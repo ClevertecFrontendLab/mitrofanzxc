@@ -2,7 +2,7 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
 import { TCatalogView } from '../../components';
-import { CatalogMockData } from '../../constants';
+import { CatalogMockData, ICatalogMockData } from '../../constants';
 import { sortData, TTypeSortData } from '../../utils';
 
 import { ICatalogState } from './slices.interface';
@@ -18,9 +18,12 @@ const initialState: ICatalogState = {
 
 export const catalogSlice = createSlice({
   /* eslint-disable no-param-reassign */
-  name: 'catalogView',
+  name: 'catalog',
   initialState,
   reducers: {
+    setAllBooks: (state, action: PayloadAction<ICatalogMockData[]>) => {
+      state.catalogData = action.payload;
+    },
     changeCatalogView: (state, action: PayloadAction<TCatalogView>) => {
       state.catalogView = action.payload;
     },
@@ -56,6 +59,7 @@ export const catalogSlice = createSlice({
 });
 
 export const {
+  setAllBooks,
   changeCatalogView,
   sortCatalogByRating,
   changeCatalogSortState,

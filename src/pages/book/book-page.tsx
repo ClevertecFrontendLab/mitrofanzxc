@@ -20,7 +20,7 @@ export const BookPage: FC = () => {
     setIsAccordionReviewsOpen(!isAccordionReviewsOpen);
   };
 
-  getBook('2');
+  // getBook('2');
 
   useToast({ isLoading, isSuccess });
 

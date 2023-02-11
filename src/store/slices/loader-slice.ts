@@ -13,8 +13,11 @@ export const loaderSlice = createSlice({
   name: 'loader',
   initialState,
   reducers: {
-    handleLoading: (state, action: PayloadAction<boolean>) => {
-      state.isLoading = action.payload;
+    startLoading: (state) => {
+      state.isLoading = true;
+    },
+    endLoading: (state) => {
+      state.isLoading = false;
     },
     handleSuccess: (state, action: PayloadAction<boolean>) => {
       state.isSuccess = action.payload;
@@ -22,6 +25,6 @@ export const loaderSlice = createSlice({
   },
 });
 
-export const { handleLoading, handleSuccess } = loaderSlice.actions;
+export const { startLoading, endLoading, handleSuccess } = loaderSlice.actions;
 /* eslint-disable-next-line import/no-default-export */
 export default loaderSlice.reducer;

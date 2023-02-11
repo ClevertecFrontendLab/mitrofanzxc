@@ -19,7 +19,8 @@ export const store = configureStore({
     loader: loaderReducer,
     registration: registrationReducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware),
+  // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware),
+  middleware: [sagaMiddleware],
 });
 
 sagaMiddleware.run(rootSaga);

@@ -1,4 +1,5 @@
 export {
+  setAllBooks,
   changeCatalogView,
   sortCatalogByRating,
   changeCatalogSortState,
@@ -16,7 +17,7 @@ export {
   closeAccordionMenu,
   toggleAccordionMenu,
 } from './mobile-menu-slice';
-export { handleLoading, handleSuccess } from './loader-slice';
+export { startLoading, endLoading, handleSuccess } from './loader-slice';
 export {
   openFlow,
   closeFlow,

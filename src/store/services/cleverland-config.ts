@@ -1,41 +1,42 @@
-import { ToolkitStore } from '@reduxjs/toolkit/dist/configureStore';
-import axios, { AxiosError } from 'axios';
+// import { ToolkitStore } from '@reduxjs/toolkit/dist/configureStore';
+// import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 
-import { interceptRequest } from '../../utils';
+// import { interceptRequest } from '../../utils';
 
 /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
-let store: ToolkitStore;
+// let store: ToolkitStore;
 
-export const injectStore = (_store: ToolkitStore) => {
-  store = _store;
-};
+// export const injectStore = (_store: ToolkitStore) => {
+//   store = _store;
+// };
 
 export const cleverlandConfig = axios.create({
   baseURL: 'https://strapi.cleverland.by',
 });
 
-cleverlandConfig.interceptors.request.use(
-  (config) => {
-    interceptRequest({ isLoading: true, isSuccess: false });
+// cleverlandConfig.interceptors.request.use(
+//   (config) => {
+//     interceptRequest({ isLoading: true, isSuccess: false });
 
-    return config;
-  },
-  (error: AxiosError) => {
-    interceptRequest({ isLoading: false, isSuccess: false });
+//     return config;
+//   },
+//   (error: AxiosError) => {
+//     interceptRequest({ isLoading: false, isSuccess: false });
 
-    return Promise.reject(error);
-  }
-);
+//     return Promise.reject(error);
+//   }
+// );
 
-cleverlandConfig.interceptors.response.use(
-  (response) => {
-    interceptRequest({ isLoading: false, isSuccess: true });
+// cleverlandConfig.interceptors.response.use(
+//   (response) => {
+//     interceptRequest({ isLoading: false, isSuccess: true });
 
-    return response;
-  },
-  (error: AxiosError) => {
-    interceptRequest({ isLoading: false, isSuccess: false });
+//     return response;
+//   },
+//   (error: AxiosError) => {
+//     interceptRequest({ isLoading: false, isSuccess: false });
 
-    return Promise.reject(error);
-  }
-);
+//     return Promise.reject(error);
+//   }
+// );

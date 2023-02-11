@@ -1,8 +1,7 @@
 import { FC, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { useAppDispatch, useAppSelector, useToast } from '../../hooks';
-import { getAllBooks } from '../../store/services';
+import { useAppDispatch, useAppSelector, useStartLoading, useToast } from '../../hooks';
 import { filterCatalogByCategory, sortCatalogByRating } from '../../store/slices';
 import { Card, Loader, Toast } from '..';
 
@@ -14,21 +13,22 @@ export const Catalog: FC = () => {
   const { isLoading, isSuccess } = useAppSelector((state) => state.loader);
   const dispatch = useAppDispatch();
 
-  getAllBooks();
+  console.log('catalogData ===', catalogData);
 
-  useEffect(() => {
-    if (category) {
-      dispatch(filterCatalogByCategory(category));
-    }
-    /* eslint-disable-next-line react-hooks/exhaustive-deps */
-  }, [category]);
-
-  useEffect(() => {
-    dispatch(sortCatalogByRating(catalogSortState));
-    /* eslint-disable-next-line react-hooks/exhaustive-deps */
-  }, [catalogSortState]);
-
+  useStartLoading();
   useToast({ isLoading, isSuccess });
+
+  // useEffect(() => {
+  //   if (category) {
+  //     dispatch(filterCatalogByCategory(category));
+  //   }
+  //   /* eslint-disable-next-line react-hooks/exhaustive-deps */
+  // }, [category]);
+
+  // useEffect(() => {
+  //   dispatch(sortCatalogByRating(catalogSortState));
+  //   /* eslint-disable-next-line react-hooks/exhaustive-deps */
+  // }, [catalogSortState]);
 
   return (
     <section className={`${catalogView === 'grid' ? 'catalog' : 'catalog_list'}`}>
