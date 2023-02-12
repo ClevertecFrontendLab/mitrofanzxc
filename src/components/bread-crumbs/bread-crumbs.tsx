@@ -4,38 +4,40 @@ import { Link } from 'react-router-dom';
 import { CategoryMockData } from '../../constants';
 import { useAppDispatch } from '../../hooks';
 import { openAccordionMenu } from '../../store/slices';
-import { translateCategoryTitle } from '../../utils';
+import { handleCategory, translateCategoryTitle } from '../../utils';
 
 import { IBreadCrumbs } from './bread-crumbs.interface';
 
 import './bread-crumbs.scss';
 
-export const BreadCrumbs: FC<IBreadCrumbs> = ({ bookInfo, isSuccess }) => {
+export const BreadCrumbs: FC<IBreadCrumbs> = ({ bookData, isSuccess, currentCategory }) => {
   const dispatch = useAppDispatch();
 
   const handleBreadCrumbCategory = () => {
     dispatch(openAccordionMenu());
   };
 
+  const categoryResult = handleCategory(currentCategory, bookData.categories);
+
   return (
     <div className='bread-crumbs_bg'>
       <div className='wrapper'>
         <div className='bread-crumbs'>
           <Link
-            to={`/books/${bookInfo ? bookInfo.category : 'all'}`}
+            to={`/books/${categoryResult}`}
             className='body_small display_inline-block'
             onClick={() => handleBreadCrumbCategory}
             data-test-id='breadcrumbs-link'
           >
-            {translateCategoryTitle(bookInfo, CategoryMockData)}
+            {translateCategoryTitle(categoryResult, CategoryMockData)}
           </Link>
-          {bookInfo && bookInfo.title && isSuccess && (
+          {bookData && bookData.title && isSuccess && (
             <Link
-              to={`/books/${bookInfo ? bookInfo.category : 'all'}/${bookInfo ? bookInfo.id : ''}`}
+              to={`/books/${categoryResult}/${bookData.id}`}
               className='body_small display_inline'
               data-test-id='breadcrumbs-link'
             >
-              {bookInfo.title}
+              {bookData.title}
             </Link>
           )}
         </div>

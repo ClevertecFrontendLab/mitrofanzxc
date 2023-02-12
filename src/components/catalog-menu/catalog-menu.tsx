@@ -6,7 +6,7 @@ import { ButtonCatalogView, ButtonSort, InputSearch } from '..';
 import './catalog-menu.scss';
 
 export const CatalogMenu: FC = () => {
-  const { isInputSearchOpen } = useAppSelector((state) => state.catalog);
+  const { isInputSearchOpen } = useAppSelector((state) => state.search);
 
   return (
     <section className='catalog-menu'>

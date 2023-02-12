@@ -1,12 +1,21 @@
 import { TCatalogView, TTypeToastError } from '../../components';
-import { ICatalogMockData } from '../../constants';
+import { ICatalogData } from '../../constants';
+import { IBookData } from '../../constants/constants.interface';
 import { TTypeSortData } from '../../utils';
 
-export interface ICatalogState {
+export type TConnectionType = '' | 'getAllBooks' | 'getBook' | 'getCategory';
+
+export interface ICatalogState extends ILoaderState {
   catalogView: TCatalogView;
-  initialData: ICatalogMockData[];
-  catalogData: ICatalogMockData[];
+  catalogData: ICatalogData[];
   catalogSortState: TTypeSortData;
+}
+
+export interface IBookState extends ILoaderState {
+  bookData: IBookData;
+}
+
+export interface ISearchState {
   inputSearchValue: string;
   isInputSearchOpen: boolean;
 }

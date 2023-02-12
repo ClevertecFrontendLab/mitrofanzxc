@@ -1,14 +1,14 @@
+export { setBookData, startBookDataLoading, endBookDataLoading, handleBookDataSuccess } from './book-slice';
 export {
-  setAllBooks,
+  setCatalogData,
   changeCatalogView,
   sortCatalogByRating,
   changeCatalogSortState,
   filterCatalogByCategory,
-  setInputSearchValue,
-  searchCatalogByTitle,
-  handleIsInputSearchOpen,
+  startCatalogDataLoading,
+  endCatalogDataLoading,
+  handleCatalogDataSuccess,
 } from './catalog-slice';
-export { openToast, closeToast, addErrorToToast, removeErrorFromToast } from './toast-slice';
 export {
   openMobileMenu,
   closeMobileMenu,
@@ -17,7 +17,7 @@ export {
   closeAccordionMenu,
   toggleAccordionMenu,
 } from './mobile-menu-slice';
-export { startLoading, endLoading, handleSuccess } from './loader-slice';
+export { openModal, closeModal } from './modal-slice';
 export {
   openFlow,
   closeFlow,
@@ -32,7 +32,8 @@ export {
   setTextFieldValue,
   setTextFieldError,
 } from './registration-slice';
-export { openModal, closeModal } from './modal-slice';
+export { setInputSearchValue, searchCatalogByTitle, handleIsInputSearchOpen } from './search-slice';
+export { openToast, closeToast, addErrorToToast, removeErrorFromToast } from './toast-slice';
 export type {
   ICatalogState,
   IForm,

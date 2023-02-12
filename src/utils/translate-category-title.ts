@@ -2,7 +2,7 @@ import { ITranslateCategoryTitle } from './utils.interface';
 
 export const translateCategoryTitle: ITranslateCategoryTitle = (data, categories) => {
   if (data && typeof data === 'object') {
-    const ruTitle = categories.find(({ eng }) => eng === data.category);
+    const ruTitle = categories.find(({ eng }) => data.categories.includes(eng));
 
     if (ruTitle) {
       return ruTitle.ru;

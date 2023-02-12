@@ -7,7 +7,7 @@ import { Sprite } from '..';
 import './input-search.scss';
 
 export const InputSearch: FC = () => {
-  const { inputSearchValue, isInputSearchOpen } = useAppSelector((state) => state.catalog);
+  const { inputSearchValue, isInputSearchOpen } = useAppSelector((state) => state.search);
   const inputSearchRef = useRef<HTMLInputElement>(null);
   const dispatch = useAppDispatch();
 

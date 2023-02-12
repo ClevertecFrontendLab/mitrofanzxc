@@ -9,13 +9,10 @@ import './catalog.scss';
 
 export const Catalog: FC = () => {
   const { category } = useParams();
-  const { catalogView, catalogData, catalogSortState } = useAppSelector((state) => state.catalog);
-  const { isLoading, isSuccess } = useAppSelector((state) => state.loader);
+  const { catalogView, catalogData, catalogSortState, isLoading, isSuccess } = useAppSelector((state) => state.catalog);
   const dispatch = useAppDispatch();
 
-  console.log('catalogData ===', catalogData);
-
-  useStartLoading();
+  useStartLoading('getAllBooks');
   useToast({ isLoading, isSuccess });
 
   // useEffect(() => {
@@ -39,7 +36,9 @@ export const Catalog: FC = () => {
         isSuccess &&
         catalogData &&
         catalogData.length > 0 &&
-        catalogData.map((element) => <Card key={element.id} catalogView={catalogView} {...element} />)}
+        catalogData.map((element) => (
+          <Card key={element.id} catalogView={catalogView} currentCategory={category} {...element} />
+        ))}
     </section>
   );
 };

@@ -1,5 +1,5 @@
-import { ICatalogMockData } from '../../constants';
+import { IBookData } from '../../constants/constants.interface';
 
 export interface ISlider {
-  data: ICatalogMockData | undefined;
+  data: IBookData;
 }

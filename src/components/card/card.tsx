@@ -1,30 +1,32 @@
 import { FC, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { convertToDate } from '../../utils';
+import { BASE_URL_API } from '../../constants';
+import { convertToDate, handleAuthors, handleCategory, handleStatus, handleTitle } from '../../utils';
 import { ButtonPrimary, Rating, Sprite } from '..';
 
 import { ICard } from './card.interface';
 
 import './card.scss';
 
-export const Card: FC<ICard> = ({ id, category, rating, title, author, images, status, catalogView }) => {
-  const [limiter, SetLimiter] = useState<number>(54);
+export const Card: FC<ICard> = ({
+  id,
+  categories,
+  currentCategory,
+  rating,
+  title,
+  authors,
+  image,
+  delivery,
+  booking,
+  catalogView,
+}) => {
+  const [limiter, setLimiter] = useState<number>(54);
   const [match700, setMatch700] = useState(Boolean(window.matchMedia('(max-width: 700px)').matches));
   const [match320, setMatch320] = useState(Boolean(window.matchMedia('(max-width: 320px)').matches));
 
-  // Обработчик для заголовков карточек
-  const handleTitle = (value: string, limeter: number) => {
-    if (value.length > limeter) {
-      return `${value.slice(0, limeter)}...`;
-    }
-
-    if (!value.length) {
-      return 'Empty title...';
-    }
-
-    return value;
-  };
+  const statusResult = handleStatus(booking, delivery);
+  const categoryResult = handleCategory(currentCategory, categories);
 
   // Ограничитель по количетсву символов в карточке, в зависимости от ширины экрана
   useEffect(() => {
@@ -36,11 +38,11 @@ export const Card: FC<ICard> = ({ id, category, rating, title, author, images, s
       setMatch320(Boolean(mediaQueryList320.matches));
 
       if (match700) {
-        SetLimiter(24);
+        setLimiter(24);
       } else if (match320) {
-        SetLimiter(75);
+        setLimiter(75);
       } else {
-        SetLimiter(54);
+        setLimiter(54);
       }
     };
 
@@ -56,40 +58,40 @@ export const Card: FC<ICard> = ({ id, category, rating, title, author, images, s
 
   return (
     <Link
-      to={`/books/${category}/${id}`}
+      to={`/books/${categoryResult}/${id}`}
       className={`${catalogView === 'grid' ? 'card' : 'card-list'}`}
       data-test-id='card'
     >
       <div className={`${catalogView === 'grid' ? 'placeholder' : 'placeholder-list'}`}>
-        {!images ||
-          (images.length <= 0 && (
+        {!image ||
+          (image.url.length <= 0 && (
             <Sprite id='cat' className={`${catalogView === 'grid' ? 'placeholder__logo' : 'placeholder-list__logo'}`} />
           ))}
-        {images && images.length > 0 && (
+        {image && image.url.length > 0 && (
           <img
-            src={images[0].src}
+            src={`${BASE_URL_API}${image.url}`}
             alt='card-img'
             className={`${catalogView === 'grid' ? 'card__img' : 'card-list__img'}`}
           />
         )}
       </div>
       <div className={`card__info ${catalogView === 'grid' ? '' : 'card__info_list'}`}>
-        {status.message === 'free' && (
+        {statusResult === 'free' && (
           <ButtonPrimary
             type='primary'
             title='Забронировать'
             className={`button_small_mobile ${catalogView === 'grid' ? '' : 'button_list'}`}
           />
         )}
-        {status.message === 'busy' && (
+        {statusResult === 'busy' && (
           <ButtonPrimary
             type='secondary'
-            title={`Занята до ${status.timestamp && convertToDate(status.timestamp, 'short')}`}
+            title={`Занята до ${delivery && delivery.dateHandedTo && convertToDate(delivery.dateHandedTo, 'short')}`}
             className={`button_small_mobile ${catalogView === 'grid' ? '' : 'button_list'}`}
             disabled={true}
           />
         )}
-        {status.message === 'reserved' && (
+        {statusResult === 'reserved' && (
           <ButtonPrimary
             type='secondary'
             title='Забронирована'
@@ -100,7 +102,7 @@ export const Card: FC<ICard> = ({ id, category, rating, title, author, images, s
           <p className={`${catalogView === 'grid' ? 'subtitle_small' : 'card-list__title'}`}>
             {handleTitle(title, limiter)}
           </p>
-          <p className='body_small card-list__author'>{handleTitle(author, limiter)}</p>
+          <p className='body_small card-list__author'>{handleTitle(handleAuthors(authors), limiter)}</p>
         </div>
         <div className={`${catalogView === 'grid' ? 'rating-wrapper' : 'rating-list__wrapper'}`}>
           <Rating rating={rating} />

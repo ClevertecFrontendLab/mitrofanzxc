@@ -1,10 +1,23 @@
 import { TIdTextField } from '../components';
-import { ICatalogMockData, ICategoryMockData, TStringAble } from '../constants';
+import { IBooking, ICatalogData, ICategoryMockData, IDelivery, TStringAble } from '../constants';
 
 export type TTypeConvertToDate = 'full' | 'short';
+export type TStatus = 'free' | 'busy' | 'reserved';
+
+export interface IHandleCategory {
+  (currentCategory: string | undefined, categories: string[]): string;
+}
+
+export interface IHandleStatus {
+  (booking: IBooking | null, delivery: IDelivery | null): TStatus;
+}
+
+export interface IHandleTitle {
+  (value: TStringAble, limeter: number): string;
+}
 
 export interface IConvertToDate {
-  (timestamp: number, type: TTypeConvertToDate): string;
+  (timestamp: string, type: TTypeConvertToDate): string;
 }
 
 export interface IArrayICreateNavData {
@@ -14,7 +27,7 @@ export interface IArrayICreateNavData {
 }
 
 export interface ICreateNavData {
-  (data: ICatalogMockData[]): IArrayICreateNavData[] | null;
+  (data: ICatalogData[]): IArrayICreateNavData[] | null;
 }
 
 export type TPartDivideTableDate = 'first' | 'second';
@@ -22,17 +35,17 @@ export type TPartDivideTableDate = 'first' | 'second';
 export type TArrayDivideTableData = Array<[string, TStringAble]>;
 
 export interface IDivideTableData {
-  (part: TPartDivideTableDate, bookInfo: ICatalogMockData | undefined): TArrayDivideTableData | null;
+  (part: TPartDivideTableDate, bookData: ICatalogData | undefined): TArrayDivideTableData | null;
 }
 
 export interface IGetAmountOfBooks {
-  (data: ICatalogMockData[], category: string): number;
+  (data: ICatalogData[], category: string): number;
 }
 
 export type TArrayGetUniqueCategories = string[];
 
 export interface IGetUniqueCategories {
-  (data: ICatalogMockData[]): TArrayGetUniqueCategories | null;
+  (data: ICatalogData[]): TArrayGetUniqueCategories | null;
 }
 
 export interface IInterceptRequest {
@@ -42,11 +55,11 @@ export interface IInterceptRequest {
 export type TTypeSortData = 'default' | 'descending' | 'ascending';
 
 export interface ISortData {
-  (type: TTypeSortData): (a: ICatalogMockData, b: ICatalogMockData) => 0 | 1 | -1;
+  (type: TTypeSortData): (a: ICatalogData, b: ICatalogData) => 0 | 1 | -1;
 }
 
 export interface ITranslateCategoryTitle {
-  (data: ICatalogMockData | string | undefined, categories: ICategoryMockData[]): string;
+  (data: ICatalogData | string | undefined, categories: ICategoryMockData[]): string;
 }
 
 export interface IValidateTextField {

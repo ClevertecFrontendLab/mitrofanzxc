@@ -1,8 +1,8 @@
 import { IDivideTableData, TArrayDivideTableData } from './utils.interface';
 
-export const divideTableData: IDivideTableData = (part, bookInfo) => {
-  if (bookInfo && bookInfo.info) {
-    const arr: TArrayDivideTableData = Object.entries(bookInfo.info);
+export const divideTableData: IDivideTableData = (part, bookData) => {
+  if (bookData) {
+    const arr: TArrayDivideTableData = Object.entries(bookData);
     const separator = Math.ceil(arr.length / 2);
 
     if (part === 'first') {

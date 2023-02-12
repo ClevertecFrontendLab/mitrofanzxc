@@ -1,6 +1,7 @@
-import { ICatalogMockData } from '../../constants';
+import { IBookData } from '../../constants/constants.interface';
 
 export interface IBreadCrumbs {
-  bookInfo: ICatalogMockData | undefined;
+  bookData: IBookData;
   isSuccess: boolean;
+  currentCategory: string | undefined;
 }

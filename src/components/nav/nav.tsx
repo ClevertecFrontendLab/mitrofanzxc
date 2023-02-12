@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
-import { CatalogMockData, CategoryMockData, PATHS } from '../../constants';
+import { CategoryMockData, PATHS } from '../../constants';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { closeAccordionMenu, closeMobileMenu, closeToast, toggleAccordionMenu } from '../../store/slices';
 import { createNavData, translateCategoryTitle } from '../../utils';
@@ -15,7 +15,7 @@ export const Nav: FC = () => {
   const dispatch = useAppDispatch();
 
   const { isMobileMenuOpen, isAccordionMenuOpen } = useAppSelector((state) => state.mobileMenu);
-  const data = createNavData(CatalogMockData);
+  // const data = createNavData(CatalogMockData);
 
   const handleAccordionMenu = () => {
     dispatch(toggleAccordionMenu());
@@ -74,7 +74,7 @@ export const Nav: FC = () => {
           >
             Все книги
           </NavLink>
-          {data &&
+          {/* {data &&
             data.map(({ id, category, amount }) => (
               <NavLink
                 key={id}
@@ -85,7 +85,7 @@ export const Nav: FC = () => {
                 {translateCategoryTitle(category, CategoryMockData)}
                 <span className='body_small'>{amount}</span>
               </NavLink>
-            ))}
+            ))} */}
         </ul>
         <NavLink
           to={terms}

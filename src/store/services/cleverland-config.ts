@@ -2,6 +2,8 @@
 // import axios, { AxiosError } from 'axios';
 import axios from 'axios';
 
+import { BASE_URL_API } from '../../constants';
+
 // import { interceptRequest } from '../../utils';
 
 /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
@@ -12,7 +14,7 @@ import axios from 'axios';
 // };
 
 export const cleverlandConfig = axios.create({
-  baseURL: 'https://strapi.cleverland.by',
+  baseURL: BASE_URL_API,
 });
 
 // cleverlandConfig.interceptors.request.use(

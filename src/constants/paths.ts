@@ -10,3 +10,5 @@ export const PATHS: IPATHS = {
   contract: '/contract',
   any: '*',
 };
+
+export const BASE_URL_API = 'https://strapi.cleverland.by';

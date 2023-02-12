@@ -2,6 +2,7 @@ import { FC, Fragment, useState } from 'react';
 import { Navigation, Pagination, Scrollbar, Thumbs } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
+import { BASE_URL_API } from '../../constants';
 import { Sprite } from '..';
 
 import { ISlider } from './slider.interface';
@@ -33,9 +34,9 @@ export const Slider: FC<ISlider> = ({ data }) => {
               }}
               data-test-id='slide-big'
             >
-              {data.images.map(({ id, src }) => (
-                <SwiperSlide key={id}>
-                  <img src={src} alt='card-img' className='card__img' />
+              {data.images.map(({ url }) => (
+                <SwiperSlide key={url}>
+                  <img src={`${BASE_URL_API}${url}`} alt='card-img' className='card__img' />
                 </SwiperSlide>
               ))}
             </Swiper>
@@ -66,9 +67,9 @@ export const Slider: FC<ISlider> = ({ data }) => {
                   },
                 }}
               >
-                {data.images.map(({ id, src }) => (
-                  <SwiperSlide key={id} className='thumbs__item' data-test-id='slide-mini'>
-                    <img src={src} alt='card-img' className='thumbs__img' />
+                {data.images.map(({ url }) => (
+                  <SwiperSlide key={url} className='thumbs__item' data-test-id='slide-mini'>
+                    <img src={`${BASE_URL_API}${url}`} alt='card-img' className='thumbs__img' />
                   </SwiperSlide>
                 ))}
               </Swiper>
