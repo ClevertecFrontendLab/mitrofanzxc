@@ -26,7 +26,7 @@ export const Card: FC<ICard> = ({
   const { categoriesData } = useAppSelector((state) => state.categories);
 
   const statusResult = handleStatus(booking, delivery);
-  const categoryResult = translateCategoryTitle(handleCategory(currentCategory, categories), categoriesData, 'en');
+  const categoryResult = translateCategoryTitle(handleCategory(currentCategory, categories), categoriesData, 'ru');
 
   return (
     <Link

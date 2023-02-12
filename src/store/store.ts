@@ -23,7 +23,6 @@ export const store = configureStore({
     registration: registrationReducer,
     search: searchReducer,
   },
-  // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware),
   middleware: [sagaMiddleware],
 });
 

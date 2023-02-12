@@ -21,7 +21,7 @@
   }
 
   .swiper-slide-thumb-active {
-    border: 1px solid $color-orange;
+    border: 0.063rem solid $color-orange;
   }
 }
 
@@ -35,7 +35,7 @@
     justify-content: center;
     flex-wrap: wrap;
     margin-top: 20px;
-    padding: 2px 0;
+    padding: 0.125rem 0;
   }
 }
 
@@ -131,8 +131,8 @@
   width: 65px !important;
   height: 86px !important;
   background: $color-grey-black-5;
-  border-radius: 3px;
-  border: 1px solid $color-grey-black-40;
+  border-radius: 0.188rem;
+  border: 0.063rem solid $color-grey-black-40;
   aspect-ratio: 65/86;
   overflow: hidden;
   cursor: pointer;

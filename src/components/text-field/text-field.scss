@@ -15,7 +15,7 @@
   border: none;
   border-top-right-radius: $base;
   border-top-left-radius: $base;
-  border-bottom: 1px solid $color-grey-black-20;
+  border-bottom: 0.063rem solid $color-grey-black-20;
   transition: border-color $transition-02 ease;
   caret-color: var(--color__accent);
 
@@ -24,7 +24,7 @@
   }
 
   &:disabled {
-    border-bottom: 1px solid $color-grey-black-5;
+    border-bottom: 0.063rem solid $color-grey-black-5;
 
     ~ .text-field__message {
       color: $color-grey-black-20;
@@ -63,7 +63,7 @@
   bottom: 1rem;
   left: 0;
   width: 100%;
-  height: 1px;
+  height: 0.063rem;
   margin-top: -1px;
   background-color: var(--color__accent);
   transition: transform 180ms cubic-bezier(0.4, 0, 0.2, 1), opacity 180ms cubic-bezier(0.4, 0, 0.2, 1),
@@ -93,14 +93,14 @@
 
 .text-field__label_hidden {
   border: 0;
-  clip: rect(1px 1px 1px 1px);
-  clip: rect(1px, 1px, 1px, 1px);
-  height: 1px;
+  clip: rect(1px 0.063rem 0.063rem 0.063rem);
+  clip: rect(1px, 0.063rem, 0.063rem, 0.063rem);
+  height: 0.063rem;
   margin: -1px;
   overflow: hidden;
   padding: 0;
   position: absolute;
-  width: 1px;
+  width: 0.063rem;
 }
 
 .text-field__message {
@@ -109,7 +109,7 @@
 }
 
 .text-field__input_error {
-  border-bottom: 1px solid $color-negative;
+  border-bottom: 0.063rem solid $color-negative;
 }
 
 .text-field__label_error {

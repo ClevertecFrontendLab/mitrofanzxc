@@ -52,7 +52,7 @@ export const catalogSlice = createSlice({
     setBookData: (state, action: PayloadAction<IBookData>) => {
       state.bookData = action.payload;
     },
-    startBookDataLoading: (state, action: PayloadAction<string | undefined>) => {
+    startBookDataLoading: (state, action: PayloadAction<string>) => {
       state.isLoading = true;
     },
     endBookDataLoading: (state) => {

@@ -40,7 +40,8 @@ export interface ICreateNavData {
 
 export type TPartDivideTableDate = 'first' | 'second';
 
-export type TArrayDivideTableData = Array<[string, string]>;
+// export type TArrayDivideTableData = Array<[string, string]>;
+export type TArrayDivideTableData = TStringAble[][];
 
 export interface IDivideTableData {
   (part: TPartDivideTableDate, bookData: IBookData): TArrayDivideTableData | null;

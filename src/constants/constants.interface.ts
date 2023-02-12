@@ -52,7 +52,7 @@ export interface IComments {
     commentUserId: number;
     firstName: string;
     lastName: string;
-    avatarUrl: string;
+    avatarUrl: TStringAble;
   };
 }
 
@@ -72,7 +72,7 @@ export interface IBookData {
   authors: string[];
   images: IImage[];
   categories: string[];
-  comments: IComments[];
+  comments: IComments[] | null;
   booking: IBooking | null;
   delivery: IDelivery | null;
   histories: IHistory[];

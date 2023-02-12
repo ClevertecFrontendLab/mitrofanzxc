@@ -2,11 +2,11 @@ import { ICategoryMockData } from './constants.interface';
 
 export const TableHeaderMockData: ICategoryMockData[] = [
   {
-    path: 'publishingHouse',
+    path: 'publish',
     name: 'Издательство',
   },
   {
-    path: 'year',
+    path: 'issueYear',
     name: 'Год издания',
   },
   {
@@ -14,7 +14,7 @@ export const TableHeaderMockData: ICategoryMockData[] = [
     name: 'Страниц',
   },
   {
-    path: 'binding',
+    path: 'cover',
     name: 'Переплёт',
   },
   {
@@ -22,7 +22,7 @@ export const TableHeaderMockData: ICategoryMockData[] = [
     name: 'Формат',
   },
   {
-    path: 'genre',
+    path: 'categories',
     name: 'Жанр',
   },
   {
@@ -30,11 +30,11 @@ export const TableHeaderMockData: ICategoryMockData[] = [
     name: 'Вес',
   },
   {
-    path: 'isbn',
+    path: 'ISBN',
     name: 'ISBN',
   },
   {
-    path: 'manufacturer',
+    path: 'producer',
     name: 'Изготовитель',
   },
 ];

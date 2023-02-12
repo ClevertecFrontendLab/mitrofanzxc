@@ -1,5 +1,6 @@
 import { FC } from 'react';
 
+import userImg from '../../assets/user-review.png';
 import { BASE_URL_API } from '../../constants';
 import { IComments } from '../../constants/constants.interface';
 import { convertToDate } from '../../utils';
@@ -10,7 +11,8 @@ import './review.scss';
 export const Review: FC<IComments> = ({ rating, text, createdAt, user }) => (
   <li className='review'>
     <div className='review__user-info'>
-      <img src={`${BASE_URL_API}${user.avatarUrl}`} alt='user-img' className='review__user-logo' />
+      {user.avatarUrl && <img src={`${BASE_URL_API}${user.avatarUrl}`} alt='user-img' className='review__user-logo' />}
+      {!user.avatarUrl && <img src={`${userImg}`} alt='user-img' className='review__user-logo' />}
       <p className='body_large color-grey-black-70 review__user-name'>{`${user.lastName} ${user.firstName}`}</p>
       <p className='body_large color-grey-black-70 review__user-date'>{convertToDate(createdAt, 'full')}</p>
     </div>

@@ -17,7 +17,7 @@ export const Table: FC<ITable> = ({ data }) => (
         data.map((element) => (
           <tr key={uuidv4()}>
             <th className='subtitle_large color-grey-black-40'>
-              {element[0] ? translateCategoryTitle(element[0], TableHeaderMockData, 'ru') : 'Категория'}
+              {element[0] ? translateCategoryTitle(element[0], TableHeaderMockData, 'en') : 'Категория'}
             </th>
             <td className='body_large'>{element[1] || 'Неизвестно'}</td>
           </tr>

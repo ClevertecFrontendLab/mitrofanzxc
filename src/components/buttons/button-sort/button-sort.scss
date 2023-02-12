@@ -6,12 +6,12 @@
   padding: 10px $base * 4;
   background-color: $color-white;
   border-radius: $base * 5;
-  box-shadow: 0px 2px 4px rgba(191, 196, 201, 0.2), 0px 3px 4px rgba(191, 196, 201, 0.18),
-    0px 1px 5px rgba(191, 196, 201, 0.24);
+  box-shadow: 0px 0.125rem $base rgba(191, 196, 201, 0.2), 0px 0.188rem $base rgba(191, 196, 201, 0.18),
+    0px 0.063rem 5px rgba(191, 196, 201, 0.24);
   transition: all $transition-02;
 
   &:hover {
-    box-shadow: 0px 3px 4px rgba(222, 125, 11, 0.2), 0px 1px 10px rgba(249, 89, 8, 0.2);
+    box-shadow: 0px 0.188rem $base rgba(222, 125, 11, 0.2), 0px 0.063rem 10px rgba(249, 89, 8, 0.2);
   }
 
   &:active {

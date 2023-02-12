@@ -78,7 +78,7 @@ export const BookPage: FC = () => {
               <div className='accordion__wrapper'>
                 <div className='accordion'>
                   <h5 className='h5 book-page__header'>
-                    Отзывы <span className='body_small'>{bookData.comments.length}</span>
+                    Отзывы {bookData.comments && <span className='body_small'>{bookData.comments.length}</span>}
                   </h5>
                   <button
                     type='button'
@@ -90,6 +90,7 @@ export const BookPage: FC = () => {
                 </div>
                 <ul className={`review-list ${isAccordionReviewsOpen ? 'review-list_active' : ''}`}>
                   {bookData &&
+                    bookData.comments &&
                     bookData.comments.length > 0 &&
                     bookData.comments.map((element) => <Review key={element.id} {...element} />)}
                 </ul>

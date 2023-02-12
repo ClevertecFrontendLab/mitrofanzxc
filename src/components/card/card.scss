@@ -7,8 +7,8 @@
   flex-direction: column;
   padding: $base * 2 $base * 2 $base * 4 $base * 2;
   border-radius: 10px;
-  box-shadow: 0px 2px 4px rgba(191, 196, 201, 0.2), 0px 3px 4px rgba(191, 196, 201, 0.18),
-    0px 1px 5px rgba(191, 196, 201, 0.24);
+  box-shadow: 0px 0.125rem $base rgba(191, 196, 201, 0.2), 0px 0.188rem $base rgba(191, 196, 201, 0.18),
+    0px 0.063rem 5px rgba(191, 196, 201, 0.24);
 
   @media (max-width: $breakpoint-xxs-min) {
     padding: $base * 2 $base * 4 $base * 4 $base * 4;
@@ -66,8 +66,8 @@
   column-gap: $base * 4;
   padding: 24px 24px 24px $base * 4;
   border-radius: $base * 3;
-  box-shadow: 0px 2px 4px rgba(191, 196, 201, 0.2), 0px 3px 4px rgba(191, 196, 201, 0.18),
-    0px 1px 5px rgba(191, 196, 201, 0.24);
+  box-shadow: 0px 0.125rem $base rgba(191, 196, 201, 0.2), 0px 0.188rem $base rgba(191, 196, 201, 0.18),
+    0px 0.063rem 5px rgba(191, 196, 201, 0.24);
   object-fit: cover;
 
   @media (max-width: $breakpoint-md-min) {
@@ -172,8 +172,8 @@
 .card-list__img {
   width: $base * 30;
   height: 170px;
-  border-radius: 3px;
-  border: 1px solid $color-grey-black-40;
+  border-radius: 0.188rem;
+  border: 0.063rem solid $color-grey-black-40;
   object-fit: cover;
 
   @media (max-width: $breakpoint-xs-min) {
@@ -198,7 +198,7 @@
   aspect-ratio: 174/242;
   background: $color-grey-black-5;
   border-radius: 10px;
-  border: 1px solid $color-grey-black-40;
+  border: 0.063rem solid $color-grey-black-40;
 
   @media (max-width: $breakpoint-xxs-min) {
     margin-right: $base * 10;
@@ -214,8 +214,8 @@
   min-width: $base * 30;
   height: 170px;
   background: $color-grey-black-5;
-  border-radius: 3px;
-  border: 1px solid $color-grey-black-40;
+  border-radius: 0.188rem;
+  border: 0.063rem solid $color-grey-black-40;
   overflow: hidden;
 
   @media (max-width: $breakpoint-xs-min) {

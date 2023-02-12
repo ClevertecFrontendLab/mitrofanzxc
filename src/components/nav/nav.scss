@@ -8,8 +8,8 @@
   width: 502px;
   max-height: 442px;
   background: $color-grey-black-5;
-  box-shadow: 0px 2px $base rgba(191, 196, 201, 0.2), 0px 3px $base rgba(191, 196, 201, 0.18),
-    0px 1px 5px rgba(191, 196, 201, 0.24);
+  box-shadow: 0px 0.125rem $base rgba(191, 196, 201, 0.2), 0px 0.188rem $base rgba(191, 196, 201, 0.18),
+    0px 0.063rem 5px rgba(191, 196, 201, 0.24);
   border-radius: 10px;
   overflow-y: scroll;
   transition: all $transition-02;
@@ -34,8 +34,8 @@
     height: 100%;
     max-height: 442px;
     background: $color-grey-black-5;
-    box-shadow: 0px 2px $base rgba(191, 196, 201, 0.2), 0px 3px $base rgba(191, 196, 201, 0.18),
-      0px 1px 5px rgba(191, 196, 201, 0.24);
+    box-shadow: 0px 0.125rem $base rgba(191, 196, 201, 0.2), 0px 0.188rem $base rgba(191, 196, 201, 0.18),
+      0px 0.063rem 5px rgba(191, 196, 201, 0.24);
     border-radius: 10px;
     overflow-y: scroll;
     transition: all $transition-02;
@@ -79,7 +79,7 @@
     bottom: -9px;
     left: -100%;
     width: 100%;
-    height: 1px;
+    height: 0.063rem;
     background: $color-hover;
     opacity: 0;
     transition: all $transition-02;
@@ -151,7 +151,7 @@
     display: block;
     margin-top: $base * 13;
     padding: $base * 8 $base * 8 46px $base * 8;
-    border-top: 1px solid $color-grey-black-20;
+    border-top: 0.063rem solid $color-grey-black-20;
   }
 
   @media (max-width: $breakpoint-xs-min) {
