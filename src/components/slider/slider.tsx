@@ -9,6 +9,12 @@ import { ISlider } from './slider.interface';
 
 import './slider.scss';
 
+import 'swiper/scss';
+import 'swiper/scss/navigation';
+import 'swiper/scss/pagination';
+import 'swiper/scss/thumbs';
+import 'swiper/css/scrollbar';
+
 export const Slider: FC<ISlider> = ({ data }) => {
   /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);

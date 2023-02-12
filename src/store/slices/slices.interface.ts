@@ -1,9 +1,8 @@
 import { TCatalogView, TTypeToastError } from '../../components';
-import { ICatalogData } from '../../constants';
-import { IBookData } from '../../constants/constants.interface';
-import { TTypeSortData } from '../../utils';
+import { IBookData, ICatalogData, ICategories } from '../../constants/constants.interface';
+import { TTypeSortData } from '../../utils/utils.interface';
 
-export type TConnectionType = '' | 'getAllBooks' | 'getBook' | 'getCategory';
+export type TConnectionType = '' | 'getCatalog' | 'getBook' | 'getCategories';
 
 export interface ICatalogState extends ILoaderState {
   catalogView: TCatalogView;
@@ -63,4 +62,8 @@ export interface IToastState {
   isToastOpen: boolean;
   isToastError: boolean;
   typeToastError: TTypeToastError;
+}
+
+export interface ICategoriesState extends ILoaderState {
+  categoriesData: ICategories[];
 }

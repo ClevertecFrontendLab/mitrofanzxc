@@ -2,9 +2,9 @@ import { FC, useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import { CategoryMockData, PATHS } from '../../constants';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector, useStartLoading } from '../../hooks';
 import { closeAccordionMenu, closeMobileMenu, closeToast, toggleAccordionMenu } from '../../store/slices';
-import { createNavData, translateCategoryTitle } from '../../utils';
+import { translateCategoryTitle } from '../../utils';
 import { Sprite } from '..';
 
 import './nav.scss';
@@ -15,7 +15,7 @@ export const Nav: FC = () => {
   const dispatch = useAppDispatch();
 
   const { isMobileMenuOpen, isAccordionMenuOpen } = useAppSelector((state) => state.mobileMenu);
-  // const data = createNavData(CatalogMockData);
+  const { categoriesData } = useAppSelector((state) => state.categories);
 
   const handleAccordionMenu = () => {
     dispatch(toggleAccordionMenu());
@@ -31,7 +31,9 @@ export const Nav: FC = () => {
     dispatch(closeToast());
   };
 
-  // Ограничитель по количетсву символов в карточке, в зависимости от ширины экрана
+  useStartLoading('getCategories');
+
+  // Эффект для подстановки необходимых data-test-id в зависимости от ширины экрана
   useEffect(() => {
     const mediaQueryList992 = window.matchMedia('(max-width: 992px)');
 
@@ -74,18 +76,13 @@ export const Nav: FC = () => {
           >
             Все книги
           </NavLink>
-          {/* {data &&
-            data.map(({ id, category, amount }) => (
-              <NavLink
-                key={id}
-                to={`/books/${category}`}
-                className='nav-list__item body_large'
-                onClick={handleMobileMenu}
-              >
-                {translateCategoryTitle(category, CategoryMockData)}
-                <span className='body_small'>{amount}</span>
+          {categoriesData &&
+            categoriesData.map(({ id, name, path }) => (
+              <NavLink key={id} to={`/books/${path}`} className='nav-list__item body_large' onClick={handleMobileMenu}>
+                {translateCategoryTitle(name, CategoryMockData)}
+                <span className='body_small'>amount</span>
               </NavLink>
-            ))} */}
+            ))}
         </ul>
         <NavLink
           to={terms}

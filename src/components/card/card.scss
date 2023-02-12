@@ -23,9 +23,10 @@
   }
 
   .subtitle_small {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
     height: 54px;
     margin-top: 21px;
 

@@ -2,8 +2,9 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
 import { TCatalogView } from '../../components';
-import { ICatalogData } from '../../constants';
-import { sortData, TTypeSortData } from '../../utils';
+import { ICatalogData } from '../../constants/constants.interface';
+import { sortData } from '../../utils';
+import { TTypeSortData } from '../../utils/utils.interface';
 
 import { ICatalogState } from './slices.interface';
 

@@ -1,7 +1,8 @@
 import { ChangeEvent, FC, useState } from 'react';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { IForm, setTextFieldError, setTextFieldValue } from '../../store/slices';
+import { setTextFieldError, setTextFieldValue } from '../../store/slices';
+import { IForm } from '../../store/slices/slices.interface';
 import { validateTextField } from '../../utils';
 import { Sprite } from '..';
 

@@ -1,4 +1,4 @@
-import { TNumberAble } from '../../constants';
+import { TNumberAble } from '../../constants/constants.interface';
 
 export interface IRatingStar {
   id: string;

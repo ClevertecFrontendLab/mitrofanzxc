@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
 
 import {
-  endBookDataLoading,
-  endCatalogDataLoading,
   handleBookDataSuccess,
   handleCatalogDataSuccess,
+  handleCategoriesDataSuccess,
   startBookDataLoading,
   startCatalogDataLoading,
+  startCategoriesDataLoading,
 } from '../store/slices';
 import { TConnectionType } from '../store/slices/slices.interface';
 
@@ -17,13 +17,17 @@ export const useStartLoading = (connectionType: TConnectionType) => {
 
   useEffect(() => {
     switch (connectionType) {
-      case 'getAllBooks':
+      case 'getCatalog':
         dispatch(startCatalogDataLoading());
         dispatch(handleCatalogDataSuccess(false));
         break;
       case 'getBook':
         dispatch(startBookDataLoading());
         dispatch(handleBookDataSuccess(false));
+        break;
+      case 'getCategories':
+        dispatch(startCategoriesDataLoading());
+        dispatch(handleCategoriesDataSuccess(false));
         break;
       default:
         break;

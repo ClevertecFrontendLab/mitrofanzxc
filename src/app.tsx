@@ -5,12 +5,6 @@ import { Layout, LayoutMainPage } from './components';
 import { PATHS } from './constants';
 import { BookPage, MainPage, ProfilePage, TermsPage } from './pages';
 
-import 'swiper/scss';
-import 'swiper/scss/navigation';
-import 'swiper/scss/pagination';
-import 'swiper/scss/thumbs';
-import 'swiper/css/scrollbar';
-
 const App: FC = () => {
   const { main, booksAll, booksCategory, bookPage, profile, terms, contract } = PATHS;
 

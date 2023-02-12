@@ -1,4 +1,4 @@
 export { cleverlandConfig } from './cleverland-config';
-export { getAllBooks } from './get-all-books';
+export { getCatalog } from './get-catalog';
 export { getBook } from './get-book';
 export { getCategories } from './get-categories';

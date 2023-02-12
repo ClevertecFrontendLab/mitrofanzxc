@@ -1,5 +1,12 @@
 import { TIdTextField } from '../components';
-import { IBooking, ICatalogData, ICategoryMockData, IDelivery, TStringAble } from '../constants';
+import {
+  IBookData,
+  IBooking,
+  ICatalogData,
+  ICategoryMockData,
+  IDelivery,
+  TStringAble,
+} from '../constants/constants.interface';
 
 export type TTypeConvertToDate = 'full' | 'short';
 export type TStatus = 'free' | 'busy' | 'reserved';
@@ -32,10 +39,10 @@ export interface ICreateNavData {
 
 export type TPartDivideTableDate = 'first' | 'second';
 
-export type TArrayDivideTableData = Array<[string, TStringAble]>;
+export type TArrayDivideTableData = Array<[string, string]>;
 
 export interface IDivideTableData {
-  (part: TPartDivideTableDate, bookData: ICatalogData | undefined): TArrayDivideTableData | null;
+  (part: TPartDivideTableDate, bookData: IBookData): TArrayDivideTableData | null;
 }
 
 export interface IGetAmountOfBooks {

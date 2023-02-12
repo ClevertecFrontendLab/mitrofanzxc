@@ -2,16 +2,16 @@ import { ITranslateCategoryTitle } from './utils.interface';
 
 export const translateCategoryTitle: ITranslateCategoryTitle = (data, categories) => {
   if (data && typeof data === 'object') {
-    const ruTitle = categories.find(({ eng }) => data.categories.includes(eng));
+    const title = categories.find(({ eng }) => data.categories.includes(eng));
 
-    if (ruTitle) {
-      return ruTitle.ru;
+    if (title) {
+      return title.ru;
     }
   } else if (typeof data === 'string') {
-    const ruTitle = categories.find(({ eng }) => eng === data);
+    const title = categories.find(({ eng }) => eng === data);
 
-    if (ruTitle) {
-      return ruTitle.ru;
+    if (title) {
+      return title.ru;
     }
   }
 

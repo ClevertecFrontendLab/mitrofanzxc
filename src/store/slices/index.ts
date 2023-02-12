@@ -10,6 +10,12 @@ export {
   handleCatalogDataSuccess,
 } from './catalog-slice';
 export {
+  setCategoriesData,
+  startCategoriesDataLoading,
+  endCategoriesDataLoading,
+  handleCategoriesDataSuccess,
+} from './categories-slice';
+export {
   openMobileMenu,
   closeMobileMenu,
   toggleMobileMenu,
@@ -34,13 +40,3 @@ export {
 } from './registration-slice';
 export { setInputSearchValue, searchCatalogByTitle, handleIsInputSearchOpen } from './search-slice';
 export { openToast, closeToast, addErrorToToast, removeErrorFromToast } from './toast-slice';
-export type {
-  ICatalogState,
-  IForm,
-  ILoaderState,
-  IMobileMenuState,
-  IModalState,
-  IRegistrationState,
-  ITextField,
-  IToastState,
-} from './slices.interface';

@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 /* eslint-disable-next-line import/no-extraneous-dependencies */
 import { v4 as uuidv4 } from 'uuid';
 
-import { TNumberAble } from '../../constants';
+import { TNumberAble } from '../../constants/constants.interface';
 import { RatingStar } from '..';
 
 import { IRating } from './rating.interface';

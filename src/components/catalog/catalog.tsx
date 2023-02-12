@@ -12,7 +12,7 @@ export const Catalog: FC = () => {
   const { catalogView, catalogData, catalogSortState, isLoading, isSuccess } = useAppSelector((state) => state.catalog);
   const dispatch = useAppDispatch();
 
-  useStartLoading('getAllBooks');
+  useStartLoading('getCatalog');
   useToast({ isLoading, isSuccess });
 
   // useEffect(() => {

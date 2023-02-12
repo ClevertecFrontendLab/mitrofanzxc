@@ -72,25 +72,8 @@ export const BookPage: FC = () => {
               </div>
               <h5 className='h5 book-page__header'>Подбробная информация</h5>
               <div className='tables-wrapper'>
-                {/* <Table data={divideTableData('first', bookData)} /> */}
-                {/* <Table data={divideTableData('second', bookData)} /> */}
-                <Table
-                  data={Array.of(
-                    Object.entries({ publish: bookData.publish }),
-                    Object.entries({ issueYear: bookData.issueYear }),
-                    Object.entries({ pages: bookData.pages }),
-                    Object.entries({ cover: bookData.cover }),
-                    Object.entries({ format: bookData.format })
-                  )}
-                />
-                <Table
-                  data={Array.of(
-                    Object.entries({ categories: handleAuthors(bookData.categories) }),
-                    Object.entries({ weight: bookData.weight }),
-                    Object.entries({ ISBN: bookData.ISBN }),
-                    Object.entries({ producer: bookData.producer })
-                  )}
-                />
+                <Table data={divideTableData('first', bookData)} />
+                <Table data={divideTableData('second', bookData)} />
               </div>
               <div className='accordion__wrapper'>
                 <div className='accordion'>
