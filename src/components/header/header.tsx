@@ -2,8 +2,7 @@ import { FC } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 import profileLogo from '../../assets/authorized.png';
-import { PATHS } from '../../constants';
-import { useAppSelector } from '../../hooks';
+import { PATHS, TitlesMockData } from '../../constants';
 import { translateCategoryTitle } from '../../utils';
 import { ButtonBurger, Sprite } from '..';
 
@@ -12,7 +11,6 @@ import './header.scss';
 export const Header: FC = () => {
   const { main, profile } = PATHS;
   const { pathname } = useLocation();
-  const { categoriesData } = useAppSelector((state) => state.categories);
 
   const indexOfSecondSlash = pathname.indexOf('/', 1);
   const finalPathname = indexOfSecondSlash === -1 ? pathname.slice(1) : pathname.slice(1, indexOfSecondSlash);
@@ -26,7 +24,7 @@ export const Header: FC = () => {
           </Link>
           <ButtonBurger />
           <div className='header__temporary-wrapper'>
-            <h3 className='h3'>{translateCategoryTitle(finalPathname, categoriesData)}</h3>
+            <h3 className='h3'>{translateCategoryTitle(finalPathname, TitlesMockData, 'en')}</h3>
             <div className='profile'>
               <div className='profile__info'>
                 <span className='subtitle_small'>Привет, Иван!</span>

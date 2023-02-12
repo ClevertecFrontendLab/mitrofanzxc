@@ -26,10 +26,7 @@ export const Card: FC<ICard> = ({
   const { categoriesData } = useAppSelector((state) => state.categories);
 
   const statusResult = handleStatus(booking, delivery);
-  const categoryResult = handleCategory(currentCategory, categories);
-  const xyu = translateCategoryTitle(categoryResult, categoriesData);
-  console.log('categoryResult', categoryResult);
-  console.log('xyu', xyu);
+  const categoryResult = translateCategoryTitle(handleCategory(currentCategory, categories), categoriesData, 'en');
 
   return (
     <Link
@@ -38,10 +35,9 @@ export const Card: FC<ICard> = ({
       data-test-id='card'
     >
       <div className={`${catalogView === 'grid' ? 'placeholder' : 'placeholder-list'}`}>
-        {!image ||
-          (image.url.length <= 0 && (
-            <Sprite id='cat' className={`${catalogView === 'grid' ? 'placeholder__logo' : 'placeholder-list__logo'}`} />
-          ))}
+        {(!image || image.url.length <= 0) && (
+          <Sprite id='cat' className={`${catalogView === 'grid' ? 'placeholder__logo' : 'placeholder-list__logo'}`} />
+        )}
         {image && image.url.length > 0 && (
           <img
             src={`${BASE_URL_API}${image.url}`}

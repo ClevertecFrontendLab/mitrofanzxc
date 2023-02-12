@@ -12,7 +12,7 @@ import { TConnectionType } from '../store/slices/slices.interface';
 
 import { useAppDispatch } from './use-app-dispatch';
 
-export const useStartLoading = (connectionType: TConnectionType) => {
+export const useStartLoading = (connectionType: TConnectionType, bookId?: string | undefined) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -22,7 +22,9 @@ export const useStartLoading = (connectionType: TConnectionType) => {
         dispatch(handleCatalogDataSuccess(false));
         break;
       case 'getBook':
-        dispatch(startBookDataLoading());
+        if (bookId) {
+          dispatch(startBookDataLoading(bookId));
+        }
         dispatch(handleBookDataSuccess(false));
         break;
       case 'getCategories':
@@ -33,5 +35,5 @@ export const useStartLoading = (connectionType: TConnectionType) => {
         break;
     }
     /* eslint-disable-next-line react-hooks/exhaustive-deps */
-  }, [dispatch]);
+  }, []);
 };

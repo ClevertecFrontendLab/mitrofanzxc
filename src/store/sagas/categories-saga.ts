@@ -1,9 +1,14 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
+import { call, put, takeLatest } from 'redux-saga/effects';
 import { AxiosResponse } from 'axios';
 
 import { ICategories } from '../../constants/constants.interface';
 import { getCategories } from '../services';
-import { endCategoriesDataLoading, handleCategoriesDataSuccess, setCategoriesData } from '../slices';
+import {
+  endCategoriesDataLoading,
+  handleCategoriesDataSuccess,
+  setCategoriesData,
+  startCategoriesDataLoading,
+} from '../slices';
 
 function* workerSaga() {
   try {
@@ -19,7 +24,7 @@ function* workerSaga() {
 }
 
 function* watchClickSaga() {
-  yield takeEvery('categories/startCategoriesDataLoading', workerSaga);
+  yield takeLatest(startCategoriesDataLoading.type, workerSaga);
 }
 
 export function* categoriesSaga() {

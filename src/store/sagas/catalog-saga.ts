@@ -1,9 +1,9 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
+import { call, put, takeLatest } from 'redux-saga/effects';
 import { AxiosResponse } from 'axios';
 
 import { ICatalogData } from '../../constants/constants.interface';
 import { getCatalog } from '../services';
-import { endCatalogDataLoading, handleCatalogDataSuccess, setCatalogData } from '../slices';
+import { endCatalogDataLoading, handleCatalogDataSuccess, setCatalogData, startCatalogDataLoading } from '../slices';
 
 function* workerSaga() {
   try {
@@ -19,7 +19,7 @@ function* workerSaga() {
 }
 
 function* watchClickSaga() {
-  yield takeEvery('catalog/startCatalogDataLoading', workerSaga);
+  yield takeLatest(startCatalogDataLoading.type, workerSaga);
 }
 
 export function* catalogSaga() {

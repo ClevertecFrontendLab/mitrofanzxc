@@ -16,7 +16,7 @@ export const InputSearch: FC = () => {
     const { value } = target;
 
     dispatch(setInputSearchValue(value));
-    dispatch(searchCatalogByTitle());
+    dispatch(searchCatalogByTitle(inputSearchValue));
   };
 
   const blurInputSearch = (event: FocusEvent<HTMLInputElement>) => {
@@ -30,7 +30,7 @@ export const InputSearch: FC = () => {
 
   const handleKeyboardInputSearch = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
-      dispatch(searchCatalogByTitle());
+      dispatch(searchCatalogByTitle(inputSearchValue));
     }
   };
 
@@ -45,7 +45,7 @@ export const InputSearch: FC = () => {
   const handleButtonCancel = () => {
     dispatch(setInputSearchValue(''));
     dispatch(handleIsInputSearchOpen(false));
-    dispatch(searchCatalogByTitle());
+    dispatch(searchCatalogByTitle(inputSearchValue));
   };
 
   return (

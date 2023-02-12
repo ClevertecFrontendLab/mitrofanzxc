@@ -1,9 +1,9 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
+import { call, put, takeLatest } from 'redux-saga/effects';
 import { AxiosResponse } from 'axios';
 
 import { IBookData } from '../../constants/constants.interface';
 import { getBook } from '../services';
-import { endBookDataLoading, handleBookDataSuccess, setBookData } from '../slices';
+import { endBookDataLoading, handleBookDataSuccess, setBookData, startBookDataLoading } from '../slices';
 
 function* workerSaga() {
   try {
@@ -19,7 +19,7 @@ function* workerSaga() {
 }
 
 function* watchClickSaga() {
-  yield takeEvery('catalog/startBookDataLoading', workerSaga);
+  yield takeLatest(startBookDataLoading.type, workerSaga);
 }
 
 export function* bookSaga() {

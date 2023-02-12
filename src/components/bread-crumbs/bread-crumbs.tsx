@@ -29,7 +29,7 @@ export const BreadCrumbs: FC<IBreadCrumbs> = ({ bookData, isSuccess, currentCate
             onClick={() => handleBreadCrumbCategory}
             data-test-id='breadcrumbs-link'
           >
-            {translateCategoryTitle(categoryResult, categoriesData)}
+            {translateCategoryTitle(categoryResult, categoriesData, 'ru')}
           </Link>
           {bookData && bookData.title && isSuccess && (
             <Link

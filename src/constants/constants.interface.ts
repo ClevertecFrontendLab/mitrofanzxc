@@ -33,14 +33,14 @@ export interface IImage {
 export interface ICatalogData {
   issueYear: TStringAble;
   rating: TNumberAble;
-  title: TStringAble;
+  title: string;
   authors: string[];
-  image: IImage;
+  image: IImage | null;
   categories: string[];
   id: number;
   booking: IBooking | null;
   delivery: IDelivery | null;
-  histories: IHistory[];
+  histories: IHistory[] | null;
 }
 
 export interface IComments {

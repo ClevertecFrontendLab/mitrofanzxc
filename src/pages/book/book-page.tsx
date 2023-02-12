@@ -18,7 +18,7 @@ export const BookPage: FC = () => {
 
   const statusResult = handleStatus(bookData.booking, bookData.delivery);
 
-  useStartLoading('getBook');
+  useStartLoading('getBook', bookId);
   useToast({ isLoading, isSuccess });
 
   return (

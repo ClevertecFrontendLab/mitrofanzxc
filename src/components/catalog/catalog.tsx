@@ -19,15 +19,13 @@ export const Catalog: FC = () => {
 
   useEffect(() => {
     if (category) {
-      dispatch(filterCatalogByCategory(translateCategoryTitle(category, categoriesData, 'ru')));
+      dispatch(filterCatalogByCategory(translateCategoryTitle(category, categoriesData, 'en')));
     }
-    /* eslint-disable-next-line react-hooks/exhaustive-deps */
-  }, [category]);
+  }, [category, categoriesData, dispatch]);
 
   useEffect(() => {
     dispatch(sortCatalogByRating(catalogSortState));
-    /* eslint-disable-next-line react-hooks/exhaustive-deps */
-  }, [catalogSortState]);
+  }, [catalogSortState, category, dispatch]);
 
   return (
     <section className={`${catalogView === 'grid' ? 'catalog' : 'catalog_list'}`}>

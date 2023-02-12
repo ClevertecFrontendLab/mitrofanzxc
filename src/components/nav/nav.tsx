@@ -12,11 +12,10 @@ import './nav.scss';
 export const Nav: FC = () => {
   const { booksAll, terms, contract, profile } = PATHS;
   const [match992, setMatch992] = useState(Boolean(window.matchMedia('(max-width: 992px)').matches));
-  const dispatch = useAppDispatch();
-
-  const { catalogData } = useAppSelector((state) => state.catalog);
+  const { initialData } = useAppSelector((state) => state.catalog);
   const { categoriesData } = useAppSelector((state) => state.categories);
   const { isMobileMenuOpen, isAccordionMenuOpen } = useAppSelector((state) => state.mobileMenu);
+  const dispatch = useAppDispatch();
 
   const handleAccordionMenu = () => {
     dispatch(toggleAccordionMenu());
@@ -81,7 +80,7 @@ export const Nav: FC = () => {
             categoriesData.map(({ id, name, path }) => (
               <NavLink key={id} to={`/books/${path}`} className='nav-list__item body_large' onClick={handleMobileMenu}>
                 {name}
-                <span className='body_small'>{getAmountOfBooks(catalogData, name)}</span>
+                <span className='body_small'>{getAmountOfBooks(initialData, name)}</span>
               </NavLink>
             ))}
         </ul>

@@ -10,6 +10,7 @@ import { ICatalogState } from './slices.interface';
 
 const initialState: ICatalogState = {
   catalogView: 'grid',
+  initialData: [],
   catalogData: [],
   catalogSortState: 'default',
   isLoading: false,
@@ -22,6 +23,7 @@ export const catalogSlice = createSlice({
   initialState,
   reducers: {
     setCatalogData: (state, action: PayloadAction<ICatalogData[]>) => {
+      state.initialData = action.payload;
       state.catalogData = action.payload;
     },
     changeCatalogView: (state, action: PayloadAction<TCatalogView>) => {
@@ -34,12 +36,19 @@ export const catalogSlice = createSlice({
       state.catalogSortState = action.payload;
     },
     filterCatalogByCategory: (state, action: PayloadAction<string>) => {
-      const temporaryData = [...state.catalogData];
-
-      if (action.payload === 'all') {
-        state.catalogData = temporaryData;
+      if (action.payload === 'Все книги') {
+        state.catalogData = state.initialData;
       } else {
-        state.catalogData = temporaryData.filter((element) => element.categories.includes(action.payload));
+        state.catalogData = state.initialData.filter((element) => element.categories.includes(action.payload));
+      }
+    },
+    searchCatalogByTitle: (state, action: PayloadAction<string>) => {
+      if (!action.payload || !action.payload.length) {
+        state.catalogData = state.initialData;
+      } else {
+        state.catalogData = state.initialData.filter((element) =>
+          element.title.toLocaleLowerCase().includes(action.payload.toLocaleLowerCase())
+        );
       }
     },
     startCatalogDataLoading: (state) => {
@@ -60,6 +69,7 @@ export const {
   sortCatalogByRating,
   changeCatalogSortState,
   filterCatalogByCategory,
+  searchCatalogByTitle,
   startCatalogDataLoading,
   endCatalogDataLoading,
   handleCatalogDataSuccess,

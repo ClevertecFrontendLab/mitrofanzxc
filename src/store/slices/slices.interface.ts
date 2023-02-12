@@ -6,6 +6,7 @@ export type TConnectionType = '' | 'getCatalog' | 'getBook' | 'getCategories';
 
 export interface ICatalogState extends ILoaderState {
   catalogView: TCatalogView;
+  initialData: ICatalogData[];
   catalogData: ICatalogData[];
   catalogSortState: TTypeSortData;
 }

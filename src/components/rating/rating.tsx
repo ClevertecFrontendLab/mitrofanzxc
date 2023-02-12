@@ -20,7 +20,6 @@ export const Rating: FC<IRating> = ({ rating }) => {
     } else {
       setEmptyStarsAmount(null);
     }
-    /* eslint-disable-next-line react-hooks/exhaustive-deps */
   }, [rating]);
 
   return (

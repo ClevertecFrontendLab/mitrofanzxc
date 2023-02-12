@@ -5,6 +5,7 @@ export {
   sortCatalogByRating,
   changeCatalogSortState,
   filterCatalogByCategory,
+  searchCatalogByTitle,
   startCatalogDataLoading,
   endCatalogDataLoading,
   handleCatalogDataSuccess,
@@ -38,5 +39,5 @@ export {
   setTextFieldValue,
   setTextFieldError,
 } from './registration-slice';
-export { setInputSearchValue, searchCatalogByTitle, handleIsInputSearchOpen } from './search-slice';
+export { setInputSearchValue, handleIsInputSearchOpen } from './search-slice';
 export { openToast, closeToast, addErrorToToast, removeErrorFromToast } from './toast-slice';
