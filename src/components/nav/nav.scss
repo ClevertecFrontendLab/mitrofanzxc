@@ -118,9 +118,18 @@
   }
 }
 
-.nav__item.accordion:has(+ .nav-list:has(.nav-list__item:has(.active))) {
+.nav__item.accordion:has(~ .nav-list .nav-list__item.active) {
   &::after {
     left: 0;
+    opacity: 1;
+  }
+
+  > a {
+    color: $color-orange;
+  }
+
+  .accordion__button {
+    fill: $color-orange;
     opacity: 1;
   }
 }

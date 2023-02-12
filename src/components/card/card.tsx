@@ -1,8 +1,9 @@
-import { FC, useEffect, useState } from 'react';
+import { FC } from 'react';
 import { Link } from 'react-router-dom';
 
 import { BASE_URL_API } from '../../constants';
-import { convertToDate, handleAuthors, handleCategory, handleStatus, handleTitle } from '../../utils';
+import { useAppSelector } from '../../hooks';
+import { convertToDate, handleAuthors, handleCategory, handleStatus, translateCategoryTitle } from '../../utils';
 import { ButtonPrimary, Rating, Sprite } from '..';
 
 import { ICard } from './card.interface';
@@ -20,41 +21,15 @@ export const Card: FC<ICard> = ({
   delivery,
   booking,
   catalogView,
+  issueYear,
 }) => {
-  const [limiter, setLimiter] = useState<number>(54);
-  const [match700, setMatch700] = useState(Boolean(window.matchMedia('(max-width: 700px)').matches));
-  const [match320, setMatch320] = useState(Boolean(window.matchMedia('(max-width: 320px)').matches));
+  const { categoriesData } = useAppSelector((state) => state.categories);
 
   const statusResult = handleStatus(booking, delivery);
   const categoryResult = handleCategory(currentCategory, categories);
-
-  // Ограничитель по количетсву символов в карточке, в зависимости от ширины экрана
-  useEffect(() => {
-    const mediaQueryList700 = window.matchMedia('(min-width: 321px) and (max-width: 700px)');
-    const mediaQueryList320 = window.matchMedia('(max-width: 320px)');
-
-    const handler = () => {
-      setMatch700(Boolean(mediaQueryList700.matches));
-      setMatch320(Boolean(mediaQueryList320.matches));
-
-      if (match700) {
-        setLimiter(24);
-      } else if (match320) {
-        setLimiter(75);
-      } else {
-        setLimiter(54);
-      }
-    };
-
-    mediaQueryList700.addEventListener('change', handler);
-    mediaQueryList320.addEventListener('change', handler);
-    handler();
-
-    return () => {
-      mediaQueryList700.removeEventListener('change', handler);
-      mediaQueryList320.removeEventListener('change', handler);
-    };
-  }, [match700, match320]);
+  const xyu = translateCategoryTitle(categoryResult, categoriesData);
+  console.log('categoryResult', categoryResult);
+  console.log('xyu', xyu);
 
   return (
     <Link
@@ -99,10 +74,8 @@ export const Card: FC<ICard> = ({
           />
         )}
         <div>
-          <p className={`${catalogView === 'grid' ? 'subtitle_small' : 'card-list__title'}`}>
-            {handleTitle(title, limiter)}
-          </p>
-          <p className='body_small card-list__author'>{handleTitle(handleAuthors(authors), limiter)}</p>
+          <p className={`${catalogView === 'grid' ? 'subtitle_small' : 'card-list__title'}`}>{title}</p>
+          <p className='body_small card-list__author'>{`${handleAuthors(authors)}, ${issueYear}`}</p>
         </div>
         <div className={`${catalogView === 'grid' ? 'rating-wrapper' : 'rating-list__wrapper'}`}>
           <Rating rating={rating} />

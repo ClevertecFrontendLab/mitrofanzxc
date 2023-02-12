@@ -2,59 +2,59 @@ import { ICategoryMockData } from './constants.interface';
 
 export const CategoryMockData: ICategoryMockData[] = [
   {
-    eng: 'business',
-    ru: 'Бизнес книги',
+    path: 'business',
+    name: 'Бизнес книги',
   },
   {
-    eng: 'detectives',
-    ru: 'Детективы',
+    path: 'detectives',
+    name: 'Детективы',
   },
   {
-    eng: 'children',
-    ru: 'Детские книги',
+    path: 'children',
+    name: 'Детские книги',
   },
   {
-    eng: 'foreign',
-    ru: 'Зарубежная литература',
+    path: 'foreign',
+    name: 'Зарубежная литература',
   },
   {
-    eng: 'history',
-    ru: 'История',
+    path: 'history',
+    name: 'История',
   },
   {
-    eng: 'classic',
-    ru: 'Классическая литература',
+    path: 'classic',
+    name: 'Классическая литература',
   },
   {
-    eng: 'psychology',
-    ru: 'Книги по психологии',
+    path: 'psychology',
+    name: 'Книги по психологии',
   },
   {
-    eng: 'computers',
-    ru: 'Компьютерная литература',
+    path: 'computers',
+    name: 'Компьютерная литература',
   },
   {
-    eng: 'culture',
-    ru: 'Культура и искусство',
+    path: 'culture',
+    name: 'Культура и искусство',
   },
   {
-    eng: 'science',
-    ru: 'Наука и образование',
+    path: 'science',
+    name: 'Наука и образование',
   },
   {
-    eng: 'journalistic',
-    ru: 'Публицистическая литература',
+    path: 'journalistic',
+    name: 'Публицистическая литература',
   },
   {
-    eng: 'directories',
-    ru: 'Справочники',
+    path: 'directories',
+    name: 'Справочники',
   },
   {
-    eng: 'fantasy',
-    ru: 'Фантастика',
+    path: 'fantasy',
+    name: 'Фантастика',
   },
   {
-    eng: 'humor',
-    ru: 'Юмористическая литература',
+    path: 'humor',
+    name: 'Юмористическая литература',
   },
 ];

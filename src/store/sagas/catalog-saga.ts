@@ -9,7 +9,7 @@ function* workerSaga() {
   try {
     const { data }: AxiosResponse<ICatalogData[]> = yield call(getCatalog);
 
-    yield put(setCatalogData(data.slice(0, 10)));
+    yield put(setCatalogData(data));
     yield put(handleCatalogDataSuccess(true));
     yield put(endCatalogDataLoading());
   } catch (error) {

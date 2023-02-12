@@ -2,39 +2,39 @@ import { ICategoryMockData } from './constants.interface';
 
 export const TableHeaderMockData: ICategoryMockData[] = [
   {
-    eng: 'publishingHouse',
-    ru: 'Издательство',
+    path: 'publishingHouse',
+    name: 'Издательство',
   },
   {
-    eng: 'year',
-    ru: 'Год издания',
+    path: 'year',
+    name: 'Год издания',
   },
   {
-    eng: 'pages',
-    ru: 'Страниц',
+    path: 'pages',
+    name: 'Страниц',
   },
   {
-    eng: 'binding',
-    ru: 'Переплёт',
+    path: 'binding',
+    name: 'Переплёт',
   },
   {
-    eng: 'format',
-    ru: 'Формат',
+    path: 'format',
+    name: 'Формат',
   },
   {
-    eng: 'genre',
-    ru: 'Жанр',
+    path: 'genre',
+    name: 'Жанр',
   },
   {
-    eng: 'weight',
-    ru: 'Вес',
+    path: 'weight',
+    name: 'Вес',
   },
   {
-    eng: 'isbn',
-    ru: 'ISBN',
+    path: 'isbn',
+    name: 'ISBN',
   },
   {
-    eng: 'manufacturer',
-    ru: 'Изготовитель',
+    path: 'manufacturer',
+    name: 'Изготовитель',
   },
 ];

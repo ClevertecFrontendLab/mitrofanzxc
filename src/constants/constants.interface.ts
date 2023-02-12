@@ -85,8 +85,8 @@ export interface ICategories {
 }
 
 export interface ICategoryMockData {
-  eng: string;
-  ru: string;
+  path: string;
+  name: string;
 }
 
 export interface ISocialsMockData {

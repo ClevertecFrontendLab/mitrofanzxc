@@ -3,6 +3,7 @@ import {
   IBookData,
   IBooking,
   ICatalogData,
+  ICategories,
   ICategoryMockData,
   IDelivery,
   TStringAble,
@@ -66,7 +67,11 @@ export interface ISortData {
 }
 
 export interface ITranslateCategoryTitle {
-  (data: ICatalogData | string | undefined, categories: ICategoryMockData[]): string;
+  (
+    data: ICatalogData | string | undefined,
+    categories: ICategories[] | ICategoryMockData[],
+    language: 'en' | 'ru'
+  ): string;
 }
 
 export interface IValidateTextField {

@@ -34,11 +34,13 @@ export const catalogSlice = createSlice({
       state.catalogSortState = action.payload;
     },
     filterCatalogByCategory: (state, action: PayloadAction<string>) => {
-      // if (action.payload === 'all') {
-      //   state.catalogData = [...state.initialData];
-      // } else {
-      //   state.catalogData = [...state.initialData].filter((element) => element.category === action.payload);
-      // }
+      const temporaryData = [...state.catalogData];
+
+      if (action.payload === 'all') {
+        state.catalogData = temporaryData;
+      } else {
+        state.catalogData = temporaryData.filter((element) => element.categories.includes(action.payload));
+      }
     },
     startCatalogDataLoading: (state) => {
       state.isLoading = true;

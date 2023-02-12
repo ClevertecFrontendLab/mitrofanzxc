@@ -1,10 +1,10 @@
 import { FC, useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
-import { CategoryMockData, PATHS } from '../../constants';
+import { PATHS } from '../../constants';
 import { useAppDispatch, useAppSelector, useStartLoading } from '../../hooks';
 import { closeAccordionMenu, closeMobileMenu, closeToast, toggleAccordionMenu } from '../../store/slices';
-import { translateCategoryTitle } from '../../utils';
+import { getAmountOfBooks } from '../../utils';
 import { Sprite } from '..';
 
 import './nav.scss';
@@ -14,8 +14,9 @@ export const Nav: FC = () => {
   const [match992, setMatch992] = useState(Boolean(window.matchMedia('(max-width: 992px)').matches));
   const dispatch = useAppDispatch();
 
-  const { isMobileMenuOpen, isAccordionMenuOpen } = useAppSelector((state) => state.mobileMenu);
+  const { catalogData } = useAppSelector((state) => state.catalog);
   const { categoriesData } = useAppSelector((state) => state.categories);
+  const { isMobileMenuOpen, isAccordionMenuOpen } = useAppSelector((state) => state.mobileMenu);
 
   const handleAccordionMenu = () => {
     dispatch(toggleAccordionMenu());
@@ -79,8 +80,8 @@ export const Nav: FC = () => {
           {categoriesData &&
             categoriesData.map(({ id, name, path }) => (
               <NavLink key={id} to={`/books/${path}`} className='nav-list__item body_large' onClick={handleMobileMenu}>
-                {translateCategoryTitle(name, CategoryMockData)}
-                <span className='body_small'>amount</span>
+                {name}
+                <span className='body_small'>{getAmountOfBooks(catalogData, name)}</span>
               </NavLink>
             ))}
         </ul>

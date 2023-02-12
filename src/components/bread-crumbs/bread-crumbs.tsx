@@ -1,8 +1,7 @@
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
 
-import { CategoryMockData } from '../../constants';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { openAccordionMenu } from '../../store/slices';
 import { handleCategory, translateCategoryTitle } from '../../utils';
 
@@ -11,6 +10,7 @@ import { IBreadCrumbs } from './bread-crumbs.interface';
 import './bread-crumbs.scss';
 
 export const BreadCrumbs: FC<IBreadCrumbs> = ({ bookData, isSuccess, currentCategory }) => {
+  const { categoriesData } = useAppSelector((state) => state.categories);
   const dispatch = useAppDispatch();
 
   const handleBreadCrumbCategory = () => {
@@ -29,7 +29,7 @@ export const BreadCrumbs: FC<IBreadCrumbs> = ({ bookData, isSuccess, currentCate
             onClick={() => handleBreadCrumbCategory}
             data-test-id='breadcrumbs-link'
           >
-            {translateCategoryTitle(categoryResult, CategoryMockData)}
+            {translateCategoryTitle(categoryResult, categoriesData)}
           </Link>
           {bookData && bookData.title && isSuccess && (
             <Link

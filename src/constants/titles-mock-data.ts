@@ -2,19 +2,19 @@ import { ICategoryMockData } from './constants.interface';
 
 export const TitlesMockData: ICategoryMockData[] = [
   {
-    eng: 'books',
-    ru: 'Библиотека',
+    path: 'books',
+    name: 'Библиотека',
   },
   {
-    eng: 'terms',
-    ru: 'Библиотека',
+    path: 'terms',
+    name: 'Библиотека',
   },
   {
-    eng: 'contract',
-    ru: 'Библиотека',
+    path: 'contract',
+    name: 'Библиотека',
   },
   {
-    eng: 'profile',
-    ru: 'Личный кабинет',
+    path: 'profile',
+    name: 'Личный кабинет',
   },
 ];
