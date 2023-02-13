@@ -33,7 +33,7 @@ export const BookPage: FC = () => {
             <div className='book-page'>
               <Slider data={bookData} />
               <div className='book-page__info'>
-                <h3 className='h3'>{bookData ? bookData.title : 'Книга'}</h3>
+                <h3 className='h3'>{bookData.title}</h3>
                 <h5 className='h5 color-grey-black-40 book-page__author'>{handleAuthors(bookData.authors)}</h5>
                 {statusResult === 'free' && (
                   <ButtonPrimary type='primary' title='Забронировать' className='button_large' />
@@ -56,7 +56,7 @@ export const BookPage: FC = () => {
               </div>
               <div className='book-page__description'>
                 <h5 className='h5 book-page__header'>О книге</h5>
-                <p className='body_large'>{bookData ? bookData.description : 'Описание'}</p>
+                <p className='body_large'>{bookData.description}</p>
               </div>
             </div>
           </div>
@@ -64,10 +64,10 @@ export const BookPage: FC = () => {
             <div className='book-page__detail'>
               <h5 className='h5 book-page__header'>Рейтинг</h5>
               <div className='book-page__rating-wrapper'>
-                <Rating rating={bookData ? bookData.rating : null} />
-                <h5 className={`${bookData && !bookData.rating ? 'body_small' : 'h5'}`}>
-                  {bookData && bookData.rating && bookData.rating.toFixed(1)}
-                  {bookData && !bookData.rating && 'ещё нет оценок'}
+                <Rating rating={bookData.rating} />
+                <h5 className={`${bookData.rating ? 'h5' : 'body_small'}`}>
+                  {bookData.rating && bookData.rating > 0 && bookData.rating.toFixed(1)}
+                  {!bookData.rating && 'ещё нет оценок'}
                 </h5>
               </div>
               <h5 className='h5 book-page__header'>Подбробная информация</h5>

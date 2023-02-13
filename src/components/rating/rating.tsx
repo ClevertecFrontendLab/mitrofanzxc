@@ -24,8 +24,8 @@ export const Rating: FC<IRating> = ({ rating }) => {
 
   return (
     <Fragment>
-      {(!rating || rating <= 0) && !bookId && <p className='body_small'>ещё нет оценок</p>}
-      {(!rating || rating <= 0) && bookId && (
+      {!rating && !bookId && <p className='body_small'>ещё нет оценок</p>}
+      {!rating && bookId && (
         <ul className='rating'>{Array.from(Array(5)).map(() => RatingStar({ id: uuidv4(), spriteId: 'star' }))}</ul>
       )}
       {rating && rating > 0 && (
