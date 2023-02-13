@@ -2,7 +2,9 @@ import { IHandleCategory } from './utils.interface';
 
 export const handleCategory: IHandleCategory = (currentCategory, categories) => {
   if (!categories || !categories.length) {
-    return 'all';
+    if (currentCategory) {
+      return currentCategory;
+    }
   }
 
   if (currentCategory) {
