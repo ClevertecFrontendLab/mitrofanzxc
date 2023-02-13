@@ -15,6 +15,10 @@ export const translateCategoryTitle: ITranslateCategoryTitle = (data, categories
 
   if (data && typeof data === 'string') {
     if (language === 'en') {
+      if (data === 'all') {
+        return 'Все книги';
+      }
+
       const title = categories.find(({ path }) => path === data);
 
       if (title) {
@@ -22,6 +26,10 @@ export const translateCategoryTitle: ITranslateCategoryTitle = (data, categories
       }
     }
     if (language === 'ru') {
+      if (data === 'Все книги') {
+        return 'all';
+      }
+
       const title = categories.find(({ name }) => name === data);
 
       if (title) {
