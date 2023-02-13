@@ -24,12 +24,12 @@ export const BreadCrumbs: FC<IBreadCrumbs> = ({ bookData, isSuccess, currentCate
       <div className='wrapper'>
         <div className='bread-crumbs'>
           <Link
-            to={`/books/${categoryResult}`}
+            to={`/books/${translateCategoryTitle(categoryResult, categoriesData, 'ru')}`}
             className='body_small display_inline-block'
             onClick={() => handleBreadCrumbCategory}
             data-test-id='breadcrumbs-link'
           >
-            {translateCategoryTitle(categoryResult, categoriesData, 'ru')}
+            {categoryResult}
           </Link>
           {bookData && bookData.title && isSuccess && (
             <Link
