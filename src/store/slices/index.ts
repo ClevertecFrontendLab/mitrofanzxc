@@ -39,5 +39,5 @@ export {
   setTextFieldValue,
   setTextFieldError,
 } from './registration-slice';
-export { setInputSearchValue, handleIsInputSearchOpen } from './search-slice';
+export { handleIsInputSearchOpen } from './search-slice';
 export { openToast, closeToast, addErrorToToast, removeErrorFromToast } from './toast-slice';

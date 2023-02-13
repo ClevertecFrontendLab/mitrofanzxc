@@ -16,7 +16,6 @@ export interface IBookState extends ILoaderState {
 }
 
 export interface ISearchState {
-  inputSearchValue: string;
   isInputSearchOpen: boolean;
 }
 

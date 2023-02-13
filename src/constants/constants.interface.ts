@@ -1,5 +1,7 @@
 export type TMessage = 'free' | 'busy' | 'reserved';
+
 export type TStringAble = string | null | undefined;
+
 export type TNumberAble = number | null | undefined;
 
 export interface IBooking {

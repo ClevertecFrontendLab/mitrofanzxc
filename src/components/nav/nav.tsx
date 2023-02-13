@@ -62,28 +62,31 @@ export const Nav: FC = () => {
           data-test-id={`${match992 ? 'burger-showcase' : 'navigation-showcase'}`}
         >
           <NavLink to={booksAll}>Витрина книг</NavLink>
-          <Sprite
-            id='arrow-down'
-            className={`accordion__button ${isAccordionMenuOpen ? 'accordion__button_active' : ''}`}
-          />
+          {categoriesData && categoriesData.length > 0 && (
+            <Sprite
+              id='arrow-down'
+              className={`accordion__button ${isAccordionMenuOpen ? 'accordion__button_active' : ''}`}
+            />
+          )}
         </button>
-        <ul className={`nav-list ${isAccordionMenuOpen ? 'nav-list_active' : ''}`}>
-          <NavLink
-            to={booksAll}
-            className='nav-list__item'
-            onClick={handleMobileMenu}
-            data-test-id={`${match992 ? 'burger-books' : 'navigation-books'}`}
-          >
-            Все книги
-          </NavLink>
-          {categoriesData &&
-            categoriesData.map(({ id, name, path }) => (
+        {categoriesData && categoriesData.length > 0 && (
+          <ul className={`nav-list ${isAccordionMenuOpen ? 'nav-list_active' : ''}`}>
+            <NavLink
+              to={booksAll}
+              className='nav-list__item'
+              onClick={handleMobileMenu}
+              data-test-id={`${match992 ? 'burger-books' : 'navigation-books'}`}
+            >
+              Все книги
+            </NavLink>
+            {categoriesData.map(({ id, name, path }) => (
               <NavLink key={id} to={`/books/${path}`} className='nav-list__item body_large' onClick={handleMobileMenu}>
                 {name}
                 <span className='body_small'>{getAmountOfBooks(initialData, name)}</span>
               </NavLink>
             ))}
-        </ul>
+          </ul>
+        )}
         <NavLink
           to={terms}
           className='h5 nav__item'

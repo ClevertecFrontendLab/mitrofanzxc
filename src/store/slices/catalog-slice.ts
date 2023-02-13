@@ -46,7 +46,7 @@ export const catalogSlice = createSlice({
       if (!action.payload || !action.payload.length) {
         state.catalogData = state.initialData;
       } else {
-        state.catalogData = state.initialData.filter((element) =>
+        state.catalogData = state.catalogData.filter((element) =>
           element.title.toLocaleLowerCase().includes(action.payload.toLocaleLowerCase())
         );
       }

@@ -10,6 +10,7 @@ import {
 } from '../constants/constants.interface';
 
 export type TTypeConvertToDate = 'full' | 'short';
+
 export type TStatus = 'free' | 'busy' | 'reserved';
 
 export interface IHandleCategory {
@@ -28,19 +29,8 @@ export interface IConvertToDate {
   (timestamp: string, type: TTypeConvertToDate): string;
 }
 
-export interface IArrayICreateNavData {
-  id: string;
-  category: string;
-  amount: number;
-}
-
-export interface ICreateNavData {
-  (data: ICatalogData[]): IArrayICreateNavData[] | null;
-}
-
 export type TPartDivideTableDate = 'first' | 'second';
 
-// export type TArrayDivideTableData = Array<[string, string]>;
 export type TArrayDivideTableData = TStringAble[][];
 
 export interface IDivideTableData {
@@ -49,12 +39,6 @@ export interface IDivideTableData {
 
 export interface IGetAmountOfBooks {
   (data: ICatalogData[], category: string): number;
-}
-
-export type TArrayGetUniqueCategories = string[];
-
-export interface IGetUniqueCategories {
-  (data: ICatalogData[]): TArrayGetUniqueCategories | null;
 }
 
 export interface IInterceptRequest {

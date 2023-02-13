@@ -1,13 +1,14 @@
-import { ChangeEvent, FC, FocusEvent, KeyboardEvent, useRef } from 'react';
+import { ChangeEvent, FC, FocusEvent, KeyboardEvent, useEffect, useRef, useState } from 'react';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { handleIsInputSearchOpen, searchCatalogByTitle, setInputSearchValue } from '../../store/slices';
+import { handleIsInputSearchOpen, searchCatalogByTitle } from '../../store/slices';
 import { Sprite } from '..';
 
 import './input-search.scss';
 
 export const InputSearch: FC = () => {
-  const { inputSearchValue, isInputSearchOpen } = useAppSelector((state) => state.search);
+  const [inputSearchValue, setInputSearchValue] = useState<string>('');
+  const { isInputSearchOpen } = useAppSelector((state) => state.search);
   const inputSearchRef = useRef<HTMLInputElement>(null);
   const dispatch = useAppDispatch();
 
@@ -15,8 +16,7 @@ export const InputSearch: FC = () => {
     const target = event.target as HTMLInputElement;
     const { value } = target;
 
-    dispatch(setInputSearchValue(value));
-    dispatch(searchCatalogByTitle(inputSearchValue));
+    setInputSearchValue(value);
   };
 
   const blurInputSearch = (event: FocusEvent<HTMLInputElement>) => {
@@ -43,10 +43,13 @@ export const InputSearch: FC = () => {
   };
 
   const handleButtonCancel = () => {
-    dispatch(setInputSearchValue(''));
+    setInputSearchValue('');
     dispatch(handleIsInputSearchOpen(false));
-    dispatch(searchCatalogByTitle(inputSearchValue));
   };
+
+  useEffect(() => {
+    dispatch(searchCatalogByTitle(inputSearchValue));
+  }, [inputSearchValue, dispatch]);
 
   return (
     <div className={`input-search ${isInputSearchOpen ? 'input-search_active' : ''}`}>
