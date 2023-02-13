@@ -18,8 +18,9 @@ export const useStartLoading = (connectionType: TConnectionType, bookId?: string
       case 'getBook':
         if (bookId) {
           dispatch(startBookDataLoading(bookId));
+          dispatch(startLoading());
+          dispatch(handleSuccess(false));
         }
-        dispatch(handleSuccess(false));
         break;
       default:
         break;
