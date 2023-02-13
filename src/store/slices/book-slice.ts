@@ -41,7 +41,6 @@ const initialState: IBookState = {
     histories: [],
   },
   isLoading: false,
-  isSuccess: false,
 };
 
 export const catalogSlice = createSlice({
@@ -55,15 +54,9 @@ export const catalogSlice = createSlice({
     startBookDataLoading: (state, action: PayloadAction<string>) => {
       state.isLoading = true;
     },
-    endBookDataLoading: (state) => {
-      state.isLoading = false;
-    },
-    handleBookDataSuccess: (state, action: PayloadAction<boolean>) => {
-      state.isSuccess = action.payload;
-    },
   },
 });
 
-export const { setBookData, startBookDataLoading, endBookDataLoading, handleBookDataSuccess } = catalogSlice.actions;
+export const { setBookData, startBookDataLoading } = catalogSlice.actions;
 /* eslint-disable-next-line import/no-default-export */
 export default catalogSlice.reducer;

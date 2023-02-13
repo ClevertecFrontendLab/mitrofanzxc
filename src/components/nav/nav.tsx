@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import { PATHS } from '../../constants';
-import { useAppDispatch, useAppSelector, useStartLoading } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { closeAccordionMenu, closeMobileMenu, closeToast, toggleAccordionMenu } from '../../store/slices';
 import { getAmountOfBooks } from '../../utils';
 import { Sprite } from '..';
@@ -30,8 +30,6 @@ export const Nav: FC = () => {
     dispatch(closeAccordionMenu());
     dispatch(closeToast());
   };
-
-  useStartLoading('getCategories');
 
   // Эффект для подстановки необходимых data-test-id в зависимости от ширины экрана
   useEffect(() => {

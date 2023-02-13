@@ -14,7 +14,6 @@ const initialState: ICatalogState = {
   catalogData: [],
   catalogSortState: 'default',
   isLoading: false,
-  isSuccess: false,
 };
 
 export const catalogSlice = createSlice({
@@ -54,12 +53,6 @@ export const catalogSlice = createSlice({
     startCatalogDataLoading: (state) => {
       state.isLoading = true;
     },
-    endCatalogDataLoading: (state) => {
-      state.isLoading = false;
-    },
-    handleCatalogDataSuccess: (state, action: PayloadAction<boolean>) => {
-      state.isSuccess = action.payload;
-    },
   },
 });
 
@@ -71,8 +64,6 @@ export const {
   filterCatalogByCategory,
   searchCatalogByTitle,
   startCatalogDataLoading,
-  endCatalogDataLoading,
-  handleCatalogDataSuccess,
 } = catalogSlice.actions;
 /* eslint-disable-next-line import/no-default-export */
 export default catalogSlice.reducer;

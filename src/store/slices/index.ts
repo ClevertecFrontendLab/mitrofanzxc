@@ -1,4 +1,4 @@
-export { setBookData, startBookDataLoading, endBookDataLoading, handleBookDataSuccess } from './book-slice';
+export { setBookData, startBookDataLoading } from './book-slice';
 export {
   setCatalogData,
   changeCatalogView,
@@ -7,15 +7,9 @@ export {
   filterCatalogByCategory,
   searchCatalogByTitle,
   startCatalogDataLoading,
-  endCatalogDataLoading,
-  handleCatalogDataSuccess,
 } from './catalog-slice';
-export {
-  setCategoriesData,
-  startCategoriesDataLoading,
-  endCategoriesDataLoading,
-  handleCategoriesDataSuccess,
-} from './categories-slice';
+export { setCategoriesData } from './categories-slice';
+export { startLoading, endLoading, handleSuccess } from './loader-slice';
 export {
   openMobileMenu,
   closeMobileMenu,

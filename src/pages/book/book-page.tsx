@@ -9,7 +9,8 @@ import './book-page.scss';
 
 export const BookPage: FC = () => {
   const { category, bookId } = useParams();
-  const { isLoading, isSuccess, bookData } = useAppSelector((state) => state.book);
+  const { bookData } = useAppSelector((state) => state.book);
+  const { isLoading, isSuccess } = useAppSelector((state) => state.loader);
   const [isAccordionReviewsOpen, setIsAccordionReviewsOpen] = useState<boolean>(false);
 
   const toggleAccordionReviews = () => {

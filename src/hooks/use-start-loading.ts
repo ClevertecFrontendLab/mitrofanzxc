@@ -1,13 +1,6 @@
 import { useEffect } from 'react';
 
-import {
-  handleBookDataSuccess,
-  handleCatalogDataSuccess,
-  handleCategoriesDataSuccess,
-  startBookDataLoading,
-  startCatalogDataLoading,
-  startCategoriesDataLoading,
-} from '../store/slices';
+import { handleSuccess, startBookDataLoading, startCatalogDataLoading, startLoading } from '../store/slices';
 import { TConnectionType } from '../store/slices/slices.interface';
 
 import { useAppDispatch } from './use-app-dispatch';
@@ -19,17 +12,14 @@ export const useStartLoading = (connectionType: TConnectionType, bookId?: string
     switch (connectionType) {
       case 'getCatalog':
         dispatch(startCatalogDataLoading());
-        dispatch(handleCatalogDataSuccess(false));
+        dispatch(startLoading());
+        dispatch(handleSuccess(false));
         break;
       case 'getBook':
         if (bookId) {
           dispatch(startBookDataLoading(bookId));
         }
-        dispatch(handleBookDataSuccess(false));
-        break;
-      case 'getCategories':
-        dispatch(startCategoriesDataLoading());
-        dispatch(handleCategoriesDataSuccess(false));
+        dispatch(handleSuccess(false));
         break;
       default:
         break;

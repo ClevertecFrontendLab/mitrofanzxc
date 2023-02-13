@@ -7,8 +7,6 @@ import { ICategoriesState } from './slices.interface';
 
 const initialState: ICategoriesState = {
   categoriesData: [],
-  isLoading: false,
-  isSuccess: false,
 };
 
 export const categoriesSlice = createSlice({
@@ -19,19 +17,9 @@ export const categoriesSlice = createSlice({
     setCategoriesData: (state, action: PayloadAction<ICategories[]>) => {
       state.categoriesData = action.payload;
     },
-    startCategoriesDataLoading: (state) => {
-      state.isLoading = true;
-    },
-    endCategoriesDataLoading: (state) => {
-      state.isLoading = false;
-    },
-    handleCategoriesDataSuccess: (state, action: PayloadAction<boolean>) => {
-      state.isSuccess = action.payload;
-    },
   },
 });
 
-export const { setCategoriesData, startCategoriesDataLoading, endCategoriesDataLoading, handleCategoriesDataSuccess } =
-  categoriesSlice.actions;
+export const { setCategoriesData } = categoriesSlice.actions;
 /* eslint-disable-next-line import/no-default-export */
 export default categoriesSlice.reducer;

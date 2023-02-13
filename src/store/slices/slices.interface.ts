@@ -4,15 +4,17 @@ import { TTypeSortData } from '../../utils/utils.interface';
 
 export type TConnectionType = '' | 'getCatalog' | 'getBook' | 'getCategories';
 
-export interface ICatalogState extends ILoaderState {
+export interface ICatalogState {
   catalogView: TCatalogView;
   initialData: ICatalogData[];
   catalogData: ICatalogData[];
   catalogSortState: TTypeSortData;
+  isLoading: boolean;
 }
 
-export interface IBookState extends ILoaderState {
+export interface IBookState {
   bookData: IBookData;
+  isLoading: boolean;
 }
 
 export interface ISearchState {
@@ -64,6 +66,6 @@ export interface IToastState {
   typeToastError: TTypeToastError;
 }
 
-export interface ICategoriesState extends ILoaderState {
+export interface ICategoriesState {
   categoriesData: ICategories[];
 }

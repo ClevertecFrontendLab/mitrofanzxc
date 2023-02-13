@@ -4,7 +4,7 @@ import { Catalog, CatalogMenu, Loader, Toast } from '../../components';
 import { useAppSelector, useStartLoading, useToast } from '../../hooks';
 
 export const MainPage: FC = () => {
-  const { isLoading, isSuccess } = useAppSelector((state) => state.catalog);
+  const { isLoading, isSuccess } = useAppSelector((state) => state.loader);
 
   useStartLoading('getCatalog');
   useToast({ isLoading, isSuccess });
