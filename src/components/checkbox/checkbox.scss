@@ -1,0 +1,70 @@
+@import '../../styles/constants.scss';
+
+.checkbox {
+  position: relative;
+  display: block;
+  cursor: pointer;
+
+  input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    cursor: pointer;
+
+    &:checked ~ .checkbox__checkmark {
+      border: 0.063rem solid $color-accent;
+      background-color: $color-accent;
+
+      &::before,
+      &::after {
+        display: block;
+      }
+    }
+
+    &:disabled ~ .checkbox__checkmark {
+      background-color: $color-grey-black-5;
+    }
+  }
+}
+
+.checkbox__checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: $base * 6;
+  height: $base * 6;
+  background-color: $color-white;
+  border: 0.063rem solid $color-grey-black-40;
+  border-radius: 6px;
+  transition: all $transition-01;
+
+  &::before,
+  &::after {
+    position: absolute;
+    content: '';
+    display: none;
+    background-color: $color-white;
+    border-radius: 5px;
+  }
+
+  &::before {
+    top: 10px;
+    left: 7px;
+    width: 0.125rem;
+    height: 5px;
+    transform: rotate(-45deg);
+  }
+
+  &::after {
+    top: 6px;
+    left: 11px;
+    width: 0.125rem;
+    height: 10px;
+    transform: rotate(45deg);
+  }
+}
+
+.checkbox__checkmark_error {
+  border: 0.063rem solid $color-accent;
+}

@@ -1,0 +1,58 @@
+@import '../../styles/constants.scss';
+
+.rating-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  row-gap: $base * 4;
+  margin-top: $base * 6;
+
+  @media (max-width: $breakpoint-xs-min) {
+    margin-top: 0.188rem;
+  }
+
+  .button-primary {
+    @media (max-width: $breakpoint-xs-min) {
+      width: 100%;
+      padding: 0;
+    }
+  }
+
+  .button-secondary {
+    @media (max-width: $breakpoint-xs-min) {
+      width: 100%;
+      padding: 0;
+    }
+  }
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+  margin-top: $base * 4;
+
+  @media (max-width: $breakpoint-sm-min) {
+    column-gap: $base * 2;
+  }
+
+  @media (max-width: $breakpoint-xs-min) {
+    column-gap: 6px;
+  }
+
+  @media (max-width: $breakpoint-xxs-min) {
+    column-gap: 11px;
+  }
+}
+
+.rating__item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rating__logo {
+  width: $base * 5;
+  height: 19px;
+}

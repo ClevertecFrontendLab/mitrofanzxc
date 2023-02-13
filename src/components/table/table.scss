@@ -1,0 +1,81 @@
+@import '../../styles/constants.scss';
+
+.table {
+  max-width: 635px;
+  text-align: left;
+
+  @media (max-width: $breakpoint-lg-min) {
+    max-width: 435px;
+  }
+
+  @media (max-width: $breakpoint-md-min) {
+    max-width: 305px;
+  }
+
+  @media (max-width: $breakpoint-sm-min) {
+    max-width: fit-content;
+  }
+}
+
+tbody {
+  tr {
+    &:last-child {
+      td {
+        padding-bottom: 0;
+      }
+    }
+  }
+}
+
+tr {
+  vertical-align: top;
+}
+
+th,
+td {
+  padding: 0;
+}
+
+td {
+  padding-bottom: 13px;
+}
+
+th.subtitle_large {
+  @media (max-width: $breakpoint-md-min) {
+    font-size: 14px;
+    line-height: 18px;
+  }
+
+  @media (max-width: $breakpoint-xs-min) {
+    font-size: $base * 3;
+    font-weight: $fw-medium;
+    line-height: $base * 4;
+    letter-spacing: 0.2px;
+  }
+}
+
+td.body_large {
+  @media (max-width: $breakpoint-md-min) {
+    font-size: 14px;
+    line-height: 18px;
+  }
+
+  @media (max-width: $breakpoint-xs-min) {
+    font-size: $base * 3;
+    line-height: $base * 4;
+    letter-spacing: 0.2px;
+    padding-bottom: 14px;
+  }
+}
+
+td {
+  padding-left: 70px;
+
+  @media (max-width: $breakpoint-lg-min) {
+    padding-left: 33px;
+  }
+
+  @media (max-width: $breakpoint-sm-min) {
+    padding-left: $base * 10;
+  }
+}

@@ -1,0 +1,73 @@
+@import './styles/normalize.scss';
+@import './styles/reset.scss';
+@import './styles/constants.scss';
+@import './styles/headers.scss';
+
+body {
+  @include montserrat;
+  background: $color-white;
+  color: $color-dark;
+}
+
+.body_overflow {
+  overflow: hidden;
+}
+
+#root {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+}
+
+.wrapper {
+  max-width: 1130px;
+  margin: 0 auto;
+  padding-right: 10px;
+  padding-left: 10px;
+
+  @media (max-width: $breakpoint-md-min) {
+    max-width: $base * 165;
+  }
+
+  @media (max-width: $breakpoint-xxs-min) {
+    max-width: $base * 77;
+  }
+}
+
+.main {
+  display: grid;
+  grid-template-columns: minmax(1px, 279px) minmax(1px, 825px);
+  column-gap: 6px;
+  width: 100%;
+  margin-top: 47px;
+
+  @media (max-width: $breakpoint-lg-min) {
+    grid-template-columns: 1fr;
+  }
+
+  @media (max-width: $breakpoint-md-min) {
+    margin-top: $base * 8;
+  }
+
+  @media (max-width: $breakpoint-xxs-min) {
+    margin-top: 11px;
+  }
+}
+
+.filter-shadow {
+  background: #c4c4c4;
+  box-shadow: 0px 0.125rem $base rgba(191, 196, 201, 0.2), 0px 0.188rem $base rgba(191, 196, 201, 0.18),
+    0px 0.063rem 5px rgba(191, 196, 201, 0.24);
+}
+
+.active {
+  color: $color-orange;
+}
+
+.display_inline {
+  display: inline;
+}
+
+.display_inline-block {
+  display: inline-block;
+}

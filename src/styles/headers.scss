@@ -1,0 +1,179 @@
+@import './constants.scss';
+
+.h1 {
+  font-size: $base * 13;
+  font-weight: $fw-medium;
+  line-height: $base * 16;
+  letter-spacing: 0.2px;
+
+  @media (max-width: $breakpoint-xs-min) {
+    font-size: 42px;
+    line-height: $base * 10;
+  }
+}
+
+.h2 {
+  font-size: $base * 11;
+  font-weight: $fw-semi-bold;
+  line-height: 54px;
+
+  @media (max-width: $breakpoint-xs-min) {
+    font-size: 26px;
+    line-height: $base * 9;
+  }
+}
+
+.h3 {
+  font-size: $base * 8;
+  font-weight: $fw-bold;
+  line-height: $base * 10;
+  letter-spacing: 0.1px;
+
+  @media (max-width: $breakpoint-xs-min) {
+    font-size: 18px;
+    line-height: $base * 7;
+  }
+}
+
+.h4 {
+  font-size: $base * 6;
+  font-weight: $fw-bold;
+  line-height: 30px;
+  letter-spacing: 0.1px;
+}
+
+.h5 {
+  font-size: 18px;
+  font-weight: $fw-bold;
+  line-height: $base * 7;
+  letter-spacing: 0.1px;
+}
+
+.subtitle_large {
+  font-size: $base * 4;
+  font-weight: $fw-semi-bold;
+  line-height: $base * 6;
+  letter-spacing: 0.1px;
+}
+
+.subtitle_small {
+  font-size: 14px;
+  font-weight: $fw-semi-bold;
+  line-height: 18px;
+  letter-spacing: 0.1px;
+}
+
+.body_large {
+  font-size: $base * 4;
+  font-weight: $fw-regular;
+  line-height: $base * 6;
+  letter-spacing: 0.1px;
+
+  @media (max-width: $breakpoint-xs-min) {
+    font-size: 15px;
+    line-height: $base * 5;
+  }
+}
+
+.body_small {
+  font-size: 14px;
+  font-weight: $fw-regular;
+  line-height: 18px;
+  letter-spacing: 0.1px;
+
+  @media (max-width: $breakpoint-xs-min) {
+    font-size: $base * 3;
+    letter-spacing: 0px;
+  }
+}
+
+.info_large {
+  font-size: $base * 3;
+  font-weight: $fw-medium;
+  line-height: $base * 4;
+  letter-spacing: 0.2px;
+}
+
+.info_small {
+  font-size: $base * 3;
+  font-weight: $fw-regular;
+  line-height: $base * 4;
+  letter-spacing: 0.2px;
+}
+
+.button_large {
+  font-size: $base * 4;
+  font-weight: $fw-semi-bold;
+  line-height: $base * 6;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+
+  @media (max-width: $breakpoint-xs-min) {
+    font-size: $base * 4;
+    line-height: $base * 5;
+  }
+}
+
+.button_small {
+  font-size: 14px;
+  font-weight: $fw-semi-bold;
+  line-height: 18px;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+
+  @media (max-width: $breakpoint-xs-min) {
+    font-size: $base * 3;
+  }
+}
+
+.button_small_mobile {
+  font-size: $base * 3;
+  font-weight: $fw-semi-bold;
+  line-height: 18px;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+}
+
+.color-grey-black-40 {
+  color: $color-grey-black-40;
+}
+
+.color-grey-black-70 {
+  color: $color-grey-black-70;
+}
+
+.fs-s {
+  font-size: $fs-s;
+}
+
+.fs-m {
+  font-size: $fs-m;
+}
+
+.fs-l {
+  font-size: $fs-l;
+}
+
+.fs-xl {
+  font-size: $fs-xl;
+}
+
+.fs-xxl {
+  font-size: $fs-xxl;
+}
+
+.fs-xxxl {
+  font-size: $fs-xxxl;
+}
+
+.fw-regular {
+  font-weight: $fw-regular;
+}
+
+.fw-medium {
+  font-weight: $fw-medium;
+}
+
+.fw-bold {
+  font-weight: $fw-bold;
+}

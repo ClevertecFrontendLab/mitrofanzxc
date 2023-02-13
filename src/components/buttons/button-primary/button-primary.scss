@@ -1,0 +1,58 @@
+@import '../../../styles/constants.scss';
+
+.button {
+  height: $base * 10;
+  border-radius: $base * 5;
+  text-align: center;
+  transition-property: background, box-shadow, border;
+  transition-duration: $transition-02;
+}
+
+.button-primary {
+  border: 0.063rem solid transparent;
+  background: $color-hover;
+  color: $color-white;
+  text-transform: uppercase;
+
+  &:hover {
+    border: 0.063rem solid $color-orange;
+    box-shadow: 0px 0.125rem 5px rgba(54, 54, 54, 0.1);
+  }
+
+  &:active {
+    box-shadow: 0px 0.188rem $base rgba(222, 125, 11, 0.2), 0px 0.063rem 10px rgba(249, 89, 8, 0.2);
+  }
+
+  &:disabled {
+    background: $color-grey-black-10;
+  }
+
+  @media (max-width: $breakpoint-xxs-min) {
+    font-size: $base * 4;
+    line-height: $base * 5;
+  }
+}
+
+.button-secondary {
+  border: 0.063rem solid $color-grey-black-20;
+  background: $color-white;
+
+  &:hover {
+    border: 0.063rem solid $color-grey-black-40;
+    box-shadow: 0px 0.125rem 5px rgba(54, 54, 54, 0.1);
+  }
+
+  &:active {
+    box-shadow: 0px 0.188rem $base rgba(222, 125, 11, 0.2), 0px 0.063rem 10px rgba(249, 89, 8, 0.2);
+  }
+
+  &:disabled {
+    background: $color-grey-black-5;
+    color: $color-grey-black-40;
+  }
+
+  @media (max-width: $breakpoint-xxs-min) {
+    font-size: $base * 4;
+    line-height: $base * 5;
+  }
+}

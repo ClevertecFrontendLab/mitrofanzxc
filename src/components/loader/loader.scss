@@ -1,0 +1,59 @@
+@import '../../styles/constants.scss';
+
+.loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  background: $color-dark-03;
+  backdrop-filter: blur(10px);
+}
+
+.circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 70px;
+  height: 70px;
+  animation: progress 2s linear infinite;
+
+  @media (max-width: $breakpoint-md-min) {
+    width: 23px;
+    height: 23px;
+  }
+}
+
+.circle__wrapper {
+  display: block;
+  margin: 0;
+}
+
+.circle__bg {
+  fill: none;
+  stroke: transparent;
+  stroke-width: $base;
+}
+
+.circle__stroke {
+  fill: none;
+  stroke-width: $base;
+  stroke-linecap: round;
+}
+
+@keyframes progress {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.stroke_orange {
+  stroke: $color-orange;
+}

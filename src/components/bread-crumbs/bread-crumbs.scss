@@ -1,0 +1,64 @@
+@import '../../styles/constants.scss';
+
+.bread-crumbs_bg {
+  background: $color-grey-black-5;
+}
+
+.bread-crumbs {
+  margin-top: 27px;
+  padding: $base * 4 0 22px 0;
+
+  @media (max-width: $breakpoint-lg-min) {
+    margin-top: $base * 6;
+    padding: $base * 4 0 22px 0;
+  }
+
+  @media (max-width: $breakpoint-xs-min) {
+    margin-top: $base * 2;
+    padding: 13px 0 $base * 5 0;
+  }
+
+  a {
+    &:nth-child(odd) {
+      position: relative;
+
+      &::after {
+        position: relative;
+        bottom: -5px;
+        transform: rotate(26deg);
+        content: '';
+        display: inline-block;
+        width: 0.125rem;
+        height: 22px;
+        margin-right: 17px;
+        margin-left: 17px;
+        background-color: $color-grey-black-20;
+        border-radius: 6px;
+
+        @media (max-width: $breakpoint-xs-min) {
+          height: 18px;
+        }
+      }
+    }
+  }
+
+  .body_small {
+    color: $color-grey-black-40;
+
+    @media (max-width: $breakpoint-lg-min) {
+      line-height: 22px;
+    }
+
+    @media (max-width: $breakpoint-xs-min) {
+      line-height: $base * 4;
+    }
+  }
+}
+
+.bread-crumbs__logo {
+  display: inline-block;
+  width: $base * 6;
+  height: $base * 6;
+  margin: 0 $base;
+  stroke: $color-grey-black-20;
+}
