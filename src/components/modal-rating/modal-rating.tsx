@@ -23,8 +23,6 @@ export const ModalRating: FC = () => {
           .map((element) => (
             <RatingStar
               key={element}
-              // className='cursor-pointer'
-              // spriteId='star'
               onClick={() => setRating(element)}
               spriteId={getColor(element)}
               onMouseEnter={() => setHoverRating(element)}
