@@ -119,7 +119,7 @@
   }
 }
 
-.nav__item.accordion:has(~ .nav-list .nav-list__item.active) {
+.nav__item.accordion:has(~ .nav-list .nav-list__link.active) {
   &::after {
     left: 0;
     opacity: 1;
@@ -163,6 +163,11 @@
 .nav-list {
   display: none;
   padding-left: $base * 5;
+
+  > a {
+    margin-top: $base * 6;
+    padding-left: 0;
+  }
 }
 
 .nav-list_active {
@@ -170,15 +175,13 @@
 }
 
 .nav-list__item {
-  display: block;
   margin-top: $base * 4;
-  padding-left: $base;
-  transition: all $transition-01;
+}
 
-  &:first-child {
-    margin-top: $base * 6;
-    padding-left: 0;
-  }
+.nav-list__link {
+  display: inline-block;
+  padding-right: $base;
+  transition: all $transition-01;
 
   &:hover {
     color: $color-accent;
@@ -191,7 +194,7 @@
   }
 }
 
-.nav-list__item.active {
+.nav-list__link.active {
   font-size: $base * 4;
   font-weight: $fw-bold;
   line-height: $base * 6;

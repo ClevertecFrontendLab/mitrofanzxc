@@ -45,7 +45,7 @@ export interface IInterceptRequest {
   ({ isLoading, isSuccess }: { isLoading: boolean; isSuccess: boolean }): void;
 }
 
-export type TTypeSortData = 'default' | 'descending' | 'ascending';
+export type TTypeSortData = 'descending' | 'ascending';
 
 export interface ISortData {
   (type: TTypeSortData): (a: ICatalogData, b: ICatalogData) => 0 | 1 | -1;

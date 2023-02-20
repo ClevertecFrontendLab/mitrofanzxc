@@ -14,11 +14,11 @@ export const useStartLoading = (connectionType: TConnectionType, bookId?: string
   useEffect(() => {
     switch (connectionType) {
       case 'getCatalog':
-        if (!initialData || !initialData.length) {
-          dispatch(startCatalogDataLoading());
-          dispatch(startLoading());
-          dispatch(handleSuccess(false));
-        }
+        // if (!initialData || !initialData.length) {
+        dispatch(startCatalogDataLoading());
+        dispatch(startLoading());
+        dispatch(handleSuccess(false));
+        // }
         break;
       case 'getBook':
         if (bookId) {

@@ -71,28 +71,29 @@ export const Nav: FC = () => {
           <ul className={`nav-list ${isAccordionMenuOpen ? 'nav-list_active' : ''}`}>
             <NavLink
               to={booksAll}
-              className='nav-list__item'
+              className='nav-list__link'
               onClick={handleMobileMenu}
               data-test-id={`${match992 ? 'burger-books' : 'navigation-books'}`}
             >
               Все книги
             </NavLink>
             {categoriesData.map(({ id, name, path }) => (
-              <NavLink
-                key={id}
-                to={`/books/${path}`}
-                className='nav-list__item body_large'
-                onClick={handleMobileMenu}
-                data-test-id={`${match992 ? `burger-${path}` : `navigation-${path}`}`}
-              >
-                {name}
+              <li key={id} className='nav-list__item'>
+                <NavLink
+                  to={`/books/${path}`}
+                  className='nav-list__link body_large'
+                  onClick={handleMobileMenu}
+                  data-test-id={`${match992 ? `burger-${path}` : `navigation-${path}`}`}
+                >
+                  {name}
+                </NavLink>
                 <span
                   className='body_small'
                   data-test-id={`${match992 ? `burger-book-count-for-${path}` : `navigation-book-count-for-${path}`}`}
                 >
                   {getAmountOfBooks(initialData, name)}
                 </span>
-              </NavLink>
+              </li>
             ))}
           </ul>
         )}

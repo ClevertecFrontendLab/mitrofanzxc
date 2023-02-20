@@ -73,7 +73,7 @@ export const InputSearch: FC = () => {
         type='search'
         name='input-search'
         id='input-search'
-        placeholder='Поиск книги или автора...'
+        placeholder='Поиск книги или автора…'
         autoComplete='off'
         value={inputSearchValue}
         onChange={changeInputSearch}

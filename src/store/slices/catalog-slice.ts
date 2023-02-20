@@ -12,7 +12,7 @@ const initialState: ICatalogState = {
   catalogView: 'grid',
   initialData: [],
   catalogData: [],
-  catalogSortState: 'default',
+  catalogSortState: 'descending',
   isLoading: false,
 };
 

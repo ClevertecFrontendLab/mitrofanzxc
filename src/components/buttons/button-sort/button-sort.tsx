@@ -14,9 +14,6 @@ export const ButtonSort: FC = () => {
 
   const handleButtonSort = () => {
     switch (catalogSortState) {
-      case 'default':
-        dispatch(changeCatalogSortState('descending'));
-        break;
       case 'descending':
         dispatch(changeCatalogSortState('ascending'));
         break;
