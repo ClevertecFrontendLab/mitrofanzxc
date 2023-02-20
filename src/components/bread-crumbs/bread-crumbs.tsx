@@ -35,7 +35,7 @@ export const BreadCrumbs: FC<IBreadCrumbs> = ({ bookData, isSuccess, currentCate
             <Link
               to={`/books/${translateCategoryTitle(categoryResult, categoriesData, 'ru')}/${bookData.id}`}
               className='body_small display_inline'
-              data-test-id='breadcrumbs-link'
+              data-test-id='book-name'
             >
               {bookData.title}
             </Link>

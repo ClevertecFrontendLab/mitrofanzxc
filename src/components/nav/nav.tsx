@@ -78,9 +78,20 @@ export const Nav: FC = () => {
               Все книги
             </NavLink>
             {categoriesData.map(({ id, name, path }) => (
-              <NavLink key={id} to={`/books/${path}`} className='nav-list__item body_large' onClick={handleMobileMenu}>
+              <NavLink
+                key={id}
+                to={`/books/${path}`}
+                className='nav-list__item body_large'
+                onClick={handleMobileMenu}
+                data-test-id={`${match992 ? `burger-${path}` : `navigation-${path}`}`}
+              >
                 {name}
-                <span className='body_small'>{getAmountOfBooks(initialData, name)}</span>
+                <span
+                  className='body_small'
+                  data-test-id={`${match992 ? `burger-book-count-for-${path}` : `navigation-book-count-for-${path}`}`}
+                >
+                  {getAmountOfBooks(initialData, name)}
+                </span>
               </NavLink>
             ))}
           </ul>

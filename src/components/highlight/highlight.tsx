@@ -23,7 +23,7 @@ export const HighLight: FC<IHighLight> = ({ inputSearchValue, title }) => {
             return (
               <Fragment key={uuidv4()}>
                 {str}
-                <mark>{firstMatch}</mark>
+                <mark data-test-id='highlight-matches'>{firstMatch}</mark>
               </Fragment>
             );
           }

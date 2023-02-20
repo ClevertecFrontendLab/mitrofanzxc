@@ -15,7 +15,7 @@ export const Catalog: FC = () => {
   return (
     <section className={`${catalogView === 'grid' ? 'catalog' : 'catalog_list'}`}>
       {(!catalogData || catalogData.length <= 0) && (
-        <h3 className='h3'>{`${
+        <h3 className='h3' data-test-id={`${inputSearchValue ? 'search-result-not-found' : 'empty-category'}`}>{`${
           inputSearchValue ? 'По запросу ничего не найдено' : 'В этой категории книг ещё нет'
         }`}</h3>
       )}

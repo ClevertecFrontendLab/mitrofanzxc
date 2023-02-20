@@ -40,7 +40,9 @@ export const BookPage: FC = () => {
             <div className='book-page'>
               <Slider data={bookData} />
               <div className='book-page__info'>
-                <h3 className='h3'>{bookData.title}</h3>
+                <h3 className='h3' data-test-id='book-title'>
+                  {bookData.title}
+                </h3>
                 <h5 className='h5 color-grey-black-40 book-page__author'>{handleAuthors(bookData.authors)}</h5>
                 {statusResult === 'free' && (
                   <ButtonPrimary type='primary' title='Забронировать' className='button_large' />

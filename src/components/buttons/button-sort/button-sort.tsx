@@ -33,7 +33,7 @@ export const ButtonSort: FC = () => {
   }, [category, catalogSortState, dispatch]);
 
   return (
-    <button className='button-sort' type='button' onClick={handleButtonSort}>
+    <button className='button-sort' type='button' onClick={handleButtonSort} data-test-id='sort-rating-button'>
       <Sprite
         id='sort-ascending'
         className={`button-sort__logo ${catalogSortState === 'ascending' ? 'button-sort__logo_ascending ' : ''}`}
