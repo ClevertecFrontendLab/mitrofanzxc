@@ -42,13 +42,9 @@ export const catalogSlice = createSlice({
       }
     },
     searchCatalogByTitle: (state, action: PayloadAction<string>) => {
-      if (!action.payload || !action.payload.length) {
-        state.catalogData = state.initialData;
-      } else {
-        state.catalogData = state.catalogData.filter((element) =>
-          element.title.toLocaleLowerCase().includes(action.payload.toLocaleLowerCase())
-        );
-      }
+      state.catalogData = state.catalogData.filter((element) =>
+        element.title.toLocaleLowerCase().includes(action.payload.toLocaleLowerCase())
+      );
     },
     startCatalogDataLoading: (state) => {
       state.isLoading = true;

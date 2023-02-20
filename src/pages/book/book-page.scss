@@ -37,7 +37,7 @@
       font-size: $base * 4;
       font-weight: $fw-semi-bold;
       line-height: $base * 6;
-      letter-spacing: 0.1px;
+      letter-spacing: 0.006rem;
     }
   }
 
@@ -134,7 +134,7 @@
       font-size: $base * 4;
       font-weight: $fw-semi-bold;
       line-height: $base * 6;
-      letter-spacing: 0.1px;
+      letter-spacing: 0.006rem;
     }
   }
 
@@ -224,7 +224,7 @@
       width: 10px;
       height: 0.125rem;
       background-color: $color-dark;
-      border-radius: 5px;
+      border-radius: $base;
     }
 
     &::before {
@@ -276,6 +276,7 @@
 
   .body_large {
     margin-top: $base * 4;
+    white-space: pre-wrap;
 
     @media (max-width: $breakpoint-xs-min) {
       margin-top: $base * 2;

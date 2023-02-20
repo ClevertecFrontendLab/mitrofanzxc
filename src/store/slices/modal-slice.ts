@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { IModalState } from './slices.interface';
 
 const initialState: IModalState = {
-  isModalOpen: false,
+  isError: false,
 };
 
 export const toastSlice = createSlice({
@@ -12,10 +12,10 @@ export const toastSlice = createSlice({
   initialState,
   reducers: {
     openModal: (state) => {
-      state.isModalOpen = true;
+      state.isError = true;
     },
     closeModal: (state) => {
-      state.isModalOpen = false;
+      state.isError = false;
     },
   },
 });

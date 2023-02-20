@@ -9,7 +9,7 @@
   max-width: 1110px;
   width: 100%;
   padding: $base * 6 $base * 8;
-  border-radius: 5px;
+  border-radius: $base;
   border-width: 1.5px;
   border-style: solid;
   transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.35);

@@ -1,12 +1,14 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../../../hooks';
-import { changeCatalogSortState } from '../../../store/slices';
+import { changeCatalogSortState, sortCatalogByRating } from '../../../store/slices';
 import { Sprite } from '../..';
 
 import './button-sort.scss';
 
 export const ButtonSort: FC = () => {
+  const { category } = useParams();
   const { catalogSortState } = useAppSelector((state) => state.catalog);
   const dispatch = useAppDispatch();
 
@@ -25,6 +27,10 @@ export const ButtonSort: FC = () => {
         break;
     }
   };
+
+  useEffect(() => {
+    dispatch(sortCatalogByRating(catalogSortState));
+  }, [category, catalogSortState, dispatch]);
 
   return (
     <button className='button-sort' type='button' onClick={handleButtonSort}>

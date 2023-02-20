@@ -1,5 +1,5 @@
 import { FC, Fragment, useState } from 'react';
-import { Navigation, Pagination, Scrollbar, Thumbs } from 'swiper';
+import SwiperCore, { Navigation, Pagination, Scrollbar, Thumbs } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import { BASE_URL_API } from '../../constants';
@@ -16,8 +16,7 @@ import 'swiper/scss/thumbs';
 import 'swiper/css/scrollbar';
 
 export const Slider: FC<ISlider> = ({ data }) => {
-  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-  const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
+  const [thumbsSwiper, setThumbsSwiper] = useState<SwiperCore>();
 
   return (
     <Fragment>
@@ -28,7 +27,7 @@ export const Slider: FC<ISlider> = ({ data }) => {
               modules={[Thumbs, Pagination]}
               loop={true}
               pagination={{ clickable: true }}
-              thumbs={{ swiper: thumbsSwiper }}
+              thumbs={{ swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null }}
               spaceBetween={30}
               breakpoints={{
                 1: {

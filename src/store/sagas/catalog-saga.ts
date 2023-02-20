@@ -1,5 +1,5 @@
 import { all, call, put, takeEvery } from 'redux-saga/effects';
-import { AxiosResponse } from 'axios';
+import { AxiosError, AxiosResponse } from 'axios';
 
 import { ICatalogData, ICategories } from '../../constants/constants.interface';
 import { getCatalog, getCategories } from '../services';
@@ -7,32 +7,47 @@ import { endLoading, handleSuccess, setCatalogData, setCategoriesData, startCata
 
 function* handleCatalog() {
   try {
-    const { data }: AxiosResponse<ICatalogData[]> = yield call(getCatalog);
+    const { data: catalogData }: AxiosResponse<ICatalogData[]> = yield call(getCatalog);
 
-    yield put(setCatalogData(data));
-    yield put(handleSuccess(true));
-    yield put(endLoading());
+    return catalogData;
   } catch (error) {
-    yield put(handleSuccess(false));
-    yield put(endLoading());
+    if (error instanceof Error || error instanceof AxiosError) {
+      throw new Error(error.message);
+    }
+
+    return error;
   }
 }
 
 function* handleCategories() {
   try {
-    const { data }: AxiosResponse<ICategories[]> = yield call(getCategories);
+    const { data: categoriesData }: AxiosResponse<ICategories[]> = yield call(getCategories);
 
-    yield put(setCategoriesData(data));
+    return categoriesData;
+  } catch (error) {
+    if (error instanceof Error || error instanceof AxiosError) {
+      throw new Error(error.message);
+    }
+
+    return error;
+  }
+}
+
+function* workerSaga() {
+  try {
+    const [catalogData, categoriesData]: [catalogData: ICatalogData[], categoriesData: ICategories[]] = yield all([
+      call(handleCatalog),
+      call(handleCategories),
+    ]);
+
+    yield put(setCatalogData(catalogData));
+    yield put(setCategoriesData(categoriesData));
     yield put(handleSuccess(true));
     yield put(endLoading());
   } catch (error) {
     yield put(handleSuccess(false));
     yield put(endLoading());
   }
-}
-
-function* workerSaga() {
-  yield all([call(handleCatalog), call(handleCategories)]);
 }
 
 function* watchClickSaga() {

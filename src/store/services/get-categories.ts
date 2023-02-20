@@ -8,7 +8,7 @@ export const getCategories = async () => {
 
     return response;
   } catch (error) {
-    if (error instanceof AxiosError) {
+    if (error instanceof Error || error instanceof AxiosError) {
       throw new Error(error.message);
     }
 

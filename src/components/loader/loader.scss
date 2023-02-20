@@ -11,20 +11,21 @@
   width: 100vw;
   height: 100vh;
   background: $color-dark-03;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur($base * 2);
 }
 
 .circle {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 70px;
-  height: 70px;
+  width: $base * 18;
+  height: $base * 18;
+  -webkit-animation: progress 2s linear infinite;
   animation: progress 2s linear infinite;
 
   @media (max-width: $breakpoint-md-min) {
-    width: 23px;
-    height: 23px;
+    width: $base * 6;
+    height: $base * 6;
   }
 }
 
@@ -45,11 +46,24 @@
   stroke-linecap: round;
 }
 
-@keyframes progress {
+@-webkit-keyframes progress {
   from {
+    -webkit-transform: rotate(0deg);
     transform: rotate(0deg);
   }
   to {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes progress {
+  from {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
   }
 }

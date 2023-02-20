@@ -4,8 +4,15 @@ import { Sprite } from '..';
 
 import { IRatingStar } from './rating.interface';
 
-export const RatingStar: FC<IRatingStar> = ({ id, spriteId }) => (
-  <li key={id} className='rating__item'>
+export const RatingStar: FC<IRatingStar> = ({ id, spriteId, onClick, onMouseEnter, onMouseLeave }) => (
+  <button
+    key={id}
+    type='button'
+    className='rating__item'
+    onClick={onClick}
+    onMouseEnter={onMouseEnter}
+    onMouseLeave={onMouseLeave}
+  >
     <Sprite id={spriteId} className='rating__logo' />
-  </li>
+  </button>
 );

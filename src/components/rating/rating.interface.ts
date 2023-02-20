@@ -1,8 +1,11 @@
 import { TNumberAble } from '../../constants/constants.interface';
 
 export interface IRatingStar {
-  id: string;
+  id?: string;
   spriteId: string;
+  onClick?: () => void;
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
 }
 
 export interface IRating {

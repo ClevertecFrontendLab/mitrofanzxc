@@ -1,10 +1,11 @@
-import { FC } from 'react';
+import { FC, useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import { BASE_URL_API } from '../../constants';
 import { useAppSelector } from '../../hooks';
+import { ContextMainPage } from '../../pages';
 import { convertToDate, handleAuthors, handleCategory, handleStatus, translateCategoryTitle } from '../../utils';
-import { ButtonPrimary, Rating, Sprite } from '..';
+import { ButtonPrimary, HighLight, Rating, Sprite } from '..';
 
 import { ICard } from './card.interface';
 
@@ -24,6 +25,7 @@ export const Card: FC<ICard> = ({
   issueYear,
 }) => {
   const { categoriesData } = useAppSelector((state) => state.categories);
+  const { inputSearchValue } = useContext(ContextMainPage);
 
   const statusResult = handleStatus(booking, delivery);
   const categoryResult = translateCategoryTitle(handleCategory(currentCategory, categories), categoriesData, 'ru');
@@ -70,7 +72,9 @@ export const Card: FC<ICard> = ({
           />
         )}
         <div>
-          <p className={`${catalogView === 'grid' ? 'subtitle_small' : 'card-list__title'}`}>{title}</p>
+          <p className={`${catalogView === 'grid' ? 'subtitle_small' : 'card-list__title'}`}>
+            <HighLight inputSearchValue={inputSearchValue} title={title} />
+          </p>
           <p className='body_small card-list__author'>{`${handleAuthors(authors)}, ${issueYear}`}</p>
         </div>
         <div className={`${catalogView === 'grid' ? 'rating-wrapper' : 'rating-list__wrapper'}`}>

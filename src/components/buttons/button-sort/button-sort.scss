@@ -3,15 +3,15 @@
 .button-sort {
   display: flex;
   align-items: center;
-  padding: 10px $base * 4;
+  padding: $base * 3 $base * 4;
   background-color: $color-white;
   border-radius: $base * 5;
-  box-shadow: 0px 0.125rem $base rgba(191, 196, 201, 0.2), 0px 0.188rem $base rgba(191, 196, 201, 0.18),
-    0px 0.063rem 5px rgba(191, 196, 201, 0.24);
+  box-shadow: 0 0.125rem $base rgba(191, 196, 201, 0.2), 0 0.188rem $base rgba(191, 196, 201, 0.18),
+    0 0.063rem $base rgba(191, 196, 201, 0.24);
   transition: all $transition-02;
 
   &:hover {
-    box-shadow: 0px 0.188rem $base rgba(222, 125, 11, 0.2), 0px 0.063rem 10px rgba(249, 89, 8, 0.2);
+    box-shadow: 0 0.188rem $base rgba(222, 125, 11, 0.2), 0 0.063rem $base * 3 rgba(249, 89, 8, 0.2);
   }
 
   &:active {
@@ -25,7 +25,7 @@
   }
 
   @media (max-width: $breakpoint-sm-min) {
-    padding: 11px;
+    padding: $base * 3;
   }
 
   @media (max-width: $breakpoint-xs-min) {
@@ -52,11 +52,7 @@
   transition: all $transition-02;
 
   @media (max-width: $breakpoint-sm-min) {
-    margin-right: 0px;
-  }
-
-  @media (max-width: $breakpoint-xxs-min) {
-    margin-right: 0px;
+    margin-right: 0;
   }
 }
 

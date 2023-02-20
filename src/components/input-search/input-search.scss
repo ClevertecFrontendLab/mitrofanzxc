@@ -7,8 +7,8 @@
   width: $base * 87.5;
   background-color: $color-white;
   border-radius: $base * 5;
-  box-shadow: 0px 0.125rem $base rgba(191, 196, 201, 0.2), 0px 0.188rem $base rgba(191, 196, 201, 0.18),
-    0px 0.063rem 5px rgba(191, 196, 201, 0.24);
+  box-shadow: 0 0.125rem $base rgba(191, 196, 201, 0.2), 0 0.188rem $base rgba(191, 196, 201, 0.18),
+    0 0.063rem $base rgba(191, 196, 201, 0.24);
   overflow: hidden;
 
   &:has(.input-search__field:is(:focus)) {
@@ -86,7 +86,7 @@
   margin-left: $base * 4;
 
   @media (max-width: $breakpoint-xs-min) {
-    margin-left: 0px;
+    margin-left: 0;
     padding: $base * 2;
   }
 }

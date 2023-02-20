@@ -32,7 +32,7 @@ export interface IMobileMenuState {
 }
 
 export interface IModalState {
-  isModalOpen: boolean;
+  isError: boolean;
 }
 
 export interface ITextField {

@@ -1,14 +1,19 @@
-import { ChangeEvent, FC, FocusEvent, KeyboardEvent, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, FC, FocusEvent, KeyboardEvent, useContext, useEffect, useRef } from 'react';
+import { useParams } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { handleIsInputSearchOpen, searchCatalogByTitle } from '../../store/slices';
+import { ContextMainPage } from '../../pages';
+import { filterCatalogByCategory, handleIsInputSearchOpen, searchCatalogByTitle } from '../../store/slices';
+import { translateCategoryTitle } from '../../utils';
 import { Sprite } from '..';
 
 import './input-search.scss';
 
 export const InputSearch: FC = () => {
-  const [inputSearchValue, setInputSearchValue] = useState<string>('');
+  const { category } = useParams();
+  const { inputSearchValue, setInputSearchValue } = useContext(ContextMainPage);
   const { isInputSearchOpen } = useAppSelector((state) => state.search);
+  const { categoriesData } = useAppSelector((state) => state.categories);
   const inputSearchRef = useRef<HTMLInputElement>(null);
   const dispatch = useAppDispatch();
 
@@ -30,6 +35,10 @@ export const InputSearch: FC = () => {
 
   const handleKeyboardInputSearch = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
+      if (category) {
+        dispatch(filterCatalogByCategory(translateCategoryTitle(category, categoriesData, 'en')));
+      }
+
       dispatch(searchCatalogByTitle(inputSearchValue));
     }
   };
@@ -43,13 +52,16 @@ export const InputSearch: FC = () => {
   };
 
   const handleButtonCancel = () => {
-    setInputSearchValue('');
     dispatch(handleIsInputSearchOpen(false));
   };
 
   useEffect(() => {
+    if (category) {
+      dispatch(filterCatalogByCategory(translateCategoryTitle(category, categoriesData, 'en')));
+    }
+
     dispatch(searchCatalogByTitle(inputSearchValue));
-  }, [inputSearchValue, dispatch]);
+  }, [inputSearchValue, dispatch, category, categoriesData]);
 
   return (
     <div className={`input-search ${isInputSearchOpen ? 'input-search_active' : ''}`}>
@@ -62,6 +74,7 @@ export const InputSearch: FC = () => {
         name='input-search'
         id='input-search'
         placeholder='Поиск книги или автора...'
+        autoComplete='off'
         value={inputSearchValue}
         onChange={changeInputSearch}
         onKeyDown={handleKeyboardInputSearch}

@@ -7,6 +7,6 @@ export interface IButtonPrimary {
   title: string;
   className?: string;
   disabled?: boolean;
-  onClick?: () => void | ((event: MouseEvent<HTMLButtonElement>) => void);
+  onClick?: () => void | ((event: MouseEvent<HTMLButtonElement>) => void) | ((state: boolean) => void);
   dataTestId?: string;
 }

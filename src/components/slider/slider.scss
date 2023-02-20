@@ -42,7 +42,7 @@
 .swiper-pagination-bullet {
   width: 7px !important;
   height: 7px !important;
-  margin: 0 $base !important;
+  margin: $base !important;
   border-radius: 50% !important;
   background: $color-grey-black-20 !important;
   opacity: 1 !important;
@@ -70,6 +70,20 @@
 
 .swiper-button-prev {
   left: 0 !important;
+  background: -webkit-gradient(
+    linear,
+    right top,
+    left top,
+    from(rgba(255, 255, 255, 0)),
+    color-stop(20%, rgba(255, 255, 255, 0.5046612394957983)),
+    to(rgba(255, 255, 255, 1))
+  ) !important;
+  background: -o-linear-gradient(
+    right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.5046612394957983) 20%,
+    rgba(255, 255, 255, 1) 100%
+  ) !important;
   background: linear-gradient(
     -90deg,
     rgba(255, 255, 255, 0) 0%,
@@ -80,6 +94,20 @@
 
 .swiper-button-next {
   right: 0 !important;
+  background: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    from(rgba(255, 255, 255, 0)),
+    color-stop(20%, rgba(255, 255, 255, 0.5046612394957983)),
+    to(rgba(255, 255, 255, 1))
+  ) !important;
+  background: -o-linear-gradient(
+    left,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.5046612394957983) 20%,
+    rgba(255, 255, 255, 1) 100%
+  ) !important;
   background: linear-gradient(
     90deg,
     rgba(255, 255, 255, 0) 0%,
@@ -147,5 +175,6 @@
   width: 100%;
   height: auto;
   aspect-ratio: 65/86;
+  -o-object-fit: cover;
   object-fit: cover;
 }

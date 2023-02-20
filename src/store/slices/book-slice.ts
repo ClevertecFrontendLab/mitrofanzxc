@@ -43,9 +43,9 @@ const initialState: IBookState = {
   isLoading: false,
 };
 
-export const catalogSlice = createSlice({
+export const bookSlice = createSlice({
   /* eslint-disable no-param-reassign */
-  name: 'catalog',
+  name: 'book',
   initialState,
   reducers: {
     setBookData: (state, action: PayloadAction<IBookData>) => {
@@ -57,6 +57,6 @@ export const catalogSlice = createSlice({
   },
 });
 
-export const { setBookData, startBookDataLoading } = catalogSlice.actions;
+export const { setBookData, startBookDataLoading } = bookSlice.actions;
 /* eslint-disable-next-line import/no-default-export */
-export default catalogSlice.reducer;
+export default bookSlice.reducer;

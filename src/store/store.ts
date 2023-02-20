@@ -1,4 +1,3 @@
-/* eslint-disable-next-line import/no-extraneous-dependencies */
 import createSagaMiddleware from 'redux-saga';
 import { configureStore } from '@reduxjs/toolkit';
 
@@ -7,6 +6,7 @@ import catalogReducer from './slices/catalog-slice';
 import categoriesReducer from './slices/categories-slice';
 import loaderReducer from './slices/loader-slice';
 import mobileMenuReducer from './slices/mobile-menu-slice';
+import modalReducer from './slices/modal-slice';
 import registrationReducer from './slices/registration-slice';
 import searchReducer from './slices/search-slice';
 import toastReducer from './slices/toast-slice';
@@ -21,6 +21,7 @@ export const store = configureStore({
     categories: categoriesReducer,
     loader: loaderReducer,
     mobileMenu: mobileMenuReducer,
+    modal: modalReducer,
     toast: toastReducer,
     registration: registrationReducer,
     search: searchReducer,

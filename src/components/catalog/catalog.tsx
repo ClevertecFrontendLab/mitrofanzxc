@@ -1,32 +1,24 @@
-import { FC, useEffect } from 'react';
+import { FC, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { filterCatalogByCategory, sortCatalogByRating } from '../../store/slices';
-import { translateCategoryTitle } from '../../utils';
+import { useAppSelector } from '../../hooks';
+import { ContextMainPage } from '../../pages';
 import { Card } from '..';
 
 import './catalog.scss';
 
 export const Catalog: FC = () => {
   const { category } = useParams();
-  const { catalogView, catalogData, catalogSortState } = useAppSelector((state) => state.catalog);
-  const { categoriesData } = useAppSelector((state) => state.categories);
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    if (category) {
-      dispatch(filterCatalogByCategory(translateCategoryTitle(category, categoriesData, 'en')));
-    }
-  }, [category, categoriesData, dispatch]);
-
-  useEffect(() => {
-    dispatch(sortCatalogByRating(catalogSortState));
-  }, [catalogSortState, category, dispatch]);
+  const { catalogView, catalogData } = useAppSelector((state) => state.catalog);
+  const { inputSearchValue } = useContext(ContextMainPage);
 
   return (
     <section className={`${catalogView === 'grid' ? 'catalog' : 'catalog_list'}`}>
-      {(!catalogData || catalogData.length <= 0) && <h3 className='h3'>По запросу ничего не найдено</h3>}
+      {(!catalogData || catalogData.length <= 0) && (
+        <h3 className='h3'>{`${
+          inputSearchValue ? 'По запросу ничего не найдено' : 'В этой категории книг ещё нет'
+        }`}</h3>
+      )}
       {catalogData &&
         catalogData.length > 0 &&
         catalogData.map((element) => (

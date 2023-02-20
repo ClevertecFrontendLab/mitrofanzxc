@@ -33,7 +33,7 @@ export const BreadCrumbs: FC<IBreadCrumbs> = ({ bookData, isSuccess, currentCate
           </Link>
           {bookData && bookData.title && isSuccess && (
             <Link
-              to={`/books/${categoryResult}/${bookData.id}`}
+              to={`/books/${translateCategoryTitle(categoryResult, categoriesData, 'ru')}/${bookData.id}`}
               className='body_small display_inline'
               data-test-id='breadcrumbs-link'
             >

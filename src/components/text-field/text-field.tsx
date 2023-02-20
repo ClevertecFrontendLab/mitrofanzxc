@@ -17,25 +17,24 @@ export const TextField: FC<ITextField> = ({ type, id, placeholder, message }) =>
 
   const handleTextFieldValue = (event: ChangeEvent<HTMLInputElement>) => {
     const target = event.target as HTMLInputElement;
-    /* eslint-disable-next-line @typescript-eslint/no-shadow */
-    const { type, id: targetId, value } = target;
+    const { type: targetType, id: targetId, value } = target;
 
     if (targetId) {
       dispatch(setTextFieldValue({ value, id: targetId }));
 
-      if (type === 'tel') {
+      if (targetType === 'tel') {
         dispatch(setTextFieldError({ value: validateTextField(value, id), id: targetId }));
       }
 
-      if (type === 'email') {
+      if (targetType === 'email') {
         dispatch(setTextFieldError({ value: validateTextField(value, id), id: targetId }));
       }
 
-      if (type === 'text' && targetId === 'login') {
+      if (targetType === 'text' && targetId === 'login') {
         dispatch(setTextFieldError({ value: validateTextField(value, id), id: targetId }));
       }
 
-      if (type === 'password') {
+      if (targetType === 'password') {
         dispatch(setTextFieldError({ value: validateTextField(value, id), id: targetId }));
       }
     }
@@ -63,11 +62,11 @@ export const TextField: FC<ITextField> = ({ type, id, placeholder, message }) =>
         <span className='text-field__label_hidden'>{placeholder}</span>
       </label>
       {type === 'password' && (
-        <div className='text-field__icon-wrapper'>
-          <Sprite id='check' className='text-field__icon text-field__icon_check' />
+        <div className='text-field__logo-wrapper'>
+          <Sprite id='check' className='text-field__logo text-field__logo_check' />
           <Sprite
             id={`${isEyeOpen ? 'eye-open' : 'eye-closed'}`}
-            className='text-field__icon text-field__icon_eye'
+            className='text-field__logo text-field__logo_eye'
             onClick={handleSetIsEyeOpen}
           />
         </div>

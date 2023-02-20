@@ -9,10 +9,11 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  row-gap: 46px;
+  row-gap: $base * 11;
   width: 100vw;
   height: 100vh;
-  background: $color-hover;
+  background: -o-linear-gradient(218.42deg, #f83600 -53.35%, #f9d423 297.76%);
+  background: linear-gradient(231.58deg, #f83600 -53.35%, #f9d423 297.76%);
 
   > .h3 {
     color: $color-white;
@@ -20,7 +21,7 @@
 }
 
 .registration {
-  width: 528px;
+  width: $base * 132;
   padding: $base * 12 $base * 14 $base * 12 $base * 14;
   background-color: $color-white;
   border-radius: $base * 4;
@@ -30,7 +31,7 @@
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  row-gap: 32px;
+  row-gap: $base * 8;
   height: 100%;
 }
 
@@ -54,7 +55,7 @@
   .button {
     width: 100%;
     height: $base * 13;
-    border-radius: 30px;
+    border-radius: $base * 8;
   }
 
   .body_large {
@@ -76,7 +77,7 @@
   column-gap: $base * 3;
 }
 
-.button-login__icon {
+.button-login__logo {
   display: flex;
   align-items: center;
   justify-content: center;

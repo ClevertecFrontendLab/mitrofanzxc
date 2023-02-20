@@ -21,12 +21,7 @@ const ButtonBurger: FC = () => {
 
   return (
     <Fragment>
-      <button
-        type='button'
-        aria-label='button-shadow'
-        className={`shadow ${isMobileMenuOpen ? 'shadow_active' : ''}`}
-        onClick={handleShadow}
-      />
+      <div role='presentation' className={`shadow ${isMobileMenuOpen ? 'shadow_active' : ''}`} onClick={handleShadow} />
       <button className='button-burger' type='button' onClick={handleButtonBurger} data-test-id='button-burger'>
         <span className={`button-burger__bar ${isMobileMenuOpen ? 'button-burger__bar_active' : ''}`} />
         <span className={`button-burger__bar ${isMobileMenuOpen ? 'button-burger__bar_active' : ''}`} />

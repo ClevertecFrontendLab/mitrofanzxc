@@ -1,8 +1,8 @@
 import { FC, Fragment, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { BreadCrumbs, ButtonPrimary, Loader, Nav, Rating, Review, Slider, Table, Toast } from '../../components';
-import { useAppSelector, useStartLoading, useToast } from '../../hooks';
+import { BreadCrumbs, ButtonPrimary, Loader, Modal, Nav, Rating, Review, Slider, Table, Toast } from '../../components';
+import { useAppSelector, useBodyOverflow, useStartLoading, useToast } from '../../hooks';
 import { convertToDate, divideTableData, handleAuthors, handleStatus } from '../../utils';
 
 import './book-page.scss';
@@ -11,16 +11,22 @@ export const BookPage: FC = () => {
   const { category, bookId } = useParams();
   const { bookData } = useAppSelector((state) => state.book);
   const { isLoading, isSuccess } = useAppSelector((state) => state.loader);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isAccordionReviewsOpen, setIsAccordionReviewsOpen] = useState<boolean>(false);
 
   const toggleAccordionReviews = () => {
     setIsAccordionReviewsOpen(!isAccordionReviewsOpen);
   };
 
+  const handleModal = (value: boolean) => {
+    setIsModalOpen(value);
+  };
+
   const statusResult = handleStatus(bookData.booking, bookData.delivery);
 
   useStartLoading('getBook', bookId);
   useToast({ isLoading, isSuccess });
+  useBodyOverflow(isModalOpen);
 
   return (
     <section>
@@ -66,10 +72,11 @@ export const BookPage: FC = () => {
               <h5 className='h5 book-page__header'>Рейтинг</h5>
               <div className='book-page__rating-wrapper'>
                 <Rating rating={bookData.rating} />
-                <h5 className={`${bookData.rating ? 'h5' : 'body_small'}`}>
-                  {bookData.rating && bookData.rating > 0 && bookData.rating.toFixed(1)}
-                  {!bookData.rating && 'ещё нет оценок'}
-                </h5>
+                {bookData.rating !== null && bookData.rating !== undefined && (
+                  <h5 className={`${bookData.rating > 0 ? 'h5' : 'body_small'}`}>
+                    {bookData.rating > 0 && bookData.rating.toFixed(1)}
+                  </h5>
+                )}
               </div>
               <h5 className='h5 book-page__header'>Подбробная информация</h5>
               <div className='tables-wrapper'>
@@ -96,9 +103,15 @@ export const BookPage: FC = () => {
                     bookData.comments.map((element) => <Review key={element.id} {...element} />)}
                 </ul>
               </div>
-              <ButtonPrimary type='primary' title='Оценить книгу' dataTestId='button-rating' />
+              <ButtonPrimary
+                type='primary'
+                title='Оценить книгу'
+                onClick={() => handleModal(true)}
+                dataTestId='button-rating'
+              />
             </div>
           </div>
+          {isModalOpen && <Modal bookId={bookId} isModalOpen={isModalOpen} handleModal={handleModal} />}
         </Fragment>
       )}
     </section>

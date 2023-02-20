@@ -116,7 +116,7 @@
   color: $color-negative;
 }
 
-.text-field__icon-wrapper {
+.text-field__logo-wrapper {
   position: absolute;
   top: $base * 5;
   right: 16px;
@@ -125,7 +125,7 @@
   column-gap: $base;
 }
 
-.text-field__icon {
+.text-field__logo {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -133,10 +133,10 @@
   height: $base * 6;
 }
 
-.text-field__icon_check {
+.text-field__logo_check {
   stroke: $color-positive;
 }
 
-.text-field__icon_eye {
+.text-field__logo_eye {
   stroke: $color-dark;
 }

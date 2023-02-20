@@ -4,16 +4,21 @@ import { handleSuccess, startBookDataLoading, startCatalogDataLoading, startLoad
 import { TConnectionType } from '../store/slices/slices.interface';
 
 import { useAppDispatch } from './use-app-dispatch';
+import { useAppSelector } from './use-app-selector';
 
 export const useStartLoading = (connectionType: TConnectionType, bookId?: string | undefined) => {
+  const { initialData } = useAppSelector((state) => state.catalog);
+  const { categoriesData } = useAppSelector((state) => state.categories);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     switch (connectionType) {
       case 'getCatalog':
-        dispatch(startCatalogDataLoading());
-        dispatch(startLoading());
-        dispatch(handleSuccess(false));
+        if (!initialData || !initialData.length) {
+          dispatch(startCatalogDataLoading());
+          dispatch(startLoading());
+          dispatch(handleSuccess(false));
+        }
         break;
       case 'getBook':
         if (bookId) {
@@ -25,6 +30,5 @@ export const useStartLoading = (connectionType: TConnectionType, bookId?: string
       default:
         break;
     }
-    /* eslint-disable-next-line react-hooks/exhaustive-deps */
-  }, []);
+  }, [connectionType, bookId, dispatch, initialData, categoriesData]);
 };

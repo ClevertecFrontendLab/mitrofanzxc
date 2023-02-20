@@ -10,21 +10,24 @@
 
 .button-primary {
   border: 0.063rem solid transparent;
-  background: $color-hover;
+  background: -o-linear-gradient(218.42deg, #f83600 -53.35%, #f9d423 297.76%);
+  background: linear-gradient(231.58deg, #f83600 -53.35%, #f9d423 297.76%);
   color: $color-white;
   text-transform: uppercase;
 
   &:hover {
     border: 0.063rem solid $color-orange;
-    box-shadow: 0px 0.125rem 5px rgba(54, 54, 54, 0.1);
+    box-shadow: 0 0.125rem $base rgba(54, 54, 54, 0.1);
   }
 
   &:active {
-    box-shadow: 0px 0.188rem $base rgba(222, 125, 11, 0.2), 0px 0.063rem 10px rgba(249, 89, 8, 0.2);
+    box-shadow: 0 0.188rem $base rgba(222, 125, 11, 0.2), 0 0.063rem $base * 3 rgba(249, 89, 8, 0.2);
   }
 
   &:disabled {
     background: $color-grey-black-10;
+    pointer-events: none;
+    cursor: not-allowed;
   }
 
   @media (max-width: $breakpoint-xxs-min) {
@@ -39,11 +42,11 @@
 
   &:hover {
     border: 0.063rem solid $color-grey-black-40;
-    box-shadow: 0px 0.125rem 5px rgba(54, 54, 54, 0.1);
+    box-shadow: 0 0.125rem $base rgba(54, 54, 54, 0.1);
   }
 
   &:active {
-    box-shadow: 0px 0.188rem $base rgba(222, 125, 11, 0.2), 0px 0.063rem 10px rgba(249, 89, 8, 0.2);
+    box-shadow: 0 0.188rem $base rgba(222, 125, 11, 0.2), 0 0.063rem $base * 3 rgba(249, 89, 8, 0.2);
   }
 
   &:disabled {

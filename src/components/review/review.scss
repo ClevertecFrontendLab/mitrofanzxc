@@ -35,6 +35,9 @@
 
 .review__user-logo {
   grid-area: review__user-logo;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
 
   @media (max-width: $breakpoint-md-min) {
     align-self: center;

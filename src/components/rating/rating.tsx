@@ -1,6 +1,5 @@
 import { FC, Fragment, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-/* eslint-disable-next-line import/no-extraneous-dependencies */
 import { v4 as uuidv4 } from 'uuid';
 
 import { TNumberAble } from '../../constants/constants.interface';
@@ -26,12 +25,17 @@ export const Rating: FC<IRating> = ({ rating }) => {
     <Fragment>
       {!rating && !bookId && <p className='body_small'>ещё нет оценок</p>}
       {!rating && bookId && (
-        <ul className='rating'>{Array.from(Array(5)).map(() => RatingStar({ id: uuidv4(), spriteId: 'star' }))}</ul>
+        <Fragment>
+          <ul className='rating'>{Array.from(Array(5)).map(() => RatingStar({ id: uuidv4(), spriteId: 'star' }))}</ul>
+          <p>ещё нет оценок</p>
+        </Fragment>
       )}
-      {rating && rating > 0 && (
+      {rating !== null && rating !== undefined && rating > 0 && (
         <ul className='rating'>
           {Array.from(Array(Math.trunc(rating))).map(() => RatingStar({ id: uuidv4(), spriteId: 'star-fill' }))}
-          {Array.from(Array(emptyStarsAmount)).map(() => RatingStar({ id: uuidv4(), spriteId: 'star' }))}
+          {emptyStarsAmount !== null &&
+            emptyStarsAmount !== undefined &&
+            Array.from(Array(emptyStarsAmount)).map(() => RatingStar({ id: uuidv4(), spriteId: 'star' }))}
         </ul>
       )}
     </Fragment>
