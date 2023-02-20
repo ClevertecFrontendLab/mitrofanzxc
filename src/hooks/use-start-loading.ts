@@ -30,5 +30,5 @@ export const useStartLoading = (connectionType: TConnectionType, bookId?: string
       default:
         break;
     }
-  }, [connectionType, bookId, dispatch, initialData, categoriesData]);
+  }, [connectionType, bookId, dispatch]);
 };

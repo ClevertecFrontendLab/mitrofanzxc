@@ -22,8 +22,8 @@ export const catalogSlice = createSlice({
   initialState,
   reducers: {
     setCatalogData: (state, action: PayloadAction<ICatalogData[]>) => {
-      state.initialData = action.payload;
-      state.catalogData = action.payload;
+      state.initialData = action.payload.sort(sortData('descending'));
+      state.catalogData = action.payload.sort(sortData('descending'));
     },
     changeCatalogView: (state, action: PayloadAction<TCatalogView>) => {
       state.catalogView = action.payload;
