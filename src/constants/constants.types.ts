@@ -4,16 +4,16 @@ export type TStringAble = string | null | undefined;
 
 export type TNumberAble = number | null | undefined;
 
-export interface IBooking {
+export type TBooking = {
   id: number;
   order: boolean;
   dateOrder: TStringAble;
   customerId: number;
   customerFirstName: TStringAble;
   customerLastName: TStringAble;
-}
+};
 
-export interface IDelivery {
+export type TDelivery = {
   id: number;
   handed: boolean;
   dateHandedFrom: TStringAble;
@@ -21,31 +21,31 @@ export interface IDelivery {
   recipientId: number;
   recipientFirstName: TStringAble;
   recipientLastName: TStringAble;
-}
+};
 
-export interface IHistory {
+export type THistory = {
   id: number;
   userId: number;
-}
+};
 
-export interface IImage {
+export type TImage = {
   url: string;
-}
+};
 
-export interface ICatalogData {
+export type TCatalogData = {
   issueYear: TStringAble;
   rating: TNumberAble;
   title: string;
   authors: string[];
-  image: IImage | null;
+  image: TImage | null;
   categories: string[];
   id: number;
-  booking: IBooking | null;
-  delivery: IDelivery | null;
-  histories: IHistory[] | null;
-}
+  booking: TBooking | null;
+  delivery: TDelivery | null;
+  histories: THistory[] | null;
+};
 
-export interface IComments {
+export type TComments = {
   id: string;
   rating: TNumberAble;
   text: TStringAble;
@@ -56,9 +56,9 @@ export interface IComments {
     lastName: string;
     avatarUrl: TStringAble;
   };
-}
+};
 
-export interface IBookData {
+export type TBookData = {
   id: number;
   title: TStringAble;
   rating: TNumberAble;
@@ -72,32 +72,32 @@ export interface IBookData {
   ISBN: string;
   producer: string;
   authors: string[];
-  images: IImage[];
+  images: TImage[];
   categories: string[];
-  comments: IComments[] | null;
-  booking: IBooking | null;
-  delivery: IDelivery | null;
-  histories: IHistory[];
-}
+  comments: TComments[] | null;
+  booking: TBooking | null;
+  delivery: TDelivery | null;
+  histories: THistory[];
+};
 
-export interface ICategories {
+export type TCategories = {
   name: string;
   path: string;
   id: number;
-}
+};
 
-export interface ICategoryMockData {
+export type TCategoryMockData = {
   path: string;
   name: string;
-}
+};
 
-export interface ISocialsMockData {
+export type TSocialsMockData = {
   id: string;
   link: string;
   src: string;
-}
+};
 
-export interface IPATHS {
+export type TPATHS = {
   main: string;
   booksAll: string;
   booksCategory: string;
@@ -106,4 +106,4 @@ export interface IPATHS {
   terms: string;
   contract: string;
   any: string;
-}
+};

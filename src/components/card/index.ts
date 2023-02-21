@@ -1,2 +1,2 @@
 export { Card } from './card';
-export type { ICard } from './card.interface';
+export type { TCard } from './card.types';

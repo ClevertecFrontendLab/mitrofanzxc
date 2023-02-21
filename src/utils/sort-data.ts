@@ -1,6 +1,6 @@
-import { ISortData } from './utils.interface';
+import { TSortData } from './utils.types';
 
-export const sortData: ISortData = (type) => (a, b) => {
+export const sortData: TSortData = (type) => (a, b) => {
   if (a.rating === null || a.rating === undefined) {
     if (type === 'ascending') {
       return -1;

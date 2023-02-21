@@ -1,4 +1,4 @@
-export interface IHighLight {
+export type THighLight = {
   inputSearchValue: string;
   title: string;
-}
+};

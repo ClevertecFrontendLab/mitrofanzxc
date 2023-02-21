@@ -1,13 +1,13 @@
 import { all, call, put, takeEvery } from 'redux-saga/effects';
 import { AxiosError, AxiosResponse } from 'axios';
 
-import { ICatalogData, ICategories } from '../../constants/constants.interface';
+import { TCatalogData, TCategories } from '../../constants/constants.types';
 import { getCatalog, getCategories } from '../services';
 import { endLoading, handleSuccess, setCatalogData, setCategoriesData, startCatalogDataLoading } from '../slices';
 
 function* handleCatalog() {
   try {
-    const { data: catalogData }: AxiosResponse<ICatalogData[]> = yield call(getCatalog);
+    const { data: catalogData }: AxiosResponse<TCatalogData[]> = yield call(getCatalog);
 
     return catalogData;
   } catch (error) {
@@ -21,7 +21,7 @@ function* handleCatalog() {
 
 function* handleCategories() {
   try {
-    const { data: categoriesData }: AxiosResponse<ICategories[]> = yield call(getCategories);
+    const { data: categoriesData }: AxiosResponse<TCategories[]> = yield call(getCategories);
 
     return categoriesData;
   } catch (error) {
@@ -35,7 +35,7 @@ function* handleCategories() {
 
 function* workerSaga() {
   try {
-    const [catalogData, categoriesData]: [catalogData: ICatalogData[], categoriesData: ICategories[]] = yield all([
+    const [catalogData, categoriesData]: [catalogData: TCatalogData[], categoriesData: TCategories[]] = yield all([
       call(handleCatalog),
       call(handleCategories),
     ]);

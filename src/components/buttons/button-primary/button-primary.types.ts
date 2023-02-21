@@ -1,12 +1,12 @@
 import { MouseEvent } from 'react';
 
-export type TButtonPrimary = 'primary' | 'secondary';
+export type TButtonPrimaryType = 'primary' | 'secondary';
 
-export interface IButtonPrimary {
-  type: TButtonPrimary;
+export type TButtonPrimary = {
+  type: TButtonPrimaryType;
   title: string;
   className?: string;
   disabled?: boolean;
   onClick?: () => void | ((event: MouseEvent<HTMLButtonElement>) => void) | ((state: boolean) => void);
   dataTestId?: string;
-}
+};

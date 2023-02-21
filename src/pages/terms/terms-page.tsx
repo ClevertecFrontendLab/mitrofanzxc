@@ -1,10 +1,10 @@
 import { FC } from 'react';
 
-import { ITermsPage } from './terms-page.interface';
+import { TTermsPage } from './terms-page.types';
 
 import './terms-page.scss';
 
-export const TermsPage: FC<ITermsPage> = ({ contentView }) => (
+export const TermsPage: FC<TTermsPage> = ({ contentView }) => (
   <section className='terms-page'>
     <h3 className='h3'>{contentView === 'terms' ? 'Правила пользования' : 'Договор оферты'}</h3>
     <ul className='terms-list'>

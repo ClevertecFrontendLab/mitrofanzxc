@@ -1,6 +1,6 @@
-import { ITranslateCategoryTitle } from './utils.interface';
+import { TTranslateCategoryTitle } from './utils.types';
 
-export const translateCategoryTitle: ITranslateCategoryTitle = (data, categories, language) => {
+export const translateCategoryTitle: TTranslateCategoryTitle = (data, categories, language) => {
   if (data && typeof data === 'object') {
     const title = categories.find(({ path }) => data.categories.includes(path));
 

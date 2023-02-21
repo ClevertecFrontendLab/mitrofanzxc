@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
 import { handleSuccess, startBookDataLoading, startCatalogDataLoading, startLoading } from '../store/slices';
-import { TConnectionType } from '../store/slices/slices.interface';
+import { TConnectionType } from '../store/slices/slices.types';
 
 import { useAppDispatch } from './use-app-dispatch';
 

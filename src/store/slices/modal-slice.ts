@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { IModalState } from './slices.interface';
+import { TModalState } from './slices.types';
 
-const initialState: IModalState = {
+const initialState: TModalState = {
   isError: false,
 };
 

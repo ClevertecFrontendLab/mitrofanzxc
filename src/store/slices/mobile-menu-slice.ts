@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { IMobileMenuState } from './slices.interface';
+import { TMobileMenuState } from './slices.types';
 
-const initialState: IMobileMenuState = {
+const initialState: TMobileMenuState = {
   isMobileMenuOpen: false,
   isAccordionMenuOpen: true,
 };

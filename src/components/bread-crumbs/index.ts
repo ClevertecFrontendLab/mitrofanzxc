@@ -1,2 +1,2 @@
 export { BreadCrumbs } from './bread-crumbs';
-export type { IBreadCrumbs } from './bread-crumbs.interface';
+export type { TBreadCrumbs } from './bread-crumbs.types';

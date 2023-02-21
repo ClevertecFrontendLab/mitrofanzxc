@@ -1,4 +1,4 @@
-export interface IButtonLogin {
+export type TButtonLogin = {
   title: string;
   onClick: () => void;
-}
+};

@@ -4,11 +4,11 @@ import { v4 as uuidv4 } from 'uuid';
 import { TableHeaderMockData } from '../../constants';
 import { translateCategoryTitle } from '../../utils';
 
-import { ITable } from './table.interface';
+import { TTable } from './table.types';
 
 import './table.scss';
 
-export const Table: FC<ITable> = ({ data }) => (
+export const Table: FC<TTable> = ({ data }) => (
   <table className='table'>
     <tbody>
       {data &&

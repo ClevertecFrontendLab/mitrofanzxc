@@ -2,14 +2,14 @@ import { FC, Fragment, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 
-import { TNumberAble } from '../../constants/constants.interface';
+import { TNumberAble } from '../../constants/constants.types';
 import { RatingStar } from '..';
 
-import { IRating } from './rating.interface';
+import { TRating } from './rating.types';
 
 import './rating.scss';
 
-export const Rating: FC<IRating> = ({ rating }) => {
+export const Rating: FC<TRating> = ({ rating }) => {
   const [emptyStarsAmount, setEmptyStarsAmount] = useState<TNumberAble>(null);
   const { bookId } = useParams();
 

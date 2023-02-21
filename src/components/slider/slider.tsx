@@ -5,7 +5,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { BASE_URL_API } from '../../constants';
 import { Sprite } from '..';
 
-import { ISlider } from './slider.interface';
+import { TSlider } from './slider.types';
 
 import './slider.scss';
 
@@ -13,9 +13,9 @@ import 'swiper/scss';
 import 'swiper/scss/navigation';
 import 'swiper/scss/pagination';
 import 'swiper/scss/thumbs';
-import 'swiper/css/scrollbar';
+import 'swiper/scss/scrollbar';
 
-export const Slider: FC<ISlider> = ({ data }) => {
+export const Slider: FC<TSlider> = ({ data }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperCore>();
 
   return (

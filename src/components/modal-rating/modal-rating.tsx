@@ -3,8 +3,8 @@ import { FC, Fragment, useMemo, useState } from 'react';
 import { RatingStar } from '../rating';
 
 export const ModalRating: FC = () => {
-  const [rating, setRating] = useState<number>(0);
-  const [hoverRating, setHoverRating] = useState<number>(0);
+  const [rating, setRating] = useState(0);
+  const [hoverRating, setHoverRating] = useState(0);
 
   return useMemo(() => {
     const getColor = (index: number) => {

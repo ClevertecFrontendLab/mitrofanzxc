@@ -1,5 +1,5 @@
 export type TContentView = 'terms' | 'contract';
 
-export interface ITermsPage {
+export type TTermsPage = {
   contentView: TContentView;
-}
+};

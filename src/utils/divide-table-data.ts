@@ -1,7 +1,7 @@
 import { handleAuthors } from './handle-authors';
-import { IDivideTableData, TArrayDivideTableData } from './utils.interface';
+import { TArrayDivideTableData, TDivideTableData } from './utils.types';
 
-export const divideTableData: IDivideTableData = (part, bookData) => {
+export const divideTableData: TDivideTableData = (part, bookData) => {
   if (bookData) {
     const arr: TArrayDivideTableData = Array.of(
       Object.entries({ publish: bookData.publish }).flat(),

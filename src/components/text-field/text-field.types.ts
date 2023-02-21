@@ -8,9 +8,9 @@ export type TIdTextField =
   | 'contractNumber'
   | 'contractOwner';
 
-export interface ITextField {
+export type TTextField = {
   type: string;
   id: TIdTextField;
   placeholder: string;
   message?: string;
-}
+};

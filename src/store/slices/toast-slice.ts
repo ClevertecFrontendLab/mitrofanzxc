@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { IToastState } from './slices.interface';
+import { TToastState } from './slices.types';
 
-const initialState: IToastState = {
+const initialState: TToastState = {
   isToastOpen: false,
   isToastError: false,
   typeToastError: 'default',

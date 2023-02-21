@@ -2,15 +2,15 @@ import { ChangeEvent, FC, useState } from 'react';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { setTextFieldError, setTextFieldValue } from '../../store/slices';
-import { IForm } from '../../store/slices/slices.interface';
+import { TForm } from '../../store/slices/slices.types';
 import { validateTextField } from '../../utils';
 import { Sprite } from '..';
 
-import { ITextField } from './text-field.interface';
+import { TTextField } from './text-field.types';
 
 import './text-field.scss';
 
-export const TextField: FC<ITextField> = ({ type, id, placeholder, message }) => {
+export const TextField: FC<TTextField> = ({ type, id, placeholder, message }) => {
   const [isEyeOpen, setIsEyeOpen] = useState<boolean>(false);
   const { form } = useAppSelector((state) => state.registration);
   const dispatch = useAppDispatch();
@@ -55,7 +55,7 @@ export const TextField: FC<ITextField> = ({ type, id, placeholder, message }) =>
         disabled={false}
         autoComplete='off'
         pattern='^.{1,}$'
-        value={form[id as keyof IForm].value}
+        value={form[id as keyof TForm].value}
         onChange={handleTextFieldValue}
       />
       <label htmlFor={id} data-content={placeholder} className='text-field__label'>

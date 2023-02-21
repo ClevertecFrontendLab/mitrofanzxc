@@ -2,13 +2,13 @@ import { ChangeEvent, FC, Fragment, useState } from 'react';
 
 import { ButtonPrimary, ModalRating, Sprite } from '..';
 
-import { IModal } from './modal.interface';
+import { TModal } from './modal.types';
 
 import './modal.scss';
 
 /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
-export const Modal: FC<IModal> = ({ bookId, isModalOpen, handleModal }) => {
-  const [textareaValue, setTextareaValue] = useState<string>('');
+export const Modal: FC<TModal> = ({ bookId, isModalOpen, handleModal }) => {
+  const [textareaValue, setTextareaValue] = useState('');
 
   const handleTextarea = (event: ChangeEvent<HTMLInputElement>) => {
     const target = event.target as HTMLInputElement;

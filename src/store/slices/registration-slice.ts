@@ -1,9 +1,9 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
-import { IForm, IRegistrationState } from './slices.interface';
+import { TForm, TRegistrationState } from './slices.types';
 
-const initialState: IRegistrationState = {
+const initialState: TRegistrationState = {
   isFlowOpen: false,
   isRegistration: false,
   isPasswordRecovery: false,
@@ -81,10 +81,10 @@ export const loaderSlice = createSlice({
       state.formStep += 1;
     },
     setTextFieldValue: (state, action: PayloadAction<{ value: string; id: string }>) => {
-      state.form[action.payload.id as keyof IForm].value = action.payload.value;
+      state.form[action.payload.id as keyof TForm].value = action.payload.value;
     },
     setTextFieldError: (state, action: PayloadAction<{ value: boolean; id: string }>) => {
-      state.form[action.payload.id as keyof IForm].isError = action.payload.value;
+      state.form[action.payload.id as keyof TForm].isError = action.payload.value;
     },
   },
 });

@@ -3,15 +3,15 @@ import { createContext, FC, Fragment, useMemo, useState } from 'react';
 import { Catalog, CatalogMenu, Loader, Toast } from '../../components';
 import { useAppSelector, useStartLoading, useToast } from '../../hooks';
 
-export interface IContext {
+export type TContext = {
   inputSearchValue: string;
   setInputSearchValue: React.Dispatch<React.SetStateAction<string>>;
-}
+};
 
-export const ContextMainPage = createContext<IContext>({ inputSearchValue: '', setInputSearchValue: () => undefined });
+export const ContextMainPage = createContext<TContext>({ inputSearchValue: '', setInputSearchValue: () => undefined });
 
 export const MainPage: FC = () => {
-  const [inputSearchValue, setInputSearchValue] = useState<string>('');
+  const [inputSearchValue, setInputSearchValue] = useState('');
   const { isLoading, isSuccess } = useAppSelector((state) => state.loader);
 
   const store = useMemo(() => ({ inputSearchValue, setInputSearchValue }), [inputSearchValue]);

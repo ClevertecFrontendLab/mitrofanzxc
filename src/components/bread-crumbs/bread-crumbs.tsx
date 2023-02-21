@@ -5,11 +5,11 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { openAccordionMenu } from '../../store/slices';
 import { handleCategory, translateCategoryTitle } from '../../utils';
 
-import { IBreadCrumbs } from './bread-crumbs.interface';
+import { TBreadCrumbs } from './bread-crumbs.types';
 
 import './bread-crumbs.scss';
 
-export const BreadCrumbs: FC<IBreadCrumbs> = ({ bookData, isSuccess, currentCategory }) => {
+export const BreadCrumbs: FC<TBreadCrumbs> = ({ bookData, isSuccess, currentCategory }) => {
   const { categoriesData } = useAppSelector((state) => state.categories);
   const dispatch = useAppDispatch();
 

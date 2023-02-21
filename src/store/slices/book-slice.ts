@@ -1,11 +1,11 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
-import { IBookData } from '../../constants/constants.interface';
+import { TBookData } from '../../constants/constants.types';
 
-import { IBookState } from './slices.interface';
+import { TBookState } from './slices.types';
 
-const initialState: IBookState = {
+const initialState: TBookState = {
   bookData: {
     id: 0,
     title: '',
@@ -48,7 +48,7 @@ export const bookSlice = createSlice({
   name: 'book',
   initialState,
   reducers: {
-    setBookData: (state, action: PayloadAction<IBookData>) => {
+    setBookData: (state, action: PayloadAction<TBookData>) => {
       state.bookData = action.payload;
     },
     startBookDataLoading: (state, action: PayloadAction<string>) => {

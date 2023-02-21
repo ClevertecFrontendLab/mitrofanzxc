@@ -1,2 +1,2 @@
 export { Modal } from './modal';
-export type { IModal } from './modal.interface';
+export type { TModal } from './modal.types';

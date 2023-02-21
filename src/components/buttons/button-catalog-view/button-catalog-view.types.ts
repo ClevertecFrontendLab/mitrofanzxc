@@ -1,7 +1,7 @@
 export type TCatalogView = 'grid' | 'list';
 
-export interface IButtonCatalogView {
+export type TButtonCatalogView = {
   id: TCatalogView;
   value: TCatalogView;
   dataTestId?: string;
-}
+};

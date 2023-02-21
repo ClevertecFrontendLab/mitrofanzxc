@@ -1,2 +1,2 @@
 export { Slider } from './slider';
-export type { ISlider } from './slider.interface';
+export type { TSlider } from './slider.types';

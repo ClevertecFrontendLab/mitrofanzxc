@@ -1,13 +1,13 @@
-import { TNumberAble } from '../../constants/constants.interface';
+import { TNumberAble } from '../../constants/constants.types';
 
-export interface IRatingStar {
+export type TRatingStar = {
   id?: string;
   spriteId: string;
   onClick?: () => void;
   onMouseEnter?: () => void;
   onMouseLeave?: () => void;
-}
+};
 
-export interface IRating {
+export type TRating = {
   rating: TNumberAble;
-}
+};

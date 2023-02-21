@@ -1,11 +1,11 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
-import { ICategories } from '../../constants/constants.interface';
+import { TCategories } from '../../constants/constants.types';
 
-import { ICategoriesState } from './slices.interface';
+import { TCategoriesState } from './slices.types';
 
-const initialState: ICategoriesState = {
+const initialState: TCategoriesState = {
   categoriesData: [],
 };
 
@@ -14,7 +14,7 @@ export const categoriesSlice = createSlice({
   name: 'categories',
   initialState,
   reducers: {
-    setCategoriesData: (state, action: PayloadAction<ICategories[]>) => {
+    setCategoriesData: (state, action: PayloadAction<TCategories[]>) => {
       state.categoriesData = action.payload;
     },
   },

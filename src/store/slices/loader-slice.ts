@@ -1,9 +1,9 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
-import { ILoaderState } from './slices.interface';
+import { TLoaderState } from './slices.types';
 
-const initialState: ILoaderState = {
+const initialState: TLoaderState = {
   isLoading: false,
   isSuccess: false,
 };

@@ -1,4 +1,4 @@
-export interface ICheckbox {
+export type TCheckbox = {
   id: string;
   value: string;
-}
+};

@@ -1,9 +1,9 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
-import { ISearchState } from './slices.interface';
+import { TSearchState } from './slices.types';
 
-const initialState: ISearchState = {
+const initialState: TSearchState = {
   isInputSearchOpen: false,
 };
 

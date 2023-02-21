@@ -5,11 +5,11 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { closeToast } from '../../store/slices';
 import { Sprite } from '..';
 
-import { IToast } from './toast.interface';
+import { TToast } from './toast.types';
 
 import './toast.scss';
 
-export const Toast: FC<IToast> = ({ isToastError, typeToastError, dataTestId }) => {
+export const Toast: FC<TToast> = ({ isToastError, typeToastError, dataTestId }) => {
   const { isToastOpen } = useAppSelector((state) => state.toast);
   const dispatch = useAppDispatch();
 

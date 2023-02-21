@@ -2,13 +2,13 @@ import { FC } from 'react';
 
 import userImg from '../../assets/user-review.png';
 import { BASE_URL_API } from '../../constants';
-import { IComments } from '../../constants/constants.interface';
+import { TComments } from '../../constants/constants.types';
 import { convertToDate } from '../../utils';
 import { Rating } from '..';
 
 import './review.scss';
 
-export const Review: FC<IComments> = ({ rating, text, createdAt, user }) => (
+export const Review: FC<TComments> = ({ rating, text, createdAt, user }) => (
   <li className='review'>
     <div className='review__user-info'>
       {user.avatarUrl && <img src={`${BASE_URL_API}${user.avatarUrl}`} alt='user-img' className='review__user-logo' />}

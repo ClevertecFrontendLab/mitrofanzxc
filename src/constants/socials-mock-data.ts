@@ -1,6 +1,6 @@
-import { ISocialsMockData } from './constants.interface';
+import { TSocialsMockData } from './constants.types';
 
-export const SocialsMockData: ISocialsMockData[] = [
+export const SocialsMockData: TSocialsMockData[] = [
   {
     id: 'b61301e2-19ce-4cd7-80f6-aa29ce69ca58',
     link: 'https://facebook.com',

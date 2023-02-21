@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 
 import { openToast } from '../store/slices';
-import { ILoaderState } from '../store/slices/slices.interface';
+import { TLoaderState } from '../store/slices/slices.types';
 
 import { useAppDispatch } from './use-app-dispatch';
 
-export const useToast = ({ isLoading, isSuccess }: ILoaderState) => {
+export const useToast = ({ isLoading, isSuccess }: TLoaderState) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {

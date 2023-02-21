@@ -8,11 +8,11 @@ import { ContextMainPage } from '../../pages';
 import { convertToDate, handleAuthors, handleCategory, handleStatus, translateCategoryTitle } from '../../utils';
 import { ButtonPrimary, HighLight, Rating, Sprite } from '..';
 
-import { ICard } from './card.interface';
+import { TCard } from './card.types';
 
 import './card.scss';
 
-export const Card: FC<ICard> = ({
+export const Card: FC<TCard> = ({
   id,
   categories,
   currentCategory,

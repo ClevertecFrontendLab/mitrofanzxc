@@ -1,2 +1,2 @@
 export { Checkbox } from './checkbox';
-export type { ICheckbox } from './checkbox.interface';
+export type { TCheckbox } from './checkbox.types';

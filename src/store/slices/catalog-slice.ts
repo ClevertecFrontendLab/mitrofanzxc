@@ -2,13 +2,13 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
 import { TCatalogView } from '../../components';
-import { ICatalogData } from '../../constants/constants.interface';
+import { TCatalogData } from '../../constants/constants.types';
 import { sortData } from '../../utils';
-import { TTypeSortData } from '../../utils/utils.interface';
+import { TTypeSortData } from '../../utils/utils.types';
 
-import { ICatalogState } from './slices.interface';
+import { TCatalogState } from './slices.types';
 
-const initialState: ICatalogState = {
+const initialState: TCatalogState = {
   catalogView: 'grid',
   initialData: [],
   catalogData: [],
@@ -21,7 +21,7 @@ export const catalogSlice = createSlice({
   name: 'catalog',
   initialState,
   reducers: {
-    setCatalogData: (state, action: PayloadAction<ICatalogData[]>) => {
+    setCatalogData: (state, action: PayloadAction<TCatalogData[]>) => {
       state.initialData = action.payload.sort(sortData('descending'));
       state.catalogData = action.payload.sort(sortData('descending'));
     },

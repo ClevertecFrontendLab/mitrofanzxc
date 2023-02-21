@@ -1,2 +1,2 @@
 export { ButtonCatalogView } from './button-catalog-view';
-export type { TCatalogView, IButtonCatalogView } from './button-catalog-view.interface';
+export type { TCatalogView, TButtonCatalogView } from './button-catalog-view.types';

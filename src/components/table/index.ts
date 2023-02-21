@@ -1,2 +1,2 @@
 export { Table } from './table';
-export type { ITable } from './table.interface';
+export type { TTable } from './table.types';

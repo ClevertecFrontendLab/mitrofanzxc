@@ -1,6 +1,6 @@
-import { IHandleStatus } from './utils.interface';
+import { THandleStatus } from './utils.types';
 
-export const handleStatus: IHandleStatus = (booking, delivery) => {
+export const handleStatus: THandleStatus = (booking, delivery) => {
   const isBooking = booking ? booking.order : null;
   const isDelivery = delivery ? delivery.handed : null;
 

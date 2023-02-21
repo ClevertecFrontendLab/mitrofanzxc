@@ -4,11 +4,11 @@ import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { changeCatalogView } from '../../../store/slices';
 import { Sprite } from '../..';
 
-import { IButtonCatalogView } from './button-catalog-view.interface';
+import { TButtonCatalogView } from './button-catalog-view.types';
 
 import './button-catalog-view.scss';
 
-export const ButtonCatalogView: FC<IButtonCatalogView> = ({ id, value, dataTestId }) => {
+export const ButtonCatalogView: FC<TButtonCatalogView> = ({ id, value, dataTestId }) => {
   const { catalogView } = useAppSelector((state) => state.catalog);
   const dispatch = useAppDispatch();
 

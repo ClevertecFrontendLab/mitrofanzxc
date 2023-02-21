@@ -1,7 +1,7 @@
 export type TTypeToastError = 'connection' | 'changes' | 'default' | 'rating';
 
-export interface IToast {
+export type TToast = {
   isToastError: boolean;
   typeToastError: TTypeToastError;
   dataTestId: string;
-}
+};
