@@ -1,5 +1,6 @@
 import { FC, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import classNames from 'classnames';
 
 import { BASE_URL_API } from '../../constants';
 import { useAppSelector } from '../../hooks';
@@ -30,54 +31,64 @@ export const Card: FC<ICard> = ({
   const statusResult = handleStatus(booking, delivery);
   const categoryResult = translateCategoryTitle(handleCategory(currentCategory, categories), categoriesData, 'ru');
 
+  const catalogViewClass = classNames({ card: catalogView === 'grid', 'card-list': catalogView !== 'grid' });
+  const placeholderClass = classNames({
+    placeholder: catalogView === 'grid',
+    'placeholder-list': catalogView !== 'grid',
+  });
+  const spriteClass = classNames({
+    placeholder__logo: catalogView === 'grid',
+    'placeholder-list__logo': catalogView !== 'grid',
+  });
+  const cardImgClass = classNames({
+    card__img: catalogView === 'grid',
+    'card-list__img': catalogView !== 'grid',
+  });
+  const cardInfoClass = classNames('card__info', {
+    card__info_list: catalogView !== 'grid',
+  });
+  const buttonPrimaryClass = classNames('button_small_mobile', {
+    button_list: catalogView !== 'grid',
+  });
+  const cardTitleClass = classNames({
+    subtitle_small: catalogView === 'grid',
+    'card-list__title': catalogView !== 'grid',
+  });
+  const ratingWrapperClass = classNames({
+    'rating-wrapper': catalogView === 'grid',
+    'rating-list__wrapper': catalogView !== 'grid',
+  });
+
   return (
-    <Link
-      to={`/books/${categoryResult}/${id}`}
-      className={`${catalogView === 'grid' ? 'card' : 'card-list'}`}
-      data-test-id='card'
-    >
-      <div className={`${catalogView === 'grid' ? 'placeholder' : 'placeholder-list'}`}>
-        {(!image || image.url.length <= 0) && (
-          <Sprite id='cat' className={`${catalogView === 'grid' ? 'placeholder__logo' : 'placeholder-list__logo'}`} />
-        )}
+    <Link to={`/books/${categoryResult}/${id}`} className={catalogViewClass} data-test-id='card'>
+      <div className={placeholderClass}>
+        {(!image || image.url.length <= 0) && <Sprite id='cat' className={spriteClass} />}
         {image && image.url.length > 0 && (
-          <img
-            src={`${BASE_URL_API}${image.url}`}
-            alt='card-img'
-            className={`${catalogView === 'grid' ? 'card__img' : 'card-list__img'}`}
-          />
+          <img src={`${BASE_URL_API}${image.url}`} alt='card-img' className={cardImgClass} />
         )}
       </div>
-      <div className={`card__info ${catalogView === 'grid' ? '' : 'card__info_list'}`}>
+      <div className={cardInfoClass}>
         {statusResult === 'free' && (
-          <ButtonPrimary
-            type='primary'
-            title='Забронировать'
-            className={`button_small_mobile ${catalogView === 'grid' ? '' : 'button_list'}`}
-          />
+          <ButtonPrimary type='primary' title='Забронировать' className={buttonPrimaryClass} />
         )}
         {statusResult === 'busy' && (
           <ButtonPrimary
             type='secondary'
             title={`Занята до ${delivery && delivery.dateHandedTo && convertToDate(delivery.dateHandedTo, 'short')}`}
-            className={`button_small_mobile ${catalogView === 'grid' ? '' : 'button_list'}`}
+            className={buttonPrimaryClass}
             disabled={true}
           />
         )}
         {statusResult === 'reserved' && (
-          <ButtonPrimary
-            type='secondary'
-            title='Забронирована'
-            className={`button_small_mobile ${catalogView === 'grid' ? '' : 'button_list'}`}
-          />
+          <ButtonPrimary type='secondary' title='Забронирована' className={buttonPrimaryClass} />
         )}
         <div>
-          <p className={`${catalogView === 'grid' ? 'subtitle_small' : 'card-list__title'}`}>
+          <p className={cardTitleClass}>
             <HighLight inputSearchValue={inputSearchValue} title={title} />
           </p>
           <p className='body_small card-list__author'>{`${handleAuthors(authors)}, ${issueYear}`}</p>
         </div>
-        <div className={`${catalogView === 'grid' ? 'rating-wrapper' : 'rating-list__wrapper'}`}>
+        <div className={ratingWrapperClass}>
           <Rating rating={rating} />
         </div>
       </div>

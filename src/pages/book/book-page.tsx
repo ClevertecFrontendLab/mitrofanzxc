@@ -1,5 +1,6 @@
 import { FC, Fragment, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import classNames from 'classnames';
 
 import { BreadCrumbs, ButtonPrimary, Loader, Modal, Nav, Rating, Review, Slider, Table, Toast } from '../../components';
 import { useAppSelector, useBodyOverflow, useStartLoading, useToast } from '../../hooks';
@@ -27,6 +28,17 @@ export const BookPage: FC = () => {
   useStartLoading('getBook', bookId);
   useToast({ isLoading, isSuccess });
   useBodyOverflow(isModalOpen);
+
+  const ratingNumberClass = classNames({
+    h5: bookData.rating !== null && bookData.rating !== undefined && bookData.rating > 0,
+    body_small: bookData.rating !== null && bookData.rating !== undefined && bookData.rating <= 0,
+  });
+  const accordionButtonClass = classNames('accordion__button', {
+    accordion__button_active: isAccordionReviewsOpen,
+  });
+  const reviewListClass = classNames('review-list', {
+    'review-list_active': isAccordionReviewsOpen,
+  });
 
   return (
     <section>
@@ -75,9 +87,7 @@ export const BookPage: FC = () => {
               <div className='book-page__rating-wrapper'>
                 <Rating rating={bookData.rating} />
                 {bookData.rating !== null && bookData.rating !== undefined && (
-                  <h5 className={`${bookData.rating > 0 ? 'h5' : 'body_small'}`}>
-                    {bookData.rating > 0 && bookData.rating.toFixed(1)}
-                  </h5>
+                  <h5 className={ratingNumberClass}>{bookData.rating > 0 && bookData.rating.toFixed(1)}</h5>
                 )}
               </div>
               <h5 className='h5 book-page__header'>Подбробная информация</h5>
@@ -92,13 +102,13 @@ export const BookPage: FC = () => {
                   </h5>
                   <button
                     type='button'
-                    className={`accordion__button ${isAccordionReviewsOpen ? 'accordion__button_active' : ''}`}
+                    className={accordionButtonClass}
                     aria-label='button-accordion'
                     onClick={toggleAccordionReviews}
                     data-test-id='button-hide-reviews'
                   />
                 </div>
-                <ul className={`review-list ${isAccordionReviewsOpen ? 'review-list_active' : ''}`}>
+                <ul className={reviewListClass}>
                   {bookData &&
                     bookData.comments &&
                     bookData.comments.length > 0 &&

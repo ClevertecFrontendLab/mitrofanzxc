@@ -1,4 +1,5 @@
 import { FC, useState } from 'react';
+import classNames from 'classnames';
 
 import { ICheckbox } from './checkbox.interface';
 
@@ -15,6 +16,10 @@ export const Checkbox: FC<ICheckbox> = ({ id, value }) => {
     setIsChecked(!isChecked);
   };
 
+  const checkboxCheckmarkClass = classNames('checkbox__checkmark', {
+    checkbox__checkmark_error: isError,
+  });
+
   return (
     <label htmlFor={id} className='checkbox'>
       <input
@@ -26,7 +31,7 @@ export const Checkbox: FC<ICheckbox> = ({ id, value }) => {
         checked={isChecked}
         onChange={handleCheckbox}
       />
-      <span className={`checkbox__checkmark ${isError ? 'checkbox__checkmark_error' : ''}`} />
+      <span className={checkboxCheckmarkClass} />
     </label>
   );
 };

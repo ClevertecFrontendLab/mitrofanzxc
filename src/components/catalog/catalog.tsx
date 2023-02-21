@@ -1,5 +1,6 @@
 import { FC, useContext } from 'react';
 import { useParams } from 'react-router-dom';
+import classNames from 'classnames';
 
 import { useAppSelector } from '../../hooks';
 import { ContextMainPage } from '../../pages';
@@ -12,8 +13,13 @@ export const Catalog: FC = () => {
   const { catalogView, catalogData } = useAppSelector((state) => state.catalog);
   const { inputSearchValue } = useContext(ContextMainPage);
 
+  const sectionClass = classNames({
+    catalog: catalogView === 'grid',
+    catalog_list: catalogView !== 'grid',
+  });
+
   return (
-    <section className={`${catalogView === 'grid' ? 'catalog' : 'catalog_list'}`}>
+    <section className={sectionClass}>
       {(!catalogData || catalogData.length <= 0) && (
         <h3 className='h3' data-test-id={`${inputSearchValue ? 'search-result-not-found' : 'empty-category'}`}>{`${
           inputSearchValue ? 'По запросу ничего не найдено' : 'В этой категории книг ещё нет'

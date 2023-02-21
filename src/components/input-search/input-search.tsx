@@ -1,5 +1,6 @@
 import { ChangeEvent, FC, FocusEvent, KeyboardEvent, useContext, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
+import classNames from 'classnames';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { ContextMainPage } from '../../pages';
@@ -63,8 +64,12 @@ export const InputSearch: FC = () => {
     dispatch(searchCatalogByTitle(inputSearchValue));
   }, [inputSearchValue, dispatch, category, categoriesData]);
 
+  const inputSearchClass = classNames('input-search', {
+    'input-search_active': isInputSearchOpen,
+  });
+
   return (
-    <div className={`input-search ${isInputSearchOpen ? 'input-search_active' : ''}`}>
+    <div className={inputSearchClass}>
       <button type='button' className='button-search' onClick={handleButtonSearch} data-test-id='button-search-open'>
         <Sprite id='search' className='button-search__logo' />
       </button>

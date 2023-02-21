@@ -1,5 +1,6 @@
 import { FC, useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import classNames from 'classnames';
 
 import { PATHS } from '../../constants';
 import { useAppDispatch, useAppSelector } from '../../hooks';
@@ -47,11 +48,19 @@ export const Nav: FC = () => {
     };
   }, [match992]);
 
+  const navClass = classNames('nav', {
+    nav_active: isMobileMenuOpen,
+    nav_accordion: isAccordionMenuOpen,
+  });
+  const spriteClass = classNames('accordion__button', {
+    accordion__button_active: isAccordionMenuOpen,
+  });
+  const navListClass = classNames('nav-list', {
+    'nav-list_active': isAccordionMenuOpen,
+  });
+
   return (
-    <nav
-      className={`nav ${isMobileMenuOpen ? 'nav_active' : ''} ${isAccordionMenuOpen ? 'nav_accordion' : ''}`}
-      data-test-id={`${isMobileMenuOpen ? 'burger-navigation' : ''}`}
-    >
+    <nav className={navClass} data-test-id={`${isMobileMenuOpen ? 'burger-navigation' : ''}`}>
       <div className='nav__wrapper'>
         <button
           type='button'
@@ -60,15 +69,10 @@ export const Nav: FC = () => {
           data-test-id={`${match992 ? 'burger-showcase' : 'navigation-showcase'}`}
         >
           <NavLink to={booksAll}>Витрина книг</NavLink>
-          {categoriesData && categoriesData.length > 0 && (
-            <Sprite
-              id='arrow-down'
-              className={`accordion__button ${isAccordionMenuOpen ? 'accordion__button_active' : ''}`}
-            />
-          )}
+          {categoriesData && categoriesData.length > 0 && <Sprite id='arrow-down' className={spriteClass} />}
         </button>
         {categoriesData && categoriesData.length > 0 && (
-          <ul className={`nav-list ${isAccordionMenuOpen ? 'nav-list_active' : ''}`}>
+          <ul className={navListClass}>
             <NavLink
               to={booksAll}
               className='nav-list__link'
