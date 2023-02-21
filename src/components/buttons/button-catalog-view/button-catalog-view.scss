@@ -8,17 +8,15 @@
   width: $base * 10;
   height: $base * 10;
   border-radius: 50%;
-  box-shadow: 0 0.125rem $base rgba(191, 196, 201, 0.2), 0 0.188rem $base rgba(191, 196, 201, 0.18),
-    0 0.063rem $base rgba(191, 196, 201, 0.24);
   cursor: pointer;
   transition: all $transition-02;
 
   &:hover {
-    box-shadow: 0 0.125rem $base rgba(54, 54, 54, 0.1);
+    box-shadow: $color-button-hover;
   }
 
   &:active {
-    box-shadow: 0 0.188rem $base rgba(222, 125, 11, 0.2), 0 0.063rem $base * 3 rgba(249, 89, 8, 0.2);
+    box-shadow: $color-button-active;
   }
 
   @media (max-width: $breakpoint-xs-min) {

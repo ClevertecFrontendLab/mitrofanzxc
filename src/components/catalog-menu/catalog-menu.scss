@@ -28,8 +28,8 @@
 }
 
 .button-catalog-view:has(input[type='radio']:checked) {
-  background: -o-linear-gradient(218.42deg, #f83600 -53.35%, #f9d423 297.76%);
-  background: linear-gradient(231.58deg, #f83600 -53.35%, #f9d423 297.76%);
+  background: -o-linear-gradient($color-hover);
+  background: linear-gradient($color-hover);
 
   .button-catalog-view__logo {
     fill: $color-white;

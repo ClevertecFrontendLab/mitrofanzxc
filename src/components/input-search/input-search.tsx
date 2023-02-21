@@ -64,7 +64,7 @@ export const InputSearch: FC = () => {
     dispatch(searchCatalogByTitle(inputSearchValue));
   }, [inputSearchValue, dispatch, category, categoriesData]);
 
-  const inputSearchClass = classNames('input-search', {
+  const inputSearchClass = classNames('input-search', 'filter-shadow', {
     'input-search_active': isInputSearchOpen,
   });
 

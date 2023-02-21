@@ -31,7 +31,7 @@ export const Card: FC<ICard> = ({
   const statusResult = handleStatus(booking, delivery);
   const categoryResult = translateCategoryTitle(handleCategory(currentCategory, categories), categoriesData, 'ru');
 
-  const catalogViewClass = classNames({ card: catalogView === 'grid', 'card-list': catalogView !== 'grid' });
+  const cardClass = classNames('filter-shadow', { card: catalogView === 'grid', 'card-list': catalogView !== 'grid' });
   const placeholderClass = classNames({
     placeholder: catalogView === 'grid',
     'placeholder-list': catalogView !== 'grid',
@@ -60,7 +60,7 @@ export const Card: FC<ICard> = ({
   });
 
   return (
-    <Link to={`/books/${categoryResult}/${id}`} className={catalogViewClass} data-test-id='card'>
+    <Link to={`/books/${categoryResult}/${id}`} className={cardClass} data-test-id='card'>
       <div className={placeholderClass}>
         {(!image || image.url.length <= 0) && <Sprite id='cat' className={spriteClass} />}
         {image && image.url.length > 0 && (

@@ -21,7 +21,7 @@ export const Modal: FC<IModal> = ({ bookId, isModalOpen, handleModal }) => {
     <Fragment>
       <div role='presentation' className='loader' onClick={() => handleModal(false)} />
       <form className='form-comment'>
-        <button type='button' onClick={() => handleModal(false)} className='button-close'>
+        <button type='button' onClick={() => handleModal(false)} className='button-close filter-shadow'>
           <Sprite id='close' className='button-close__logo' />
         </button>
         <h4 className='h4'>Оцените книгу</h4>

@@ -6,12 +6,10 @@
   padding: $base * 3 $base * 4;
   background-color: $color-white;
   border-radius: $base * 5;
-  box-shadow: 0 0.125rem $base rgba(191, 196, 201, 0.2), 0 0.188rem $base rgba(191, 196, 201, 0.18),
-    0 0.063rem $base rgba(191, 196, 201, 0.24);
   transition: all $transition-02;
 
   &:hover {
-    box-shadow: 0 0.188rem $base rgba(222, 125, 11, 0.2), 0 0.063rem $base * 3 rgba(249, 89, 8, 0.2);
+    box-shadow: $color-button-active;
   }
 
   &:active {

@@ -7,8 +7,6 @@
   flex-direction: column;
   padding: $base * 2 $base * 2 $base * 4 $base * 2;
   border-radius: $base * 2;
-  box-shadow: 0 0.125rem $base rgba(191, 196, 201, 0.2), 0 0.188rem $base rgba(191, 196, 201, 0.18),
-    0 0.063rem $base rgba(191, 196, 201, 0.24);
 
   @media (max-width: $breakpoint-xxs-min) {
     padding: $base * 2 $base * 4 $base * 4 $base * 4;
@@ -66,8 +64,6 @@
   column-gap: $base * 4;
   padding: $base * 6 $base * 6 $base * 6 $base * 4;
   border-radius: $base * 3;
-  box-shadow: 0 0.125rem $base rgba(191, 196, 201, 0.2), 0 0.188rem $base rgba(191, 196, 201, 0.18),
-    0 0.063rem $base rgba(191, 196, 201, 0.24);
   -o-object-fit: cover;
   object-fit: cover;
 

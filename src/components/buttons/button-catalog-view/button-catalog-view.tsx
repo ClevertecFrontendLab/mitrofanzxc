@@ -22,7 +22,7 @@ export const ButtonCatalogView: FC<IButtonCatalogView> = ({ id, value, dataTestI
   };
 
   return (
-    <label htmlFor={id} className='button-catalog-view'>
+    <label htmlFor={id} className='button-catalog-view filter-shadow'>
       <input
         id={id}
         type='radio'

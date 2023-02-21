@@ -32,7 +32,7 @@ export const Header: FC = () => {
               <Link to={profile} className='profile__wrapper filter-shadow'>
                 <img src={profileLogo} alt='profileLogo' className='profile__logo' />
               </Link>
-              <div className='nav__profile'>
+              <div className='nav__profile filter-shadow'>
                 <Link to={profile} className='h5 nav__item'>
                   Профиль
                 </Link>
