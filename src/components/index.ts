@@ -31,7 +31,7 @@ export { Review } from './review';
 export { Slider } from './slider';
 export type { TSlider } from './slider';
 export { Sprite } from './sprite';
-export type { TSprite } from './sprite';
+export type { TSprite, ESpriteId } from './sprite';
 export { Table } from './table';
 export type { TTable } from './table';
 export { TextField } from './text-field';

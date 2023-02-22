@@ -1,3 +1,5 @@
+import { ESpriteId } from '../components';
+
 export type TStringAble = string | null | undefined;
 
 export type TNumberAble = number | null | undefined;
@@ -92,7 +94,7 @@ export type TCategoryMockData = {
 export type TSocialsMockData = {
   id: string;
   link: string;
-  src: string;
+  src: ESpriteId;
 };
 
 export type TPATHS = {

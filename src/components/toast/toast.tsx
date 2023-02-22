@@ -3,6 +3,7 @@ import classNames from 'classnames';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { closeToast } from '../../store/slices';
+import { ESpriteId } from '../sprite/sprite.types';
 import { Sprite } from '..';
 
 import { EToastErrorMessage, ETypeToastError, TToast } from './toast.types';
@@ -27,7 +28,7 @@ export const Toast: FC<TToast> = ({ isToastError, typeToastError, dataTestId }) 
     <div className={toastClass} data-test-id={dataTestId}>
       <div className='toast__wrapper'>
         <div className='toast__wrapper'>
-          <Sprite id={`${isToastError ? 'warning-circle-fill' : 'check-circle-fill'}`} className='toast__logo' />
+          <Sprite id={isToastError ? ESpriteId.Warning : ESpriteId.Success} className='toast__logo' />
           <p className='subtitle_large'>
             {isToastError && typeToastError === ETypeToastError.Changes && EToastErrorMessage.ChangesFail}
             {!isToastError && typeToastError === ETypeToastError.Changes && EToastErrorMessage.ChangesSuccess}
@@ -38,7 +39,7 @@ export const Toast: FC<TToast> = ({ isToastError, typeToastError, dataTestId }) 
             {!isToastError && typeToastError === ETypeToastError.Default && EToastErrorMessage.DefaultSuccess}
           </p>
         </div>
-        <Sprite id='close' className='toast__logo' onClick={handleToast} />
+        <Sprite id={ESpriteId.Close} className='toast__logo' onClick={handleToast} />
       </div>
     </div>
   );

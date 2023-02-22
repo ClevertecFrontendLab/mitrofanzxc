@@ -1,6 +1,7 @@
 import { ChangeEvent, FC, Fragment, useState } from 'react';
 
 import { EButtonPrimaryTitle, EButtonPrimaryType } from '../buttons/button-primary/button-primary.types';
+import { ESpriteId } from '../sprite/sprite.types';
 import { ButtonPrimary, ModalRating, Sprite } from '..';
 
 import { TModal } from './modal.types';
@@ -23,7 +24,7 @@ export const Modal: FC<TModal> = ({ bookId, isModalOpen, handleModal }) => {
       <div role='presentation' className='loader' onClick={() => handleModal(false)} />
       <form className='form-comment'>
         <button type='button' onClick={() => handleModal(false)} className='button-close filter-shadow'>
-          <Sprite id='close' className='button-close__logo' />
+          <Sprite id={ESpriteId.Close} className='button-close__logo' />
         </button>
         <h4 className='h4'>Оцените книгу</h4>
         <p className='subtitle_large'>Ваша оценка</p>

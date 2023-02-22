@@ -9,6 +9,7 @@ import { convertToDate, handleAuthors, handleCategory, handleStatus, translateCa
 import { EDate, ELanguage, EStatus } from '../../utils/utils.types';
 import { ECatalogView } from '../buttons/button-catalog-view/button-catalog-view.types';
 import { EButtonPrimaryTitle, EButtonPrimaryType } from '../buttons/button-primary/button-primary.types';
+import { ESpriteId } from '../sprite/sprite.types';
 import { ButtonPrimary, HighLight, Rating, Sprite } from '..';
 
 import { TCard } from './card.types';
@@ -72,7 +73,7 @@ export const Card: FC<TCard> = ({
   return (
     <Link to={`/books/${categoryResult}/${id}`} className={cardClass} data-test-id='card'>
       <div className={placeholderClass}>
-        {(!image || image.url.length <= 0) && <Sprite id='cat' className={spriteClass} />}
+        {(!image || image.url.length <= 0) && <Sprite id={ESpriteId.Cat} className={spriteClass} />}
         {image && image.url.length > 0 && (
           <img src={`${BASE_URL_API}${image.url}`} alt='card-img' className={cardImgClass} />
         )}

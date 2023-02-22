@@ -1,2 +1,2 @@
 export { Sprite } from './sprite';
-export type { TSprite } from './sprite.types';
+export type { TSprite, ESpriteId } from './sprite.types';

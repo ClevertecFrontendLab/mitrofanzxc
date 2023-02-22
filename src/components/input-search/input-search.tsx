@@ -7,6 +7,7 @@ import { ContextMainPage } from '../../pages';
 import { filterCatalogByCategory, handleIsInputSearchOpen, searchCatalogByTitle } from '../../store/slices';
 import { translateCategoryTitle } from '../../utils';
 import { ELanguage } from '../../utils/utils.types';
+import { ESpriteId } from '../sprite/sprite.types';
 import { Sprite } from '..';
 
 import './input-search.scss';
@@ -72,7 +73,7 @@ export const InputSearch: FC = () => {
   return (
     <div className={inputSearchClass}>
       <button type='button' className='button-search' onClick={handleButtonSearch} data-test-id='button-search-open'>
-        <Sprite id='search' className='button-search__logo' />
+        <Sprite id={ESpriteId.Search} className='button-search__logo' />
       </button>
       <input
         className='input-search__field body_small'
@@ -89,7 +90,7 @@ export const InputSearch: FC = () => {
         data-test-id='input-search'
       />
       <button type='button' className='button-cancel' onClick={handleButtonCancel} data-test-id='button-search-close'>
-        <Sprite id='close' className='button-cancel__logo' />
+        <Sprite id={ESpriteId.Close} className='button-cancel__logo' />
       </button>
     </div>
   );

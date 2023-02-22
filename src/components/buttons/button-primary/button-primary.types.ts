@@ -1,5 +1,3 @@
-import { MouseEvent } from 'react';
-
 import { TStringAble } from '../../../constants/constants.types';
 
 export enum EButtonPrimaryType {
@@ -29,6 +27,6 @@ export type TButtonPrimary = {
   untilDate?: TStringAble;
   className?: string;
   disabled?: boolean;
-  onClick?: () => void | ((event: MouseEvent<HTMLButtonElement>) => void) | ((state: boolean) => void);
+  onClick?: () => void;
   dataTestId?: string;
 };

@@ -3,6 +3,7 @@ import SwiperCore, { Navigation, Pagination, Scrollbar, Thumbs } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import { BASE_URL_API } from '../../constants';
+import { ESpriteId } from '../sprite/sprite.types';
 import { Sprite } from '..';
 
 import { TSlider } from './slider.types';
@@ -84,7 +85,7 @@ export const Slider: FC<TSlider> = ({ data }) => {
       )}
       {(!data || !data.images || data.images.length <= 0) && (
         <div className='placeholder book-page__img-wrapper'>
-          <Sprite id='cat' className='placeholder__logo' />
+          <Sprite id={ESpriteId.Cat} className='placeholder__logo' />
         </div>
       )}
     </Fragment>

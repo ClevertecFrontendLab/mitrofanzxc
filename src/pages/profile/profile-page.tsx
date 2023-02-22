@@ -3,6 +3,7 @@ import { FC } from 'react';
 import unauthorizedImg from '../../assets/unauthorized.png';
 import { ButtonPrimary, Sprite, TextField } from '../../components';
 import { EButtonPrimaryTitle, EButtonPrimaryType } from '../../components/buttons/button-primary/button-primary.types';
+import { ESpriteId } from '../../components/sprite/sprite.types';
 import { ETextFieldId, ETextFieldPlaceholder, ETextFieldType } from '../../components/text-field/text-field.types';
 
 import './profile-page.scss';
@@ -15,7 +16,7 @@ export const ProfilePage: FC = () => (
           <img src={unauthorizedImg} alt='unauthorized-img' className='user-avatar' />
           <input type='file' name='' id='input-file' className='input-file' />
           <label htmlFor='input-file' className='input-file__label'>
-            <Sprite id='camera' className='input-file__logo' />
+            <Sprite id={ESpriteId.Camera} className='input-file__logo' />
           </label>
         </div>
         <p className='h1 user-lastname'>Иванов</p>

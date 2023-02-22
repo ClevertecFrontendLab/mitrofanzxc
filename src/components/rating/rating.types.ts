@@ -1,13 +1,9 @@
 import { TNumberAble } from '../../constants/constants.types';
-
-export enum EStar {
-  Empty = 'star',
-  Fill = 'star-fill',
-}
+import { ESpriteId } from '../sprite';
 
 export type TRatingStar = {
   id?: string;
-  spriteId: string;
+  spriteId: ESpriteId;
   onClick?: () => void;
   onMouseEnter?: () => void;
   onMouseLeave?: () => void;

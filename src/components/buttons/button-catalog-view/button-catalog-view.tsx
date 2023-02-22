@@ -3,6 +3,7 @@ import { ChangeEvent, FC } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { changeCatalogView } from '../../../store/slices';
 import { Sprite } from '../..';
+import { ESpriteId } from '../../sprite/sprite.types';
 
 import { ECatalogView, TButtonCatalogView } from './button-catalog-view.types';
 
@@ -32,7 +33,7 @@ export const ButtonCatalogView: FC<TButtonCatalogView> = ({ id, value, dataTestI
         onChange={handleInput}
         data-test-id={dataTestId}
       />
-      <Sprite id={id === ECatalogView.Grid ? 'square-four' : 'menu'} className='button-catalog-view__logo' />
+      <Sprite id={id === ECatalogView.Grid ? ESpriteId.Grid : ESpriteId.List} className='button-catalog-view__logo' />
     </label>
   );
 };

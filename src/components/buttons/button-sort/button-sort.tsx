@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { changeCatalogSortState, sortCatalogByRating } from '../../../store/slices';
 import { ESort } from '../../../utils/utils.types';
 import { Sprite } from '../..';
+import { ESpriteId } from '../../sprite/sprite.types';
 
 import './button-sort.scss';
 
@@ -38,7 +39,7 @@ export const ButtonSort: FC = () => {
       data-test-id='sort-rating-button'
     >
       <Sprite
-        id='sort-ascending'
+        id={ESpriteId.Sort}
         className={`button-sort__logo ${catalogSortState === ESort.Ascending ? 'button-sort__logo_ascending ' : ''}`}
       />
       <span className='body_small'>По рейтингу</span>

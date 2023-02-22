@@ -6,6 +6,7 @@ import { PATHS } from '../../constants';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { closeAccordionMenu, closeMobileMenu, closeToast, toggleAccordionMenu } from '../../store/slices';
 import { getAmountOfBooks } from '../../utils';
+import { ESpriteId } from '../sprite/sprite.types';
 import { Sprite } from '..';
 
 import './nav.scss';
@@ -69,7 +70,7 @@ export const Nav: FC = () => {
           data-test-id={`${match992 ? 'burger-showcase' : 'navigation-showcase'}`}
         >
           <NavLink to={booksAll}>Витрина книг</NavLink>
-          {categoriesData && categoriesData.length > 0 && <Sprite id='arrow-down' className={spriteClass} />}
+          {categoriesData && categoriesData.length > 0 && <Sprite id={ESpriteId.ArrowShort} className={spriteClass} />}
         </button>
         {categoriesData && categoriesData.length > 0 && (
           <ul className={navListClass}>
