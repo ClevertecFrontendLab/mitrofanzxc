@@ -2,8 +2,8 @@ export { BreadCrumbs } from './bread-crumbs';
 export type { TBreadCrumbs } from './bread-crumbs';
 export { ButtonCatalogView, ButtonPrimary, ButtonSort, ButtonBurger, ButtonLogin } from './buttons';
 export type {
-  ButtonPrimaryTitle,
-  ButtonPrimaryType,
+  EButtonPrimaryTitle,
+  EButtonPrimaryType,
   ECatalogView,
   TButtonCatalogView,
   TButtonLogin,
@@ -37,7 +37,7 @@ export type { TTable } from './table';
 export { TextField } from './text-field';
 export type { ETextFieldId, ETextFieldType, TTextField } from './text-field';
 export { Toast } from './toast';
-export type { TTypeToastError, TToast } from './toast';
+export type { ETypeToastError, TToast } from './toast';
 export { HighLight } from './highlight';
 export type { THighLight } from './highlight';
 export { ModalRating } from './modal-rating';

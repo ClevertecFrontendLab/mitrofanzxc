@@ -1,2 +1,2 @@
 export { TermsPage } from './terms-page';
-export type { TContentView, TTermsPage } from './terms-page.types';
+export type { EContentView, TTermsPage } from './terms-page.types';

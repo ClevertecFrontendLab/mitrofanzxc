@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { openAccordionMenu } from '../../store/slices';
 import { handleCategory, translateCategoryTitle } from '../../utils';
+import { ELanguage } from '../../utils/utils.types';
 
 import { TBreadCrumbs } from './bread-crumbs.types';
 
@@ -24,7 +25,7 @@ export const BreadCrumbs: FC<TBreadCrumbs> = ({ bookData, isSuccess, currentCate
       <div className='wrapper'>
         <div className='bread-crumbs'>
           <Link
-            to={`/books/${translateCategoryTitle(categoryResult, categoriesData, 'ru')}`}
+            to={`/books/${translateCategoryTitle(categoryResult, categoriesData, ELanguage.Ru)}`}
             className='body_small display_inline-block'
             onClick={() => handleBreadCrumbCategory}
             data-test-id='breadcrumbs-link'
@@ -33,7 +34,7 @@ export const BreadCrumbs: FC<TBreadCrumbs> = ({ bookData, isSuccess, currentCate
           </Link>
           {bookData && bookData.title && isSuccess && (
             <Link
-              to={`/books/${translateCategoryTitle(categoryResult, categoriesData, 'ru')}/${bookData.id}`}
+              to={`/books/${translateCategoryTitle(categoryResult, categoriesData, ELanguage.Ru)}/${bookData.id}`}
               className='body_small display_inline'
               data-test-id='book-name'
             >

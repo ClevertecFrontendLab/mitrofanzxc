@@ -4,6 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import profileLogo from '../../assets/authorized.png';
 import { PATHS, TitlesMockData } from '../../constants';
 import { translateCategoryTitle } from '../../utils';
+import { ELanguage } from '../../utils/utils.types';
 import { ButtonBurger, Sprite } from '..';
 
 import './header.scss';
@@ -24,7 +25,7 @@ export const Header: FC = () => {
           </Link>
           <ButtonBurger />
           <div className='header__temporary-wrapper'>
-            <h3 className='h3'>{translateCategoryTitle(finalPathname, TitlesMockData, 'en')}</h3>
+            <h3 className='h3'>{translateCategoryTitle(finalPathname, TitlesMockData, ELanguage.En)}</h3>
             <div className='profile'>
               <div className='profile__info'>
                 <span className='subtitle_small'>Привет, Иван!</span>

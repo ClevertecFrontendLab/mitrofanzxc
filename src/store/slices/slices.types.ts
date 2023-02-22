@@ -1,15 +1,19 @@
-import { TTypeToastError } from '../../components';
+import { ETypeToastError } from '../../components';
 import { ECatalogView } from '../../components/buttons/button-catalog-view';
 import { TBookData, TCatalogData, TCategories } from '../../constants/constants.types';
-import { TTypeSortData } from '../../utils/utils.types';
+import { ESort } from '../../utils/utils.types';
 
-export type TConnectionType = '' | 'getCatalog' | 'getBook' | 'getCategories';
+export enum EConnectionType {
+  Catalog = 'getCatalog',
+  Book = 'getBook',
+  Categories = 'getCategories',
+}
 
 export type TCatalogState = {
   catalogView: ECatalogView;
   initialData: TCatalogData[];
   catalogData: TCatalogData[];
-  catalogSortState: TTypeSortData;
+  catalogSortState: ESort;
   isLoading: boolean;
 };
 
@@ -64,7 +68,7 @@ export type TRegistrationState = {
 export type TToastState = {
   isToastOpen: boolean;
   isToastError: boolean;
-  typeToastError: TTypeToastError;
+  typeToastError: ETypeToastError;
 };
 
 export type TCategoriesState = {

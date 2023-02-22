@@ -4,7 +4,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { ECatalogView } from '../../components/buttons/button-catalog-view/button-catalog-view.types';
 import { TCatalogData } from '../../constants/constants.types';
 import { sortData } from '../../utils';
-import { ESort, TTypeSortData } from '../../utils/utils.types';
+import { ESort } from '../../utils/utils.types';
 
 import { TCatalogState } from './slices.types';
 
@@ -28,10 +28,10 @@ export const catalogSlice = createSlice({
     changeCatalogView: (state, action: PayloadAction<ECatalogView>) => {
       state.catalogView = action.payload;
     },
-    sortCatalogByRating: (state, action: PayloadAction<TTypeSortData>) => {
+    sortCatalogByRating: (state, action: PayloadAction<ESort>) => {
       state.catalogData = state.catalogData.sort(sortData(action.payload));
     },
-    changeCatalogSortState: (state, action: PayloadAction<TTypeSortData>) => {
+    changeCatalogSortState: (state, action: PayloadAction<ESort>) => {
       state.catalogSortState = action.payload;
     },
     filterCatalogByCategory: (state, action: PayloadAction<string>) => {

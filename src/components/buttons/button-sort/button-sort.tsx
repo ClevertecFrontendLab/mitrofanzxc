@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { changeCatalogSortState, sortCatalogByRating } from '../../../store/slices';
+import { ESort } from '../../../utils/utils.types';
 import { Sprite } from '../..';
 
 import './button-sort.scss';
@@ -14,11 +15,11 @@ export const ButtonSort: FC = () => {
 
   const handleButtonSort = () => {
     switch (catalogSortState) {
-      case 'descending':
-        dispatch(changeCatalogSortState('ascending'));
+      case ESort.Descending:
+        dispatch(changeCatalogSortState(ESort.Ascending));
         break;
-      case 'ascending':
-        dispatch(changeCatalogSortState('descending'));
+      case ESort.Ascending:
+        dispatch(changeCatalogSortState(ESort.Descending));
         break;
       default:
         break;
@@ -38,7 +39,7 @@ export const ButtonSort: FC = () => {
     >
       <Sprite
         id='sort-ascending'
-        className={`button-sort__logo ${catalogSortState === 'ascending' ? 'button-sort__logo_ascending ' : ''}`}
+        className={`button-sort__logo ${catalogSortState === ESort.Ascending ? 'button-sort__logo_ascending ' : ''}`}
       />
       <span className='body_small'>По рейтингу</span>
     </button>

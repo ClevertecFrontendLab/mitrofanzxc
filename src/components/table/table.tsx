@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { TableHeaderMockData } from '../../constants';
 import { translateCategoryTitle } from '../../utils';
+import { ELanguage } from '../../utils/utils.types';
 
 import { TTable } from './table.types';
 
@@ -16,7 +17,7 @@ export const Table: FC<TTable> = ({ data }) => (
         data.map((element) => (
           <tr key={uuidv4()}>
             <th className='subtitle_large color-grey-black-40'>
-              {element[0] ? translateCategoryTitle(element[0], TableHeaderMockData, 'en') : 'Категория'}
+              {element[0] ? translateCategoryTitle(element[0], TableHeaderMockData, ELanguage.En) : 'Категория'}
             </th>
             <td className='body_large'>{element[1] || 'Неизвестно'}</td>
           </tr>

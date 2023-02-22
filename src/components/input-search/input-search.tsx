@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { ContextMainPage } from '../../pages';
 import { filterCatalogByCategory, handleIsInputSearchOpen, searchCatalogByTitle } from '../../store/slices';
 import { translateCategoryTitle } from '../../utils';
+import { ELanguage } from '../../utils/utils.types';
 import { Sprite } from '..';
 
 import './input-search.scss';
@@ -37,7 +38,7 @@ export const InputSearch: FC = () => {
   const handleKeyboardInputSearch = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
       if (category) {
-        dispatch(filterCatalogByCategory(translateCategoryTitle(category, categoriesData, 'en')));
+        dispatch(filterCatalogByCategory(translateCategoryTitle(category, categoriesData, ELanguage.En)));
       }
 
       dispatch(searchCatalogByTitle(inputSearchValue));
@@ -58,7 +59,7 @@ export const InputSearch: FC = () => {
 
   useEffect(() => {
     if (category) {
-      dispatch(filterCatalogByCategory(translateCategoryTitle(category, categoriesData, 'en')));
+      dispatch(filterCatalogByCategory(translateCategoryTitle(category, categoriesData, ELanguage.En)));
     }
 
     dispatch(searchCatalogByTitle(inputSearchValue));

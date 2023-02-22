@@ -1,11 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+import { ETypeToastError } from '../../components/toast/toast.types';
+
 import { TToastState } from './slices.types';
 
 const initialState: TToastState = {
   isToastOpen: false,
   isToastError: false,
-  typeToastError: 'default',
+  typeToastError: ETypeToastError.Default,
 };
 
 export const toastSlice = createSlice({

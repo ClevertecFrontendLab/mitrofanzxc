@@ -2,12 +2,12 @@ import { MouseEvent } from 'react';
 
 import { TStringAble } from '../../../constants/constants.types';
 
-export enum ButtonPrimaryType {
+export enum EButtonPrimaryType {
   Primary = 'primary',
   Secondary = 'secondary',
 }
 
-export enum ButtonPrimaryTitle {
+export enum EButtonPrimaryTitle {
   Book = 'Забронировать',
   Booked = 'Забронирована',
   BusyUntil = 'Занята до',
@@ -24,8 +24,8 @@ export enum ButtonPrimaryTitle {
 }
 
 export type TButtonPrimary = {
-  type: ButtonPrimaryType;
-  title: ButtonPrimaryTitle;
+  type: EButtonPrimaryType;
+  title: EButtonPrimaryTitle;
   untilDate?: TStringAble;
   className?: string;
   disabled?: boolean;

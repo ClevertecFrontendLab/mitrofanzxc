@@ -1,5 +1,8 @@
-export type TContentView = 'terms' | 'contract';
+export enum EContentView {
+  Terms = 'terms',
+  Contract = 'contract',
+}
 
 export type TTermsPage = {
-  contentView: TContentView;
+  contentView: EContentView;
 };

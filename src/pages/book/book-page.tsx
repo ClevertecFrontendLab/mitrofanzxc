@@ -3,8 +3,10 @@ import { useParams } from 'react-router-dom';
 import classNames from 'classnames';
 
 import { BreadCrumbs, ButtonPrimary, Loader, Modal, Nav, Rating, Review, Slider, Table, Toast } from '../../components';
-import { ButtonPrimaryTitle, ButtonPrimaryType } from '../../components/buttons/button-primary/button-primary.types';
+import { EButtonPrimaryTitle, EButtonPrimaryType } from '../../components/buttons/button-primary/button-primary.types';
+import { ETypeToastError } from '../../components/toast/toast.types';
 import { useAppSelector, useBodyOverflow, useStartLoading, useToast } from '../../hooks';
+import { EConnectionType } from '../../store/slices/slices.types';
 import { convertToDate, divideTableData, handleAuthors, handleStatus } from '../../utils';
 import { EDate, EPart, EStatus } from '../../utils/utils.types';
 
@@ -27,7 +29,7 @@ export const BookPage: FC = () => {
 
   const statusResult = handleStatus(bookData.booking, bookData.delivery);
 
-  useStartLoading('getBook', bookId);
+  useStartLoading(EConnectionType.Book, bookId);
   useToast({ isLoading, isSuccess });
   useBodyOverflow(isModalOpen);
 
@@ -46,7 +48,9 @@ export const BookPage: FC = () => {
     <section>
       <BreadCrumbs bookData={bookData} isSuccess={isSuccess} currentCategory={category} />
       {isLoading && !isSuccess && <Loader />}
-      {!isLoading && !isSuccess && <Toast isToastError={true} typeToastError='connection' dataTestId='error' />}
+      {!isLoading && !isSuccess && (
+        <Toast isToastError={true} typeToastError={ETypeToastError.Connection} dataTestId='error' />
+      )}
       {!isLoading && isSuccess && (
         <Fragment>
           <div className='wrapper'>
@@ -60,15 +64,15 @@ export const BookPage: FC = () => {
                 <h5 className='h5 color-grey-black-40 book-page__author'>{handleAuthors(bookData.authors)}</h5>
                 {statusResult === EStatus.Free && (
                   <ButtonPrimary
-                    type={ButtonPrimaryType.Primary}
-                    title={ButtonPrimaryTitle.Book}
+                    type={EButtonPrimaryType.Primary}
+                    title={EButtonPrimaryTitle.Book}
                     className='button_large'
                   />
                 )}
                 {statusResult === EStatus.Busy && (
                   <ButtonPrimary
-                    type={ButtonPrimaryType.Secondary}
-                    title={ButtonPrimaryTitle.BusyUntil}
+                    type={EButtonPrimaryType.Secondary}
+                    title={EButtonPrimaryTitle.BusyUntil}
                     untilDate={
                       bookData.delivery &&
                       bookData.delivery.dateHandedTo &&
@@ -80,8 +84,8 @@ export const BookPage: FC = () => {
                 )}
                 {statusResult === EStatus.Reserved && (
                   <ButtonPrimary
-                    type={ButtonPrimaryType.Secondary}
-                    title={ButtonPrimaryTitle.Booked}
+                    type={EButtonPrimaryType.Secondary}
+                    title={EButtonPrimaryTitle.Booked}
                     className='button_large'
                   />
                 )}
@@ -127,8 +131,8 @@ export const BookPage: FC = () => {
                 </ul>
               </div>
               <ButtonPrimary
-                type={ButtonPrimaryType.Primary}
-                title={ButtonPrimaryTitle.RateTheBook}
+                type={EButtonPrimaryType.Primary}
+                title={EButtonPrimaryTitle.RateTheBook}
                 onClick={() => handleModal(true)}
                 dataTestId='button-rating'
               />

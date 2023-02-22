@@ -4,6 +4,7 @@ import classNames from 'classnames';
 
 import { useAppSelector } from '../../hooks';
 import { ContextMainPage } from '../../pages';
+import { ECatalogView } from '../buttons/button-catalog-view/button-catalog-view.types';
 import { Card } from '..';
 
 import './catalog.scss';
@@ -14,8 +15,8 @@ export const Catalog: FC = () => {
   const { inputSearchValue } = useContext(ContextMainPage);
 
   const sectionClass = classNames({
-    catalog: catalogView === 'grid',
-    catalog_list: catalogView !== 'grid',
+    catalog: catalogView === ECatalogView.Grid,
+    catalog_list: catalogView !== ECatalogView.Grid,
   });
 
   return (

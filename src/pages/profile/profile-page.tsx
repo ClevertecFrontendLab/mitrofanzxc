@@ -2,8 +2,8 @@ import { FC } from 'react';
 
 import unauthorizedImg from '../../assets/unauthorized.png';
 import { ButtonPrimary, Sprite, TextField } from '../../components';
-import { ButtonPrimaryTitle, ButtonPrimaryType } from '../../components/buttons/button-primary/button-primary.types';
-import { ETextFieldId, ETextFieldType } from '../../components/text-field/text-field.types';
+import { EButtonPrimaryTitle, EButtonPrimaryType } from '../../components/buttons/button-primary/button-primary.types';
+import { ETextFieldId, ETextFieldPlaceholder, ETextFieldType } from '../../components/text-field/text-field.types';
 
 import './profile-page.scss';
 
@@ -25,18 +25,34 @@ export const ProfilePage: FC = () => (
         <h4 className='h4'>Учётные данные</h4>
         <p className='body_large'>Здесь вы можете отредактировать информацию о себе</p>
         <div className='credentials__fields'>
-          <TextField type={ETextFieldType.Text} id={ETextFieldId.Login} placeholder='Логин' />
-          <TextField type={ETextFieldType.Password} id={ETextFieldId.Password} placeholder='Пароль' />
-          <TextField type={ETextFieldType.Text} id={ETextFieldId.FirstName} placeholder='Имя' />
-          <TextField type={ETextFieldType.Text} id={ETextFieldId.LastName} placeholder='Фамилия' />
-          <TextField type={ETextFieldType.Tel} id={ETextFieldId.Phone} placeholder='Номер телефона' />
-          <TextField type={ETextFieldType.Email} id={ETextFieldId.Email} placeholder='E-mail' />
+          <TextField type={ETextFieldType.Text} id={ETextFieldId.Login} placeholder={ETextFieldPlaceholder.Login} />
+          <TextField
+            type={ETextFieldType.Password}
+            id={ETextFieldId.Password}
+            placeholder={ETextFieldPlaceholder.Password}
+          />
+          <TextField
+            type={ETextFieldType.Text}
+            id={ETextFieldId.FirstName}
+            placeholder={ETextFieldPlaceholder.FirstName}
+          />
+          <TextField
+            type={ETextFieldType.Text}
+            id={ETextFieldId.LastName}
+            placeholder={ETextFieldPlaceholder.LastName}
+          />
+          <TextField type={ETextFieldType.Tel} id={ETextFieldId.Phone} placeholder={ETextFieldPlaceholder.Tel} />
+          <TextField type={ETextFieldType.Email} id={ETextFieldId.Email} placeholder={ETextFieldPlaceholder.Email} />
         </div>
         <div className='credentials__buttons'>
-          <ButtonPrimary type={ButtonPrimaryType.Secondary} title={ButtonPrimaryTitle.Edit} className='button_large' />
           <ButtonPrimary
-            type={ButtonPrimaryType.Primary}
-            title={ButtonPrimaryTitle.SaveChanges}
+            type={EButtonPrimaryType.Secondary}
+            title={EButtonPrimaryTitle.Edit}
+            className='button_large'
+          />
+          <ButtonPrimary
+            type={EButtonPrimaryType.Primary}
+            title={EButtonPrimaryTitle.SaveChanges}
             className='button_large'
             disabled={true}
           />
@@ -46,13 +62,21 @@ export const ProfilePage: FC = () => (
         <h4 className='h4'>Договор</h4>
         <p className='body_large'>Здесь вы можете просмотрить данные о договоре, а так же внести оплату</p>
         <div className='credentials__fields'>
-          <TextField type={ETextFieldType.Text} id={ETextFieldId.ContractOwner} placeholder='Оформлен на' />
-          <TextField type={ETextFieldType.Text} id={ETextFieldId.ContractNumber} placeholder='Номер договора' />
+          <TextField
+            type={ETextFieldType.Text}
+            id={ETextFieldId.ContractOwner}
+            placeholder={ETextFieldPlaceholder.ContractOwner}
+          />
+          <TextField
+            type={ETextFieldType.Text}
+            id={ETextFieldId.ContractNumber}
+            placeholder={ETextFieldPlaceholder.ContractNumber}
+          />
         </div>
         <div className='credentials__buttons'>
           <ButtonPrimary
-            type={ButtonPrimaryType.Secondary}
-            title={ButtonPrimaryTitle.ViewContract}
+            type={EButtonPrimaryType.Secondary}
+            title={EButtonPrimaryTitle.ViewContract}
             className='button_large'
           />
         </div>

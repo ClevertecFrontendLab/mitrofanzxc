@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import classNames from 'classnames';
 
-import { TButtonPrimary } from './button-primary.types';
+import { EButtonPrimaryType, TButtonPrimary } from './button-primary.types';
 
 import './button-primary.scss';
 
@@ -15,8 +15,8 @@ export const ButtonPrimary: FC<TButtonPrimary> = ({
   dataTestId,
 }) => {
   const buttonPrimaryClass = classNames('button', {
-    'button-primary': type === 'primary',
-    'button-secondary': type !== 'primary',
+    'button-primary': type === EButtonPrimaryType.Primary,
+    'button-secondary': type !== EButtonPrimaryType.Primary,
   });
 
   return (

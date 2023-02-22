@@ -1,2 +1,2 @@
 export { ButtonPrimary } from './button-primary';
-export type { ButtonPrimaryType, ButtonPrimaryTitle, TButtonPrimary } from './button-primary.types';
+export type { EButtonPrimaryType, EButtonPrimaryTitle, TButtonPrimary } from './button-primary.types';

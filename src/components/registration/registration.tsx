@@ -9,8 +9,8 @@ import {
   toggleRegistration,
 } from '../../store/slices';
 import { EButtonLoginTitle } from '../buttons/button-login/button-login.types';
-import { ButtonPrimaryTitle, ButtonPrimaryType } from '../buttons/button-primary/button-primary.types';
-import { ETextFieldId, ETextFieldType } from '../text-field/text-field.types';
+import { EButtonPrimaryTitle, EButtonPrimaryType } from '../buttons/button-primary/button-primary.types';
+import { ETextFieldId, ETextFieldMessage, ETextFieldPlaceholder, ETextFieldType } from '../text-field/text-field.types';
 import { ButtonLogin, ButtonPrimary, TextField } from '..';
 
 import './registration.scss';
@@ -61,21 +61,29 @@ export const Registration: FC = () => {
                       <TextField
                         type={ETextFieldType.Text}
                         id={ETextFieldId.Login}
-                        placeholder='Придумайте логин для входа'
-                        message='Используйте для логина латинский алфавит и цифры'
+                        placeholder={ETextFieldPlaceholder.CreateUserName}
+                        message={ETextFieldMessage.CreateUserName}
                       />
                       <TextField
                         type={ETextFieldType.Password}
                         id={ETextFieldId.Password}
-                        placeholder='Пароль'
-                        message='Пароль не менее 8 символов, с заглавной буквой и цифрой'
+                        placeholder={ETextFieldPlaceholder.Password}
+                        message={ETextFieldMessage.Password}
                       />
                     </Fragment>
                   )}
                   {formStep === 2 && (
                     <Fragment>
-                      <TextField type={ETextFieldType.Text} id={ETextFieldId.FirstName} placeholder='Имя' />
-                      <TextField type={ETextFieldType.Text} id={ETextFieldId.LastName} placeholder='Фамилия' />
+                      <TextField
+                        type={ETextFieldType.Text}
+                        id={ETextFieldId.FirstName}
+                        placeholder={ETextFieldPlaceholder.FirstName}
+                      />
+                      <TextField
+                        type={ETextFieldType.Text}
+                        id={ETextFieldId.LastName}
+                        placeholder={ETextFieldPlaceholder.LastName}
+                      />
                     </Fragment>
                   )}
                   {formStep === 3 && (
@@ -83,34 +91,38 @@ export const Registration: FC = () => {
                       <TextField
                         type={ETextFieldType.Tel}
                         id={ETextFieldId.Phone}
-                        placeholder='Номер телефона'
-                        message='В формате +375 (xx) xxx-xx-xx'
+                        placeholder={ETextFieldPlaceholder.Tel}
+                        message={ETextFieldMessage.Tel}
                       />
-                      <TextField type={ETextFieldType.Email} id={ETextFieldId.Email} placeholder='E-mail' />
+                      <TextField
+                        type={ETextFieldType.Email}
+                        id={ETextFieldId.Email}
+                        placeholder={ETextFieldPlaceholder.Email}
+                      />
                     </Fragment>
                   )}
                 </div>
                 <div className='registration__section'>
                   {formStep === 1 && (
                     <ButtonPrimary
-                      type={ButtonPrimaryType.Primary}
-                      title={ButtonPrimaryTitle.NextStep}
+                      type={EButtonPrimaryType.Primary}
+                      title={EButtonPrimaryTitle.NextStep}
                       className='button_large'
                       onClick={handleNextStep}
                     />
                   )}
                   {formStep === 2 && (
                     <ButtonPrimary
-                      type={ButtonPrimaryType.Primary}
-                      title={ButtonPrimaryTitle.LastStep}
+                      type={EButtonPrimaryType.Primary}
+                      title={EButtonPrimaryTitle.LastStep}
                       className='button_large'
                       onClick={handleNextStep}
                     />
                   )}
                   {formStep === 3 && (
                     <ButtonPrimary
-                      type={ButtonPrimaryType.Primary}
-                      title={ButtonPrimaryTitle.Register}
+                      type={EButtonPrimaryType.Primary}
+                      title={EButtonPrimaryTitle.Register}
                       className='button_large'
                       onClick={handleNextStep}
                     />
@@ -130,12 +142,16 @@ export const Registration: FC = () => {
                   <legend className='h4'>Вход в личный кабинет</legend>
                 </div>
                 <div className='registration__section'>
-                  <TextField type={ETextFieldType.Text} id={ETextFieldId.Login} placeholder='Логин' />
+                  <TextField
+                    type={ETextFieldType.Text}
+                    id={ETextFieldId.Login}
+                    placeholder={ETextFieldPlaceholder.Login}
+                  />
                   <TextField
                     type={ETextFieldType.Password}
                     id={ETextFieldId.Password}
-                    placeholder='Пароль'
-                    message='Пароль не менее 8 символов, с заглавной буквой и цифрой'
+                    placeholder={ETextFieldPlaceholder.Password}
+                    message={ETextFieldMessage.Password}
                   />
                   <button type='button' className='info_large' onClick={handleButtonPasswordRecovery}>
                     Забыли логин или пароль?
@@ -143,8 +159,8 @@ export const Registration: FC = () => {
                 </div>
                 <div className='registration__section'>
                   <ButtonPrimary
-                    type={ButtonPrimaryType.Primary}
-                    title={ButtonPrimaryTitle.Entrance}
+                    type={EButtonPrimaryType.Primary}
+                    title={EButtonPrimaryTitle.Entrance}
                     className='button_large'
                   />
                   <p className='body_large'>
@@ -166,14 +182,14 @@ export const Registration: FC = () => {
                   <TextField
                     type={ETextFieldType.Email}
                     id={ETextFieldId.Email}
-                    placeholder='Email'
-                    message='На это email будет отправлено письмо с инструкциями по восстановлению пароля'
+                    placeholder={ETextFieldPlaceholder.Email}
+                    message={ETextFieldMessage.Email}
                   />
                 </div>
                 <div className='registration__section'>
                   <ButtonPrimary
-                    type={ButtonPrimaryType.Primary}
-                    title={ButtonPrimaryTitle.Restore}
+                    type={EButtonPrimaryType.Primary}
+                    title={EButtonPrimaryTitle.Restore}
                     className='button_large'
                   />
                   <p className='body_large'>
@@ -194,15 +210,19 @@ export const Registration: FC = () => {
                   <TextField
                     type={ETextFieldType.Password}
                     id={ETextFieldId.Password}
-                    placeholder='Новый пароль'
-                    message='Пароль не менее 8 символов, с заглавной буквой и цифрой'
+                    placeholder={ETextFieldPlaceholder.NewPassword}
+                    message={ETextFieldMessage.Password}
                   />
-                  <TextField type={ETextFieldType.Password} id={ETextFieldId.Password} placeholder='Повторите пароль' />
+                  <TextField
+                    type={ETextFieldType.Password}
+                    id={ETextFieldId.Password}
+                    placeholder={ETextFieldPlaceholder.RepeatPassword}
+                  />
                 </div>
                 <div className='registration__section'>
                   <ButtonPrimary
-                    type={ButtonPrimaryType.Primary}
-                    title={ButtonPrimaryTitle.SaveChanges}
+                    type={EButtonPrimaryType.Primary}
+                    title={EButtonPrimaryTitle.SaveChanges}
                     className='button_large'
                   />
                   <p className='body_large'>
