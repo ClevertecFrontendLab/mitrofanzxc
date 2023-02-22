@@ -1,4 +1,10 @@
+export enum EButtonLoginTitle {
+  Enter = 'Войти',
+  Registration = 'Регистрация',
+  Login = 'Вход в личный кабинет',
+}
+
 export type TButtonLogin = {
-  title: string;
+  title: EButtonLoginTitle;
   onClick: () => void;
 };

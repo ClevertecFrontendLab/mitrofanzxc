@@ -1,11 +1,12 @@
-import { TCatalogView, TTypeToastError } from '../../components';
+import { TTypeToastError } from '../../components';
+import { ECatalogView } from '../../components/buttons/button-catalog-view';
 import { TBookData, TCatalogData, TCategories } from '../../constants/constants.types';
 import { TTypeSortData } from '../../utils/utils.types';
 
 export type TConnectionType = '' | 'getCatalog' | 'getBook' | 'getCategories';
 
 export type TCatalogState = {
-  catalogView: TCatalogView;
+  catalogView: ECatalogView;
   initialData: TCatalogData[];
   catalogData: TCatalogData[];
   catalogSortState: TTypeSortData;

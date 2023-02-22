@@ -1,5 +1,5 @@
 import { handleAuthors } from './handle-authors';
-import { TArrayDivideTableData, TDivideTableData } from './utils.types';
+import { EPart, TArrayDivideTableData, TDivideTableData } from './utils.types';
 
 export const divideTableData: TDivideTableData = (part, bookData) => {
   if (bookData) {
@@ -17,7 +17,7 @@ export const divideTableData: TDivideTableData = (part, bookData) => {
 
     const separator = Math.ceil(arr.length / 2);
 
-    if (part === 'first') {
+    if (part === EPart.First) {
       return arr.slice(0, separator);
     }
 

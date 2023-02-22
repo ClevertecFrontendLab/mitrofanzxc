@@ -8,6 +8,9 @@ import {
   openPasswordRecovery,
   toggleRegistration,
 } from '../../store/slices';
+import { EButtonLoginTitle } from '../buttons/button-login/button-login.types';
+import { ButtonPrimaryTitle, ButtonPrimaryType } from '../buttons/button-primary/button-primary.types';
+import { ETextFieldId, ETextFieldType } from '../text-field/text-field.types';
 import { ButtonLogin, ButtonPrimary, TextField } from '..';
 
 import './registration.scss';
@@ -56,14 +59,14 @@ export const Registration: FC = () => {
                   {formStep === 1 && (
                     <Fragment>
                       <TextField
-                        type='text'
-                        id='login'
+                        type={ETextFieldType.Text}
+                        id={ETextFieldId.Login}
                         placeholder='Придумайте логин для входа'
                         message='Используйте для логина латинский алфавит и цифры'
                       />
                       <TextField
-                        type='password'
-                        id='password'
+                        type={ETextFieldType.Password}
+                        id={ETextFieldId.Password}
                         placeholder='Пароль'
                         message='Пароль не менее 8 символов, с заглавной буквой и цифрой'
                       />
@@ -71,50 +74,50 @@ export const Registration: FC = () => {
                   )}
                   {formStep === 2 && (
                     <Fragment>
-                      <TextField type='text' id='firstName' placeholder='Имя' />
-                      <TextField type='text' id='lastName' placeholder='Фамилия' />
+                      <TextField type={ETextFieldType.Text} id={ETextFieldId.FirstName} placeholder='Имя' />
+                      <TextField type={ETextFieldType.Text} id={ETextFieldId.LastName} placeholder='Фамилия' />
                     </Fragment>
                   )}
                   {formStep === 3 && (
                     <Fragment>
                       <TextField
-                        type='tel'
-                        id='phone'
+                        type={ETextFieldType.Tel}
+                        id={ETextFieldId.Phone}
                         placeholder='Номер телефона'
                         message='В формате +375 (xx) xxx-xx-xx'
                       />
-                      <TextField type='email' id='email' placeholder='E-mail' />
+                      <TextField type={ETextFieldType.Email} id={ETextFieldId.Email} placeholder='E-mail' />
                     </Fragment>
                   )}
                 </div>
                 <div className='registration__section'>
                   {formStep === 1 && (
                     <ButtonPrimary
-                      type='primary'
-                      title='Следующий шаг'
+                      type={ButtonPrimaryType.Primary}
+                      title={ButtonPrimaryTitle.NextStep}
                       className='button_large'
                       onClick={handleNextStep}
                     />
                   )}
                   {formStep === 2 && (
                     <ButtonPrimary
-                      type='primary'
-                      title='Последний шаг'
+                      type={ButtonPrimaryType.Primary}
+                      title={ButtonPrimaryTitle.LastStep}
                       className='button_large'
                       onClick={handleNextStep}
                     />
                   )}
                   {formStep === 3 && (
                     <ButtonPrimary
-                      type='primary'
-                      title='Зарегистрироваться'
+                      type={ButtonPrimaryType.Primary}
+                      title={ButtonPrimaryTitle.Register}
                       className='button_large'
                       onClick={handleNextStep}
                     />
                   )}
                   <p className='body_large'>
                     <span>Есть учётная запись?</span>
-                    <ButtonLogin title='Войти' onClick={handleButtonRegistration} />
+                    <ButtonLogin title={EButtonLoginTitle.Enter} onClick={handleButtonRegistration} />
                   </p>
                 </div>
               </fieldset>
@@ -127,10 +130,10 @@ export const Registration: FC = () => {
                   <legend className='h4'>Вход в личный кабинет</legend>
                 </div>
                 <div className='registration__section'>
-                  <TextField type='text' id='login' placeholder='Логин' />
+                  <TextField type={ETextFieldType.Text} id={ETextFieldId.Login} placeholder='Логин' />
                   <TextField
-                    type='password'
-                    id='password'
+                    type={ETextFieldType.Password}
+                    id={ETextFieldId.Password}
                     placeholder='Пароль'
                     message='Пароль не менее 8 символов, с заглавной буквой и цифрой'
                   />
@@ -139,10 +142,14 @@ export const Registration: FC = () => {
                   </button>
                 </div>
                 <div className='registration__section'>
-                  <ButtonPrimary type='primary' title='Вход' className='button_large' />
+                  <ButtonPrimary
+                    type={ButtonPrimaryType.Primary}
+                    title={ButtonPrimaryTitle.Entrance}
+                    className='button_large'
+                  />
                   <p className='body_large'>
                     <span>Нет учётной записи</span>
-                    <ButtonLogin title='Регистрация' onClick={handleButtonRegistration} />
+                    <ButtonLogin title={EButtonLoginTitle.Registration} onClick={handleButtonRegistration} />
                   </p>
                 </div>
               </fieldset>
@@ -151,23 +158,27 @@ export const Registration: FC = () => {
             {/* Для восстановления пароля */}
             {isPasswordRecovery && (
               <fieldset className='registration__fieldset'>
-                <ButtonLogin title='Вход в личный кабинет' onClick={handleButtonPersonalAccount} />
+                <ButtonLogin title={EButtonLoginTitle.Login} onClick={handleButtonPersonalAccount} />
                 <div className='registration__section'>
                   <legend className='h4'>Восстановление пароля</legend>
                 </div>
                 <div className='registration__section'>
                   <TextField
-                    type='email'
-                    id='email'
+                    type={ETextFieldType.Email}
+                    id={ETextFieldId.Email}
                     placeholder='Email'
                     message='На это email будет отправлено письмо с инструкциями по восстановлению пароля'
                   />
                 </div>
                 <div className='registration__section'>
-                  <ButtonPrimary type='primary' title='Восстановить' className='button_large' />
+                  <ButtonPrimary
+                    type={ButtonPrimaryType.Primary}
+                    title={ButtonPrimaryTitle.Restore}
+                    className='button_large'
+                  />
                   <p className='body_large'>
                     <span>Нет учётной записи</span>
-                    <ButtonLogin title='Регистрация' onClick={handleButtonRegistration} />
+                    <ButtonLogin title={EButtonLoginTitle.Registration} onClick={handleButtonRegistration} />
                   </p>
                 </div>
               </fieldset>
@@ -181,15 +192,19 @@ export const Registration: FC = () => {
                 </div>
                 <div className='registration__section'>
                   <TextField
-                    type='password'
-                    id='password'
+                    type={ETextFieldType.Password}
+                    id={ETextFieldId.Password}
                     placeholder='Новый пароль'
                     message='Пароль не менее 8 символов, с заглавной буквой и цифрой'
                   />
-                  <TextField type='password' id='password' placeholder='Повторите пароль' />
+                  <TextField type={ETextFieldType.Password} id={ETextFieldId.Password} placeholder='Повторите пароль' />
                 </div>
                 <div className='registration__section'>
-                  <ButtonPrimary type='primary' title='Сохранить изменения' className='button_large' />
+                  <ButtonPrimary
+                    type={ButtonPrimaryType.Primary}
+                    title={ButtonPrimaryTitle.SaveChanges}
+                    className='button_large'
+                  />
                   <p className='body_large'>
                     <span>После сохранения войдите в библиотеку, используя новый пароль</span>
                   </p>

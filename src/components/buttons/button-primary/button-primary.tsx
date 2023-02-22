@@ -5,7 +5,15 @@ import { TButtonPrimary } from './button-primary.types';
 
 import './button-primary.scss';
 
-export const ButtonPrimary: FC<TButtonPrimary> = ({ type, title, className, disabled, onClick, dataTestId }) => {
+export const ButtonPrimary: FC<TButtonPrimary> = ({
+  type,
+  title,
+  untilDate,
+  className,
+  disabled,
+  onClick,
+  dataTestId,
+}) => {
   const buttonPrimaryClass = classNames('button', {
     'button-primary': type === 'primary',
     'button-secondary': type !== 'primary',
@@ -20,6 +28,7 @@ export const ButtonPrimary: FC<TButtonPrimary> = ({ type, title, className, disa
       data-test-id={dataTestId}
     >
       {title}
+      {untilDate && <span>{` ${untilDate}`}</span>}
     </button>
   );
 };

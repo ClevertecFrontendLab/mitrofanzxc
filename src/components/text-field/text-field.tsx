@@ -6,7 +6,7 @@ import { TForm } from '../../store/slices/slices.types';
 import { validateTextField } from '../../utils';
 import { Sprite } from '..';
 
-import { TTextField } from './text-field.types';
+import { ETextFieldId, ETextFieldType, TTextField } from './text-field.types';
 
 import './text-field.scss';
 
@@ -22,19 +22,19 @@ export const TextField: FC<TTextField> = ({ type, id, placeholder, message }) =>
     if (targetId) {
       dispatch(setTextFieldValue({ value, id: targetId }));
 
-      if (targetType === 'tel') {
+      if (targetType === ETextFieldType.Tel) {
         dispatch(setTextFieldError({ value: validateTextField(value, id), id: targetId }));
       }
 
-      if (targetType === 'email') {
+      if (targetType === ETextFieldType.Email) {
         dispatch(setTextFieldError({ value: validateTextField(value, id), id: targetId }));
       }
 
-      if (targetType === 'text' && targetId === 'login') {
+      if (targetType === ETextFieldType.Text && targetId === ETextFieldId.Login) {
         dispatch(setTextFieldError({ value: validateTextField(value, id), id: targetId }));
       }
 
-      if (targetType === 'password') {
+      if (targetType === ETextFieldType.Password) {
         dispatch(setTextFieldError({ value: validateTextField(value, id), id: targetId }));
       }
     }
@@ -47,7 +47,7 @@ export const TextField: FC<TTextField> = ({ type, id, placeholder, message }) =>
   return (
     <div className='text-field'>
       <input
-        type={isEyeOpen ? 'text' : type}
+        type={isEyeOpen ? ETextFieldType.Text : type}
         name={id}
         id={id}
         placeholder={placeholder}
@@ -61,7 +61,7 @@ export const TextField: FC<TTextField> = ({ type, id, placeholder, message }) =>
       <label htmlFor={id} data-content={placeholder} className='text-field__label'>
         <span className='text-field__label_hidden'>{placeholder}</span>
       </label>
-      {type === 'password' && (
+      {type === ETextFieldType.Password && (
         <div className='text-field__logo-wrapper'>
           <Sprite id='check' className='text-field__logo text-field__logo_check' />
           <Sprite

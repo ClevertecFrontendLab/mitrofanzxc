@@ -6,6 +6,8 @@ import { BASE_URL_API } from '../../constants';
 import { useAppSelector } from '../../hooks';
 import { ContextMainPage } from '../../pages';
 import { convertToDate, handleAuthors, handleCategory, handleStatus, translateCategoryTitle } from '../../utils';
+import { EDate, EStatus } from '../../utils/utils.types';
+import { ButtonPrimaryTitle, ButtonPrimaryType } from '../buttons/button-primary/button-primary.types';
 import { ButtonPrimary, HighLight, Rating, Sprite } from '..';
 
 import { TCard } from './card.types';
@@ -68,19 +70,28 @@ export const Card: FC<TCard> = ({
         )}
       </div>
       <div className={cardInfoClass}>
-        {statusResult === 'free' && (
-          <ButtonPrimary type='primary' title='Забронировать' className={buttonPrimaryClass} />
-        )}
-        {statusResult === 'busy' && (
+        {statusResult === EStatus.Free && (
           <ButtonPrimary
-            type='secondary'
-            title={`Занята до ${delivery && delivery.dateHandedTo && convertToDate(delivery.dateHandedTo, 'short')}`}
+            type={ButtonPrimaryType.Primary}
+            title={ButtonPrimaryTitle.Book}
+            className={buttonPrimaryClass}
+          />
+        )}
+        {statusResult === EStatus.Busy && (
+          <ButtonPrimary
+            type={ButtonPrimaryType.Secondary}
+            title={ButtonPrimaryTitle.BusyUntil}
+            untilDate={delivery && delivery.dateHandedTo && convertToDate(delivery.dateHandedTo, EDate.Short)}
             className={buttonPrimaryClass}
             disabled={true}
           />
         )}
-        {statusResult === 'reserved' && (
-          <ButtonPrimary type='secondary' title='Забронирована' className={buttonPrimaryClass} />
+        {statusResult === EStatus.Reserved && (
+          <ButtonPrimary
+            type={ButtonPrimaryType.Secondary}
+            title={ButtonPrimaryTitle.Booked}
+            className={buttonPrimaryClass}
+          />
         )}
         <div>
           <p className={cardTitleClass}>

@@ -1,18 +1,18 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
-import { TCatalogView } from '../../components';
+import { ECatalogView } from '../../components/buttons/button-catalog-view/button-catalog-view.types';
 import { TCatalogData } from '../../constants/constants.types';
 import { sortData } from '../../utils';
-import { TTypeSortData } from '../../utils/utils.types';
+import { ESort, TTypeSortData } from '../../utils/utils.types';
 
 import { TCatalogState } from './slices.types';
 
 const initialState: TCatalogState = {
-  catalogView: 'grid',
+  catalogView: ECatalogView.Grid,
   initialData: [],
   catalogData: [],
-  catalogSortState: 'descending',
+  catalogSortState: ESort.Descending,
   isLoading: false,
 };
 
@@ -22,10 +22,10 @@ export const catalogSlice = createSlice({
   initialState,
   reducers: {
     setCatalogData: (state, action: PayloadAction<TCatalogData[]>) => {
-      state.initialData = action.payload.sort(sortData('descending'));
-      state.catalogData = action.payload.sort(sortData('descending'));
+      state.initialData = action.payload.sort(sortData(ESort.Descending));
+      state.catalogData = action.payload.sort(sortData(ESort.Descending));
     },
-    changeCatalogView: (state, action: PayloadAction<TCatalogView>) => {
+    changeCatalogView: (state, action: PayloadAction<ECatalogView>) => {
       state.catalogView = action.payload;
     },
     sortCatalogByRating: (state, action: PayloadAction<TTypeSortData>) => {

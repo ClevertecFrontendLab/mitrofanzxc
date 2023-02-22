@@ -1,5 +1,6 @@
 import { ChangeEvent, FC, Fragment, useState } from 'react';
 
+import { ButtonPrimaryTitle, ButtonPrimaryType } from '../buttons/button-primary/button-primary.types';
 import { ButtonPrimary, ModalRating, Sprite } from '..';
 
 import { TModal } from './modal.types';
@@ -45,7 +46,7 @@ export const Modal: FC<TModal> = ({ bookId, isModalOpen, handleModal }) => {
             <span className='text-field__label_hidden'>Оставить отзыв</span>
           </label>
         </div>
-        <ButtonPrimary type='primary' title='Оценить' className='button_large' />
+        <ButtonPrimary type={ButtonPrimaryType.Primary} title={ButtonPrimaryTitle.Rate} className='button_large' />
       </form>
     </Fragment>
   );

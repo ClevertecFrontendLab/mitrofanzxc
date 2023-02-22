@@ -2,6 +2,7 @@ import { FC } from 'react';
 import classNames from 'classnames';
 
 import { useAppSelector } from '../../hooks';
+import { ECatalogView } from '../buttons/button-catalog-view/button-catalog-view.types';
 import { ButtonCatalogView, ButtonSort, InputSearch } from '..';
 
 import './catalog-menu.scss';
@@ -20,8 +21,8 @@ export const CatalogMenu: FC = () => {
         <ButtonSort />
       </div>
       <div className={catalogMenuItemClass}>
-        <ButtonCatalogView id='grid' value='grid' dataTestId='button-menu-view-window' />
-        <ButtonCatalogView id='list' value='list' dataTestId='button-menu-view-list' />
+        <ButtonCatalogView id={ECatalogView.Grid} value={ECatalogView.Grid} dataTestId='button-menu-view-window' />
+        <ButtonCatalogView id={ECatalogView.List} value={ECatalogView.List} dataTestId='button-menu-view-list' />
       </div>
     </section>
   );

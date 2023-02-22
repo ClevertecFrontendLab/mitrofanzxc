@@ -1,11 +1,11 @@
-import { TTranslateCategoryTitle } from './utils.types';
+import { ELanguage, TTranslateCategoryTitle } from './utils.types';
 
 export const translateCategoryTitle: TTranslateCategoryTitle = (data, categories, language) => {
   if (data && typeof data === 'object') {
     const title = categories.find(({ path }) => data.categories.includes(path));
 
     if (title) {
-      if (language === 'en') {
+      if (language === ELanguage.En) {
         return title.name;
       }
 
@@ -14,7 +14,7 @@ export const translateCategoryTitle: TTranslateCategoryTitle = (data, categories
   }
 
   if (data && typeof data === 'string') {
-    if (language === 'en') {
+    if (language === ELanguage.En) {
       if (data === 'all') {
         return 'Все книги';
       }
@@ -25,7 +25,7 @@ export const translateCategoryTitle: TTranslateCategoryTitle = (data, categories
         return title.name;
       }
     }
-    if (language === 'ru') {
+    if (language === ELanguage.Ru) {
       if (data === 'Все книги') {
         return 'all';
       }

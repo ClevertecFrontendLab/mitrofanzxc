@@ -1,4 +1,4 @@
-import { TIdTextField } from '../components';
+import { ETextFieldId } from '../components';
 import {
   TBookData,
   TBooking,
@@ -60,5 +60,31 @@ export type TTranslateCategoryTitle = {
 };
 
 export type TValidateTextField = {
-  (value: string, id: TIdTextField): boolean;
+  (value: string, id: ETextFieldId): boolean;
 };
+
+export enum EDate {
+  Full = 'full',
+  Short = 'short',
+}
+
+export enum EStatus {
+  Busy = 'busy',
+  Reserved = 'reserved',
+  Free = 'free',
+}
+
+export enum ESort {
+  Ascending = 'ascending',
+  Descending = 'descending',
+}
+
+export enum ELanguage {
+  En = 'en',
+  Ru = 'ru',
+}
+
+export enum EPart {
+  First = 'first',
+  Second = 'second',
+}

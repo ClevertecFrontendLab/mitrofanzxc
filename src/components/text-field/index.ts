@@ -1,2 +1,2 @@
 export { TextField } from './text-field';
-export type { TIdTextField, TTextField } from './text-field.types';
+export type { ETextFieldId, ETextFieldType, TTextField } from './text-field.types';

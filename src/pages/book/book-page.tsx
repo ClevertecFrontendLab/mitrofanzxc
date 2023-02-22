@@ -3,8 +3,10 @@ import { useParams } from 'react-router-dom';
 import classNames from 'classnames';
 
 import { BreadCrumbs, ButtonPrimary, Loader, Modal, Nav, Rating, Review, Slider, Table, Toast } from '../../components';
+import { ButtonPrimaryTitle, ButtonPrimaryType } from '../../components/buttons/button-primary/button-primary.types';
 import { useAppSelector, useBodyOverflow, useStartLoading, useToast } from '../../hooks';
 import { convertToDate, divideTableData, handleAuthors, handleStatus } from '../../utils';
+import { EDate, EPart, EStatus } from '../../utils/utils.types';
 
 import './book-page.scss';
 
@@ -56,23 +58,32 @@ export const BookPage: FC = () => {
                   {bookData.title}
                 </h3>
                 <h5 className='h5 color-grey-black-40 book-page__author'>{handleAuthors(bookData.authors)}</h5>
-                {statusResult === 'free' && (
-                  <ButtonPrimary type='primary' title='Забронировать' className='button_large' />
-                )}
-                {statusResult === 'busy' && (
+                {statusResult === EStatus.Free && (
                   <ButtonPrimary
-                    type='secondary'
-                    title={`Занята до ${
+                    type={ButtonPrimaryType.Primary}
+                    title={ButtonPrimaryTitle.Book}
+                    className='button_large'
+                  />
+                )}
+                {statusResult === EStatus.Busy && (
+                  <ButtonPrimary
+                    type={ButtonPrimaryType.Secondary}
+                    title={ButtonPrimaryTitle.BusyUntil}
+                    untilDate={
                       bookData.delivery &&
                       bookData.delivery.dateHandedTo &&
-                      convertToDate(bookData.delivery.dateHandedTo, 'short')
-                    }`}
+                      convertToDate(bookData.delivery.dateHandedTo, EDate.Short)
+                    }
                     className='button_large'
                     disabled={true}
                   />
                 )}
-                {statusResult === 'reserved' && (
-                  <ButtonPrimary type='secondary' title='Забронирована' className='button_large' />
+                {statusResult === EStatus.Reserved && (
+                  <ButtonPrimary
+                    type={ButtonPrimaryType.Secondary}
+                    title={ButtonPrimaryTitle.Booked}
+                    className='button_large'
+                  />
                 )}
               </div>
               <div className='book-page__description'>
@@ -92,8 +103,8 @@ export const BookPage: FC = () => {
               </div>
               <h5 className='h5 book-page__header'>Подбробная информация</h5>
               <div className='tables-wrapper'>
-                <Table data={divideTableData('first', bookData)} />
-                <Table data={divideTableData('second', bookData)} />
+                <Table data={divideTableData(EPart.First, bookData)} />
+                <Table data={divideTableData(EPart.Second, bookData)} />
               </div>
               <div className='accordion__wrapper'>
                 <div className='accordion'>
@@ -116,8 +127,8 @@ export const BookPage: FC = () => {
                 </ul>
               </div>
               <ButtonPrimary
-                type='primary'
-                title='Оценить книгу'
+                type={ButtonPrimaryType.Primary}
+                title={ButtonPrimaryTitle.RateTheBook}
                 onClick={() => handleModal(true)}
                 dataTestId='button-rating'
               />

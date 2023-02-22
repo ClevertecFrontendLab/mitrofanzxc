@@ -1,7 +1,10 @@
-export type TCatalogView = 'grid' | 'list';
+export enum ECatalogView {
+  Grid = 'grid',
+  List = 'list',
+}
 
 export type TButtonCatalogView = {
-  id: TCatalogView;
-  value: TCatalogView;
+  id: ECatalogView;
+  value: ECatalogView;
   dataTestId?: string;
 };

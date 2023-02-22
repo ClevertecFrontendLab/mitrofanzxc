@@ -1,7 +1,14 @@
 export { BreadCrumbs } from './bread-crumbs';
 export type { TBreadCrumbs } from './bread-crumbs';
 export { ButtonCatalogView, ButtonPrimary, ButtonSort, ButtonBurger, ButtonLogin } from './buttons';
-export type { TButtonPrimary, TCatalogView, TButtonCatalogView, TButtonLogin, TButtonPrimaryType } from './buttons';
+export type {
+  ButtonPrimaryTitle,
+  ButtonPrimaryType,
+  ECatalogView,
+  TButtonCatalogView,
+  TButtonLogin,
+  TButtonPrimary,
+} from './buttons';
 export { Card } from './card';
 export type { TCard } from './card';
 export { Catalog } from './catalog';
@@ -28,7 +35,7 @@ export type { TSprite } from './sprite';
 export { Table } from './table';
 export type { TTable } from './table';
 export { TextField } from './text-field';
-export type { TIdTextField, TTextField } from './text-field';
+export type { ETextFieldId, ETextFieldType, TTextField } from './text-field';
 export { Toast } from './toast';
 export type { TTypeToastError, TToast } from './toast';
 export { HighLight } from './highlight';

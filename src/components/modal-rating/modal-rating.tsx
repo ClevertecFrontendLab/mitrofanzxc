@@ -1,6 +1,7 @@
 import { FC, Fragment, useMemo, useState } from 'react';
 
 import { RatingStar } from '../rating';
+import { EStar } from '../rating/rating.types';
 
 export const ModalRating: FC = () => {
   const [rating, setRating] = useState(0);
@@ -9,10 +10,10 @@ export const ModalRating: FC = () => {
   return useMemo(() => {
     const getColor = (index: number) => {
       if (hoverRating >= index || (!hoverRating && rating >= index)) {
-        return 'star-filled';
+        return EStar.Fill;
       }
 
-      return 'star';
+      return EStar.Empty;
     };
 
     return (

@@ -1,5 +1,5 @@
 import { TBooking, TDelivery, THistory, TImage, TNumberAble, TStringAble } from '../../constants/constants.types';
-import { TCatalogView } from '../buttons';
+import { ECatalogView } from '../buttons';
 
 export type TCard = {
   issueYear: TStringAble;
@@ -12,6 +12,6 @@ export type TCard = {
   booking: TBooking | null;
   delivery: TDelivery | null;
   histories: THistory[] | null;
-  catalogView: TCatalogView;
+  catalogView: ECatalogView;
   currentCategory: string | undefined;
 };

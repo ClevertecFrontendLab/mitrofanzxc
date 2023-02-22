@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { changeCatalogView } from '../../../store/slices';
 import { Sprite } from '../..';
 
-import { TButtonCatalogView } from './button-catalog-view.types';
+import { ECatalogView, TButtonCatalogView } from './button-catalog-view.types';
 
 import './button-catalog-view.scss';
 
@@ -16,7 +16,7 @@ export const ButtonCatalogView: FC<TButtonCatalogView> = ({ id, value, dataTestI
     const target = event.target as HTMLInputElement;
     const { value: inputValue } = target;
 
-    if (inputValue === 'grid' || inputValue === 'list') {
+    if (inputValue === ECatalogView.Grid || inputValue === ECatalogView.List) {
       dispatch(changeCatalogView(inputValue));
     }
   };
@@ -32,7 +32,7 @@ export const ButtonCatalogView: FC<TButtonCatalogView> = ({ id, value, dataTestI
         onChange={handleInput}
         data-test-id={dataTestId}
       />
-      <Sprite id={id === 'grid' ? 'square-four' : 'menu'} className='button-catalog-view__logo' />
+      <Sprite id={id === ECatalogView.Grid ? 'square-four' : 'menu'} className='button-catalog-view__logo' />
     </label>
   );
 };
