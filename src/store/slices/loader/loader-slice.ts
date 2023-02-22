@@ -1,12 +1,7 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
-import { TLoaderState } from './slices.types';
-
-const initialState: TLoaderState = {
-  isLoading: false,
-  isSuccess: false,
-};
+import { initialState } from './initial-state';
 
 export const catalogSlice = createSlice({
   /* eslint-disable no-param-reassign */

@@ -1,12 +1,12 @@
 import { FC } from 'react';
 
-import { TTermsPage } from './terms-page.types';
+import { EContentView, TTermsPage } from './terms-page.types';
 
 import './terms-page.scss';
 
 export const TermsPage: FC<TTermsPage> = ({ contentView }) => (
   <section className='terms-page'>
-    <h3 className='h3'>{contentView === 'terms' ? 'Правила пользования' : 'Договор оферты'}</h3>
+    <h3 className='h3'>{contentView === EContentView.Terms ? 'Правила пользования' : 'Договор оферты'}</h3>
     <ul className='terms-list'>
       <li className='terms-list__item subtitle_large'>
         1. Идейные соображения высшего порядка, а также высокое качество позиционных исследований представляет собой

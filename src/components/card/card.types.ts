@@ -1,5 +1,5 @@
 import { TBooking, TDelivery, THistory, TImage, TNumberAble, TStringAble } from '../../constants/constants.types';
-import { ECatalogView } from '../buttons';
+import { ECatalogView } from '../buttons/button-catalog-view/button-catalog-view.types';
 
 export type TCard = {
   issueYear: TStringAble;

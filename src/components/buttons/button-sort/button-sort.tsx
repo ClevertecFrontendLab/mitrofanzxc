@@ -1,5 +1,6 @@
 import { FC, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import classNames from 'classnames';
 
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { changeCatalogSortState, sortCatalogByRating } from '../../../store/slices';
@@ -31,6 +32,10 @@ export const ButtonSort: FC = () => {
     dispatch(sortCatalogByRating(catalogSortState));
   }, [category, catalogSortState, dispatch]);
 
+  const spriteClass = classNames('button-sort__logo', {
+    'button-sort__logo_ascending': catalogSortState === ESort.Ascending,
+  });
+
   return (
     <button
       className='button-sort filter-shadow'
@@ -38,10 +43,7 @@ export const ButtonSort: FC = () => {
       onClick={handleButtonSort}
       data-test-id='sort-rating-button'
     >
-      <Sprite
-        id={ESpriteId.Sort}
-        className={`button-sort__logo ${catalogSortState === ESort.Ascending ? 'button-sort__logo_ascending ' : ''}`}
-      />
+      <Sprite id={ESpriteId.Sort} className={spriteClass} />
       <span className='body_small'>По рейтингу</span>
     </button>
   );

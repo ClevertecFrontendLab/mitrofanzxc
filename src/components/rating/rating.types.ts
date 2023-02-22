@@ -1,5 +1,5 @@
 import { TNumberAble } from '../../constants/constants.types';
-import { ESpriteId } from '../sprite';
+import { ESpriteId } from '../sprite/sprite.types';
 
 export type TRatingStar = {
   id?: string;

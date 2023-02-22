@@ -1,13 +1,9 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
-import { TCategories } from '../../constants/constants.types';
+import { TCategories } from '../../../constants/constants.types';
 
-import { TCategoriesState } from './slices.types';
-
-const initialState: TCategoriesState = {
-  categoriesData: [],
-};
+import { initialState } from './initial-state';
 
 export const categoriesSlice = createSlice({
   /* eslint-disable no-param-reassign */

@@ -1,4 +1,4 @@
-export { setBookData, startBookDataLoading } from './book-slice';
+export { setBookData, startBookDataLoading } from './book/book-slice';
 export {
   setCatalogData,
   changeCatalogView,
@@ -7,9 +7,9 @@ export {
   filterCatalogByCategory,
   searchCatalogByTitle,
   startCatalogDataLoading,
-} from './catalog-slice';
-export { setCategoriesData } from './categories-slice';
-export { startLoading, endLoading, handleSuccess } from './loader-slice';
+} from './catalog/catalog-slice';
+export { setCategoriesData } from './categories/categories-slice';
+export { startLoading, endLoading, handleSuccess } from './loader/loader-slice';
 export {
   openMobileMenu,
   closeMobileMenu,
@@ -17,8 +17,8 @@ export {
   openAccordionMenu,
   closeAccordionMenu,
   toggleAccordionMenu,
-} from './mobile-menu-slice';
-export { openModal, closeModal } from './modal-slice';
+} from './mobile-menu/mobile-menu-slice';
+export { openModal, closeModal } from './modal/modal-slice';
 export {
   openFlow,
   closeFlow,
@@ -32,6 +32,6 @@ export {
   nextStep,
   setTextFieldValue,
   setTextFieldError,
-} from './registration-slice';
-export { handleIsInputSearchOpen } from './search-slice';
-export { openToast, closeToast, addErrorToToast, removeErrorFromToast } from './toast-slice';
+} from './registration/registration-slice';
+export { handleIsInputSearchOpen } from './search/search-slice';
+export { openToast, closeToast, addErrorToToast, removeErrorFromToast } from './toast/toast-slice';

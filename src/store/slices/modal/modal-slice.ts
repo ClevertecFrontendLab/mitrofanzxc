@@ -1,10 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { TModalState } from './slices.types';
-
-const initialState: TModalState = {
-  isError: false,
-};
+import { initialState } from './initial-state';
 
 export const toastSlice = createSlice({
   /* eslint-disable no-param-reassign */

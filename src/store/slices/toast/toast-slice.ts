@@ -1,14 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { ETypeToastError } from '../../components/toast/toast.types';
-
-import { TToastState } from './slices.types';
-
-const initialState: TToastState = {
-  isToastOpen: false,
-  isToastError: false,
-  typeToastError: ETypeToastError.Default,
-};
+import { initialState } from './initial-state';
 
 export const toastSlice = createSlice({
   /* eslint-disable no-param-reassign */

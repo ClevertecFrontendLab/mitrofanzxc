@@ -2,6 +2,8 @@ import { all, call, put, takeEvery } from 'redux-saga/effects';
 import { AxiosError, AxiosResponse } from 'axios';
 
 import { TCatalogData, TCategories } from '../../constants/constants.types';
+import { sortData } from '../../utils';
+import { ESort } from '../../utils/utils.types';
 import { getCatalog, getCategories } from '../services';
 import { endLoading, handleSuccess, setCatalogData, setCategoriesData, startCatalogDataLoading } from '../slices';
 
@@ -40,7 +42,7 @@ function* workerSaga() {
       call(handleCategories),
     ]);
 
-    yield put(setCatalogData(catalogData));
+    yield put(setCatalogData(catalogData.sort(sortData(ESort.Descending))));
     yield put(setCategoriesData(categoriesData));
     yield put(handleSuccess(true));
     yield put(endLoading());

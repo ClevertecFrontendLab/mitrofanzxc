@@ -1,11 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { TMobileMenuState } from './slices.types';
-
-const initialState: TMobileMenuState = {
-  isMobileMenuOpen: false,
-  isAccordionMenuOpen: true,
-};
+import { initialState } from './initial-state';
 
 export const mobileMenuSlice = createSlice({
   /* eslint-disable no-param-reassign */

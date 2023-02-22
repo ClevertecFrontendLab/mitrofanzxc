@@ -1,4 +1,4 @@
-import { ETextFieldId } from '../components';
+import { ETextFieldId } from '../components/text-field/text-field.types';
 import {
   TBookData,
   TBooking,

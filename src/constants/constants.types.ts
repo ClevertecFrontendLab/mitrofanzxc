@@ -1,4 +1,4 @@
-import { ESpriteId } from '../components';
+import { ESpriteId } from '../components/sprite/sprite.types';
 
 export type TStringAble = string | null | undefined;
 

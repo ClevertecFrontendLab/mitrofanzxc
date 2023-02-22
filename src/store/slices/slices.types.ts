@@ -1,5 +1,5 @@
-import { ETypeToastError } from '../../components';
-import { ECatalogView } from '../../components/buttons/button-catalog-view';
+import { ECatalogView } from '../../components/buttons/button-catalog-view/button-catalog-view.types';
+import { ETypeToastError } from '../../components/toast/toast.types';
 import { TBookData, TCatalogData, TCategories } from '../../constants/constants.types';
 import { ESort } from '../../utils/utils.types';
 
