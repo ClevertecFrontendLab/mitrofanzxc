@@ -1,11 +1,12 @@
-import { FC, Fragment, useState } from 'react';
+import { FC, Fragment, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import classNames from 'classnames';
 
 import { BreadCrumbs, ButtonPrimary, Loader, Modal, Nav, Rating, Review, Slider, Table, Toast } from '../../components';
 import { EButtonPrimaryTitle, EButtonPrimaryType } from '../../components/buttons/button-primary/button-primary.types';
 import { ETypeToastError } from '../../components/toast/toast.types';
-import { useAppSelector, useBodyOverflow, useRequest, useToast } from '../../hooks';
+import { useAppDispatch, useAppSelector, useBodyOverflow, useRequest } from '../../hooks';
+import { openToast } from '../../store/slices';
 import { EConnectionType } from '../../store/slices/slices.types';
 import { convertToDate, divideTableData, handleAuthors, handleStatus } from '../../utils';
 import { EDate, EPart, EStatus } from '../../utils/utils.types';
@@ -18,6 +19,7 @@ export const BookPage: FC = () => {
   const { isLoading: isLoadingCategories, isError: isErrorCategories } = useAppSelector((state) => state.categories);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isAccordionReviewsOpen, setIsAccordionReviewsOpen] = useState<boolean>(false);
+  const dispatch = useAppDispatch();
 
   const toggleAccordionReviews = () => {
     setIsAccordionReviewsOpen(!isAccordionReviewsOpen);
@@ -29,8 +31,13 @@ export const BookPage: FC = () => {
 
   const statusResult = handleStatus(bookData.booking, bookData.delivery);
 
+  useEffect(() => {
+    if (!isLoadingBook && !isLoadingCategories && (isErrorBook || isErrorCategories)) {
+      dispatch(openToast());
+    }
+  }, [dispatch, isErrorBook, isErrorCategories, isLoadingBook, isLoadingCategories]);
+
   useRequest(EConnectionType.Book, bookId);
-  // useToast({ isLoading, isSuccess });
   useBodyOverflow(isModalOpen);
 
   const ratingNumberClass = classNames({

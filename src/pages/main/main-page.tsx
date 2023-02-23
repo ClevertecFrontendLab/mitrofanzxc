@@ -23,11 +23,11 @@ export const MainPage: FC = () => {
 
   useRequest(EConnectionType.Catalog);
 
-  // useEffect(() => {
-  //   if (!isLoadingCatalog && !isLoadingCategories && (isErrorCatalog || isErrorCategories)) {
-  //     dispatch(openToast());
-  //   }
-  // }, [dispatch, isErrorCatalog, isErrorCategories, isLoadingCatalog, isLoadingCategories]);
+  useEffect(() => {
+    if (!isLoadingCatalog && !isLoadingCategories && (isErrorCatalog || isErrorCategories)) {
+      dispatch(openToast());
+    }
+  }, [dispatch, isErrorCatalog, isErrorCategories, isLoadingCatalog, isLoadingCategories]);
 
   return (
     <ContextMainPage.Provider value={store}>

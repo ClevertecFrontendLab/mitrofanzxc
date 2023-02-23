@@ -1,5 +1,5 @@
 import { ECatalogView } from '../../components/buttons/button-catalog-view/button-catalog-view.types';
-import { ETypeToastError } from '../../components/toast/toast.types';
+import { EToastErrorMessage, ETypeToastError } from '../../components/toast/toast.types';
 import { TBookData, TCatalogData, TCategories } from '../../constants/constants.types';
 import { ESort } from '../../utils/utils.types';
 
@@ -71,6 +71,7 @@ export type TToastState = {
   isToastOpen: boolean;
   isToastError: boolean;
   typeToastError: ETypeToastError;
+  textToastError: EToastErrorMessage;
 };
 
 export type TCategoriesState = {
