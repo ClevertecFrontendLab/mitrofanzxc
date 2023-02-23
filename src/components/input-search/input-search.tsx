@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { ContextMainPage } from '../../pages';
 import { filterCatalogByCategory, handleIsInputSearchOpen, searchCatalogByTitle } from '../../store/slices';
-import { translateCategoryTitle } from '../../utils';
+import { handleFilter, handleSearch } from '../../utils';
 import { ELanguage } from '../../utils/utils.types';
 import { ESpriteId } from '../sprite/sprite.types';
 import { Sprite } from '..';
@@ -17,6 +17,7 @@ export const InputSearch: FC = () => {
   const { inputSearchValue, setInputSearchValue } = useContext(ContextMainPage);
   const { isInputSearchOpen } = useAppSelector((state) => state.search);
   const { categoriesData } = useAppSelector((state) => state.categories);
+  const { initialData } = useAppSelector((state) => state.catalog);
   const inputSearchRef = useRef<HTMLInputElement>(null);
   const dispatch = useAppDispatch();
 
@@ -39,10 +40,14 @@ export const InputSearch: FC = () => {
   const handleKeyboardInputSearch = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
       if (category) {
-        dispatch(filterCatalogByCategory(translateCategoryTitle(category, categoriesData, ELanguage.En)));
+        dispatch(filterCatalogByCategory(handleFilter(category, categoriesData, ELanguage.En, initialData)));
       }
 
-      dispatch(searchCatalogByTitle(inputSearchValue));
+      dispatch(
+        searchCatalogByTitle(
+          handleSearch(inputSearchValue, handleFilter(category, categoriesData, ELanguage.En, initialData))
+        )
+      );
     }
   };
 
@@ -59,12 +64,13 @@ export const InputSearch: FC = () => {
   };
 
   useEffect(() => {
-    if (category) {
-      dispatch(filterCatalogByCategory(translateCategoryTitle(category, categoriesData, ELanguage.En)));
-    }
-
-    dispatch(searchCatalogByTitle(inputSearchValue));
-  }, [inputSearchValue, dispatch, category, categoriesData]);
+    dispatch(filterCatalogByCategory(handleFilter(category, categoriesData, ELanguage.En, initialData)));
+    dispatch(
+      searchCatalogByTitle(
+        handleSearch(inputSearchValue, handleFilter(category, categoriesData, ELanguage.En, initialData))
+      )
+    );
+  }, [categoriesData, category, dispatch, initialData, inputSearchValue]);
 
   const inputSearchClass = classNames('input-search', 'filter-shadow', {
     'input-search_active': isInputSearchOpen,
