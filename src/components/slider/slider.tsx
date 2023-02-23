@@ -2,7 +2,7 @@ import { FC, Fragment, useState } from 'react';
 import SwiperCore, { Navigation, Pagination, Scrollbar, Thumbs } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-import { BASE_URL_API } from '../../constants';
+import { API } from '../../constants/axios';
 import { ESpriteId } from '../sprite/sprite.types';
 import { Sprite } from '..';
 
@@ -42,7 +42,7 @@ export const Slider: FC<TSlider> = ({ data }) => {
             >
               {data.images.map(({ url }) => (
                 <SwiperSlide key={url}>
-                  <img src={`${BASE_URL_API}${url}`} alt='card-img' className='card__img' />
+                  <img src={`${API.BaseUrl}${url}`} alt='card-img' className='card__img' />
                 </SwiperSlide>
               ))}
             </Swiper>
@@ -75,7 +75,7 @@ export const Slider: FC<TSlider> = ({ data }) => {
               >
                 {data.images.map(({ url }) => (
                   <SwiperSlide key={url} className='thumbs__item' data-test-id='slide-mini'>
-                    <img src={`${BASE_URL_API}${url}`} alt='card-img' className='thumbs__img' />
+                    <img src={`${API.BaseUrl}${url}`} alt='card-img' className='thumbs__img' />
                   </SwiperSlide>
                 ))}
               </Swiper>

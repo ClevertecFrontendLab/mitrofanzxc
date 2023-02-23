@@ -36,4 +36,5 @@ export const initialState: TBookState = {
     histories: [],
   },
   isLoading: false,
+  isError: false,
 };

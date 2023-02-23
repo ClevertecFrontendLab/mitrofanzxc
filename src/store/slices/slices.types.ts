@@ -15,11 +15,13 @@ export type TCatalogState = {
   catalogData: TCatalogData[];
   catalogSortState: ESort;
   isLoading: boolean;
+  isError: boolean;
 };
 
 export type TBookState = {
   bookData: TBookData;
   isLoading: boolean;
+  isError: boolean;
 };
 
 export type TSearchState = {
@@ -73,4 +75,6 @@ export type TToastState = {
 
 export type TCategoriesState = {
   categoriesData: TCategories[];
+  isLoading: boolean;
+  isError: boolean;
 };

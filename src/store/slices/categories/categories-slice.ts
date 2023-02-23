@@ -10,12 +10,20 @@ export const categoriesSlice = createSlice({
   name: 'categories',
   initialState,
   reducers: {
-    setCategoriesData: (state, action: PayloadAction<TCategories[]>) => {
+    categoriesRequest: (state) => {
+      state.isLoading = true;
+    },
+    categoriesRequestSuccess: (state, action: PayloadAction<TCategories[]>) => {
       state.categoriesData = action.payload;
+      state.isLoading = false;
+    },
+    categoriesRequestFailure: (state) => {
+      state.isError = true;
+      state.isLoading = false;
     },
   },
 });
 
-export const { setCategoriesData } = categoriesSlice.actions;
+export const { categoriesRequest, categoriesRequestSuccess, categoriesRequestFailure } = categoriesSlice.actions;
 /* eslint-disable-next-line import/no-default-export */
 export default categoriesSlice.reducer;

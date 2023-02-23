@@ -1,9 +1,9 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import classNames from 'classnames';
 
 import { PATHS } from '../../constants';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector, useMatchScreenWidth } from '../../hooks';
 import { closeAccordionMenu, closeMobileMenu, closeToast, toggleAccordionMenu } from '../../store/slices';
 import { getAmountOfBooks } from '../../utils';
 import { ESpriteId } from '../sprite/sprite.types';
@@ -13,7 +13,7 @@ import './nav.scss';
 
 export const Nav: FC = () => {
   const { booksAll, terms, contract, profile } = PATHS;
-  const [match992, setMatch992] = useState(Boolean(window.matchMedia('(max-width: 992px)').matches));
+  const [matchScreenWidth, setMatchScreenWidth] = useState(Boolean(window.matchMedia('(max-width: 992px)').matches));
   const { initialData } = useAppSelector((state) => state.catalog);
   const { categoriesData } = useAppSelector((state) => state.categories);
   const { isMobileMenuOpen, isAccordionMenuOpen } = useAppSelector((state) => state.mobileMenu);
@@ -33,21 +33,11 @@ export const Nav: FC = () => {
     dispatch(closeToast());
   };
 
-  // Эффект для подстановки необходимых data-test-id в зависимости от ширины экрана
-  useEffect(() => {
-    const mediaQueryList992 = window.matchMedia('(max-width: 992px)');
+  const handleScreenWidth = (value: boolean) => {
+    setMatchScreenWidth(value);
+  };
 
-    const handler = () => {
-      setMatch992(Boolean(mediaQueryList992.matches));
-    };
-
-    mediaQueryList992.addEventListener('change', handler);
-    handler();
-
-    return () => {
-      mediaQueryList992.removeEventListener('change', handler);
-    };
-  }, [match992]);
+  useMatchScreenWidth(992, handleScreenWidth);
 
   const navClass = classNames('nav', {
     nav_active: isMobileMenuOpen,
@@ -67,7 +57,7 @@ export const Nav: FC = () => {
           type='button'
           className='h5 nav__item accordion'
           onClick={handleAccordionMenu}
-          data-test-id={`${match992 ? 'burger-showcase' : 'navigation-showcase'}`}
+          data-test-id={`${matchScreenWidth ? 'burger-showcase' : 'navigation-showcase'}`}
         >
           <NavLink to={booksAll}>Витрина книг</NavLink>
           {categoriesData && categoriesData.length > 0 && <Sprite id={ESpriteId.ArrowShort} className={spriteClass} />}
@@ -78,7 +68,7 @@ export const Nav: FC = () => {
               to={booksAll}
               className='nav-list__link'
               onClick={handleMobileMenu}
-              data-test-id={`${match992 ? 'burger-books' : 'navigation-books'}`}
+              data-test-id={`${matchScreenWidth ? 'burger-books' : 'navigation-books'}`}
             >
               Все книги
             </NavLink>
@@ -88,15 +78,17 @@ export const Nav: FC = () => {
                   to={`/books/${path}`}
                   className='nav-list__link body_large'
                   onClick={handleMobileMenu}
-                  data-test-id={`${match992 ? `burger-${path}` : `navigation-${path}`}`}
+                  data-test-id={`${matchScreenWidth ? `burger-${path}` : `navigation-${path}`}`}
                 >
                   {name}
                 </NavLink>
                 <span
                   className='body_small'
-                  data-test-id={`${match992 ? `burger-book-count-for-${path}` : `navigation-book-count-for-${path}`}`}
+                  data-test-id={`${
+                    matchScreenWidth ? `burger-book-count-for-${path}` : `navigation-book-count-for-${path}`
+                  }`}
                 >
-                  {getAmountOfBooks(initialData, name)}
+                  {initialData && initialData.length > 0 && getAmountOfBooks(initialData, name)}
                 </span>
               </li>
             ))}
@@ -106,7 +98,7 @@ export const Nav: FC = () => {
           to={terms}
           className='h5 nav__item'
           onClick={handleTerms}
-          data-test-id={`${match992 ? 'burger-terms' : 'navigation-terms'}`}
+          data-test-id={`${matchScreenWidth ? 'burger-terms' : 'navigation-terms'}`}
         >
           Правила пользования
         </NavLink>
@@ -114,7 +106,7 @@ export const Nav: FC = () => {
           to={contract}
           className='h5 nav__item'
           onClick={handleTerms}
-          data-test-id={`${match992 ? 'burger-contract' : 'navigation-contract'}`}
+          data-test-id={`${matchScreenWidth ? 'burger-contract' : 'navigation-contract'}`}
         >
           Договор оферты
         </NavLink>

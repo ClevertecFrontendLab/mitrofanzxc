@@ -4,13 +4,12 @@ import { configureStore } from '@reduxjs/toolkit';
 import bookReducer from './slices/book/book-slice';
 import catalogReducer from './slices/catalog/catalog-slice';
 import categoriesReducer from './slices/categories/categories-slice';
-import loaderReducer from './slices/loader/loader-slice';
 import mobileMenuReducer from './slices/mobile-menu/mobile-menu-slice';
 import modalReducer from './slices/modal/modal-slice';
 import registrationReducer from './slices/registration/registration-slice';
 import searchReducer from './slices/search/search-slice';
 import toastReducer from './slices/toast/toast-slice';
-import { bookSaga, catalogSaga } from './sagas';
+import { rootSaga } from './sagas';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -19,7 +18,6 @@ export const store = configureStore({
     book: bookReducer,
     catalog: catalogReducer,
     categories: categoriesReducer,
-    loader: loaderReducer,
     mobileMenu: mobileMenuReducer,
     modal: modalReducer,
     toast: toastReducer,
@@ -29,8 +27,7 @@ export const store = configureStore({
   middleware: [sagaMiddleware],
 });
 
-sagaMiddleware.run(catalogSaga);
-sagaMiddleware.run(bookSaga);
+sagaMiddleware.run(rootSaga);
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

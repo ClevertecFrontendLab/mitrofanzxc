@@ -10,15 +10,20 @@ export const bookSlice = createSlice({
   name: 'book',
   initialState,
   reducers: {
-    setBookData: (state, action: PayloadAction<TBookData>) => {
-      state.bookData = action.payload;
-    },
-    startBookDataLoading: (state, action: PayloadAction<string>) => {
+    bookRequest: (state, action: PayloadAction<string>) => {
       state.isLoading = true;
+    },
+    bookRequestSuccess: (state, action: PayloadAction<TBookData>) => {
+      state.bookData = action.payload;
+      state.isLoading = false;
+    },
+    bookRequestFailure: (state) => {
+      state.isError = true;
+      state.isLoading = false;
     },
   },
 });
 
-export const { setBookData, startBookDataLoading } = bookSlice.actions;
+export const { bookRequest, bookRequestSuccess, bookRequestFailure } = bookSlice.actions;
 /* eslint-disable-next-line import/no-default-export */
 export default bookSlice.reducer;

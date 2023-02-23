@@ -2,7 +2,7 @@ import { FC, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 
-import { BASE_URL_API } from '../../constants';
+import { API } from '../../constants/axios';
 import { useAppSelector } from '../../hooks';
 import { ContextMainPage } from '../../pages';
 import { convertToDate, handleAuthors, handleCategory, handleStatus, translateCategoryTitle } from '../../utils';
@@ -75,7 +75,7 @@ export const Card: FC<TCard> = ({
       <div className={placeholderClass}>
         {(!image || image.url.length <= 0) && <Sprite id={ESpriteId.Cat} className={spriteClass} />}
         {image && image.url.length > 0 && (
-          <img src={`${BASE_URL_API}${image.url}`} alt='card-img' className={cardImgClass} />
+          <img src={`${API.BaseUrl}${image.url}`} alt='card-img' className={cardImgClass} />
         )}
       </div>
       <div className={cardInfoClass}>

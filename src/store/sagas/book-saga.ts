@@ -1,27 +1,20 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { AxiosResponse } from 'axios';
 
+import { API, cleverlandConfig } from '../../constants/axios';
 import { TBookData } from '../../constants/constants.types';
-import { getBook } from '../services';
-import { endLoading, handleSuccess, setBookData, startBookDataLoading } from '../slices';
+import { bookRequest, bookRequestFailure, bookRequestSuccess } from '../slices';
 
-function* workerSaga(action: { payload: string; type: string }) {
+function* bookRequestWorker(action: { payload: string; type: string }) {
   try {
-    const { data }: AxiosResponse<TBookData> = yield call(getBook, action.payload);
+    const { data }: AxiosResponse<TBookData> = yield call(cleverlandConfig.get, `${API.Book}${action.payload}`);
 
-    yield put(setBookData(data));
-    yield put(handleSuccess(true));
-    yield put(endLoading());
-  } catch (error) {
-    yield put(handleSuccess(false));
-    yield put(endLoading());
+    yield put(bookRequestSuccess(data));
+  } catch {
+    yield put(bookRequestFailure());
   }
 }
 
-function* watchClickSaga() {
-  yield takeLatest(startBookDataLoading.type, workerSaga);
-}
-
-export function* bookSaga() {
-  yield watchClickSaga();
+export function* watchBookRequest() {
+  yield takeLatest(bookRequest.type, bookRequestWorker);
 }

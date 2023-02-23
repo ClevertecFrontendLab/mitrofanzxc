@@ -8,4 +8,5 @@ export const initialState: TCatalogState = {
   catalogData: [],
   catalogSortState: ESort.Descending,
   isLoading: false,
+  isError: false,
 };

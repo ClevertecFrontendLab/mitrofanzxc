@@ -12,9 +12,17 @@ export const catalogSlice = createSlice({
   name: 'catalog',
   initialState,
   reducers: {
-    setCatalogData: (state, action: PayloadAction<TCatalogData[]>) => {
+    catalogRequest: (state) => {
+      state.isLoading = true;
+    },
+    catalogRequestSuccess: (state, action: PayloadAction<TCatalogData[]>) => {
       state.initialData = action.payload;
       state.catalogData = action.payload;
+      state.isLoading = false;
+    },
+    catalogRequestFailure: (state) => {
+      state.isError = true;
+      state.isLoading = false;
     },
     changeCatalogView: (state, action: PayloadAction<ECatalogView>) => {
       state.catalogView = action.payload;
@@ -31,20 +39,18 @@ export const catalogSlice = createSlice({
     searchCatalogByTitle: (state, action: PayloadAction<TCatalogData[]>) => {
       state.catalogData = action.payload;
     },
-    startCatalogDataLoading: (state) => {
-      state.isLoading = true;
-    },
   },
 });
 
 export const {
-  setCatalogData,
+  catalogRequest,
+  catalogRequestSuccess,
+  catalogRequestFailure,
   changeCatalogView,
   sortCatalogByRating,
   changeCatalogSortState,
   filterCatalogByCategory,
   searchCatalogByTitle,
-  startCatalogDataLoading,
 } = catalogSlice.actions;
 /* eslint-disable-next-line import/no-default-export */
 export default catalogSlice.reducer;

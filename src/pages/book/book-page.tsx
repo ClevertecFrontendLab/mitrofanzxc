@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { BreadCrumbs, ButtonPrimary, Loader, Modal, Nav, Rating, Review, Slider, Table, Toast } from '../../components';
 import { EButtonPrimaryTitle, EButtonPrimaryType } from '../../components/buttons/button-primary/button-primary.types';
 import { ETypeToastError } from '../../components/toast/toast.types';
-import { useAppSelector, useBodyOverflow, useStartLoading, useToast } from '../../hooks';
+import { useAppSelector, useBodyOverflow, useRequest, useToast } from '../../hooks';
 import { EConnectionType } from '../../store/slices/slices.types';
 import { convertToDate, divideTableData, handleAuthors, handleStatus } from '../../utils';
 import { EDate, EPart, EStatus } from '../../utils/utils.types';
@@ -14,8 +14,8 @@ import './book-page.scss';
 
 export const BookPage: FC = () => {
   const { category, bookId } = useParams();
-  const { bookData } = useAppSelector((state) => state.book);
-  const { isLoading, isSuccess } = useAppSelector((state) => state.loader);
+  const { bookData, isLoading: isLoadingBook, isError: isErrorBook } = useAppSelector((state) => state.book);
+  const { isLoading: isLoadingCategories, isError: isErrorCategories } = useAppSelector((state) => state.categories);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isAccordionReviewsOpen, setIsAccordionReviewsOpen] = useState<boolean>(false);
 
@@ -29,8 +29,8 @@ export const BookPage: FC = () => {
 
   const statusResult = handleStatus(bookData.booking, bookData.delivery);
 
-  useStartLoading(EConnectionType.Book, bookId);
-  useToast({ isLoading, isSuccess });
+  useRequest(EConnectionType.Book, bookId);
+  // useToast({ isLoading, isSuccess });
   useBodyOverflow(isModalOpen);
 
   const ratingNumberClass = classNames({
@@ -46,12 +46,16 @@ export const BookPage: FC = () => {
 
   return (
     <section>
-      <BreadCrumbs bookData={bookData} isSuccess={isSuccess} currentCategory={category} />
-      {isLoading && !isSuccess && <Loader />}
-      {!isLoading && !isSuccess && (
+      <BreadCrumbs
+        bookData={bookData}
+        isSuccess={!isLoadingBook && !isLoadingCategories && !isErrorBook && !isErrorCategories}
+        currentCategory={category}
+      />
+      {(isLoadingBook || isLoadingCategories) && !isErrorBook && !isErrorCategories && <Loader />}
+      {(isErrorBook || isErrorCategories) && (
         <Toast isToastError={true} typeToastError={ETypeToastError.Connection} dataTestId='error' />
       )}
-      {!isLoading && isSuccess && (
+      {!isLoadingBook && !isLoadingCategories && !isErrorBook && !isErrorCategories && (
         <Fragment>
           <div className='wrapper'>
             <Nav />

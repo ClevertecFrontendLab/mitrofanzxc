@@ -1,8 +1,9 @@
-import { createContext, FC, Fragment, useMemo, useState } from 'react';
+import { createContext, FC, Fragment, useEffect, useMemo, useState } from 'react';
 
 import { Catalog, CatalogMenu, Loader, Toast } from '../../components';
 import { ETypeToastError } from '../../components/toast/toast.types';
-import { useAppSelector, useStartLoading, useToast } from '../../hooks';
+import { useAppDispatch, useAppSelector, useRequest } from '../../hooks';
+import { openToast } from '../../store/slices';
 import { EConnectionType } from '../../store/slices/slices.types';
 
 export type TContext = {
@@ -14,21 +15,28 @@ export const ContextMainPage = createContext<TContext>({ inputSearchValue: '', s
 
 export const MainPage: FC = () => {
   const [inputSearchValue, setInputSearchValue] = useState('');
-  const { isLoading, isSuccess } = useAppSelector((state) => state.loader);
+  const { isLoading: isLoadingCatalog, isError: isErrorCatalog } = useAppSelector((state) => state.catalog);
+  const { isLoading: isLoadingCategories, isError: isErrorCategories } = useAppSelector((state) => state.categories);
+  const dispatch = useAppDispatch();
 
   const store = useMemo(() => ({ inputSearchValue, setInputSearchValue }), [inputSearchValue]);
 
-  useStartLoading(EConnectionType.Catalog);
-  useToast({ isLoading, isSuccess });
+  useRequest(EConnectionType.Catalog);
+
+  // useEffect(() => {
+  //   if (!isLoadingCatalog && !isLoadingCategories && (isErrorCatalog || isErrorCategories)) {
+  //     dispatch(openToast());
+  //   }
+  // }, [dispatch, isErrorCatalog, isErrorCategories, isLoadingCatalog, isLoadingCategories]);
 
   return (
     <ContextMainPage.Provider value={store}>
       <section className='main-page'>
-        {isLoading && !isSuccess && <Loader />}
-        {!isLoading && !isSuccess && (
+        {(isLoadingCatalog || isLoadingCategories) && !isErrorCatalog && !isErrorCategories && <Loader />}
+        {(isErrorCatalog || isErrorCategories) && (
           <Toast isToastError={true} typeToastError={ETypeToastError.Connection} dataTestId='error' />
         )}
-        {!isLoading && isSuccess && (
+        {!isLoadingCatalog && !isLoadingCategories && !isErrorCatalog && !isErrorCategories && (
           <Fragment>
             <CatalogMenu />
             <Catalog />

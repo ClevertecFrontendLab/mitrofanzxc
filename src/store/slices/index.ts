@@ -1,15 +1,15 @@
-export { setBookData, startBookDataLoading } from './book/book-slice';
+export { bookRequest, bookRequestSuccess, bookRequestFailure } from './book/book-slice';
 export {
-  setCatalogData,
-  changeCatalogView,
-  sortCatalogByRating,
+  catalogRequest,
+  catalogRequestSuccess,
+  catalogRequestFailure,
   changeCatalogSortState,
+  changeCatalogView,
   filterCatalogByCategory,
   searchCatalogByTitle,
-  startCatalogDataLoading,
+  sortCatalogByRating,
 } from './catalog/catalog-slice';
-export { setCategoriesData } from './categories/categories-slice';
-export { startLoading, endLoading, handleSuccess } from './loader/loader-slice';
+export { categoriesRequest, categoriesRequestSuccess, categoriesRequestFailure } from './categories/categories-slice';
 export {
   openMobileMenu,
   closeMobileMenu,
