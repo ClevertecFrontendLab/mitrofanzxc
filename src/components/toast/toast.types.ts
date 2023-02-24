@@ -1,22 +1,18 @@
-export enum ETypeToastError {
-  Connection = 'connection',
-  Changes = 'changes',
-  Default = 'default',
-  Rating = 'rating',
+export enum EToastType {
+  Error = 'error',
+  Success = 'success',
 }
 
-export enum EToastErrorMessage {
-  ConnectionFail = 'Что-то пошло не так. Обновите страницу через некоторое время.',
-  ChangesFail = 'Изменения не были сохранены. Попробуйте позже!',
+export enum EToastMessage {
+  ConnectionError = 'Что-то пошло не так. Обновите страницу через некоторое время.',
+  ChangesError = 'Изменения не были сохранены. Попробуйте позже!',
   ChangesSuccess = 'Изменения успешно сохранены!',
-  DefaultFail = 'Изменения не были сохранены. Попробуйте позже!',
+  DefaultError = 'Изменения не были сохранены. Попробуйте позже!',
   DefaultSuccess = 'Изменения успешно сохранены!',
-  RatingFail = 'Оценка не была отправлена. Попробуйте позже!',
+  RatingError = 'Оценка не была отправлена. Попробуйте позже!',
   RatingSuccess = 'Спасибо, что нашли время оценить книгу!',
 }
 
 export type TToast = {
-  isToastError: boolean;
-  typeToastError: ETypeToastError;
   dataTestId: string;
 };

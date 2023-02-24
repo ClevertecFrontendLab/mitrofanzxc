@@ -1,11 +1,12 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { AxiosResponse } from 'axios';
 
+import { EToastMessage, EToastType } from '../../components/toast/toast.types';
 import { API, cleverlandConfig } from '../../constants/axios';
 import { TCatalogData } from '../../constants/constants.types';
 import { sortData } from '../../utils';
 import { ESort } from '../../utils/utils.types';
-import { catalogRequest, catalogRequestFailure, catalogRequestSuccess } from '../slices';
+import { catalogRequest, catalogRequestError, catalogRequestSuccess, setToast } from '../slices';
 
 function* catalogRequestWorker() {
   try {
@@ -13,10 +14,11 @@ function* catalogRequestWorker() {
 
     yield put(catalogRequestSuccess(data.sort(sortData(ESort.Descending))));
   } catch {
-    yield put(catalogRequestFailure());
+    yield put(catalogRequestError());
+    yield put(setToast({ type: EToastType.Error, message: EToastMessage.ConnectionError }));
   }
 }
 
-export function* watchCatalogRequest() {
+export function* catalogRequestWatcher() {
   yield takeLatest(catalogRequest.type, catalogRequestWorker);
 }

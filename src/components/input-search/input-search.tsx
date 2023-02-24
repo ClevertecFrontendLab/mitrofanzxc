@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { ContextMainPage } from '../../pages';
-import { filterCatalogByCategory, handleIsInputSearchOpen, searchCatalogByTitle } from '../../store/slices';
+import { filterCatalogByCategory, searchCatalogByTitle } from '../../store/slices';
 import { handleFilter, handleSearch } from '../../utils';
 import { ELanguage } from '../../utils/utils.types';
 import { ESpriteId } from '../sprite/sprite.types';
@@ -14,8 +14,8 @@ import './input-search.scss';
 
 export const InputSearch: FC = () => {
   const { category } = useParams();
-  const { inputSearchValue, setInputSearchValue } = useContext(ContextMainPage);
-  const { isInputSearchOpen } = useAppSelector((state) => state.search);
+  const { inputSearchValue, setInputSearchValue, isInputSearchOpen, setIsInputSearchOpen } =
+    useContext(ContextMainPage);
   const { categoriesData } = useAppSelector((state) => state.categories);
   const { initialData } = useAppSelector((state) => state.catalog);
   const inputSearchRef = useRef<HTMLInputElement>(null);
@@ -33,7 +33,7 @@ export const InputSearch: FC = () => {
     const { value } = target;
 
     if (!value) {
-      dispatch(handleIsInputSearchOpen(false));
+      setIsInputSearchOpen(false);
     }
   };
 
@@ -56,11 +56,11 @@ export const InputSearch: FC = () => {
       inputSearchRef.current.focus();
     }
 
-    dispatch(handleIsInputSearchOpen(true));
+    setIsInputSearchOpen(true);
   };
 
   const handleButtonCancel = () => {
-    dispatch(handleIsInputSearchOpen(false));
+    setIsInputSearchOpen(false);
   };
 
   useEffect(() => {

@@ -6,12 +6,12 @@ import { closeToast } from '../../store/slices';
 import { ESpriteId } from '../sprite/sprite.types';
 import { Sprite } from '..';
 
-import { EToastErrorMessage, ETypeToastError, TToast } from './toast.types';
+import { EToastType, TToast } from './toast.types';
 
 import './toast.scss';
 
-export const Toast: FC<TToast> = ({ isToastError, typeToastError, dataTestId }) => {
-  const { isToastOpen } = useAppSelector((state) => state.toast);
+export const Toast: FC<TToast> = ({ dataTestId }) => {
+  const { isToastOpen, toastType, toastMessage } = useAppSelector((state) => state.toast);
   const dispatch = useAppDispatch();
 
   const handleToast = () => {
@@ -19,8 +19,8 @@ export const Toast: FC<TToast> = ({ isToastError, typeToastError, dataTestId }) 
   };
 
   const toastClass = classNames('toast', {
-    toast_error: isToastError,
-    toast_success: !isToastError,
+    toast_error: toastType === EToastType.Error,
+    toast_success: toastType === EToastType.Success,
     toast_active: isToastOpen,
   });
 
@@ -28,16 +28,8 @@ export const Toast: FC<TToast> = ({ isToastError, typeToastError, dataTestId }) 
     <div className={toastClass} data-test-id={dataTestId}>
       <div className='toast__wrapper'>
         <div className='toast__wrapper'>
-          <Sprite id={isToastError ? ESpriteId.Warning : ESpriteId.Success} className='toast__logo' />
-          <p className='subtitle_large'>
-            {isToastError && typeToastError === ETypeToastError.Changes && EToastErrorMessage.ChangesFail}
-            {!isToastError && typeToastError === ETypeToastError.Changes && EToastErrorMessage.ChangesSuccess}
-            {isToastError && typeToastError === ETypeToastError.Rating && EToastErrorMessage.RatingFail}
-            {!isToastError && typeToastError === ETypeToastError.Rating && EToastErrorMessage.RatingSuccess}
-            {isToastError && typeToastError === ETypeToastError.Connection && EToastErrorMessage.ConnectionFail}
-            {isToastError && typeToastError === ETypeToastError.Default && EToastErrorMessage.DefaultFail}
-            {!isToastError && typeToastError === ETypeToastError.Default && EToastErrorMessage.DefaultSuccess}
-          </p>
+          <Sprite id={toastType === EToastType.Error ? ESpriteId.Warning : ESpriteId.Success} className='toast__logo' />
+          <p className='subtitle_large'>{toastMessage}</p>
         </div>
         <Sprite id={ESpriteId.Close} className='toast__logo' onClick={handleToast} />
       </div>

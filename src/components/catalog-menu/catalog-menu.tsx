@@ -1,14 +1,14 @@
-import { FC } from 'react';
+import { FC, useContext } from 'react';
 import classNames from 'classnames';
 
-import { useAppSelector } from '../../hooks';
+import { ContextMainPage } from '../../pages';
 import { ECatalogView } from '../buttons/button-catalog-view/button-catalog-view.types';
 import { ButtonCatalogView, ButtonSort, InputSearch } from '..';
 
 import './catalog-menu.scss';
 
 export const CatalogMenu: FC = () => {
-  const { isInputSearchOpen } = useAppSelector((state) => state.search);
+  const { isInputSearchOpen } = useContext(ContextMainPage);
 
   const catalogMenuItemClass = classNames('catalog-menu__item', {
     'catalog-menu__item_active': isInputSearchOpen,

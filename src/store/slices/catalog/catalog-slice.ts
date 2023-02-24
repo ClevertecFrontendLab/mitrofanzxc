@@ -20,7 +20,7 @@ export const catalogSlice = createSlice({
       state.catalogData = action.payload;
       state.isLoading = false;
     },
-    catalogRequestFailure: (state) => {
+    catalogRequestError: (state) => {
       state.isError = true;
       state.isLoading = false;
     },
@@ -45,7 +45,7 @@ export const catalogSlice = createSlice({
 export const {
   catalogRequest,
   catalogRequestSuccess,
-  catalogRequestFailure,
+  catalogRequestError,
   changeCatalogView,
   sortCatalogByRating,
   changeCatalogSortState,

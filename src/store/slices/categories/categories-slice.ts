@@ -17,13 +17,13 @@ export const categoriesSlice = createSlice({
       state.categoriesData = action.payload;
       state.isLoading = false;
     },
-    categoriesRequestFailure: (state) => {
+    categoriesRequestError: (state) => {
       state.isError = true;
       state.isLoading = false;
     },
   },
 });
 
-export const { categoriesRequest, categoriesRequestSuccess, categoriesRequestFailure } = categoriesSlice.actions;
+export const { categoriesRequest, categoriesRequestSuccess, categoriesRequestError } = categoriesSlice.actions;
 /* eslint-disable-next-line import/no-default-export */
 export default categoriesSlice.reducer;

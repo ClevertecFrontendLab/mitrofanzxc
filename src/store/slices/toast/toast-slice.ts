@@ -1,4 +1,7 @@
+import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
+
+import { EToastMessage, EToastType } from '../../../components/toast/toast.types';
 
 import { initialState } from './initial-state';
 
@@ -7,21 +10,17 @@ export const toastSlice = createSlice({
   name: 'toast',
   initialState,
   reducers: {
-    openToast: (state) => {
-      state.isToastOpen = true;
-    },
     closeToast: (state) => {
       state.isToastOpen = false;
     },
-    addErrorToToast: (state) => {
-      state.isToastError = true;
-    },
-    removeErrorFromToast: (state) => {
-      state.isToastError = false;
+    setToast: (state, action: PayloadAction<{ type: EToastType; message: EToastMessage }>) => {
+      state.toastType = action.payload.type;
+      state.toastMessage = action.payload.message;
+      state.isToastOpen = true;
     },
   },
 });
 
-export const { openToast, closeToast, addErrorToToast, removeErrorFromToast } = toastSlice.actions;
+export const { closeToast, setToast } = toastSlice.actions;
 /* eslint-disable-next-line import/no-default-export */
 export default toastSlice.reducer;

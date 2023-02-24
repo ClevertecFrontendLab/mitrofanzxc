@@ -1,15 +1,15 @@
-export { bookRequest, bookRequestSuccess, bookRequestFailure } from './book/book-slice';
+export { bookRequest, bookRequestSuccess, bookRequestError } from './book/book-slice';
 export {
   catalogRequest,
   catalogRequestSuccess,
-  catalogRequestFailure,
+  catalogRequestError,
   changeCatalogSortState,
   changeCatalogView,
   filterCatalogByCategory,
   searchCatalogByTitle,
   sortCatalogByRating,
 } from './catalog/catalog-slice';
-export { categoriesRequest, categoriesRequestSuccess, categoriesRequestFailure } from './categories/categories-slice';
+export { categoriesRequest, categoriesRequestSuccess, categoriesRequestError } from './categories/categories-slice';
 export {
   openMobileMenu,
   closeMobileMenu,
@@ -18,7 +18,6 @@ export {
   closeAccordionMenu,
   toggleAccordionMenu,
 } from './mobile-menu/mobile-menu-slice';
-export { openModal, closeModal } from './modal/modal-slice';
 export {
   openFlow,
   closeFlow,
@@ -33,5 +32,4 @@ export {
   setTextFieldValue,
   setTextFieldError,
 } from './registration/registration-slice';
-export { handleIsInputSearchOpen } from './search/search-slice';
-export { openToast, closeToast, addErrorToToast, removeErrorFromToast } from './toast/toast-slice';
+export { closeToast, setToast } from './toast/toast-slice';

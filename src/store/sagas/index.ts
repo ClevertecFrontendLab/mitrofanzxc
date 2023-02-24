@@ -1,4 +1,4 @@
-export { watchCatalogRequest } from './catalog-saga';
-export { watchBookRequest } from './book-saga';
-export { watchCategoriesRequest } from './categories-saga';
+export { catalogRequestWatcher } from './catalog-saga';
+export { bookRequestWatcher } from './book-saga';
+export { categoriesRequestWatcher } from './categories-saga';
 export { rootSaga } from './root-saga';

@@ -1,9 +1,9 @@
 import { all, call } from 'redux-saga/effects';
 
-import { watchBookRequest } from './book-saga';
-import { watchCatalogRequest } from './catalog-saga';
-import { watchCategoriesRequest } from './categories-saga';
+import { bookRequestWatcher } from './book-saga';
+import { catalogRequestWatcher } from './catalog-saga';
+import { categoriesRequestWatcher } from './categories-saga';
 
 export function* rootSaga() {
-  yield all([call(watchCatalogRequest), call(watchCategoriesRequest), call(watchBookRequest)]);
+  yield all([call(catalogRequestWatcher), call(categoriesRequestWatcher), call(bookRequestWatcher)]);
 }

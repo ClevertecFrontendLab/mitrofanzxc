@@ -17,13 +17,13 @@ export const bookSlice = createSlice({
       state.bookData = action.payload;
       state.isLoading = false;
     },
-    bookRequestFailure: (state) => {
+    bookRequestError: (state) => {
       state.isError = true;
       state.isLoading = false;
     },
   },
 });
 
-export const { bookRequest, bookRequestSuccess, bookRequestFailure } = bookSlice.actions;
+export const { bookRequest, bookRequestSuccess, bookRequestError } = bookSlice.actions;
 /* eslint-disable-next-line import/no-default-export */
 export default bookSlice.reducer;

@@ -11,7 +11,7 @@ export const useScrollToTop = () => {
         left: 0,
         behavior: 'auto',
       });
-    } catch (error) {
+    } catch {
       window.scroll({
         top: 0,
         left: 0,
