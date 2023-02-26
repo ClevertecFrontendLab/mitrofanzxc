@@ -54,5 +54,6 @@
 
 .rating__logo {
   width: $base * 5;
-  height: 19px;
+  height: $base * 5;
+  fill: $color-white;
 }

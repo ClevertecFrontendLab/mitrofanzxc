@@ -3,12 +3,13 @@ import { ChangeEvent, FC } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { changeCatalogView } from '../../../store/slices';
 import { Sprite } from '../..';
+import { ESpriteId } from '../../sprite/sprite.types';
 
-import { IButtonCatalogView } from './button-catalog-view.interface';
+import { ECatalogView, TButtonCatalogView } from './button-catalog-view.types';
 
 import './button-catalog-view.scss';
 
-export const ButtonCatalogView: FC<IButtonCatalogView> = ({ id, value, dataTestId }) => {
+export const ButtonCatalogView: FC<TButtonCatalogView> = ({ id, value, dataTestId }) => {
   const { catalogView } = useAppSelector((state) => state.catalog);
   const dispatch = useAppDispatch();
 
@@ -16,13 +17,13 @@ export const ButtonCatalogView: FC<IButtonCatalogView> = ({ id, value, dataTestI
     const target = event.target as HTMLInputElement;
     const { value: inputValue } = target;
 
-    if (inputValue === 'grid' || inputValue === 'list') {
+    if (inputValue === ECatalogView.Grid || inputValue === ECatalogView.List) {
       dispatch(changeCatalogView(inputValue));
     }
   };
 
   return (
-    <label htmlFor={id} className='button-catalog-view'>
+    <label htmlFor={id} className='button-catalog-view filter-shadow'>
       <input
         id={id}
         type='radio'
@@ -32,7 +33,7 @@ export const ButtonCatalogView: FC<IButtonCatalogView> = ({ id, value, dataTestI
         onChange={handleInput}
         data-test-id={dataTestId}
       />
-      <Sprite id={id === 'grid' ? 'square-four' : 'menu'} className='button-catalog-view__logo' />
+      <Sprite id={id === ECatalogView.Grid ? ESpriteId.Grid : ESpriteId.List} className='button-catalog-view__logo' />
     </label>
   );
 };

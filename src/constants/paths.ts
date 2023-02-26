@@ -1,6 +1,6 @@
-import { IPATHS } from './constants.interface';
+import { TPATHS } from './constants.types';
 
-export const PATHS: IPATHS = {
+export const PATHS: TPATHS = {
   main: '/',
   booksAll: '/books/all',
   booksCategory: '/books/:category',
@@ -10,5 +10,3 @@ export const PATHS: IPATHS = {
   contract: '/contract',
   any: '*',
 };
-
-export const BASE_URL_API = 'https://strapi.cleverland.by';

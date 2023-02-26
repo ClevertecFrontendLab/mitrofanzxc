@@ -7,7 +7,7 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  row-gap: 5px;
+  row-gap: $base;
 
   @media (max-width: $breakpoint-lg-min) {
     display: flex;
@@ -15,14 +15,14 @@
 }
 
 .button-burger__bar {
-  width: 27px;
+  width: $base * 7;
   height: 0.188rem;
   background: $color-dark;
-  border-radius: 5px;
+  border-radius: $base;
   transition: all $transition-02;
 
   &:nth-child(1) {
-    transform: translate(0px, 0px) rotate(0deg);
+    transform: translate(0, 0) rotate(0deg);
   }
 
   &:nth-child(2) {
@@ -30,15 +30,16 @@
   }
 
   &:nth-child(3) {
-    transform: translate(0px, 0px) rotate(0deg);
+    transform: translate(0, 0) rotate(0deg);
   }
 }
 
 .button-burger__bar_active {
-  background: $color-hover;
+  background: -o-linear-gradient($color-hover);
+  background: linear-gradient($color-hover);
 
   &:nth-child(1) {
-    transform: translate(0px, 7px) rotate(45deg);
+    transform: translate(0, 7px) rotate(45deg);
   }
 
   &:nth-child(2) {
@@ -46,7 +47,7 @@
   }
 
   &:nth-child(3) {
-    transform: translate(0px, -9px) rotate(-45deg);
+    transform: translate(0, -9px) rotate(-45deg);
   }
 }
 

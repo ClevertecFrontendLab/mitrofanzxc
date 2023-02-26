@@ -1,23 +1,25 @@
-import { IValidateTextField } from './utils.interface';
+import { ETextFieldId } from '../components/text-field/text-field.types';
 
-export const validateTextField: IValidateTextField = (value, id) => {
+import { TValidateTextField } from './utils.types';
+
+export const validateTextField: TValidateTextField = (value, id) => {
   const regexPhone = /^(?:\+375|375|80)\s?\(?(?:25|29|33|44)\)?\s?\d{3}\s?-?\d{2}\s?-?\d{2}/g;
   const regexEmail = /[^\s@]+@[^\s@]+\.[^\s@]+/;
   const regexLogin = /^[A-Za-z0-9]+$/;
   const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
 
   switch (id) {
-    case 'login':
+    case ETextFieldId.Login:
       return regexLogin.test(value);
-    case 'phone':
+    case ETextFieldId.Phone:
       return regexPhone.test(value);
-    case 'email':
+    case ETextFieldId.Email:
       return regexEmail.test(value);
-    case 'password':
+    case ETextFieldId.Password:
       return regexPassword.test(value);
-    case 'contractNumber':
+    case ETextFieldId.ContractNumber:
       return false;
-    case 'contractOwner':
+    case ETextFieldId.ContractOwner:
       return false;
     default:
       return false;

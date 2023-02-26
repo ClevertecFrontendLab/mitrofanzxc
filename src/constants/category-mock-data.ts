@@ -1,6 +1,6 @@
-import { ICategoryMockData } from './constants.interface';
+import { TCategoryMockData } from './constants.types';
 
-export const CategoryMockData: ICategoryMockData[] = [
+export const CategoryMockData: TCategoryMockData[] = [
   {
     path: 'business',
     name: 'Бизнес книги',

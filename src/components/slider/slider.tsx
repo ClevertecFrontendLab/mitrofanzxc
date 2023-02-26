@@ -1,11 +1,12 @@
 import { FC, Fragment, useState } from 'react';
-import { Navigation, Pagination, Scrollbar, Thumbs } from 'swiper';
+import SwiperCore, { Navigation, Pagination, Scrollbar, Thumbs } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-import { BASE_URL_API } from '../../constants';
+import { API } from '../../constants/axios';
+import { ESpriteId } from '../sprite/sprite.types';
 import { Sprite } from '..';
 
-import { ISlider } from './slider.interface';
+import { TSlider } from './slider.types';
 
 import './slider.scss';
 
@@ -13,11 +14,10 @@ import 'swiper/scss';
 import 'swiper/scss/navigation';
 import 'swiper/scss/pagination';
 import 'swiper/scss/thumbs';
-import 'swiper/css/scrollbar';
+import 'swiper/scss/scrollbar';
 
-export const Slider: FC<ISlider> = ({ data }) => {
-  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-  const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
+export const Slider: FC<TSlider> = ({ data }) => {
+  const [thumbsSwiper, setThumbsSwiper] = useState<SwiperCore>();
 
   return (
     <Fragment>
@@ -28,7 +28,7 @@ export const Slider: FC<ISlider> = ({ data }) => {
               modules={[Thumbs, Pagination]}
               loop={true}
               pagination={{ clickable: true }}
-              thumbs={{ swiper: thumbsSwiper }}
+              thumbs={{ swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null }}
               spaceBetween={30}
               breakpoints={{
                 1: {
@@ -42,7 +42,7 @@ export const Slider: FC<ISlider> = ({ data }) => {
             >
               {data.images.map(({ url }) => (
                 <SwiperSlide key={url}>
-                  <img src={`${BASE_URL_API}${url}`} alt='card-img' className='card__img' />
+                  <img src={`${API.BaseUrl}${url}`} alt='card-img' className='card__img' />
                 </SwiperSlide>
               ))}
             </Swiper>
@@ -75,7 +75,7 @@ export const Slider: FC<ISlider> = ({ data }) => {
               >
                 {data.images.map(({ url }) => (
                   <SwiperSlide key={url} className='thumbs__item' data-test-id='slide-mini'>
-                    <img src={`${BASE_URL_API}${url}`} alt='card-img' className='thumbs__img' />
+                    <img src={`${API.BaseUrl}${url}`} alt='card-img' className='thumbs__img' />
                   </SwiperSlide>
                 ))}
               </Swiper>
@@ -85,7 +85,7 @@ export const Slider: FC<ISlider> = ({ data }) => {
       )}
       {(!data || !data.images || data.images.length <= 0) && (
         <div className='placeholder book-page__img-wrapper'>
-          <Sprite id='cat' className='placeholder__logo' />
+          <Sprite id={ESpriteId.Cat} className='placeholder__logo' />
         </div>
       )}
     </Fragment>

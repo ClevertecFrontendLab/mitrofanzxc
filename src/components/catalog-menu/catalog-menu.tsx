@@ -1,12 +1,18 @@
-import { FC } from 'react';
+import { FC, useContext } from 'react';
+import classNames from 'classnames';
 
-import { useAppSelector } from '../../hooks';
+import { ContextMainPage } from '../../pages';
+import { ECatalogView } from '../buttons/button-catalog-view/button-catalog-view.types';
 import { ButtonCatalogView, ButtonSort, InputSearch } from '..';
 
 import './catalog-menu.scss';
 
 export const CatalogMenu: FC = () => {
-  const { isInputSearchOpen } = useAppSelector((state) => state.search);
+  const { isInputSearchOpen } = useContext(ContextMainPage);
+
+  const catalogMenuItemClass = classNames('catalog-menu__item', {
+    'catalog-menu__item_active': isInputSearchOpen,
+  });
 
   return (
     <section className='catalog-menu'>
@@ -14,9 +20,9 @@ export const CatalogMenu: FC = () => {
         <InputSearch />
         <ButtonSort />
       </div>
-      <div className={`catalog-menu__item ${isInputSearchOpen ? 'catalog-menu__item_active' : ''}`}>
-        <ButtonCatalogView id='grid' value='grid' dataTestId='button-menu-view-window' />
-        <ButtonCatalogView id='list' value='list' dataTestId='button-menu-view-list' />
+      <div className={catalogMenuItemClass}>
+        <ButtonCatalogView id={ECatalogView.Grid} value={ECatalogView.Grid} dataTestId='button-menu-view-window' />
+        <ButtonCatalogView id={ECatalogView.List} value={ECatalogView.List} dataTestId='button-menu-view-list' />
       </div>
     </section>
   );

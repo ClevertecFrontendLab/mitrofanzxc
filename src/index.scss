@@ -20,10 +20,10 @@ body {
 }
 
 .wrapper {
-  max-width: 1130px;
+  max-width: $base * 283;
   margin: 0 auto;
-  padding-right: 10px;
-  padding-left: 10px;
+  padding-right: $base * 2;
+  padding-left: $base * 2;
 
   @media (max-width: $breakpoint-md-min) {
     max-width: $base * 165;
@@ -36,10 +36,10 @@ body {
 
 .main {
   display: grid;
-  grid-template-columns: minmax(1px, 279px) minmax(1px, 825px);
-  column-gap: 6px;
+  grid-template-columns: minmax(0.063rem, 279px) minmax(0.063rem, 825px);
+  column-gap: $base;
   width: 100%;
-  margin-top: 47px;
+  margin-top: $base * 12;
 
   @media (max-width: $breakpoint-lg-min) {
     grid-template-columns: 1fr;
@@ -50,14 +50,13 @@ body {
   }
 
   @media (max-width: $breakpoint-xxs-min) {
-    margin-top: 11px;
+    margin-top: $base * 3;
   }
 }
 
 .filter-shadow {
-  background: #c4c4c4;
-  box-shadow: 0px 0.125rem $base rgba(191, 196, 201, 0.2), 0px 0.188rem $base rgba(191, 196, 201, 0.18),
-    0px 0.063rem 5px rgba(191, 196, 201, 0.24);
+  box-shadow: 0 0.125rem $base rgba(191, 196, 201, 0.2), 0 0.188rem $base rgba(191, 196, 201, 0.18),
+    0 0.063rem $base rgba(191, 196, 201, 0.24);
 }
 
 .active {

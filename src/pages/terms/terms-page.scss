@@ -18,7 +18,7 @@
 
 .nesting-lvl_1 {
   margin-top: $base * 4;
-  padding-left: 30px;
+  padding-left: $base * 7;
 }
 
 .nesting-lvl_2 {
@@ -28,5 +28,5 @@
 
 .nesting-lvl_3 {
   margin-top: $base * 4;
-  padding-left: 90px;
+  padding-left: $base * 22;
 }

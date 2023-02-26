@@ -8,8 +8,7 @@
   width: 502px;
   max-height: 442px;
   background: $color-grey-black-5;
-  box-shadow: 0px 0.125rem $base rgba(191, 196, 201, 0.2), 0px 0.188rem $base rgba(191, 196, 201, 0.18),
-    0px 0.063rem 5px rgba(191, 196, 201, 0.24);
+  box-shadow: $color-filter-shadow;
   border-radius: 10px;
   overflow-y: scroll;
   transition: all $transition-02;
@@ -34,8 +33,7 @@
     height: 100%;
     max-height: 442px;
     background: $color-grey-black-5;
-    box-shadow: 0px 0.125rem $base rgba(191, 196, 201, 0.2), 0px 0.188rem $base rgba(191, 196, 201, 0.18),
-      0px 0.063rem 5px rgba(191, 196, 201, 0.24);
+    box-shadow: $color-filter-shadow;
     border-radius: 10px;
     overflow-y: scroll;
     transition: all $transition-02;
@@ -80,7 +78,8 @@
     left: -100%;
     width: 100%;
     height: 0.063rem;
-    background: $color-hover;
+    background: -o-linear-gradient($color-hover);
+    background: linear-gradient($color-hover);
     opacity: 0;
     transition: all $transition-02;
   }
@@ -118,7 +117,7 @@
   }
 }
 
-.nav__item.accordion:has(~ .nav-list .nav-list__item.active) {
+.nav__item.accordion:has(~ .nav-list .nav-list__link.active) {
   &::after {
     left: 0;
     opacity: 1;
@@ -162,6 +161,11 @@
 .nav-list {
   display: none;
   padding-left: $base * 5;
+
+  > a {
+    margin-top: $base * 6;
+    padding-left: 0;
+  }
 }
 
 .nav-list_active {
@@ -169,15 +173,17 @@
 }
 
 .nav-list__item {
-  display: block;
   margin-top: $base * 4;
-  padding-left: $base;
-  transition: all $transition-01;
 
-  &:first-child {
-    margin-top: $base * 6;
-    padding-left: 0;
+  .body_small {
+    color: $color-grey-black-40;
   }
+}
+
+.nav-list__link {
+  display: inline-block;
+  padding-right: $base;
+  transition: all $transition-01;
 
   &:hover {
     color: $color-accent;
@@ -190,11 +196,11 @@
   }
 }
 
-.nav-list__item.active {
+.nav-list__link.active {
   font-size: $base * 4;
   font-weight: $fw-bold;
   line-height: $base * 6;
-  letter-spacing: 0.1px;
+  letter-spacing: 0.006rem;
 
   .body_small {
     color: $color-dark;

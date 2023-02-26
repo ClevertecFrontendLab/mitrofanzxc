@@ -50,7 +50,7 @@ th.subtitle_large {
     font-size: $base * 3;
     font-weight: $fw-medium;
     line-height: $base * 4;
-    letter-spacing: 0.2px;
+    letter-spacing: 0.013rem;
   }
 }
 
@@ -63,7 +63,7 @@ td.body_large {
   @media (max-width: $breakpoint-xs-min) {
     font-size: $base * 3;
     line-height: $base * 4;
-    letter-spacing: 0.2px;
+    letter-spacing: 0.013rem;
     padding-bottom: 14px;
   }
 }

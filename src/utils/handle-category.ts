@@ -1,6 +1,10 @@
-import { IHandleCategory } from './utils.interface';
+import { THandleCategory } from './utils.types';
 
-export const handleCategory: IHandleCategory = (currentCategory, categories) => {
+export const handleCategory: THandleCategory = (currentCategory, categories) => {
+  if (currentCategory === 'all') {
+    return 'Все книги';
+  }
+
   if (!categories || !categories.length) {
     if (currentCategory) {
       return 'Все книги';

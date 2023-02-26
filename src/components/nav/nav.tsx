@@ -1,17 +1,19 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import classNames from 'classnames';
 
 import { PATHS } from '../../constants';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector, useMatchScreenWidth } from '../../hooks';
 import { closeAccordionMenu, closeMobileMenu, closeToast, toggleAccordionMenu } from '../../store/slices';
 import { getAmountOfBooks } from '../../utils';
+import { ESpriteId } from '../sprite/sprite.types';
 import { Sprite } from '..';
 
 import './nav.scss';
 
 export const Nav: FC = () => {
   const { booksAll, terms, contract, profile } = PATHS;
-  const [match992, setMatch992] = useState(Boolean(window.matchMedia('(max-width: 992px)').matches));
+  const [matchScreenWidth, setMatchScreenWidth] = useState(Boolean(window.matchMedia('(max-width: 992px)').matches));
   const { initialData } = useAppSelector((state) => state.catalog);
   const { categoriesData } = useAppSelector((state) => state.categories);
   const { isMobileMenuOpen, isAccordionMenuOpen } = useAppSelector((state) => state.mobileMenu);
@@ -31,57 +33,64 @@ export const Nav: FC = () => {
     dispatch(closeToast());
   };
 
-  // Эффект для подстановки необходимых data-test-id в зависимости от ширины экрана
-  useEffect(() => {
-    const mediaQueryList992 = window.matchMedia('(max-width: 992px)');
+  const handleScreenWidth = (value: boolean) => {
+    setMatchScreenWidth(value);
+  };
 
-    const handler = () => {
-      setMatch992(Boolean(mediaQueryList992.matches));
-    };
+  useMatchScreenWidth(992, handleScreenWidth);
 
-    mediaQueryList992.addEventListener('change', handler);
-    handler();
-
-    return () => {
-      mediaQueryList992.removeEventListener('change', handler);
-    };
-  }, [match992]);
+  const navClass = classNames('nav', {
+    nav_active: isMobileMenuOpen,
+    nav_accordion: isAccordionMenuOpen,
+  });
+  const spriteClass = classNames('accordion__button', {
+    accordion__button_active: isAccordionMenuOpen,
+  });
+  const navListClass = classNames('nav-list', {
+    'nav-list_active': isAccordionMenuOpen,
+  });
 
   return (
-    <nav
-      className={`nav ${isMobileMenuOpen ? 'nav_active' : ''} ${isAccordionMenuOpen ? 'nav_accordion' : ''}`}
-      data-test-id={`${isMobileMenuOpen ? 'burger-navigation' : ''}`}
-    >
+    <nav className={navClass} data-test-id={`${isMobileMenuOpen ? 'burger-navigation' : ''}`}>
       <div className='nav__wrapper'>
         <button
           type='button'
           className='h5 nav__item accordion'
           onClick={handleAccordionMenu}
-          data-test-id={`${match992 ? 'burger-showcase' : 'navigation-showcase'}`}
+          data-test-id={`${matchScreenWidth ? 'burger-showcase' : 'navigation-showcase'}`}
         >
           <NavLink to={booksAll}>Витрина книг</NavLink>
-          {categoriesData && categoriesData.length > 0 && (
-            <Sprite
-              id='arrow-down'
-              className={`accordion__button ${isAccordionMenuOpen ? 'accordion__button_active' : ''}`}
-            />
-          )}
+          {categoriesData && categoriesData.length > 0 && <Sprite id={ESpriteId.ArrowShort} className={spriteClass} />}
         </button>
         {categoriesData && categoriesData.length > 0 && (
-          <ul className={`nav-list ${isAccordionMenuOpen ? 'nav-list_active' : ''}`}>
+          <ul className={navListClass}>
             <NavLink
               to={booksAll}
-              className='nav-list__item'
+              className='nav-list__link'
               onClick={handleMobileMenu}
-              data-test-id={`${match992 ? 'burger-books' : 'navigation-books'}`}
+              data-test-id={`${matchScreenWidth ? 'burger-books' : 'navigation-books'}`}
             >
               Все книги
             </NavLink>
             {categoriesData.map(({ id, name, path }) => (
-              <NavLink key={id} to={`/books/${path}`} className='nav-list__item body_large' onClick={handleMobileMenu}>
-                {name}
-                <span className='body_small'>{getAmountOfBooks(initialData, name)}</span>
-              </NavLink>
+              <li key={id} className='nav-list__item'>
+                <NavLink
+                  to={`/books/${path}`}
+                  className='nav-list__link body_large'
+                  onClick={handleMobileMenu}
+                  data-test-id={`${matchScreenWidth ? `burger-${path}` : `navigation-${path}`}`}
+                >
+                  {name}
+                </NavLink>
+                <span
+                  className='body_small'
+                  data-test-id={`${
+                    matchScreenWidth ? `burger-book-count-for-${path}` : `navigation-book-count-for-${path}`
+                  }`}
+                >
+                  {initialData && initialData.length > 0 && getAmountOfBooks(initialData, name)}
+                </span>
+              </li>
             ))}
           </ul>
         )}
@@ -89,7 +98,7 @@ export const Nav: FC = () => {
           to={terms}
           className='h5 nav__item'
           onClick={handleTerms}
-          data-test-id={`${match992 ? 'burger-terms' : 'navigation-terms'}`}
+          data-test-id={`${matchScreenWidth ? 'burger-terms' : 'navigation-terms'}`}
         >
           Правила пользования
         </NavLink>
@@ -97,7 +106,7 @@ export const Nav: FC = () => {
           to={contract}
           className='h5 nav__item'
           onClick={handleTerms}
-          data-test-id={`${match992 ? 'burger-contract' : 'navigation-contract'}`}
+          data-test-id={`${matchScreenWidth ? 'burger-contract' : 'navigation-contract'}`}
         >
           Договор оферты
         </NavLink>

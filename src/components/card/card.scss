@@ -6,9 +6,7 @@
   justify-content: space-between;
   flex-direction: column;
   padding: $base * 2 $base * 2 $base * 4 $base * 2;
-  border-radius: 10px;
-  box-shadow: 0px 0.125rem $base rgba(191, 196, 201, 0.2), 0px 0.188rem $base rgba(191, 196, 201, 0.18),
-    0px 0.063rem 5px rgba(191, 196, 201, 0.24);
+  border-radius: $base * 2;
 
   @media (max-width: $breakpoint-xxs-min) {
     padding: $base * 2 $base * 4 $base * 4 $base * 4;
@@ -27,8 +25,8 @@
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    height: 54px;
-    margin-top: 21px;
+    height: $base * 14;
+    margin-top: $base * 5;
 
     @media (max-width: $breakpoint-md-min) {
       font-size: $base * 3;
@@ -42,17 +40,17 @@
   }
 
   .button-primary {
-    margin-top: 22px;
+    margin-top: $base * 6;
     padding-right: 0;
     padding-left: 0;
 
     @media (max-width: $breakpoint-xxs-min) {
-      margin-top: 18px;
+      margin-top: $base * 4;
     }
   }
 
   .button-secondary {
-    margin-top: 22px;
+    margin-top: $base * 6;
     padding-right: 0;
     padding-left: 0;
   }
@@ -64,19 +62,18 @@
   justify-content: space-between;
   width: 100%;
   column-gap: $base * 4;
-  padding: 24px 24px 24px $base * 4;
+  padding: $base * 6 $base * 6 $base * 6 $base * 4;
   border-radius: $base * 3;
-  box-shadow: 0px 0.125rem $base rgba(191, 196, 201, 0.2), 0px 0.188rem $base rgba(191, 196, 201, 0.18),
-    0px 0.063rem 5px rgba(191, 196, 201, 0.24);
+  -o-object-fit: cover;
   object-fit: cover;
 
   @media (max-width: $breakpoint-md-min) {
-    padding: $base * 4 24px $base * 4 $base * 4;
+    padding: $base * 4 $base * 6 $base * 4 $base * 4;
   }
 
   @media (max-width: $breakpoint-xxs-min) {
     column-gap: $base * 2;
-    padding: $base * 4 24px $base * 4 $base * 2;
+    padding: $base * 4 $base * 6 $base * 4 $base * 2;
   }
 
   .body_small {
@@ -101,7 +98,7 @@
   height: 100%;
 
   .button {
-    width: 174px;
+    width: $base * 43;
 
     @media (max-width: $breakpoint-xs-min) {
       position: relative;
@@ -131,8 +128,8 @@
 
   .rating__logo {
     @media (max-width: $breakpoint-sm-min) {
-      width: 13px;
-      height: 13px;
+      width: $base * 3;
+      height: $base * 3;
     }
   }
 }
@@ -144,20 +141,20 @@
 }
 
 .card-list__title {
-  font-size: 22px;
+  font-size: $base * 6;
   font-weight: $fw-bold;
   line-height: $base * 8;
 
   @media (max-width: $breakpoint-md-min) {
-    font-size: 24px;
-    line-height: 30px;
-    letter-spacing: 0.1px;
+    font-size: $base * 6;
+    line-height: $base * 7;
+    letter-spacing: 0.006rem;
   }
 
   @media (max-width: $breakpoint-xs-min) {
     font-size: 14px;
     font-weight: $fw-semi-bold;
-    line-height: 18px;
+    line-height: $base * 4;
   }
 }
 
@@ -165,19 +162,21 @@
   width: 100%;
   height: auto;
   aspect-ratio: 174/242;
-  border-radius: 10px;
+  border-radius: $base * 2;
+  -o-object-fit: cover;
   object-fit: cover;
 }
 
 .card-list__img {
   width: $base * 30;
-  height: 170px;
+  height: $base * 42;
   border-radius: 0.188rem;
   border: 0.063rem solid $color-grey-black-40;
+  -o-object-fit: cover;
   object-fit: cover;
 
   @media (max-width: $breakpoint-xs-min) {
-    width: 70px;
+    width: $base * 18;
     height: $base * 25;
   }
 }
@@ -197,7 +196,7 @@
   justify-content: center;
   aspect-ratio: 174/242;
   background: $color-grey-black-5;
-  border-radius: 10px;
+  border-radius: $base * 2;
   border: 0.063rem solid $color-grey-black-40;
 
   @media (max-width: $breakpoint-xxs-min) {
@@ -212,14 +211,14 @@
   align-items: center;
   justify-content: center;
   min-width: $base * 30;
-  height: 170px;
+  height: $base * 42;
   background: $color-grey-black-5;
   border-radius: 0.188rem;
   border: 0.063rem solid $color-grey-black-40;
   overflow: hidden;
 
   @media (max-width: $breakpoint-xs-min) {
-    min-width: 70px;
+    min-width: $base * 18;
     height: $base * 25;
   }
 }

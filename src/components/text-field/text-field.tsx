@@ -2,42 +2,41 @@ import { ChangeEvent, FC, useState } from 'react';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { setTextFieldError, setTextFieldValue } from '../../store/slices';
-import { IForm } from '../../store/slices/slices.interface';
+import { TForm } from '../../store/slices/slices.types';
 import { validateTextField } from '../../utils';
+import { ESpriteId } from '../sprite/sprite.types';
 import { Sprite } from '..';
 
-import { ITextField } from './text-field.interface';
+import { ETextFieldType, TTextField } from './text-field.types';
 
 import './text-field.scss';
 
-export const TextField: FC<ITextField> = ({ type, id, placeholder, message }) => {
+export const TextField: FC<TTextField> = ({ type, id, placeholder, message }) => {
   const [isEyeOpen, setIsEyeOpen] = useState<boolean>(false);
   const { form } = useAppSelector((state) => state.registration);
   const dispatch = useAppDispatch();
 
   const handleTextFieldValue = (event: ChangeEvent<HTMLInputElement>) => {
     const target = event.target as HTMLInputElement;
-    /* eslint-disable-next-line @typescript-eslint/no-shadow */
-    const { type, id: targetId, value } = target;
+    const { type: targetType, id: targetId, value } = target;
 
-    if (targetId) {
-      dispatch(setTextFieldValue({ value, id: targetId }));
+    dispatch(setTextFieldValue({ value, id: targetId }));
 
-      if (type === 'tel') {
+    switch (targetType) {
+      case ETextFieldType.Tel:
         dispatch(setTextFieldError({ value: validateTextField(value, id), id: targetId }));
-      }
-
-      if (type === 'email') {
+        break;
+      case ETextFieldType.Email:
         dispatch(setTextFieldError({ value: validateTextField(value, id), id: targetId }));
-      }
-
-      if (type === 'text' && targetId === 'login') {
+        break;
+      case ETextFieldType.Text:
         dispatch(setTextFieldError({ value: validateTextField(value, id), id: targetId }));
-      }
-
-      if (type === 'password') {
+        break;
+      case ETextFieldType.Password:
         dispatch(setTextFieldError({ value: validateTextField(value, id), id: targetId }));
-      }
+        break;
+      default:
+        break;
     }
   };
 
@@ -48,7 +47,7 @@ export const TextField: FC<ITextField> = ({ type, id, placeholder, message }) =>
   return (
     <div className='text-field'>
       <input
-        type={isEyeOpen ? 'text' : type}
+        type={isEyeOpen ? ETextFieldType.Text : type}
         name={id}
         id={id}
         placeholder={placeholder}
@@ -56,18 +55,18 @@ export const TextField: FC<ITextField> = ({ type, id, placeholder, message }) =>
         disabled={false}
         autoComplete='off'
         pattern='^.{1,}$'
-        value={form[id as keyof IForm].value}
+        value={form[id as keyof TForm].value}
         onChange={handleTextFieldValue}
       />
       <label htmlFor={id} data-content={placeholder} className='text-field__label'>
         <span className='text-field__label_hidden'>{placeholder}</span>
       </label>
-      {type === 'password' && (
-        <div className='text-field__icon-wrapper'>
-          <Sprite id='check' className='text-field__icon text-field__icon_check' />
+      {type === ETextFieldType.Password && (
+        <div className='text-field__logo-wrapper'>
+          <Sprite id={ESpriteId.Check} className='text-field__logo text-field__logo_check' />
           <Sprite
-            id={`${isEyeOpen ? 'eye-open' : 'eye-closed'}`}
-            className='text-field__icon text-field__icon_eye'
+            id={isEyeOpen ? ESpriteId.EyeOpen : ESpriteId.EyeClosed}
+            className='text-field__logo text-field__logo_eye'
             onClick={handleSetIsEyeOpen}
           />
         </div>

@@ -45,14 +45,14 @@
     content: '';
     display: none;
     background-color: $color-white;
-    border-radius: 5px;
+    border-radius: $base;
   }
 
   &::before {
     top: 10px;
     left: 7px;
     width: 0.125rem;
-    height: 5px;
+    height: $base;
     transform: rotate(-45deg);
   }
 

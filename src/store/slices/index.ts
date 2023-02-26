@@ -1,15 +1,15 @@
-export { setBookData, startBookDataLoading } from './book-slice';
+export { bookRequest, bookRequestSuccess, bookRequestError } from './book/book-slice';
 export {
-  setCatalogData,
-  changeCatalogView,
-  sortCatalogByRating,
+  catalogRequest,
+  catalogRequestSuccess,
+  catalogRequestError,
   changeCatalogSortState,
+  changeCatalogView,
   filterCatalogByCategory,
   searchCatalogByTitle,
-  startCatalogDataLoading,
-} from './catalog-slice';
-export { setCategoriesData } from './categories-slice';
-export { startLoading, endLoading, handleSuccess } from './loader-slice';
+  sortCatalogByRating,
+} from './catalog/catalog-slice';
+export { categoriesRequest, categoriesRequestSuccess, categoriesRequestError } from './categories/categories-slice';
 export {
   openMobileMenu,
   closeMobileMenu,
@@ -17,8 +17,7 @@ export {
   openAccordionMenu,
   closeAccordionMenu,
   toggleAccordionMenu,
-} from './mobile-menu-slice';
-export { openModal, closeModal } from './modal-slice';
+} from './mobile-menu/mobile-menu-slice';
 export {
   openFlow,
   closeFlow,
@@ -32,6 +31,5 @@ export {
   nextStep,
   setTextFieldValue,
   setTextFieldError,
-} from './registration-slice';
-export { handleIsInputSearchOpen } from './search-slice';
-export { openToast, closeToast, addErrorToToast, removeErrorFromToast } from './toast-slice';
+} from './registration/registration-slice';
+export { closeToast, setToast } from './toast/toast-slice';
