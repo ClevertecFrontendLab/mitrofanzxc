@@ -42,7 +42,7 @@ export {
   passwordRecoveryRequest,
   passwordRecoveryRequestSuccess,
   passwordRecoveryRequestError,
-} from './password-recovery/password-recovery-slice';
+} from './forgot-pass/forgot-pass-slice';
 export {
   passwordResetRequest,
   passwordResetRequestSuccess,

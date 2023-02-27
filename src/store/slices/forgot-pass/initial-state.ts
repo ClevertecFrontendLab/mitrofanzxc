@@ -1,6 +1,6 @@
-import { PasswordRecoveryState } from '../slices.types';
+import { ForgotPassState } from '../slices.types';
 
-export const initialState: PasswordRecoveryState = {
+export const initialState: ForgotPassState = {
   passwordRecoveryRequest: {
     password: '',
     passwordConfirmation: '',
@@ -21,6 +21,12 @@ export const initialState: PasswordRecoveryState = {
       lastName: '',
       phone: '',
     },
+  },
+  passwordResetRequest: {
+    email: '',
+  },
+  passwordResetResponse: {
+    ok: null,
   },
   isLoading: false,
   isError: false,

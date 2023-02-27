@@ -3,7 +3,7 @@ import { Path } from 'constants/path';
 import { FC } from 'react';
 import { HashRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { Layout, LayoutMainPage } from 'components';
-import { BookPage, MainPage, ProfilePage, RegisterPage, TermsPage } from 'pages';
+import { AuthorizationPage, BookPage, ForgotPassPage, MainPage, ProfilePage, RegistrationPage, TermsPage } from 'pages';
 import { ContentView } from 'pages/terms/terms-page.types';
 
 const App: FC = () => (
@@ -18,7 +18,9 @@ const App: FC = () => (
         </Route>
         <Route path={Path.BookPage} element={<BookPage />} />
         <Route path={Path.Profile} element={<ProfilePage />} />
-        <Route path={Path.Register} element={<RegisterPage />} />
+        <Route path={Path.Authorization} element={<AuthorizationPage />} />
+        <Route path={Path.Registration} element={<RegistrationPage />} />
+        <Route path={Path.ForgotPass} element={<ForgotPassPage />} />
       </Route>
     </Routes>
   </HashRouter>

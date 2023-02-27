@@ -17,7 +17,7 @@ import { registrationSelector } from 'store/selectors';
 import { closePasswordRecovery, toggleRegistration } from 'store/slices';
 import { Connection } from 'store/slices/slices.types';
 
-export const RegisterPage: FC = () => {
+export const RegistrationPage: FC = () => {
   const { registrationRequest } = useAppSelector(registrationSelector);
   const {
     register,

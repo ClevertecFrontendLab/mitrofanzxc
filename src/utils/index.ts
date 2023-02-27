@@ -11,3 +11,4 @@ export { handleCategory } from './handle-category';
 export { handleFilter } from './handle-filter';
 export { handleSearch } from './handle-search';
 export { handleSort } from './handle-sort';
+export { getLocalStorage } from './get-local-storage';

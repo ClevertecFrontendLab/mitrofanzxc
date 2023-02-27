@@ -22,6 +22,18 @@ export const PasswordRecoverySlice = createSlice({
       state.isError = true;
       state.isLoading = false;
     },
+    passwordResetRequest: (state, action: PayloadAction<PasswordResetRequest>) => {
+      state.isError = false;
+      state.isLoading = true;
+    },
+    passwordResetRequestSuccess: (state, action: PayloadAction<PasswordResetResponse>) => {
+      state.passwordResetResponse = action.payload;
+      state.isLoading = false;
+    },
+    passwordResetRequestError: (state) => {
+      state.isError = true;
+      state.isLoading = false;
+    },
   },
 });
 

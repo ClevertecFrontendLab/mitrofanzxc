@@ -11,7 +11,7 @@ function* registrationRequestWorker(action: { payload: RegistrationRequest; type
   try {
     const { data }: AxiosResponse<RegistrationResponse> = yield call(
       cleverlandConfig.post,
-      API.Register,
+      API.Registration,
       action.payload
     );
 

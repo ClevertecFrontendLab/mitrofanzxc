@@ -6,8 +6,8 @@ export enum Path {
   Profile = '/profile',
   Terms = '/terms',
   Contract = '/contract',
-  Login = '/login',
-  Register = '/register',
-  Password = '/password',
+  Authorization = '/auth',
+  Registration = '/registration',
+  ForgotPass = '/forgot-pass',
   Any = '*',
 }

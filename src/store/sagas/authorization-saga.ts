@@ -11,7 +11,7 @@ function* authorizationRequestWorker(action: { payload: AuthorizationRequest; ty
   try {
     const { data }: AxiosResponse<AuthorizationResponse> = yield call(
       cleverlandConfig.post,
-      API.Register,
+      API.Authorization,
       action.payload
     );
 

@@ -6,7 +6,7 @@ import bookReducer from './slices/book/book-slice';
 import catalogReducer from './slices/catalog/catalog-slice';
 import categoriesReducer from './slices/categories/categories-slice';
 import mobileMenuReducer from './slices/mobile-menu/mobile-menu-slice';
-import passwordRecoveryReducer from './slices/password-recovery/password-recovery-slice';
+import passwordRecoveryReducer from './slices/forgot-pass/forgot-pass-slice';
 import passwordResetReducer from './slices/password-reset/password-reset-slice';
 import registrationReducer from './slices/registration/registration-slice';
 import toastReducer from './slices/toast/toast-slice';
