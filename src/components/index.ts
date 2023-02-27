@@ -13,7 +13,6 @@ export { Loader } from './loader';
 export { RateBook } from './rate-book';
 export { Nav } from './nav';
 export { Rating, RatingStar } from './rating';
-export { Registration } from './registration';
 export { Review } from './review';
 export { Slider } from './slider';
 export { Sprite } from './sprite';

@@ -5,8 +5,8 @@ import { FieldErrors, useForm } from 'react-hook-form';
 import { ButtonLogin, ButtonPrimary, TextField } from 'components';
 import { ButtonLoginTitle } from 'components/buttons/button-login/button-login.types';
 import { ButtonPrimaryTitle, ButtonPrimaryType } from 'components/buttons/button-primary/button-primary.types';
-import { FormTextField } from 'components/registration/registration.types';
 import {
+  FormTextField,
   TextFieldId,
   TextFieldMessage,
   TextFieldPlaceholder,
@@ -14,11 +14,11 @@ import {
 } from 'components/text-field/text-field.types';
 import { useAppDispatch, useAppSelector, useRequest } from 'hooks';
 import { registrationSelector } from 'store/selectors';
-import { closePasswordRecovery, toggleRegistration } from 'store/slices';
+import { closePasswordRecovery } from 'store/slices';
 import { Connection } from 'store/slices/slices.types';
 
 export const RegistrationPage: FC = () => {
-  const { registrationRequest } = useAppSelector(registrationSelector);
+  const { isError, isLoading, registrationRequest, registrationResponse } = useAppSelector(registrationSelector);
   const {
     register,
     handleSubmit,
@@ -43,11 +43,10 @@ export const RegistrationPage: FC = () => {
   };
 
   const handleButtonRegistration = () => {
-    dispatch(toggleRegistration());
     dispatch(closePasswordRecovery());
   };
 
-  useRequest({ connectionType: Connection.Registration, registrationData: registrationRequest });
+  // useRequest({ connectionType: Connection.Registration, registrationData: registrationRequest });
 
   const buttonPrimaryTitle =
     step === 1 ? ButtonPrimaryTitle.NextStep : step === 2 ? ButtonPrimaryTitle.LastStep : ButtonPrimaryTitle.Register;

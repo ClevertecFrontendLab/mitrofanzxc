@@ -28,6 +28,8 @@ export const initialState: ForgotPassState = {
   passwordResetResponse: {
     ok: null,
   },
+  isLetterReceived: false,
+  isPasswordRecovery: false,
   isLoading: false,
   isError: false,
 };

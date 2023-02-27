@@ -46,53 +46,6 @@ export type CategoriesState = {
   isError: boolean;
 };
 
-export type RegistrationRequest = {
-  email: string;
-  username: string;
-  password: string;
-  firstName: string;
-  lastName: string;
-  phone: string;
-};
-
-export type RegistrationResponse = {
-  jwt: string;
-  user: {
-    id: number;
-    username: string;
-    email: string;
-    provider: string;
-    confirmed: boolean;
-    blocked: boolean;
-    createdAt: string;
-    updatedAt: string;
-    firstName: string;
-    lastName: string;
-    phone: string;
-  };
-};
-
-export type RegistrationError = {
-  data: null;
-  error: {
-    status: number | null;
-    name: string | null;
-    message: string | null;
-    details: Record<string, never> | null;
-  };
-};
-
-export type RegistrationState = {
-  isFlowOpen: boolean;
-  isRegistration: boolean;
-  isPasswordRecovery: boolean;
-  isLetterReceived: boolean;
-  registrationRequest: RegistrationRequest;
-  registrationResponse: RegistrationResponse;
-  isLoading: boolean;
-  isError: boolean;
-};
-
 export type AuthorizationRequest = {
   identifier: string;
   password: string;
@@ -132,19 +85,55 @@ export type AuthorizationState = {
   isError: boolean;
 };
 
+export type RegistrationRequest = {
+  email: string;
+  username: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+  phone: string;
+};
+
+export type RegistrationResponse = {
+  jwt: string;
+  user: {
+    id: number;
+    username: string;
+    email: string;
+    provider: string;
+    confirmed: boolean;
+    blocked: boolean;
+    createdAt: string;
+    updatedAt: string;
+    firstName: string;
+    lastName: string;
+    phone: string;
+  };
+};
+
+export type RegistrationError = {
+  data: null;
+  error: {
+    status: number | null;
+    name: string | null;
+    message: string | null;
+    details: Record<string, never> | null;
+  };
+};
+
+export type RegistrationState = {
+  registrationRequest: RegistrationRequest;
+  registrationResponse: RegistrationResponse;
+  isLoading: boolean;
+  isError: boolean;
+};
+
 export type PasswordResetRequest = {
   email: string;
 };
 
 export type PasswordResetResponse = {
   ok: boolean | null;
-};
-
-export type PasswordResetState = {
-  passwordResetRequest: PasswordResetRequest;
-  passwordResetResponse: PasswordResetResponse;
-  isLoading: boolean;
-  isError: boolean;
 };
 
 export type PasswordRecoveryRequest = {
@@ -170,9 +159,13 @@ export type PasswordRecoveryResponse = {
   };
 };
 
-export type PasswordRecoveryState = {
+export type ForgotPassState = {
   passwordRecoveryRequest: PasswordRecoveryRequest;
   passwordRecoveryResponse: PasswordRecoveryResponse;
+  passwordResetRequest: PasswordResetRequest;
+  passwordResetResponse: PasswordResetResponse;
+  isPasswordRecovery: boolean;
+  isLetterReceived: boolean;
   isLoading: boolean;
   isError: boolean;
 };

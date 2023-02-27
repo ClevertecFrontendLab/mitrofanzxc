@@ -5,8 +5,8 @@ import { FieldErrors, useForm } from 'react-hook-form';
 import { ButtonLogin, ButtonPrimary, TextField } from 'components';
 import { ButtonLoginTitle } from 'components/buttons/button-login/button-login.types';
 import { ButtonPrimaryTitle, ButtonPrimaryType } from 'components/buttons/button-primary/button-primary.types';
-import { FormTextField } from 'components/registration/registration.types';
 import {
+  FormTextField,
   TextFieldId,
   TextFieldMessage,
   TextFieldPlaceholder,
@@ -14,13 +14,13 @@ import {
 } from 'components/text-field/text-field.types';
 import { useAppDispatch, useAppSelector, useRequest } from 'hooks';
 import { authorizationSelector } from 'store/selectors';
-import { authorizationRequest, closePasswordRecovery, openPasswordRecovery, toggleRegistration } from 'store/slices';
+import { authorizationRequest, closePasswordRecovery, openPasswordRecovery } from 'store/slices';
 import { Connection } from 'store/slices/slices.types';
 
-import './registration.scss';
+import './authorization-page.scss';
 
 export const AuthorizationPage: FC = () => {
-  const { authorizationRequest } = useAppSelector(authorizationSelector);
+  const { authorizationRequest, authorizationResponse, isError, isLoading } = useAppSelector(authorizationSelector);
   const {
     register,
     handleSubmit,
@@ -37,7 +37,6 @@ export const AuthorizationPage: FC = () => {
   };
 
   const handleButtonRegistration = () => {
-    dispatch(toggleRegistration());
     dispatch(closePasswordRecovery());
   };
 
@@ -45,7 +44,7 @@ export const AuthorizationPage: FC = () => {
     dispatch(openPasswordRecovery());
   };
 
-  useRequest({ connectionType: Connection.Authorization, authorizationData: authorizationRequest });
+  // useRequest({ connectionType: Connection.Authorization, authorizationData: authorizationRequest });
 
   return (
     <div className='registration-bg'>

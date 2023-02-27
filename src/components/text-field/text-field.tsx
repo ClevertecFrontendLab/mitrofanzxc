@@ -1,10 +1,9 @@
 import { forwardRef, useState } from 'react';
 import { UseFormRegister } from 'react-hook-form/dist/types';
 import { Sprite } from 'components';
-import { FormValues } from 'components/registration/registration.types';
 import { SpriteId } from 'components/sprite/sprite.types';
 
-import { TextFieldId, TextFieldMessage, TextFieldPlaceholder, TextFieldType } from './text-field.types';
+import { FormValues, TextFieldId, TextFieldMessage, TextFieldPlaceholder, TextFieldType } from './text-field.types';
 
 import './text-field.scss';
 

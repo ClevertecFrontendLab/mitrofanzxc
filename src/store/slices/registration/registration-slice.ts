@@ -10,33 +10,6 @@ export const registrationSlice = createSlice({
   name: 'registration',
   initialState,
   reducers: {
-    openFlow: (state) => {
-      state.isFlowOpen = true;
-    },
-    closeFlow: (state) => {
-      state.isFlowOpen = false;
-    },
-    openRegistration: (state) => {
-      state.isRegistration = true;
-    },
-    closeRegistration: (state) => {
-      state.isRegistration = false;
-    },
-    toggleRegistration: (state) => {
-      state.isRegistration = !state.isRegistration;
-    },
-    openPasswordRecovery: (state) => {
-      state.isPasswordRecovery = true;
-    },
-    closePasswordRecovery: (state) => {
-      state.isPasswordRecovery = false;
-    },
-    openNewPassword: (state) => {
-      state.isLetterReceived = true;
-    },
-    closeNewPassword: (state) => {
-      state.isLetterReceived = false;
-    },
     registrationRequest: (state, action: PayloadAction<RegistrationRequest>) => {
       state.isError = false;
       state.isLoading = true;
@@ -52,19 +25,6 @@ export const registrationSlice = createSlice({
   },
 });
 
-export const {
-  openFlow,
-  closeFlow,
-  openRegistration,
-  closeRegistration,
-  toggleRegistration,
-  openPasswordRecovery,
-  closePasswordRecovery,
-  openNewPassword,
-  closeNewPassword,
-  registrationRequest,
-  registrationRequestSuccess,
-  registrationRequestError,
-} = registrationSlice.actions;
+export const { registrationRequest, registrationRequestSuccess, registrationRequestError } = registrationSlice.actions;
 /* eslint-disable-next-line import/no-default-export */
 export default registrationSlice.reducer;

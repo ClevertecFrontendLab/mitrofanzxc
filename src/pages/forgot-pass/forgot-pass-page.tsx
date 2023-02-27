@@ -6,27 +6,28 @@ import { ButtonLogin, ButtonPrimary, TextField } from 'components';
 import { ButtonLoginTitle } from 'components/buttons/button-login/button-login.types';
 import { ButtonPrimaryTitle, ButtonPrimaryType } from 'components/buttons/button-primary/button-primary.types';
 import {
+  FormTextField,
   TextFieldId,
   TextFieldMessage,
   TextFieldPlaceholder,
   TextFieldType,
 } from 'components/text-field/text-field.types';
 import { useAppDispatch, useAppSelector, useRequest } from 'hooks';
-import {
-  closePasswordRecovery,
-  closeRegistration,
-  openPasswordRecovery,
-  passwordRecoveryRequest,
-  toggleRegistration,
-} from 'store/slices';
+import { forgotPassSelector } from 'store/selectors';
+import { closePasswordRecovery } from 'store/slices';
 import { Connection } from 'store/slices/slices.types';
 
-import { FormTextField } from './registration.types';
-
-import './registration.scss';
-
 export const ForgotPassPage: FC = () => {
-  const { isPasswordRecovery, isLetterReceived, registrationRequest } = useAppSelector((state) => state.registration);
+  const {
+    isError,
+    isLoading,
+    isLetterReceived,
+    isPasswordRecovery,
+    passwordRecoveryRequest,
+    passwordRecoveryResponse,
+    passwordResetRequest,
+    passwordResetResponse,
+  } = useAppSelector(forgotPassSelector);
   const {
     register,
     handleSubmit,
@@ -43,16 +44,10 @@ export const ForgotPassPage: FC = () => {
   };
 
   const handleButtonRegistration = () => {
-    dispatch(toggleRegistration());
     dispatch(closePasswordRecovery());
   };
 
-  const handleButtonPersonalAccount = () => {
-    dispatch(closePasswordRecovery());
-    dispatch(closeRegistration());
-  };
-
-  useRequest({ connectionType: Connection.Registration, passwordRecoveryData: passwordRecoveryRequest });
+  // useRequest({ connectionType: Connection.Registration, passwordRecoveryData: passwordRecoveryRequest });
 
   return (
     <div className='registration-bg'>
@@ -61,7 +56,7 @@ export const ForgotPassPage: FC = () => {
         {/* Для восстановления пароля */}
         {isPasswordRecovery && (
           <fieldset className='registration__fieldset'>
-            <ButtonLogin title={ButtonLoginTitle.Login} onClick={handleButtonPersonalAccount} />
+            <ButtonLogin title={ButtonLoginTitle.Login} onClick={handleButtonRegistration} />
             <div className='registration__section'>
               <legend className='h4'>Восстановление пароля</legend>
             </div>

@@ -1,11 +1,16 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
-import { PasswordRecoveryRequest, PasswordRecoveryResponse } from '../slices.types';
+import {
+  PasswordRecoveryRequest,
+  PasswordRecoveryResponse,
+  PasswordResetRequest,
+  PasswordResetResponse,
+} from '../slices.types';
 
 import { initialState } from './initial-state';
 
-export const PasswordRecoverySlice = createSlice({
+export const forgotPassSlice = createSlice({
   /* eslint-disable no-param-reassign */
   name: 'passwordRecovery',
   initialState,
@@ -34,10 +39,32 @@ export const PasswordRecoverySlice = createSlice({
       state.isError = true;
       state.isLoading = false;
     },
+    openPasswordRecovery: (state) => {
+      state.isPasswordRecovery = true;
+    },
+    closePasswordRecovery: (state) => {
+      state.isPasswordRecovery = false;
+    },
+    openNewPassword: (state) => {
+      state.isLetterReceived = true;
+    },
+    closeNewPassword: (state) => {
+      state.isLetterReceived = false;
+    },
   },
 });
 
-export const { passwordRecoveryRequest, passwordRecoveryRequestSuccess, passwordRecoveryRequestError } =
-  PasswordRecoverySlice.actions;
+export const {
+  passwordRecoveryRequest,
+  passwordRecoveryRequestSuccess,
+  passwordRecoveryRequestError,
+  passwordResetRequest,
+  passwordResetRequestSuccess,
+  passwordResetRequestError,
+  openPasswordRecovery,
+  closePasswordRecovery,
+  openNewPassword,
+  closeNewPassword,
+} = forgotPassSlice.actions;
 /* eslint-disable-next-line import/no-default-export */
-export default PasswordRecoverySlice.reducer;
+export default forgotPassSlice.reducer;

@@ -4,7 +4,7 @@ import { TITLE_LIST } from 'constants/title-list';
 import { FC } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import profileLogo from 'assets/authorized.png';
-import { ButtonBurger, Registration, Sprite } from 'components';
+import { ButtonBurger, Sprite } from 'components';
 import { SpriteId } from 'components/sprite/sprite.types';
 import { translateCategoryTitle } from 'utils';
 import { Language } from 'utils/utils.types';
@@ -21,7 +21,6 @@ export const Header: FC = () => {
     <header className='header'>
       <div className='wrapper'>
         <div className='header__wrapper'>
-          <Registration />
           <Link to={Path.Main} className='header__logo'>
             <Sprite id={SpriteId.Logo} className='logo' />
           </Link>

@@ -18,20 +18,6 @@ export {
   closeAccordionMenu,
   toggleAccordionMenu,
 } from './mobile-menu/mobile-menu-slice';
-export {
-  openFlow,
-  closeFlow,
-  openRegistration,
-  closeRegistration,
-  toggleRegistration,
-  openPasswordRecovery,
-  closePasswordRecovery,
-  openNewPassword,
-  closeNewPassword,
-  registrationRequest,
-  registrationRequestSuccess,
-  registrationRequestError,
-} from './registration/registration-slice';
 export { closeToast, setToast } from './toast/toast-slice';
 export {
   authorizationRequest,
@@ -39,12 +25,19 @@ export {
   authorizationRequestError,
 } from './authorization/authorization-slice';
 export {
+  registrationRequest,
+  registrationRequestSuccess,
+  registrationRequestError,
+} from './registration/registration-slice';
+export {
   passwordRecoveryRequest,
   passwordRecoveryRequestSuccess,
   passwordRecoveryRequestError,
-} from './forgot-pass/forgot-pass-slice';
-export {
   passwordResetRequest,
   passwordResetRequestSuccess,
   passwordResetRequestError,
-} from './password-reset/password-reset-slice';
+  closeNewPassword,
+  closePasswordRecovery,
+  openNewPassword,
+  openPasswordRecovery,
+} from './forgot-pass/forgot-pass-slice';

@@ -1,10 +1,6 @@
 import { RegistrationState } from '../slices.types';
 
 export const initialState: RegistrationState = {
-  isFlowOpen: false,
-  isRegistration: true,
-  isPasswordRecovery: false,
-  isLetterReceived: false,
   registrationRequest: {
     email: '',
     username: '',
