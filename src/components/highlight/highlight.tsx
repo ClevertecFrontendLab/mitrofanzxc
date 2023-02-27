@@ -1,11 +1,14 @@
 import { FC, Fragment } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-import { THighLight } from './highlight.types';
-
 import './highlight.scss';
 
-export const HighLight: FC<THighLight> = ({ inputSearchValue, title }) => {
+export type HighLightProps = {
+  inputSearchValue: string;
+  title: string;
+};
+
+export const HighLight: FC<HighLightProps> = ({ inputSearchValue, title }) => {
   if (!inputSearchValue) {
     return <span>{title}</span>;
   }

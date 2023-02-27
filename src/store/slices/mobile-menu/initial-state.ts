@@ -1,6 +1,6 @@
-import { TMobileMenuState } from '../slices.types';
+import { MobileMenuState } from '../slices.types';
 
-export const initialState: TMobileMenuState = {
+export const initialState: MobileMenuState = {
   isMobileMenuOpen: false,
   isAccordionMenuOpen: true,
 };

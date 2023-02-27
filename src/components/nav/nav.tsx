@@ -1,22 +1,22 @@
+import { Path } from 'constants/path';
+
 import { FC, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import classNames from 'classnames';
-
-import { PATHS } from '../../constants';
-import { useAppDispatch, useAppSelector, useMatchScreenWidth } from '../../hooks';
-import { closeAccordionMenu, closeMobileMenu, closeToast, toggleAccordionMenu } from '../../store/slices';
-import { getAmountOfBooks } from '../../utils';
-import { ESpriteId } from '../sprite/sprite.types';
-import { Sprite } from '..';
+import { Sprite } from 'components';
+import { SpriteId } from 'components/sprite/sprite.types';
+import { useAppDispatch, useAppSelector, useMatchScreenWidth } from 'hooks';
+import { catalogSelector, categoriesSelector, mobileMenuSelector } from 'store/selectors';
+import { closeAccordionMenu, closeMobileMenu, closeToast, toggleAccordionMenu } from 'store/slices';
+import { getAmountOfBooks } from 'utils';
 
 import './nav.scss';
 
 export const Nav: FC = () => {
-  const { booksAll, terms, contract, profile } = PATHS;
   const [matchScreenWidth, setMatchScreenWidth] = useState(Boolean(window.matchMedia('(max-width: 992px)').matches));
-  const { initialData } = useAppSelector((state) => state.catalog);
-  const { categoriesData } = useAppSelector((state) => state.categories);
-  const { isMobileMenuOpen, isAccordionMenuOpen } = useAppSelector((state) => state.mobileMenu);
+  const { initialData } = useAppSelector(catalogSelector);
+  const { categoriesData } = useAppSelector(categoriesSelector);
+  const { isMobileMenuOpen, isAccordionMenuOpen } = useAppSelector(mobileMenuSelector);
   const dispatch = useAppDispatch();
 
   const handleAccordionMenu = () => {
@@ -59,13 +59,13 @@ export const Nav: FC = () => {
           onClick={handleAccordionMenu}
           data-test-id={`${matchScreenWidth ? 'burger-showcase' : 'navigation-showcase'}`}
         >
-          <NavLink to={booksAll}>Витрина книг</NavLink>
-          {categoriesData && categoriesData.length > 0 && <Sprite id={ESpriteId.ArrowShort} className={spriteClass} />}
+          <NavLink to={Path.BooksAll}>Витрина книг</NavLink>
+          {categoriesData && categoriesData.length > 0 && <Sprite id={SpriteId.ArrowShort} className={spriteClass} />}
         </button>
         {categoriesData && categoriesData.length > 0 && (
           <ul className={navListClass}>
             <NavLink
-              to={booksAll}
+              to={Path.BooksAll}
               className='nav-list__link'
               onClick={handleMobileMenu}
               data-test-id={`${matchScreenWidth ? 'burger-books' : 'navigation-books'}`}
@@ -95,7 +95,7 @@ export const Nav: FC = () => {
           </ul>
         )}
         <NavLink
-          to={terms}
+          to={Path.Terms}
           className='h5 nav__item'
           onClick={handleTerms}
           data-test-id={`${matchScreenWidth ? 'burger-terms' : 'navigation-terms'}`}
@@ -103,7 +103,7 @@ export const Nav: FC = () => {
           Правила пользования
         </NavLink>
         <NavLink
-          to={contract}
+          to={Path.Contract}
           className='h5 nav__item'
           onClick={handleTerms}
           data-test-id={`${matchScreenWidth ? 'burger-contract' : 'navigation-contract'}`}
@@ -112,7 +112,7 @@ export const Nav: FC = () => {
         </NavLink>
       </div>
       <div className='nav__profile'>
-        <NavLink to={profile} className='h5 nav__item' onClick={handleMobileMenu}>
+        <NavLink to={Path.Profile} className='h5 nav__item' onClick={handleMobileMenu}>
           Профиль
         </NavLink>
         <h5 className='h5 nav__item'>Выход</h5>

@@ -1,10 +1,9 @@
 import { FC } from 'react';
-
-import unauthorizedImg from '../../assets/unauthorized.png';
-import { ButtonPrimary, Sprite, TextField } from '../../components';
-import { EButtonPrimaryTitle, EButtonPrimaryType } from '../../components/buttons/button-primary/button-primary.types';
-import { ESpriteId } from '../../components/sprite/sprite.types';
-import { ETextFieldId, ETextFieldPlaceholder, ETextFieldType } from '../../components/text-field/text-field.types';
+import unauthorizedImg from 'assets/unauthorized.png';
+import { ButtonPrimary, Sprite, TextField } from 'components';
+import { ButtonPrimaryTitle, ButtonPrimaryType } from 'components/buttons/button-primary/button-primary.types';
+import { SpriteId } from 'components/sprite/sprite.types';
+import { TextFieldId, TextFieldPlaceholder, TextFieldType } from 'components/text-field/text-field.types';
 
 import './profile-page.scss';
 
@@ -16,7 +15,7 @@ export const ProfilePage: FC = () => (
           <img src={unauthorizedImg} alt='unauthorized-img' className='user-avatar' />
           <input type='file' name='' id='input-file' className='input-file' />
           <label htmlFor='input-file' className='input-file__label'>
-            <Sprite id={ESpriteId.Camera} className='input-file__logo' />
+            <Sprite id={SpriteId.Camera} className='input-file__logo' />
           </label>
         </div>
         <p className='h1 user-lastname'>Иванов</p>
@@ -26,34 +25,30 @@ export const ProfilePage: FC = () => (
         <h4 className='h4'>Учётные данные</h4>
         <p className='body_large'>Здесь вы можете отредактировать информацию о себе</p>
         <div className='credentials__fields'>
-          <TextField type={ETextFieldType.Text} id={ETextFieldId.Login} placeholder={ETextFieldPlaceholder.Login} />
+          {/* <TextField type={TextFieldType.Text} id={TextFieldId.Login} placeholder={TextFieldPlaceholder.Login} />
           <TextField
-            type={ETextFieldType.Password}
-            id={ETextFieldId.Password}
-            placeholder={ETextFieldPlaceholder.Password}
+            type={TextFieldType.Password}
+            id={TextFieldId.Password}
+            placeholder={TextFieldPlaceholder.Password}
           />
           <TextField
-            type={ETextFieldType.Text}
-            id={ETextFieldId.FirstName}
-            placeholder={ETextFieldPlaceholder.FirstName}
+            type={TextFieldType.Text}
+            id={TextFieldId.FirstName}
+            placeholder={TextFieldPlaceholder.FirstName}
           />
           <TextField
-            type={ETextFieldType.Text}
-            id={ETextFieldId.LastName}
-            placeholder={ETextFieldPlaceholder.LastName}
+            type={TextFieldType.Text}
+            id={TextFieldId.LastName}
+            placeholder={TextFieldPlaceholder.LastName}
           />
-          <TextField type={ETextFieldType.Tel} id={ETextFieldId.Phone} placeholder={ETextFieldPlaceholder.Tel} />
-          <TextField type={ETextFieldType.Email} id={ETextFieldId.Email} placeholder={ETextFieldPlaceholder.Email} />
+          <TextField type={TextFieldType.Tel} id={TextFieldId.Tel} placeholder={TextFieldPlaceholder.Tel} />
+          <TextField type={TextFieldType.Email} id={TextFieldId.Email} placeholder={TextFieldPlaceholder.Email} /> */}
         </div>
         <div className='credentials__buttons'>
+          <ButtonPrimary type={ButtonPrimaryType.Secondary} title={ButtonPrimaryTitle.Edit} className='button_large' />
           <ButtonPrimary
-            type={EButtonPrimaryType.Secondary}
-            title={EButtonPrimaryTitle.Edit}
-            className='button_large'
-          />
-          <ButtonPrimary
-            type={EButtonPrimaryType.Primary}
-            title={EButtonPrimaryTitle.SaveChanges}
+            type={ButtonPrimaryType.Primary}
+            title={ButtonPrimaryTitle.SaveChanges}
             className='button_large'
             disabled={true}
           />
@@ -63,21 +58,21 @@ export const ProfilePage: FC = () => (
         <h4 className='h4'>Договор</h4>
         <p className='body_large'>Здесь вы можете просмотрить данные о договоре, а так же внести оплату</p>
         <div className='credentials__fields'>
-          <TextField
-            type={ETextFieldType.Text}
-            id={ETextFieldId.ContractOwner}
-            placeholder={ETextFieldPlaceholder.ContractOwner}
+          {/* <TextField
+            type={TextFieldType.Text}
+            id={TextFieldId.ContractOwner}
+            placeholder={TextFieldPlaceholder.ContractOwner}
           />
           <TextField
-            type={ETextFieldType.Text}
-            id={ETextFieldId.ContractNumber}
-            placeholder={ETextFieldPlaceholder.ContractNumber}
-          />
+            type={TextFieldType.Text}
+            id={TextFieldId.ContractNumber}
+            placeholder={TextFieldPlaceholder.ContractNumber}
+          /> */}
         </div>
         <div className='credentials__buttons'>
           <ButtonPrimary
-            type={EButtonPrimaryType.Secondary}
-            title={EButtonPrimaryTitle.ViewContract}
+            type={ButtonPrimaryType.Secondary}
+            title={ButtonPrimaryTitle.ViewContract}
             className='button_large'
           />
         </div>

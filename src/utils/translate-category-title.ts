@@ -1,11 +1,17 @@
-import { ELanguage, TTranslateCategoryTitle } from './utils.types';
+import { CategoryList, TCatalogData, TCategories } from 'constants/constants.types';
 
-export const translateCategoryTitle: TTranslateCategoryTitle = (data, categories, language) => {
+import { Language } from './utils.types';
+
+export const translateCategoryTitle = (
+  categories: TCategories[] | CategoryList[],
+  language: Language,
+  data?: TCatalogData | string
+): string => {
   if (data && typeof data === 'object') {
     const title = categories.find(({ path }) => data.categories.includes(path));
 
     if (title) {
-      if (language === ELanguage.En) {
+      if (language === Language.En) {
         return title.name;
       }
 
@@ -14,7 +20,7 @@ export const translateCategoryTitle: TTranslateCategoryTitle = (data, categories
   }
 
   if (data && typeof data === 'string') {
-    if (language === ELanguage.En) {
+    if (language === Language.En) {
       if (data === 'all') {
         return 'Все книги';
       }
@@ -25,7 +31,7 @@ export const translateCategoryTitle: TTranslateCategoryTitle = (data, categories
         return title.name;
       }
     }
-    if (language === ELanguage.Ru) {
+    if (language === Language.Ru) {
       if (data === 'Все книги') {
         return 'all';
       }

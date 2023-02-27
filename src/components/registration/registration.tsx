@@ -1,28 +1,49 @@
-import { FC, Fragment } from 'react';
+import { PatternEmail, PatternLogin, PatternPassword, PatternTel } from 'constants/patterns';
 
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { FC, Fragment, useState } from 'react';
+import { FieldErrors, useForm } from 'react-hook-form';
+import { ButtonLogin, ButtonPrimary, TextField } from 'components';
+import { ButtonLoginTitle } from 'components/buttons/button-login/button-login.types';
+import { ButtonPrimaryTitle, ButtonPrimaryType } from 'components/buttons/button-primary/button-primary.types';
 import {
-  closePasswordRecovery,
-  closeRegistration,
-  nextStep,
-  openPasswordRecovery,
-  toggleRegistration,
-} from '../../store/slices';
-import { EButtonLoginTitle } from '../buttons/button-login/button-login.types';
-import { EButtonPrimaryTitle, EButtonPrimaryType } from '../buttons/button-primary/button-primary.types';
-import { ETextFieldId, ETextFieldMessage, ETextFieldPlaceholder, ETextFieldType } from '../text-field/text-field.types';
-import { ButtonLogin, ButtonPrimary, TextField } from '..';
+  TextFieldId,
+  TextFieldMessage,
+  TextFieldPlaceholder,
+  TextFieldType,
+} from 'components/text-field/text-field.types';
+import { useAppDispatch, useAppSelector, useRequest } from 'hooks';
+import { closePasswordRecovery, closeRegistration, openPasswordRecovery, toggleRegistration } from 'store/slices';
+import { Connection } from 'store/slices/slices.types';
+
+import { FormTextField } from './registration.types';
 
 import './registration.scss';
 
 export const Registration: FC = () => {
-  const { isFlowOpen, isRegistration, isPasswordRecovery, isLetterReceived, formStep } = useAppSelector(
+  const { isFlowOpen, isRegistration, isPasswordRecovery, isLetterReceived, registrationRequest } = useAppSelector(
     (state) => state.registration
   );
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormTextField>();
+  const [step, setStep] = useState(1);
   const dispatch = useAppDispatch();
 
-  const handleNextStep = () => {
-    dispatch(nextStep());
+  const handleStep = () => {
+    if (step < 3) {
+      setStep(step + 1);
+    }
+  };
+
+  const onSubmit = (data: FormTextField) => {
+    console.log('FORM_DATA ===', data);
+    handleStep();
+  };
+
+  const onError = (error: FieldErrors<FormTextField>) => {
+    console.log('FORM_ERRORS ===', error);
   };
 
   const handleButtonRegistration = () => {
@@ -39,97 +60,85 @@ export const Registration: FC = () => {
     dispatch(closeRegistration());
   };
 
+  const buttonPrimaryTitle =
+    step === 1 ? ButtonPrimaryTitle.NextStep : step === 2 ? ButtonPrimaryTitle.LastStep : ButtonPrimaryTitle.Register;
+
+  useRequest({ connectionType: Connection.Registration, registrationData: registrationRequest });
+
   return (
     /* eslint-disable-next-line react/jsx-no-useless-fragment */
     <Fragment>
       {isFlowOpen && (
         <div className='registration-bg'>
           <h3 className='h3'>Cleverland</h3>
-          <form className='registration'>
+          <form className='registration' onSubmit={handleSubmit(onSubmit, onError)}>
             {/* Для незарегистрированных */}
             {isRegistration && !isPasswordRecovery && (
               <fieldset className='registration__fieldset'>
                 <div className='registration__section'>
                   <legend className='h4'>Регистрация</legend>
                   <p className='subtitle_small'>
-                    <span>{formStep}</span> шаг из 3
+                    <span>{step}</span> шаг из 3
                   </p>
                 </div>
                 <div className='registration__section'>
-                  {formStep === 1 && (
+                  {step === 1 && (
                     <Fragment>
                       <TextField
-                        type={ETextFieldType.Text}
-                        id={ETextFieldId.Login}
-                        placeholder={ETextFieldPlaceholder.CreateUserName}
-                        message={ETextFieldMessage.CreateUserName}
+                        type={TextFieldType.Text}
+                        id={TextFieldId.Login}
+                        placeholder={TextFieldPlaceholder.CreateUserName}
+                        message={TextFieldMessage.CreateUserName}
+                        {...register(TextFieldId.Login, { required: true, pattern: PatternLogin })}
                       />
                       <TextField
-                        type={ETextFieldType.Password}
-                        id={ETextFieldId.Password}
-                        placeholder={ETextFieldPlaceholder.Password}
-                        message={ETextFieldMessage.Password}
+                        type={TextFieldType.Password}
+                        id={TextFieldId.Password}
+                        placeholder={TextFieldPlaceholder.Password}
+                        message={TextFieldMessage.Password}
+                        {...register(TextFieldId.Password, { required: true, pattern: PatternPassword })}
                       />
                     </Fragment>
                   )}
-                  {formStep === 2 && (
+                  {step === 2 && (
                     <Fragment>
                       <TextField
-                        type={ETextFieldType.Text}
-                        id={ETextFieldId.FirstName}
-                        placeholder={ETextFieldPlaceholder.FirstName}
+                        type={TextFieldType.Text}
+                        id={TextFieldId.FirstName}
+                        placeholder={TextFieldPlaceholder.FirstName}
+                        {...register(TextFieldId.FirstName, { required: true, pattern: PatternLogin })}
                       />
                       <TextField
-                        type={ETextFieldType.Text}
-                        id={ETextFieldId.LastName}
-                        placeholder={ETextFieldPlaceholder.LastName}
+                        type={TextFieldType.Text}
+                        id={TextFieldId.LastName}
+                        placeholder={TextFieldPlaceholder.LastName}
+                        {...register(TextFieldId.LastName, { required: true, pattern: PatternLogin })}
                       />
                     </Fragment>
                   )}
-                  {formStep === 3 && (
+                  {step === 3 && (
                     <Fragment>
                       <TextField
-                        type={ETextFieldType.Tel}
-                        id={ETextFieldId.Phone}
-                        placeholder={ETextFieldPlaceholder.Tel}
-                        message={ETextFieldMessage.Tel}
+                        type={TextFieldType.Tel}
+                        id={TextFieldId.Tel}
+                        placeholder={TextFieldPlaceholder.Tel}
+                        message={TextFieldMessage.Tel}
+                        {...register(TextFieldId.Tel, { required: true, pattern: PatternTel })}
                       />
                       <TextField
-                        type={ETextFieldType.Email}
-                        id={ETextFieldId.Email}
-                        placeholder={ETextFieldPlaceholder.Email}
+                        type={TextFieldType.Email}
+                        id={TextFieldId.Email}
+                        placeholder={TextFieldPlaceholder.Email}
+                        {...register(TextFieldId.Email, { required: true, pattern: PatternEmail })}
                       />
                     </Fragment>
                   )}
                 </div>
                 <div className='registration__section'>
-                  {formStep === 1 && (
-                    <ButtonPrimary
-                      type={EButtonPrimaryType.Primary}
-                      title={EButtonPrimaryTitle.NextStep}
-                      className='button_large'
-                      onClick={handleNextStep}
-                    />
-                  )}
-                  {formStep === 2 && (
-                    <ButtonPrimary
-                      type={EButtonPrimaryType.Primary}
-                      title={EButtonPrimaryTitle.LastStep}
-                      className='button_large'
-                      onClick={handleNextStep}
-                    />
-                  )}
-                  {formStep === 3 && (
-                    <ButtonPrimary
-                      type={EButtonPrimaryType.Primary}
-                      title={EButtonPrimaryTitle.Register}
-                      className='button_large'
-                      onClick={handleNextStep}
-                    />
-                  )}
+                  <ButtonPrimary type={ButtonPrimaryType.Submit} title={buttonPrimaryTitle} className='button_large' />
                   <p className='body_large'>
                     <span>Есть учётная запись?</span>
-                    <ButtonLogin title={EButtonLoginTitle.Enter} onClick={handleButtonRegistration} />
+                    <ButtonLogin title={ButtonLoginTitle.Enter} onClick={handleButtonRegistration} />
                   </p>
                 </div>
               </fieldset>
@@ -142,30 +151,32 @@ export const Registration: FC = () => {
                   <legend className='h4'>Вход в личный кабинет</legend>
                 </div>
                 <div className='registration__section'>
-                  <TextField
-                    type={ETextFieldType.Text}
-                    id={ETextFieldId.Login}
-                    placeholder={ETextFieldPlaceholder.Login}
+                  {/* <TextField
+                    type={TextFieldType.Text}
+                    id={TextFieldId.Login}
+                    placeholder={TextFieldPlaceholder.Login}
+                    {...register(TextFieldId.Login, { required: true, pattern: PatternLogin })}
                   />
                   <TextField
-                    type={ETextFieldType.Password}
-                    id={ETextFieldId.Password}
-                    placeholder={ETextFieldPlaceholder.Password}
-                    message={ETextFieldMessage.Password}
-                  />
+                    type={TextFieldType.Password}
+                    id={TextFieldId.Password}
+                    placeholder={TextFieldPlaceholder.Password}
+                    message={TextFieldMessage.Password}
+                    {...register(TextFieldId.Password, { required: true, pattern: PatternPassword })}
+                  /> */}
                   <button type='button' className='info_large' onClick={handleButtonPasswordRecovery}>
                     Забыли логин или пароль?
                   </button>
                 </div>
                 <div className='registration__section'>
                   <ButtonPrimary
-                    type={EButtonPrimaryType.Primary}
-                    title={EButtonPrimaryTitle.Entrance}
+                    type={ButtonPrimaryType.Primary}
+                    title={ButtonPrimaryTitle.Entrance}
                     className='button_large'
                   />
                   <p className='body_large'>
                     <span>Нет учётной записи</span>
-                    <ButtonLogin title={EButtonLoginTitle.Registration} onClick={handleButtonRegistration} />
+                    <ButtonLogin title={ButtonLoginTitle.Registration} onClick={handleButtonRegistration} />
                   </p>
                 </div>
               </fieldset>
@@ -174,27 +185,28 @@ export const Registration: FC = () => {
             {/* Для восстановления пароля */}
             {isPasswordRecovery && (
               <fieldset className='registration__fieldset'>
-                <ButtonLogin title={EButtonLoginTitle.Login} onClick={handleButtonPersonalAccount} />
+                <ButtonLogin title={ButtonLoginTitle.Login} onClick={handleButtonPersonalAccount} />
                 <div className='registration__section'>
                   <legend className='h4'>Восстановление пароля</legend>
                 </div>
                 <div className='registration__section'>
-                  <TextField
-                    type={ETextFieldType.Email}
-                    id={ETextFieldId.Email}
-                    placeholder={ETextFieldPlaceholder.Email}
-                    message={ETextFieldMessage.Email}
-                  />
+                  {/* <TextField
+                    type={TextFieldType.Email}
+                    id={TextFieldId.Email}
+                    placeholder={TextFieldPlaceholder.Email}
+                    message={TextFieldMessage.Email}
+                    {...register(TextFieldId.Email, { required: true, pattern: PatternEmail })}
+                  /> */}
                 </div>
                 <div className='registration__section'>
                   <ButtonPrimary
-                    type={EButtonPrimaryType.Primary}
-                    title={EButtonPrimaryTitle.Restore}
+                    type={ButtonPrimaryType.Primary}
+                    title={ButtonPrimaryTitle.Restore}
                     className='button_large'
                   />
                   <p className='body_large'>
                     <span>Нет учётной записи</span>
-                    <ButtonLogin title={EButtonLoginTitle.Registration} onClick={handleButtonRegistration} />
+                    <ButtonLogin title={ButtonLoginTitle.Registration} onClick={handleButtonRegistration} />
                   </p>
                 </div>
               </fieldset>
@@ -207,22 +219,24 @@ export const Registration: FC = () => {
                   <legend className='h4'>Восстановление пароля</legend>
                 </div>
                 <div className='registration__section'>
-                  <TextField
-                    type={ETextFieldType.Password}
-                    id={ETextFieldId.Password}
-                    placeholder={ETextFieldPlaceholder.NewPassword}
-                    message={ETextFieldMessage.Password}
+                  {/* <TextField
+                    type={TextFieldType.Password}
+                    id={TextFieldId.Password}
+                    placeholder={TextFieldPlaceholder.NewPassword}
+                    message={TextFieldMessage.Password}
+                    {...register(TextFieldId.NewPassword, { required: true, pattern: PatternPassword })}
                   />
                   <TextField
-                    type={ETextFieldType.Password}
-                    id={ETextFieldId.Password}
-                    placeholder={ETextFieldPlaceholder.RepeatPassword}
-                  />
+                    type={TextFieldType.Password}
+                    id={TextFieldId.Password}
+                    placeholder={TextFieldPlaceholder.RepeatPassword}
+                    {...register(TextFieldId.RepeatNewPassword, { required: true, pattern: PatternPassword })}
+                  /> */}
                 </div>
                 <div className='registration__section'>
                   <ButtonPrimary
-                    type={EButtonPrimaryType.Primary}
-                    title={EButtonPrimaryTitle.SaveChanges}
+                    type={ButtonPrimaryType.Primary}
+                    title={ButtonPrimaryTitle.SaveChanges}
                     className='button_large'
                   />
                   <p className='body_large'>

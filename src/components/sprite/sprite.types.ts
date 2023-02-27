@@ -1,4 +1,4 @@
-export enum ESpriteId {
+export enum SpriteId {
   Grid = 'square-four',
   List = 'menu',
   ArrowLong = 'arrow-long-right',
@@ -21,10 +21,3 @@ export enum ESpriteId {
   StarEmpty = 'star',
   StarFill = 'star-fill',
 }
-
-export type TSprite = {
-  id: ESpriteId;
-  className: string;
-  onClick?: () => void;
-  dataTestId?: string;
-};

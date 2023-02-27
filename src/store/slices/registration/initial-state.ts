@@ -1,43 +1,34 @@
-import { TRegistrationState } from '../slices.types';
+import { RegistrationState } from '../slices.types';
 
-export const initialState: TRegistrationState = {
+export const initialState: RegistrationState = {
   isFlowOpen: false,
-  isRegistration: false,
+  isRegistration: true,
   isPasswordRecovery: false,
   isLetterReceived: false,
-  formStep: 1,
-  form: {
-    login: {
-      isError: false,
-      value: '',
-    },
-    password: {
-      isError: false,
-      value: '',
-    },
-    firstName: {
-      isError: false,
-      value: '',
-    },
-    lastName: {
-      isError: false,
-      value: '',
-    },
-    phone: {
-      isError: false,
-      value: '',
-    },
-    email: {
-      isError: false,
-      value: '',
-    },
-    contractNumber: {
-      isError: false,
-      value: '',
-    },
-    contractOwner: {
-      isError: false,
-      value: '',
+  registrationRequest: {
+    email: '',
+    username: '',
+    password: '',
+    firstName: '',
+    lastName: '',
+    phone: '',
+  },
+  registrationResponse: {
+    jwt: '',
+    user: {
+      id: 0,
+      username: '',
+      email: '',
+      provider: '',
+      confirmed: false,
+      blocked: true,
+      createdAt: '',
+      updatedAt: '',
+      firstName: '',
+      lastName: '',
+      phone: '',
     },
   },
+  isLoading: false,
+  isError: false,
 };

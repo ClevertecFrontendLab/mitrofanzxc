@@ -1,6 +1,6 @@
-import { TCategoryMockData } from './constants.types';
+import { CategoryList } from './constants.types';
 
-export const TableHeaderMockData: TCategoryMockData[] = [
+export const TABLE_HEADER_LIST: CategoryList[] = [
   {
     path: 'publish',
     name: 'Издательство',

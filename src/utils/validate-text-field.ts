@@ -1,25 +1,20 @@
-import { ETextFieldId } from '../components/text-field/text-field.types';
+import { PatternEmail, PatternLogin, PatternPassword, PatternTel } from 'constants/patterns';
 
-import { TValidateTextField } from './utils.types';
+import { TextFieldId } from 'components/text-field/text-field.types';
 
-export const validateTextField: TValidateTextField = (value, id) => {
-  const regexPhone = /^(?:\+375|375|80)\s?\(?(?:25|29|33|44)\)?\s?\d{3}\s?-?\d{2}\s?-?\d{2}/g;
-  const regexEmail = /[^\s@]+@[^\s@]+\.[^\s@]+/;
-  const regexLogin = /^[A-Za-z0-9]+$/;
-  const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
-
+export const validateTextField = (value: string, id: TextFieldId): boolean => {
   switch (id) {
-    case ETextFieldId.Login:
-      return regexLogin.test(value);
-    case ETextFieldId.Phone:
-      return regexPhone.test(value);
-    case ETextFieldId.Email:
-      return regexEmail.test(value);
-    case ETextFieldId.Password:
-      return regexPassword.test(value);
-    case ETextFieldId.ContractNumber:
+    case TextFieldId.Login:
+      return PatternLogin.test(value);
+    case TextFieldId.Password:
+      return PatternPassword.test(value);
+    case TextFieldId.Email:
+      return PatternEmail.test(value);
+    case TextFieldId.Tel:
+      return PatternTel.test(value);
+    case TextFieldId.ContractNumber:
       return false;
-    case ETextFieldId.ContractOwner:
+    case TextFieldId.ContractOwner:
       return false;
     default:
       return false;

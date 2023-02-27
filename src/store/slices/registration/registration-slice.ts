@@ -1,13 +1,13 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
-import { TForm } from '../slices.types';
+import { RegistrationRequest, RegistrationResponse } from '../slices.types';
 
 import { initialState } from './initial-state';
 
-export const loaderSlice = createSlice({
+export const registrationSlice = createSlice({
   /* eslint-disable no-param-reassign */
-  name: 'loader',
+  name: 'registration',
   initialState,
   reducers: {
     openFlow: (state) => {
@@ -37,14 +37,17 @@ export const loaderSlice = createSlice({
     closeNewPassword: (state) => {
       state.isLetterReceived = false;
     },
-    nextStep: (state) => {
-      state.formStep += 1;
+    registrationRequest: (state, action: PayloadAction<RegistrationRequest>) => {
+      state.isError = false;
+      state.isLoading = true;
     },
-    setTextFieldValue: (state, action: PayloadAction<{ value: string; id: string }>) => {
-      state.form[action.payload.id as keyof TForm].value = action.payload.value;
+    registrationRequestSuccess: (state, action: PayloadAction<RegistrationResponse>) => {
+      state.registrationResponse = action.payload;
+      state.isLoading = false;
     },
-    setTextFieldError: (state, action: PayloadAction<{ value: boolean; id: string }>) => {
-      state.form[action.payload.id as keyof TForm].isError = action.payload.value;
+    registrationRequestError: (state) => {
+      state.isError = true;
+      state.isLoading = false;
     },
   },
 });
@@ -59,9 +62,9 @@ export const {
   closePasswordRecovery,
   openNewPassword,
   closeNewPassword,
-  nextStep,
-  setTextFieldValue,
-  setTextFieldError,
-} = loaderSlice.actions;
+  registrationRequest,
+  registrationRequestSuccess,
+  registrationRequestError,
+} = registrationSlice.actions;
 /* eslint-disable-next-line import/no-default-export */
-export default loaderSlice.reducer;
+export default registrationSlice.reducer;

@@ -1,12 +1,13 @@
-import { ECatalogView } from '../../../components/buttons/button-catalog-view/button-catalog-view.types';
-import { ESort } from '../../../utils/utils.types';
-import { TCatalogState } from '../slices.types';
+import { CatalogView } from 'components/buttons/button-catalog-view/button-catalog-view.types';
+import { Sort } from 'utils/utils.types';
 
-export const initialState: TCatalogState = {
-  catalogView: ECatalogView.Grid,
+import { CatalogState } from '../slices.types';
+
+export const initialState: CatalogState = {
+  catalogView: CatalogView.Grid,
   initialData: [],
   catalogData: [],
-  catalogSortState: ESort.Descending,
+  catalogSortState: Sort.Descending,
   isLoading: false,
   isError: false,
 };

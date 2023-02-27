@@ -1,8 +1,4 @@
-export enum EContentView {
+export enum ContentView {
   Terms = 'terms',
   Contract = 'contract',
 }
-
-export type TTermsPage = {
-  contentView: EContentView;
-};

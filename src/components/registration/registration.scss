@@ -1,4 +1,4 @@
-@import '../../styles/constants.scss';
+@import 'styles/constants.scss';
 
 .registration-bg {
   position: fixed;
@@ -61,6 +61,8 @@
   .body_large {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
+    row-gap: 4px;
     color: $color-grey-black-70;
 
     .button_small_mobile {

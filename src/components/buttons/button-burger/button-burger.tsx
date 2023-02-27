@@ -1,13 +1,13 @@
 import { FC, Fragment } from 'react';
 import classNames from 'classnames';
-
-import { useAppDispatch, useAppSelector, useBodyOverflow } from '../../../hooks';
-import { closeMobileMenu, toggleMobileMenu } from '../../../store/slices';
+import { useAppDispatch, useAppSelector, useBodyOverflow } from 'hooks';
+import { mobileMenuSelector } from 'store/selectors';
+import { closeMobileMenu, toggleMobileMenu } from 'store/slices';
 
 import './button-burger.scss';
 
 const ButtonBurger: FC = () => {
-  const { isMobileMenuOpen } = useAppSelector((state) => state.mobileMenu);
+  const { isMobileMenuOpen } = useAppSelector(mobileMenuSelector);
   const dispatch = useAppDispatch();
 
   const handleButtonBurger = () => {

@@ -1,14 +1,14 @@
-import { EDate, TConvertToDate } from './utils.types';
+import { DateType } from './utils.types';
 
-export const convertToDate: TConvertToDate = (timestamp, type) => {
+export const convertToDate = (timestamp: string, type: DateType): string => {
   switch (type) {
-    case EDate.Full:
+    case DateType.Full:
       return new Date(timestamp).toLocaleString('ru-RU', {
         year: 'numeric',
         month: 'long',
         day: 'numeric',
       });
-    case EDate.Short:
+    case DateType.Short:
       return new Date(timestamp).toLocaleString('ru-RU', {
         month: 'numeric',
         day: 'numeric',

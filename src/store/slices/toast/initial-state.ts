@@ -1,8 +1,8 @@
-import { EToastMessage, EToastType } from '../../../components/toast/toast.types';
-import { TToastState } from '../slices.types';
+import { ToastMessage, ToastType } from '../../../components/toast/toast.types';
+import { ToastState } from '../slices.types';
 
-export const initialState: TToastState = {
+export const initialState: ToastState = {
   isToastOpen: false,
-  toastType: EToastType.Error,
-  toastMessage: EToastMessage.DefaultError,
+  toastType: ToastType.Error,
+  toastMessage: ToastMessage.DefaultError,
 };

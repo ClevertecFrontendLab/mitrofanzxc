@@ -1,35 +1,39 @@
 import { FC, Fragment, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import classNames from 'classnames';
-
-import { BreadCrumbs, ButtonPrimary, Loader, Modal, Nav, Rating, Review, Slider, Table, Toast } from '../../components';
-import { EButtonPrimaryTitle, EButtonPrimaryType } from '../../components/buttons/button-primary/button-primary.types';
-import { useAppSelector, useBodyOverflow, useRequest } from '../../hooks';
-import { EConnectionType } from '../../store/slices/slices.types';
-import { convertToDate, divideTableData, handleAuthors, handleStatus } from '../../utils';
-import { EDate, EPart, EStatus } from '../../utils/utils.types';
+import { BreadCrumbs, ButtonPrimary, Loader, Nav, RateBook, Rating, Review, Slider, Table, Toast } from 'components';
+import { ButtonPrimaryTitle, ButtonPrimaryType } from 'components/buttons/button-primary/button-primary.types';
+import { useAppSelector, useBodyOverflow, useRequest } from 'hooks';
+import { bookSelector, categoriesSelector } from 'store/selectors';
+import { Connection } from 'store/slices/slices.types';
+import { convertToDate, divideTableData, handleAuthors, handleStatus } from 'utils';
+import { DateType, Part, Status } from 'utils/utils.types';
 
 import './book-page.scss';
 
 export const BookPage: FC = () => {
   const { category, bookId } = useParams();
-  const { bookData, isLoading: isLoadingBook, isError: isErrorBook } = useAppSelector((state) => state.book);
-  const { isLoading: isLoadingCategories, isError: isErrorCategories } = useAppSelector((state) => state.categories);
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const { bookData, isLoading: isLoadingBook, isError: isErrorBook } = useAppSelector(bookSelector);
+  const { isLoading: isLoadingCategories, isError: isErrorCategories } = useAppSelector(categoriesSelector);
+  const [isRateBookOpen, setIsRateBookOpen] = useState<boolean>(false);
   const [isAccordionReviewsOpen, setIsAccordionReviewsOpen] = useState<boolean>(false);
+
+  const isLoading = (isLoadingBook || isLoadingCategories) && !isErrorBook && !isErrorCategories;
+  const isError = isErrorBook || isErrorCategories;
+  const isSuccess = !isLoadingBook && !isLoadingCategories && !isErrorBook && !isErrorCategories;
 
   const toggleAccordionReviews = () => {
     setIsAccordionReviewsOpen(!isAccordionReviewsOpen);
   };
 
   const handleModal = (value: boolean) => {
-    setIsModalOpen(value);
+    setIsRateBookOpen(value);
   };
 
   const statusResult = handleStatus(bookData.booking, bookData.delivery);
 
-  useRequest(EConnectionType.Book, bookId);
-  useBodyOverflow(isModalOpen);
+  useRequest({ connectionType: Connection.Book, bookId });
+  useBodyOverflow(isRateBookOpen);
 
   const ratingNumberClass = classNames({
     h5: bookData.rating !== null && bookData.rating !== undefined && bookData.rating > 0,
@@ -44,14 +48,10 @@ export const BookPage: FC = () => {
 
   return (
     <section>
-      <BreadCrumbs
-        bookData={bookData}
-        isSuccess={!isLoadingBook && !isLoadingCategories && !isErrorBook && !isErrorCategories}
-        currentCategory={category}
-      />
-      {(isLoadingBook || isLoadingCategories) && !isErrorBook && !isErrorCategories && <Loader />}
-      {(isErrorBook || isErrorCategories) && <Toast dataTestId='error' />}
-      {!isLoadingBook && !isLoadingCategories && !isErrorBook && !isErrorCategories && (
+      <BreadCrumbs bookData={bookData} isSuccess={isSuccess} currentCategory={category} />
+      {isLoading && <Loader />}
+      {isError && <Toast dataTestId='error' />}
+      {isSuccess && (
         <Fragment>
           <div className='wrapper'>
             <Nav />
@@ -62,30 +62,30 @@ export const BookPage: FC = () => {
                   {bookData.title}
                 </h3>
                 <h5 className='h5 color-grey-black-40 book-page__author'>{handleAuthors(bookData.authors)}</h5>
-                {statusResult === EStatus.Free && (
+                {statusResult === Status.Free && (
                   <ButtonPrimary
-                    type={EButtonPrimaryType.Primary}
-                    title={EButtonPrimaryTitle.Book}
+                    type={ButtonPrimaryType.Primary}
+                    title={ButtonPrimaryTitle.Book}
                     className='button_large'
                   />
                 )}
-                {statusResult === EStatus.Busy && (
+                {statusResult === Status.Busy && (
                   <ButtonPrimary
-                    type={EButtonPrimaryType.Secondary}
-                    title={EButtonPrimaryTitle.BusyUntil}
+                    type={ButtonPrimaryType.Secondary}
+                    title={ButtonPrimaryTitle.BusyUntil}
                     untilDate={
                       bookData.delivery &&
                       bookData.delivery.dateHandedTo &&
-                      convertToDate(bookData.delivery.dateHandedTo, EDate.Short)
+                      convertToDate(bookData.delivery.dateHandedTo, DateType.Short)
                     }
                     className='button_large'
                     disabled={true}
                   />
                 )}
-                {statusResult === EStatus.Reserved && (
+                {statusResult === Status.Reserved && (
                   <ButtonPrimary
-                    type={EButtonPrimaryType.Secondary}
-                    title={EButtonPrimaryTitle.Booked}
+                    type={ButtonPrimaryType.Secondary}
+                    title={ButtonPrimaryTitle.Booked}
                     className='button_large'
                   />
                 )}
@@ -107,8 +107,8 @@ export const BookPage: FC = () => {
               </div>
               <h5 className='h5 book-page__header'>Подбробная информация</h5>
               <div className='tables-wrapper'>
-                <Table data={divideTableData(EPart.First, bookData)} />
-                <Table data={divideTableData(EPart.Second, bookData)} />
+                <Table data={divideTableData(Part.First, bookData)} />
+                <Table data={divideTableData(Part.Second, bookData)} />
               </div>
               <div className='accordion__wrapper'>
                 <div className='accordion'>
@@ -131,14 +131,14 @@ export const BookPage: FC = () => {
                 </ul>
               </div>
               <ButtonPrimary
-                type={EButtonPrimaryType.Primary}
-                title={EButtonPrimaryTitle.RateTheBook}
+                type={ButtonPrimaryType.Primary}
+                title={ButtonPrimaryTitle.RateTheBook}
                 onClick={() => handleModal(true)}
                 dataTestId='button-rating'
               />
             </div>
           </div>
-          {isModalOpen && <Modal bookId={bookId} isModalOpen={isModalOpen} handleModal={handleModal} />}
+          {isRateBookOpen && <RateBook bookId={bookId} isRateBookOpen={isRateBookOpen} handleModal={handleModal} />}
         </Fragment>
       )}
     </section>

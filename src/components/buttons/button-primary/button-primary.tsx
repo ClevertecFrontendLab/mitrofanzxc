@@ -1,11 +1,23 @@
-import { FC } from 'react';
+import { StringAble } from 'constants/constants.types';
+
+import { FC, Fragment } from 'react';
 import classNames from 'classnames';
 
-import { EButtonPrimaryType, TButtonPrimary } from './button-primary.types';
+import { ButtonPrimaryTitle, ButtonPrimaryType } from './button-primary.types';
 
 import './button-primary.scss';
 
-export const ButtonPrimary: FC<TButtonPrimary> = ({
+export type ButtonPrimaryProps = {
+  type: ButtonPrimaryType;
+  title: ButtonPrimaryTitle;
+  untilDate?: StringAble;
+  className?: string;
+  disabled?: boolean;
+  onClick?: () => void;
+  dataTestId?: string;
+};
+
+export const ButtonPrimary: FC<ButtonPrimaryProps> = ({
   type,
   title,
   untilDate,
@@ -15,20 +27,25 @@ export const ButtonPrimary: FC<TButtonPrimary> = ({
   dataTestId,
 }) => {
   const buttonPrimaryClass = classNames('button', {
-    'button-primary': type === EButtonPrimaryType.Primary,
-    'button-secondary': type !== EButtonPrimaryType.Primary,
+    'button-primary': type === ButtonPrimaryType.Primary || type === ButtonPrimaryType.Submit,
+    'button-secondary': type === ButtonPrimaryType.Secondary,
   });
 
   return (
-    <button
-      className={`${buttonPrimaryClass} ${className || ''}`}
-      type='button'
-      disabled={disabled || false}
-      onClick={onClick}
-      data-test-id={dataTestId}
-    >
-      {title}
-      {untilDate && <span>{` ${untilDate}`}</span>}
-    </button>
+    <Fragment>
+      {(type === ButtonPrimaryType.Primary || type === ButtonPrimaryType.Secondary) && (
+        <button
+          className={`${buttonPrimaryClass} ${className || ''}`}
+          type='button'
+          disabled={disabled || false}
+          onClick={onClick}
+          data-test-id={dataTestId}
+        >
+          {title}
+          {untilDate && <span>{` ${untilDate}`}</span>}
+        </button>
+      )}
+      {type === ButtonPrimaryType.Submit && <input className={buttonPrimaryClass} type='submit' value={title} />}
+    </Fragment>
   );
 };

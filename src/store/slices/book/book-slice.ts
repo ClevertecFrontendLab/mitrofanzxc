@@ -1,9 +1,9 @@
+import { BookData } from 'constants/constants.types';
+
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
-import { TBookData } from '../../../constants/constants.types';
-
-import { initialState } from './initial-state';
+import { initialBookData, initialState } from './initial-state';
 
 export const bookSlice = createSlice({
   /* eslint-disable no-param-reassign */
@@ -11,9 +11,11 @@ export const bookSlice = createSlice({
   initialState,
   reducers: {
     bookRequest: (state, action: PayloadAction<string>) => {
+      state.isError = false;
+      state.bookData = initialBookData;
       state.isLoading = true;
     },
-    bookRequestSuccess: (state, action: PayloadAction<TBookData>) => {
+    bookRequestSuccess: (state, action: PayloadAction<BookData>) => {
       state.bookData = action.payload;
       state.isLoading = false;
     },

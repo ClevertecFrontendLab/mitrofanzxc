@@ -1,17 +1,17 @@
 import { createContext, Dispatch, FC, Fragment, SetStateAction, useMemo, useState } from 'react';
+import { Catalog, CatalogMenu, Loader, Toast } from 'components';
+import { useAppSelector, useRequest } from 'hooks';
+import { catalogSelector, categoriesSelector, toastSelector } from 'store/selectors';
+import { Connection } from 'store/slices/slices.types';
 
-import { Catalog, CatalogMenu, Loader, Toast } from '../../components';
-import { useAppSelector, useRequest } from '../../hooks';
-import { EConnectionType } from '../../store/slices/slices.types';
-
-export type TContext = {
+export type Context = {
   inputSearchValue: string;
   setInputSearchValue: Dispatch<SetStateAction<string>>;
   isInputSearchOpen: boolean;
   setIsInputSearchOpen: Dispatch<SetStateAction<boolean>>;
 };
 
-export const ContextMainPage = createContext<TContext>({
+export const ContextMainPage = createContext<Context>({
   inputSearchValue: '',
   setInputSearchValue: () => undefined,
   isInputSearchOpen: false,
@@ -21,23 +21,27 @@ export const ContextMainPage = createContext<TContext>({
 export const MainPage: FC = () => {
   const [inputSearchValue, setInputSearchValue] = useState('');
   const [isInputSearchOpen, setIsInputSearchOpen] = useState(false);
-  const { isLoading: isLoadingCatalog, isError: isErrorCatalog } = useAppSelector((state) => state.catalog);
-  const { isLoading: isLoadingCategories, isError: isErrorCategories } = useAppSelector((state) => state.categories);
-  const { isToastOpen } = useAppSelector((state) => state.toast);
+  const { isLoading: isLoadingCatalog, isError: isErrorCatalog } = useAppSelector(catalogSelector);
+  const { isLoading: isLoadingCategories, isError: isErrorCategories } = useAppSelector(categoriesSelector);
+  const { isToastOpen } = useAppSelector(toastSelector);
+
+  const isLoading = (isLoadingCatalog || isLoadingCategories) && !isErrorCatalog && !isErrorCategories;
+  const isError = isToastOpen;
+  const isSuccess = !isLoadingCatalog && !isLoadingCategories && !isErrorCatalog && !isErrorCategories;
 
   const store = useMemo(
     () => ({ inputSearchValue, setInputSearchValue, isInputSearchOpen, setIsInputSearchOpen }),
     [inputSearchValue, isInputSearchOpen]
   );
 
-  useRequest(EConnectionType.Catalog);
+  useRequest({ connectionType: Connection.Catalog });
 
   return (
     <ContextMainPage.Provider value={store}>
       <section className='main-page'>
-        {(isLoadingCatalog || isLoadingCategories) && !isErrorCatalog && !isErrorCategories && <Loader />}
-        {isToastOpen && <Toast dataTestId='error' />}
-        {!isLoadingCatalog && !isLoadingCategories && !isErrorCatalog && !isErrorCategories && (
+        {isLoading && <Loader />}
+        {isError && <Toast dataTestId='error' />}
+        {isSuccess && (
           <Fragment>
             <CatalogMenu />
             <Catalog />

@@ -1,12 +1,11 @@
+import { API } from 'constants/axios';
+import { BookData } from 'constants/constants.types';
+
 import { FC, Fragment, useState } from 'react';
+import { Sprite } from 'components';
+import { SpriteId } from 'components/sprite/sprite.types';
 import SwiperCore, { Navigation, Pagination, Scrollbar, Thumbs } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
-
-import { API } from '../../constants/axios';
-import { ESpriteId } from '../sprite/sprite.types';
-import { Sprite } from '..';
-
-import { TSlider } from './slider.types';
 
 import './slider.scss';
 
@@ -16,7 +15,11 @@ import 'swiper/scss/pagination';
 import 'swiper/scss/thumbs';
 import 'swiper/scss/scrollbar';
 
-export const Slider: FC<TSlider> = ({ data }) => {
+export type SliderProps = {
+  data: BookData;
+};
+
+export const Slider: FC<SliderProps> = ({ data }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperCore>();
 
   return (
@@ -85,7 +88,7 @@ export const Slider: FC<TSlider> = ({ data }) => {
       )}
       {(!data || !data.images || data.images.length <= 0) && (
         <div className='placeholder book-page__img-wrapper'>
-          <Sprite id={ESpriteId.Cat} className='placeholder__logo' />
+          <Sprite id={SpriteId.Cat} className='placeholder__logo' />
         </div>
       )}
     </Fragment>

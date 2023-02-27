@@ -28,8 +28,23 @@ export {
   closePasswordRecovery,
   openNewPassword,
   closeNewPassword,
-  nextStep,
-  setTextFieldValue,
-  setTextFieldError,
+  registrationRequest,
+  registrationRequestSuccess,
+  registrationRequestError,
 } from './registration/registration-slice';
 export { closeToast, setToast } from './toast/toast-slice';
+export {
+  authorizationRequest,
+  authorizationRequestSuccess,
+  authorizationRequestError,
+} from './authorization/authorization-slice';
+export {
+  passwordRecoveryRequest,
+  passwordRecoveryRequestSuccess,
+  passwordRecoveryRequestError,
+} from './password-recovery/password-recovery-slice';
+export {
+  passwordResetRequest,
+  passwordResetRequestSuccess,
+  passwordResetRequestError,
+} from './password-reset/password-reset-slice';

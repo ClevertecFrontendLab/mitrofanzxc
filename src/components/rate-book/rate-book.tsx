@@ -1,15 +1,18 @@
 import { ChangeEvent, FC, Fragment, useState } from 'react';
+import { ButtonPrimary, RateBookRating, Sprite } from 'components';
+import { ButtonPrimaryTitle, ButtonPrimaryType } from 'components/buttons/button-primary/button-primary.types';
+import { SpriteId } from 'components/sprite/sprite.types';
 
-import { EButtonPrimaryTitle, EButtonPrimaryType } from '../buttons/button-primary/button-primary.types';
-import { ESpriteId } from '../sprite/sprite.types';
-import { ButtonPrimary, ModalRating, Sprite } from '..';
+import './rate-book.scss';
 
-import { TModal } from './modal.types';
-
-import './modal.scss';
+export type RateBookProps = {
+  bookId?: string;
+  isRateBookOpen: boolean;
+  handleModal: (value: boolean) => void;
+};
 
 /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
-export const Modal: FC<TModal> = ({ bookId, isModalOpen, handleModal }) => {
+export const RateBook: FC<RateBookProps> = ({ bookId, isRateBookOpen, handleModal }) => {
   const [textareaValue, setTextareaValue] = useState('');
 
   const handleTextarea = (event: ChangeEvent<HTMLInputElement>) => {
@@ -24,12 +27,12 @@ export const Modal: FC<TModal> = ({ bookId, isModalOpen, handleModal }) => {
       <div role='presentation' className='loader' onClick={() => handleModal(false)} />
       <form className='form-comment'>
         <button type='button' onClick={() => handleModal(false)} className='button-close filter-shadow'>
-          <Sprite id={ESpriteId.Close} className='button-close__logo' />
+          <Sprite id={SpriteId.Close} className='button-close__logo' />
         </button>
         <h4 className='h4'>Оцените книгу</h4>
         <p className='subtitle_large'>Ваша оценка</p>
         <ul className='rating'>
-          <ModalRating />
+          <RateBookRating />
         </ul>
         <div className='text-field'>
           <input
@@ -47,7 +50,7 @@ export const Modal: FC<TModal> = ({ bookId, isModalOpen, handleModal }) => {
             <span className='text-field__label_hidden'>Оставить отзыв</span>
           </label>
         </div>
-        <ButtonPrimary type={EButtonPrimaryType.Primary} title={EButtonPrimaryTitle.Rate} className='button_large' />
+        <ButtonPrimary type={ButtonPrimaryType.Primary} title={ButtonPrimaryTitle.Rate} className='button_large' />
       </form>
     </Fragment>
   );

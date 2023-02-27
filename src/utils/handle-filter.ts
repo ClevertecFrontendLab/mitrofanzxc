@@ -1,15 +1,15 @@
-import { TCatalogData, TCategories } from '../constants/constants.types';
+import { TCatalogData, TCategories } from 'constants/constants.types';
 
 import { translateCategoryTitle } from './translate-category-title';
-import { ELanguage } from './utils.types';
+import { Language } from './utils.types';
 
 export const handleFilter = (
-  category: string | undefined,
   categoriesData: TCategories[],
-  language: ELanguage,
-  data: TCatalogData[]
+  language: Language,
+  data: TCatalogData[],
+  category?: string
 ) => {
-  const categoryName = translateCategoryTitle(category, categoriesData, language);
+  const categoryName = translateCategoryTitle(categoriesData, language, category);
   const temporaryData: TCatalogData[] = JSON.parse(JSON.stringify(data));
 
   switch (categoryName) {

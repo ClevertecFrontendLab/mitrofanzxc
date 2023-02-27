@@ -1,6 +1,6 @@
-import { TCategoryMockData } from './constants.types';
+import { CategoryList } from './constants.types';
 
-export const TitlesMockData: TCategoryMockData[] = [
+export const TITLE_LIST: CategoryList[] = [
   {
     path: 'books',
     name: 'Библиотека',
