@@ -1,12 +1,15 @@
+import { LocalStorage } from 'constants/local-storage';
+import { Path } from 'constants/path';
+
 import { FC, Fragment, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 import classNames from 'classnames';
 import { BreadCrumbs, ButtonPrimary, Loader, Nav, RateBook, Rating, Review, Slider, Table, Toast } from 'components';
 import { ButtonPrimaryTitle, ButtonPrimaryType } from 'components/buttons/button-primary/button-primary.types';
 import { useAppSelector, useBodyOverflow, useRequest } from 'hooks';
 import { bookSelector, categoriesSelector } from 'store/selectors';
 import { Connection } from 'store/slices/slices.types';
-import { convertToDate, divideTableData, handleAuthors, handleStatus } from 'utils';
+import { convertToDate, divideTableData, getLocalStorage, handleAuthors, handleStatus } from 'utils';
 import { DateType, Part, Status } from 'utils/utils.types';
 
 import './book-page.scss';
@@ -45,6 +48,12 @@ export const BookPage: FC = () => {
   const reviewListClass = classNames('review-list', {
     'review-list_active': isAccordionReviewsOpen,
   });
+
+  const user = getLocalStorage(LocalStorage.Token);
+
+  if (!user) {
+    return <Navigate to={Path.Authorization} />;
+  }
 
   return (
     <section>

@@ -1,4 +1,4 @@
-import { PatternLogin, PatternPassword } from 'constants/patterns';
+import { REGEX_WITH_PASSWORD, REGEX_WITH_USERNAME } from 'constants/regex';
 
 import { FC } from 'react';
 import { FieldErrors, useForm } from 'react-hook-form';
@@ -57,16 +57,16 @@ export const AuthorizationPage: FC = () => {
           <div className='registration__section'>
             <TextField
               type={TextFieldType.Text}
-              id={TextFieldId.Login}
+              id={TextFieldId.Identifier}
               placeholder={TextFieldPlaceholder.Login}
-              {...register(TextFieldId.Login, { required: true, pattern: PatternLogin })}
+              {...register(TextFieldId.Identifier, { required: true, pattern: REGEX_WITH_USERNAME })}
             />
             <TextField
               type={TextFieldType.Password}
               id={TextFieldId.Password}
               placeholder={TextFieldPlaceholder.Password}
               message={TextFieldMessage.Password}
-              {...register(TextFieldId.Password, { required: true, pattern: PatternPassword })}
+              {...register(TextFieldId.Password, { required: true, pattern: REGEX_WITH_PASSWORD })}
             />
             <button type='button' className='info_large' onClick={handleButtonPasswordRecovery}>
               Забыли логин или пароль?

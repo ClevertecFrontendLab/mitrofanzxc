@@ -1,8 +1,13 @@
+import { LocalStorage } from 'constants/local-storage';
+import { Path } from 'constants/path';
+
 import { createContext, Dispatch, FC, Fragment, SetStateAction, useMemo, useState } from 'react';
+import { Navigate } from 'react-router-dom';
 import { Catalog, CatalogMenu, Loader, Toast } from 'components';
 import { useAppSelector, useRequest } from 'hooks';
 import { catalogSelector, categoriesSelector, toastSelector } from 'store/selectors';
 import { Connection } from 'store/slices/slices.types';
+import { getLocalStorage } from 'utils';
 
 export type Context = {
   inputSearchValue: string;
@@ -34,7 +39,13 @@ export const MainPage: FC = () => {
     [inputSearchValue, isInputSearchOpen]
   );
 
-  useRequest({ connectionType: Connection.Catalog });
+  const user = getLocalStorage(LocalStorage.Token);
+
+  // useRequest({ connectionType: Connection.Catalog });
+
+  if (!user) {
+    return <Navigate to={Path.Authorization} />;
+  }
 
   return (
     <ContextMainPage.Provider value={store}>

@@ -5,13 +5,13 @@ import { ToastMessage, ToastType } from 'components/toast/toast.types';
 import { Sort } from 'utils/utils.types';
 
 export enum Connection {
-  Catalog = 'getCatalog',
-  Book = 'getBook',
-  Categories = 'getCategories',
-  Registration = 'setUser',
-  Authorization = 'getUser',
-  PasswordRecovery = 'setUserPassword',
-  PasswordReset = 'setUserPassword',
+  Authorization = 'authorization',
+  Book = 'book',
+  Catalog = 'catalog',
+  Categories = 'categories',
+  PasswordRecovery = 'passwordRecovery',
+  PasswordReset = 'passwordReset',
+  Registration = 'registration',
 }
 
 export type CatalogState = {

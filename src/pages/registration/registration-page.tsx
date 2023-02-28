@@ -1,4 +1,4 @@
-import { PatternEmail, PatternLogin, PatternPassword, PatternTel } from 'constants/patterns';
+import { REGEX_WITH_EMAIL, REGEX_WITH_PASSWORD, REGEX_WITH_PHONE, REGEX_WITH_USERNAME } from 'constants/regex';
 
 import { FC, Fragment, useState } from 'react';
 import { FieldErrors, useForm } from 'react-hook-form';
@@ -67,17 +67,17 @@ export const RegistrationPage: FC = () => {
               <Fragment>
                 <TextField
                   type={TextFieldType.Text}
-                  id={TextFieldId.Login}
+                  id={TextFieldId.Username}
                   placeholder={TextFieldPlaceholder.CreateUserName}
                   message={TextFieldMessage.CreateUserName}
-                  {...register(TextFieldId.Login, { required: true, pattern: PatternLogin })}
+                  {...register(TextFieldId.Username, { required: true, pattern: REGEX_WITH_USERNAME })}
                 />
                 <TextField
                   type={TextFieldType.Password}
                   id={TextFieldId.Password}
                   placeholder={TextFieldPlaceholder.Password}
                   message={TextFieldMessage.Password}
-                  {...register(TextFieldId.Password, { required: true, pattern: PatternPassword })}
+                  {...register(TextFieldId.Password, { required: true, pattern: REGEX_WITH_PASSWORD })}
                 />
               </Fragment>
             )}
@@ -87,13 +87,13 @@ export const RegistrationPage: FC = () => {
                   type={TextFieldType.Text}
                   id={TextFieldId.FirstName}
                   placeholder={TextFieldPlaceholder.FirstName}
-                  {...register(TextFieldId.FirstName, { required: true, pattern: PatternLogin })}
+                  {...register(TextFieldId.FirstName, { required: true, pattern: REGEX_WITH_USERNAME })}
                 />
                 <TextField
                   type={TextFieldType.Text}
                   id={TextFieldId.LastName}
                   placeholder={TextFieldPlaceholder.LastName}
-                  {...register(TextFieldId.LastName, { required: true, pattern: PatternLogin })}
+                  {...register(TextFieldId.LastName, { required: true, pattern: REGEX_WITH_USERNAME })}
                 />
               </Fragment>
             )}
@@ -101,16 +101,16 @@ export const RegistrationPage: FC = () => {
               <Fragment>
                 <TextField
                   type={TextFieldType.Tel}
-                  id={TextFieldId.Tel}
-                  placeholder={TextFieldPlaceholder.Tel}
-                  message={TextFieldMessage.Tel}
-                  {...register(TextFieldId.Tel, { required: true, pattern: PatternTel })}
+                  id={TextFieldId.Phone}
+                  placeholder={TextFieldPlaceholder.Phone}
+                  message={TextFieldMessage.Phone}
+                  {...register(TextFieldId.Phone, { required: true, pattern: REGEX_WITH_PHONE })}
                 />
                 <TextField
                   type={TextFieldType.Email}
                   id={TextFieldId.Email}
                   placeholder={TextFieldPlaceholder.Email}
-                  {...register(TextFieldId.Email, { required: true, pattern: PatternEmail })}
+                  {...register(TextFieldId.Email, { required: true, pattern: REGEX_WITH_EMAIL })}
                 />
               </Fragment>
             )}

@@ -18,7 +18,7 @@ import {
 
 export const forgotPassSlice = createSlice({
   /* eslint-disable no-param-reassign */
-  name: 'passwordRecovery',
+  name: 'forgotPass',
   initialState,
   reducers: {
     passwordRecoveryRequest: (state, action: PayloadAction<PasswordRecoveryRequest>) => {

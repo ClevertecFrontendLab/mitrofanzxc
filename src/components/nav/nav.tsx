@@ -1,3 +1,4 @@
+import { LocalStorage } from 'constants/local-storage';
 import { Path } from 'constants/path';
 
 import { FC, useState } from 'react';
@@ -7,8 +8,8 @@ import { Sprite } from 'components';
 import { SpriteId } from 'components/sprite/sprite.types';
 import { useAppDispatch, useAppSelector, useMatchScreenWidth } from 'hooks';
 import { catalogSelector, categoriesSelector, mobileMenuSelector } from 'store/selectors';
-import { closeAccordionMenu, closeMobileMenu, closeToast, toggleAccordionMenu } from 'store/slices';
-import { getAmountOfBooks } from 'utils';
+import { closeAccordionMenu, closeMobileMenu, closeToast, logout, toggleAccordionMenu } from 'store/slices';
+import { getAmountOfBooks, removeLocalStorage } from 'utils';
 
 import './nav.scss';
 
@@ -24,6 +25,12 @@ export const Nav: FC = () => {
   };
 
   const handleMobileMenu = () => {
+    dispatch(closeMobileMenu());
+  };
+
+  const handleLogout = () => {
+    removeLocalStorage(LocalStorage.Token);
+    dispatch(logout());
     dispatch(closeMobileMenu());
   };
 
@@ -115,7 +122,9 @@ export const Nav: FC = () => {
         <NavLink to={Path.Profile} className='h5 nav__item' onClick={handleMobileMenu}>
           Профиль
         </NavLink>
-        <h5 className='h5 nav__item'>Выход</h5>
+        <button type='button' className='h5 nav__item' onClick={handleLogout}>
+          Выход
+        </button>
       </div>
     </nav>
   );

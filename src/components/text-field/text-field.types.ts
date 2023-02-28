@@ -6,16 +6,16 @@ export enum TextFieldType {
 }
 
 export enum TextFieldId {
-  Login = 'login',
   Email = 'email',
+  Username = 'username',
+  Identifier = 'identifier',
   Password = 'password',
+  PasswordConfirmation = 'passwordConfirmation',
   FirstName = 'firstName',
   LastName = 'lastName',
+  Phone = 'phone',
   ContractNumber = 'contractNumber',
   ContractOwner = 'contractOwner',
-  Tel = 'tel',
-  NewPassword = 'newPassword',
-  RepeatNewPassword = 'repeatNewPassword',
 }
 
 export enum TextFieldPlaceholder {
@@ -27,7 +27,7 @@ export enum TextFieldPlaceholder {
   Login = 'Логин',
   NewPassword = 'Новый пароль',
   RepeatPassword = 'Повторите пароль',
-  Tel = 'Номер телефона',
+  Phone = 'Номер телефона',
   ContractOwner = 'Оформлен на',
   ContractNumber = 'Номер договора',
 }
@@ -35,30 +35,32 @@ export enum TextFieldPlaceholder {
 export enum TextFieldMessage {
   CreateUserName = 'Используйте для логина латинский алфавит и цифры',
   Password = 'Пароль не менее 8 символов, с заглавной буквой и цифрой',
-  Tel = 'В формате +375 (xx) xxx-xx-xx',
+  Phone = 'В формате +375 (xx) xxx-xx-xx',
   Email = 'На это email будет отправлено письмо с инструкциями по восстановлению пароля',
 }
 
 export type FormTextField = {
-  login: string;
+  email: string;
+  username: string;
+  identifier: string;
   password: string;
+  passwordConfirmation: string;
   firstName: string;
   lastName: string;
-  tel: string;
-  email: string;
-  newPassword: string;
-  repeatNewPassword: string;
+  phone: string;
+  contractNumber: string;
+  contractOwner: string;
 };
 
 export type FormValues = {
-  login: 'login';
+  email: 'email';
+  username: 'username';
+  identifier: 'identifier';
   password: 'password';
+  passwordConfirmation: 'passwordConfirmation';
   firstName: 'firstName';
   lastName: 'lastName';
-  email: 'email';
-  tel: 'tel';
+  phone: 'phone';
   contractNumber: 'contractNumber';
   contractOwner: 'contractOwner';
-  newPassword: 'newPassword';
-  repeatNewPassword: 'repeatNewPassword';
 };

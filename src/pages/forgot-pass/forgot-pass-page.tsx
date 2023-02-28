@@ -1,4 +1,4 @@
-import { PatternEmail, PatternPassword } from 'constants/patterns';
+import { REGEX_WITH_EMAIL, REGEX_WITH_PASSWORD } from 'constants/regex';
 
 import { FC } from 'react';
 import { FieldErrors, useForm } from 'react-hook-form';
@@ -66,7 +66,7 @@ export const ForgotPassPage: FC = () => {
                 id={TextFieldId.Email}
                 placeholder={TextFieldPlaceholder.Email}
                 message={TextFieldMessage.Email}
-                {...register(TextFieldId.Email, { required: true, pattern: PatternEmail })}
+                {...register(TextFieldId.Email, { required: true, pattern: REGEX_WITH_EMAIL })}
               />
             </div>
             <div className='registration__section'>
@@ -95,13 +95,13 @@ export const ForgotPassPage: FC = () => {
                 id={TextFieldId.Password}
                 placeholder={TextFieldPlaceholder.NewPassword}
                 message={TextFieldMessage.Password}
-                {...register(TextFieldId.NewPassword, { required: true, pattern: PatternPassword })}
+                {...register(TextFieldId.Password, { required: true, pattern: REGEX_WITH_PASSWORD })}
               />
               <TextField
                 type={TextFieldType.Password}
                 id={TextFieldId.Password}
                 placeholder={TextFieldPlaceholder.RepeatPassword}
-                {...register(TextFieldId.RepeatNewPassword, { required: true, pattern: PatternPassword })}
+                {...register(TextFieldId.PasswordConfirmation, { required: true, pattern: REGEX_WITH_PASSWORD })}
               />
             </div>
             <div className='registration__section'>

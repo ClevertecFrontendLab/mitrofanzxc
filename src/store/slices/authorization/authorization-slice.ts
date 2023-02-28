@@ -21,8 +21,8 @@ export const authorizationSlice = createSlice({
       state.isError = false;
     },
     authorizationRequestSuccess: (state, action: PayloadAction<AuthorizationResponse>) => {
-      state.authorizationResponse = action.payload;
       state.authorizationRequest = AUTHORIZATION_REQUEST_WITH_INITIAL_DATA;
+      state.authorizationResponse = action.payload;
       state.isAuth = true;
       state.isLoading = false;
       state.isError = false;

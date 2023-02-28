@@ -1,17 +1,17 @@
-import { PatternEmail, PatternLogin, PatternPassword, PatternTel } from 'constants/patterns';
+import { REGEX_WITH_EMAIL, REGEX_WITH_PASSWORD, REGEX_WITH_PHONE, REGEX_WITH_USERNAME } from 'constants/regex';
 
 import { TextFieldId } from 'components/text-field/text-field.types';
 
 export const validateTextField = (value: string, id: TextFieldId): boolean => {
   switch (id) {
-    case TextFieldId.Login:
-      return PatternLogin.test(value);
+    case TextFieldId.Username:
+      return REGEX_WITH_USERNAME.test(value);
     case TextFieldId.Password:
-      return PatternPassword.test(value);
+      return REGEX_WITH_PASSWORD.test(value);
     case TextFieldId.Email:
-      return PatternEmail.test(value);
-    case TextFieldId.Tel:
-      return PatternTel.test(value);
+      return REGEX_WITH_EMAIL.test(value);
+    case TextFieldId.Phone:
+      return REGEX_WITH_PHONE.test(value);
     case TextFieldId.ContractNumber:
       return false;
     case TextFieldId.ContractOwner:
