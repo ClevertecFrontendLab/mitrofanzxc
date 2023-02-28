@@ -7,9 +7,6 @@ export const mobileMenuSlice = createSlice({
   name: 'mobileMenu',
   initialState,
   reducers: {
-    openMobileMenu: (state) => {
-      state.isMobileMenuOpen = true;
-    },
     closeMobileMenu: (state) => {
       state.isMobileMenuOpen = false;
     },
@@ -28,13 +25,7 @@ export const mobileMenuSlice = createSlice({
   },
 });
 
-export const {
-  openMobileMenu,
-  closeMobileMenu,
-  toggleMobileMenu,
-  openAccordionMenu,
-  closeAccordionMenu,
-  toggleAccordionMenu,
-} = mobileMenuSlice.actions;
+export const { closeMobileMenu, toggleMobileMenu, openAccordionMenu, closeAccordionMenu, toggleAccordionMenu } =
+  mobileMenuSlice.actions;
 /* eslint-disable-next-line import/no-default-export */
 export default mobileMenuSlice.reducer;

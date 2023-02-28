@@ -5,13 +5,13 @@ import { LocalStorage } from './local-storage';
 
 export enum API {
   BaseUrl = 'https://strapi.cleverland.by',
+  Authorization = '/api/auth/local',
+  Book = '/api/books/',
   Catalog = '/api/books',
   Categories = '/api/categories',
-  Book = '/api/books/',
-  Registration = '/api/auth/local/register',
-  Authorization = '/api/auth/local',
-  PasswordReset = '/api/auth/forgot-password',
   PasswordRecovery = '/api/auth/reset-password',
+  PasswordReset = '/api/auth/forgot-password',
+  Registration = '/api/auth/local/register',
 }
 
 export const cleverlandConfig = axios.create({

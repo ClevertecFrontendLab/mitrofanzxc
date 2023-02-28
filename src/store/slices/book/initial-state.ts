@@ -1,6 +1,6 @@
 import { BookState } from '../slices.types';
 
-export const initialBookData = {
+export const BOOK_WITH_INITIAL_DATA = {
   id: 0,
   title: '',
   rating: 0,
@@ -36,7 +36,7 @@ export const initialBookData = {
 };
 
 export const initialState: BookState = {
-  bookData: initialBookData,
+  bookData: BOOK_WITH_INITIAL_DATA,
   isLoading: false,
   isError: false,
 };

@@ -11,17 +11,19 @@ export const categoriesSlice = createSlice({
   initialState,
   reducers: {
     categoriesRequest: (state) => {
-      state.isError = false;
       state.categoriesData = [];
       state.isLoading = true;
+      state.isError = false;
     },
     categoriesRequestSuccess: (state, action: PayloadAction<TCategories[]>) => {
       state.categoriesData = action.payload;
       state.isLoading = false;
+      state.isError = false;
     },
     categoriesRequestError: (state) => {
-      state.isError = true;
+      state.categoriesData = [];
       state.isLoading = false;
+      state.isError = true;
     },
   },
 });

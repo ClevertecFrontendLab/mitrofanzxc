@@ -81,6 +81,7 @@ export type AuthorizationError = {
 export type AuthorizationState = {
   authorizationRequest: AuthorizationRequest;
   authorizationResponse: AuthorizationResponse;
+  isAuth: boolean;
   isLoading: boolean;
   isError: boolean;
 };

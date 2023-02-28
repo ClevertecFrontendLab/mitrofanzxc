@@ -11,18 +11,18 @@ export {
 } from './catalog/catalog-slice';
 export { categoriesRequest, categoriesRequestSuccess, categoriesRequestError } from './categories/categories-slice';
 export {
-  openMobileMenu,
-  closeMobileMenu,
-  toggleMobileMenu,
-  openAccordionMenu,
   closeAccordionMenu,
+  closeMobileMenu,
+  openAccordionMenu,
   toggleAccordionMenu,
+  toggleMobileMenu,
 } from './mobile-menu/mobile-menu-slice';
 export { closeToast, setToast } from './toast/toast-slice';
 export {
   authorizationRequest,
   authorizationRequestSuccess,
   authorizationRequestError,
+  logout,
 } from './authorization/authorization-slice';
 export {
   registrationRequest,

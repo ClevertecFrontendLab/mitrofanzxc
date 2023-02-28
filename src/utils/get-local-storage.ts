@@ -1,4 +1,6 @@
-export const getLocalStorage = <T>(key: string): T | null => {
+import { LocalStorage } from 'constants/local-storage';
+
+export const getLocalStorage = <T>(key: LocalStorage): T | null => {
   const data: string | null = localStorage.getItem(key) || null;
 
   if (data) {

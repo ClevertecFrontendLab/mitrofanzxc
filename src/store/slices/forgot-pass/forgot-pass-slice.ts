@@ -8,7 +8,13 @@ import {
   PasswordResetResponse,
 } from '../slices.types';
 
-import { initialState } from './initial-state';
+import {
+  initialState,
+  PASSWORD_RECOVERY_REQUEST_WITH_INITIAL_DATA,
+  PASSWORD_RECOVERY_RESPONSE_WITH_INITIAL_DATA,
+  PASSWORD_RESET_REQUEST_WITH_INITIAL_DATA,
+  PASSWORD_RESET_RESPONSE_WITH_INITIAL_DATA,
+} from './initial-state';
 
 export const forgotPassSlice = createSlice({
   /* eslint-disable no-param-reassign */
@@ -16,28 +22,56 @@ export const forgotPassSlice = createSlice({
   initialState,
   reducers: {
     passwordRecoveryRequest: (state, action: PayloadAction<PasswordRecoveryRequest>) => {
-      state.isError = false;
+      state.passwordRecoveryResponse = PASSWORD_RECOVERY_RESPONSE_WITH_INITIAL_DATA;
+      state.passwordResetRequest = PASSWORD_RESET_REQUEST_WITH_INITIAL_DATA;
+      state.passwordResetResponse = PASSWORD_RESET_RESPONSE_WITH_INITIAL_DATA;
+      state.isLetterReceived = false;
       state.isLoading = true;
+      state.isError = false;
     },
     passwordRecoveryRequestSuccess: (state, action: PayloadAction<PasswordRecoveryResponse>) => {
+      state.passwordRecoveryRequest = PASSWORD_RECOVERY_REQUEST_WITH_INITIAL_DATA;
       state.passwordRecoveryResponse = action.payload;
+      state.passwordResetRequest = PASSWORD_RESET_REQUEST_WITH_INITIAL_DATA;
+      state.passwordResetResponse = PASSWORD_RESET_RESPONSE_WITH_INITIAL_DATA;
+      state.isLetterReceived = false;
       state.isLoading = false;
+      state.isError = false;
     },
     passwordRecoveryRequestError: (state) => {
-      state.isError = true;
+      state.passwordRecoveryRequest = PASSWORD_RECOVERY_REQUEST_WITH_INITIAL_DATA;
+      state.passwordRecoveryResponse = PASSWORD_RECOVERY_RESPONSE_WITH_INITIAL_DATA;
+      state.passwordResetRequest = PASSWORD_RESET_REQUEST_WITH_INITIAL_DATA;
+      state.passwordResetResponse = PASSWORD_RESET_RESPONSE_WITH_INITIAL_DATA;
+      state.isLetterReceived = false;
       state.isLoading = false;
+      state.isError = true;
     },
     passwordResetRequest: (state, action: PayloadAction<PasswordResetRequest>) => {
-      state.isError = false;
+      state.passwordRecoveryRequest = PASSWORD_RECOVERY_REQUEST_WITH_INITIAL_DATA;
+      state.passwordRecoveryResponse = PASSWORD_RECOVERY_RESPONSE_WITH_INITIAL_DATA;
+      state.passwordResetResponse = PASSWORD_RESET_RESPONSE_WITH_INITIAL_DATA;
+      state.isLetterReceived = false;
       state.isLoading = true;
+      state.isError = false;
     },
     passwordResetRequestSuccess: (state, action: PayloadAction<PasswordResetResponse>) => {
+      state.passwordRecoveryRequest = PASSWORD_RECOVERY_REQUEST_WITH_INITIAL_DATA;
+      state.passwordRecoveryResponse = PASSWORD_RECOVERY_RESPONSE_WITH_INITIAL_DATA;
       state.passwordResetResponse = action.payload;
+      state.passwordResetRequest = PASSWORD_RESET_REQUEST_WITH_INITIAL_DATA;
+      state.isLetterReceived = true;
       state.isLoading = false;
+      state.isError = false;
     },
     passwordResetRequestError: (state) => {
-      state.isError = true;
+      state.passwordRecoveryRequest = PASSWORD_RECOVERY_REQUEST_WITH_INITIAL_DATA;
+      state.passwordRecoveryResponse = PASSWORD_RECOVERY_RESPONSE_WITH_INITIAL_DATA;
+      state.passwordResetRequest = PASSWORD_RESET_REQUEST_WITH_INITIAL_DATA;
+      state.passwordResetResponse = PASSWORD_RESET_RESPONSE_WITH_INITIAL_DATA;
+      state.isLetterReceived = false;
       state.isLoading = false;
+      state.isError = true;
     },
     openPasswordRecovery: (state) => {
       state.isPasswordRecovery = true;

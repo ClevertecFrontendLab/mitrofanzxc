@@ -3,7 +3,11 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { RegistrationRequest, RegistrationResponse } from '../slices.types';
 
-import { initialState } from './initial-state';
+import {
+  initialState,
+  REGISTRATION_REQUEST_WITH_INITIAL_DATA,
+  REGISTRATION_RESPONSE_WITH_INITIAL_DATA,
+} from './initial-state';
 
 export const registrationSlice = createSlice({
   /* eslint-disable no-param-reassign */
@@ -11,16 +15,21 @@ export const registrationSlice = createSlice({
   initialState,
   reducers: {
     registrationRequest: (state, action: PayloadAction<RegistrationRequest>) => {
-      state.isError = false;
+      state.registrationResponse = REGISTRATION_RESPONSE_WITH_INITIAL_DATA;
       state.isLoading = true;
+      state.isError = false;
     },
     registrationRequestSuccess: (state, action: PayloadAction<RegistrationResponse>) => {
+      state.registrationRequest = REGISTRATION_REQUEST_WITH_INITIAL_DATA;
       state.registrationResponse = action.payload;
       state.isLoading = false;
+      state.isError = false;
     },
     registrationRequestError: (state) => {
-      state.isError = true;
+      state.registrationRequest = REGISTRATION_REQUEST_WITH_INITIAL_DATA;
+      state.registrationResponse = REGISTRATION_RESPONSE_WITH_INITIAL_DATA;
       state.isLoading = false;
+      state.isError = true;
     },
   },
 });

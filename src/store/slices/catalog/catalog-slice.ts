@@ -13,17 +13,20 @@ export const catalogSlice = createSlice({
   initialState,
   reducers: {
     catalogRequest: (state) => {
-      state.isError = false;
       state.initialData = [];
       state.catalogData = [];
       state.isLoading = true;
+      state.isError = false;
     },
     catalogRequestSuccess: (state, action: PayloadAction<TCatalogData[]>) => {
       state.initialData = action.payload;
       state.catalogData = action.payload;
       state.isLoading = false;
+      state.isError = false;
     },
     catalogRequestError: (state) => {
+      state.initialData = [];
+      state.catalogData = [];
       state.isError = true;
       state.isLoading = false;
     },
