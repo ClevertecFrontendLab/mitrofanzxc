@@ -15,14 +15,19 @@ export enum API {
 }
 
 export const cleverlandConfig = axios.create({
-  withCredentials: true,
   baseURL: API.BaseUrl,
+  withCredentials: true,
 });
 
 cleverlandConfig.interceptors.request.use((config) => {
-  const result = { ...config };
+  /* eslint-disable no-param-reassign */
+  const token: string | null = getLocalStorage(LocalStorage.Token);
 
-  result.headers.Authorization = `Bearer ${getLocalStorage(LocalStorage.Token)}`;
+  console.log('token ===', token);
 
-  return result;
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+
+  return config;
 });

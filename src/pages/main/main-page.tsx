@@ -39,11 +39,11 @@ export const MainPage: FC = () => {
     [inputSearchValue, isInputSearchOpen]
   );
 
-  const user = getLocalStorage(LocalStorage.Token);
+  const isAuth = getLocalStorage(LocalStorage.Token);
 
-  // useRequest({ connectionType: Connection.Catalog });
+  useRequest({ connectionType: Connection.Catalog });
 
-  if (!user) {
+  if (!isAuth) {
     return <Navigate to={Path.Authorization} />;
   }
 

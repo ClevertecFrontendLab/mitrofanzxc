@@ -13,9 +13,9 @@ import { getLocalStorage } from 'utils';
 import './profile-page.scss';
 
 export const ProfilePage: FC = () => {
-  const user = getLocalStorage(LocalStorage.Token);
+  const isAuth = getLocalStorage(LocalStorage.Token);
 
-  if (!user) {
+  if (!isAuth) {
     return <Navigate to={Path.Authorization} />;
   }
 

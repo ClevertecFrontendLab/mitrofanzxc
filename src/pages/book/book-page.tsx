@@ -49,9 +49,9 @@ export const BookPage: FC = () => {
     'review-list_active': isAccordionReviewsOpen,
   });
 
-  const user = getLocalStorage(LocalStorage.Token);
+  const isAuth = getLocalStorage(LocalStorage.Token);
 
-  if (!user) {
+  if (!isAuth) {
     return <Navigate to={Path.Authorization} />;
   }
 
