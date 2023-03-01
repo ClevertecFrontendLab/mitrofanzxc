@@ -65,9 +65,9 @@ export const RegistrationPage: FC = () => {
     <Fragment>
       {isLoading && <Loader />}
       {isError && <Toast dataTestId='123' />}
-      <div className='registration-bg'>
+      <div className='registration-bg' data-test-id='auth'>
         <h3 className='h3'>Cleverland</h3>
-        <form className='registration' onSubmit={handleSubmit(onSubmit, onError)}>
+        <form className='registration' onSubmit={handleSubmit(onSubmit, onError)} data-test-id='register-form'>
           <fieldset className='registration__fieldset'>
             <div className='registration__section'>
               <legend className='h4'>Регистрация</legend>

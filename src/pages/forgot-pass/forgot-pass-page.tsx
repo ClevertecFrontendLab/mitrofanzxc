@@ -37,11 +37,11 @@ export const ForgotPassPage: FC = () => {
     <Fragment>
       {isLoading && <Loader />}
       {isError && <Toast dataTestId='123' />}
-      <div className='registration-bg'>
+      <div className='registration-bg' data-test-id='auth'>
         <h3 className='h3'>Cleverland</h3>
-        <form className='registration' onSubmit={handleSubmit(onSubmit, onError)}>
-          {/* Для восстановления пароля */}
-          {isPasswordRecovery && (
+        {/* Для восстановления пароля */}
+        {isPasswordRecovery && (
+          <form className='registration' onSubmit={handleSubmit(onSubmit, onError)} data-test-id='send-email-form'>
             <fieldset className='registration__fieldset'>
               <ButtonLogin title={ButtonLoginTitle.Login} path={Path.Authorization} />
               <div className='registration__section'>
@@ -68,10 +68,12 @@ export const ForgotPassPage: FC = () => {
                 </p>
               </div>
             </fieldset>
-          )}
+          </form>
+        )}
 
-          {/* Для нового пароля по ссылке из почты */}
-          {isLetterReceived && (
+        {/* Для нового пароля по ссылке из почты */}
+        {isLetterReceived && (
+          <form className='registration' onSubmit={handleSubmit(onSubmit, onError)} data-test-id='reset-password-form'>
             <fieldset className='registration__fieldset'>
               <div className='registration__section'>
                 <legend className='h4'>Восстановление пароля</legend>
@@ -102,8 +104,8 @@ export const ForgotPassPage: FC = () => {
                 </p>
               </div>
             </fieldset>
-          )}
-        </form>
+          </form>
+        )}
       </div>
     </Fragment>
   );

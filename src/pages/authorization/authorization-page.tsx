@@ -42,9 +42,9 @@ export const AuthorizationPage: FC = () => {
     <Fragment>
       {isLoading && <Loader />}
       {isError && <Toast dataTestId='123' />}
-      <div className='registration-bg'>
+      <div className='registration-bg' data-test-id='auth'>
         <h3 className='h3'>Cleverland</h3>
-        <form className='registration' onSubmit={handleSubmit(onSubmit, onError)}>
+        <form className='registration' onSubmit={handleSubmit(onSubmit, onError)} data-test-id='auth-form'>
           <fieldset className='registration__fieldset'>
             <div className='registration__section'>
               <legend className='h4'>Вход в личный кабинет</legend>
@@ -63,7 +63,7 @@ export const AuthorizationPage: FC = () => {
                 message={TextFieldMessage.Password}
                 {...register(TextFieldId.Password, { required: true, pattern: REGEX_WITH_PASSWORD })}
               />
-              <Link to='/123' className='info_large'>
+              <Link to={Path.ForgotPass} className='info_large'>
                 Забыли логин или пароль?
               </Link>
             </div>

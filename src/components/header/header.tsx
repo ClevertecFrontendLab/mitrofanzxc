@@ -49,7 +49,7 @@ export const Header: FC = () => {
                 <Link to={Path.Profile} className='h5 nav__item'>
                   Профиль
                 </Link>
-                <button type='button' className='h5 nav__item' onClick={handleLogout}>
+                <button type='button' className='h5 nav__item' onClick={handleLogout} data-test-id='exit-button'>
                   Выход
                 </button>
               </div>

@@ -122,7 +122,7 @@ export const Nav: FC = () => {
         <NavLink to={Path.Profile} className='h5 nav__item' onClick={handleMobileMenu}>
           Профиль
         </NavLink>
-        <button type='button' className='h5 nav__item' onClick={handleLogout}>
+        <button type='button' className='h5 nav__item' onClick={handleLogout} data-test-id='exit-button'>
           Выход
         </button>
       </div>

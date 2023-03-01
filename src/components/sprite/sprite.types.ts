@@ -9,7 +9,7 @@ export enum SpriteId {
   Close = 'close',
   ArrowShort = 'arrow-down',
   Check = 'check',
-  EyeOpen = 'eye-open',
+  EyeOpened = 'eye-opened',
   EyeClosed = 'eye-closed',
   Warning = 'warning-circle-fill',
   Success = 'check-circle-fill',
