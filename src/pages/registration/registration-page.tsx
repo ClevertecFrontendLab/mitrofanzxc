@@ -58,7 +58,7 @@ export const RegistrationPage: FC = () => {
   const isAuth = getLocalStorage(LocalStorage.Token);
 
   if (isAuth) {
-    return <Navigate to={Path.Authorization} />;
+    return <Navigate to={Path.Main} />;
   }
 
   return (

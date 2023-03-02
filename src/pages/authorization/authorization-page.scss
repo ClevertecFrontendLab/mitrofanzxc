@@ -25,6 +25,11 @@
   padding: $base * 12 $base * 14 $base * 12 $base * 14;
   background-color: $color-white;
   border-radius: $base * 4;
+
+  @media (max-width: $breakpoint-sm-min) {
+    width: 288px;
+    padding: 24px 16px 24px 16px;
+  }
 }
 
 .registration__fieldset {
@@ -70,6 +75,10 @@
       margin-left: $base * 4;
       color: $color-dark;
       text-transform: uppercase;
+
+      @media (max-width: $breakpoint-sm-min) {
+        margin-left: 0;
+      }
     }
   }
 }

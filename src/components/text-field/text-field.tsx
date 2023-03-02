@@ -42,7 +42,7 @@ export const TextField = forwardRef<
       {type === TextFieldType.Password && (
         <div className='text-field__logo-wrapper'>
           {/* <Sprite id={SpriteId.Check} className='text-field__logo text-field__logo_check' dataTestId='checkmark' /> */}
-          <svg className='text-field__logo text-field__logo_check' data-testid='checkmark'>
+          <svg className='text-field__logo text-field__logo_check' data-test-id='checkmark'>
             <use xlinkHref={`${sprite}#${SpriteId.Check}`} />
           </svg>
           {/* <Sprite
@@ -54,7 +54,7 @@ export const TextField = forwardRef<
           <svg
             className='text-field__logo text-field__logo_eye'
             onClick={handleSetIsEyeOpened}
-            data-testid={isEyeOpened ? SpriteId.EyeOpened : SpriteId.EyeClosed}
+            data-test-id={isEyeOpened ? SpriteId.EyeOpened : SpriteId.EyeClosed}
           >
             <use xlinkHref={`${sprite}#${isEyeOpened ? SpriteId.EyeOpened : SpriteId.EyeClosed}`} />
           </svg>

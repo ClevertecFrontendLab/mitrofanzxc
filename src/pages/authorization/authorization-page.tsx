@@ -1,9 +1,10 @@
+import { LocalStorage } from 'constants/local-storage';
 import { Path } from 'constants/path';
 import { REGEX_WITH_PASSWORD, REGEX_WITH_USERNAME } from 'constants/regex';
 
 import { FC, Fragment } from 'react';
 import { FieldErrors, useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { ButtonLogin, ButtonPrimary, Loader, TextField, Toast } from 'components';
 import { ButtonLoginTitle } from 'components/buttons/button-login/button-login.types';
 import { ButtonPrimaryTitle, ButtonPrimaryType } from 'components/buttons/button-primary/button-primary.types';
@@ -17,6 +18,7 @@ import { useAppDispatch, useAppSelector } from 'hooks';
 import { authorizationSelector } from 'store/selectors';
 import { authorizationRequest } from 'store/slices';
 import { AuthorizationRequest } from 'store/slices/slices.types';
+import { getLocalStorage } from 'utils';
 
 import './authorization-page.scss';
 
@@ -37,6 +39,12 @@ export const AuthorizationPage: FC = () => {
   const onError = (error: FieldErrors<AuthorizationRequest>) => {
     console.log('FORM_ERRORS ===', error);
   };
+
+  const isAuth = getLocalStorage(LocalStorage.Token);
+
+  if (isAuth) {
+    return <Navigate to={Path.Main} />;
+  }
 
   return (
     <Fragment>

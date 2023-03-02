@@ -24,11 +24,11 @@ export const ContextMainPage = createContext<Context>({
 });
 
 export const MainPage: FC = () => {
-  const [inputSearchValue, setInputSearchValue] = useState('');
-  const [isInputSearchOpen, setIsInputSearchOpen] = useState(false);
   const { isLoading: isLoadingCatalog, isError: isErrorCatalog } = useAppSelector(catalogSelector);
   const { isLoading: isLoadingCategories, isError: isErrorCategories } = useAppSelector(categoriesSelector);
   const { isToastOpen } = useAppSelector(toastSelector);
+  const [inputSearchValue, setInputSearchValue] = useState('');
+  const [isInputSearchOpen, setIsInputSearchOpen] = useState(false);
 
   const isLoading = (isLoadingCatalog || isLoadingCategories) && !isErrorCatalog && !isErrorCategories;
   const isError = isToastOpen;
