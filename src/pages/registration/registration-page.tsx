@@ -1,10 +1,8 @@
-import { LocalStorage } from 'constants/local-storage';
 import { Path } from 'constants/path';
 import { REGEX_WITH_EMAIL, REGEX_WITH_PASSWORD, REGEX_WITH_PHONE, REGEX_WITH_USERNAME } from 'constants/regex';
 
 import { FC, Fragment, useState } from 'react';
 import { FieldErrors, useForm } from 'react-hook-form';
-import { Navigate } from 'react-router-dom';
 import { ButtonLogin, ButtonPrimary, Loader, TextField, Toast } from 'components';
 import { ButtonLoginTitle } from 'components/buttons/button-login/button-login.types';
 import { ButtonPrimaryTitle, ButtonPrimaryType } from 'components/buttons/button-primary/button-primary.types';
@@ -14,12 +12,11 @@ import {
   TextFieldPlaceholder,
   TextFieldType,
 } from 'components/text-field/text-field.types';
-import { useAppDispatch, useAppSelector } from 'hooks';
+import { useAppDispatch, useAppSelector, useAuth } from 'hooks';
 import { registrationSelector } from 'store/selectors';
 import { registrationRequest } from 'store/slices';
 import { REGISTRATION_REQUEST_WITH_INITIAL_DATA } from 'store/slices/registration/initial-state';
 import { RegistrationRequest } from 'store/slices/slices.types';
-import { getLocalStorage } from 'utils';
 
 export const RegistrationPage: FC = () => {
   const { isError, isLoading } = useAppSelector(registrationSelector);
@@ -55,11 +52,7 @@ export const RegistrationPage: FC = () => {
   const buttonPrimaryTitle =
     step === 1 ? ButtonPrimaryTitle.NextStep : step === 2 ? ButtonPrimaryTitle.LastStep : ButtonPrimaryTitle.Register;
 
-  const isAuth = getLocalStorage(LocalStorage.Token);
-
-  if (isAuth) {
-    return <Navigate to={Path.Main} />;
-  }
+  useAuth(Path.Main);
 
   return (
     <Fragment>

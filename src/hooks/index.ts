@@ -5,3 +5,5 @@ export { useScrollToTop } from './use-scroll-to-top';
 export { useDebounce } from './use-debounce';
 export { useRequest } from './use-request';
 export { useMatchScreenWidth } from './use-match-screen-width';
+export { useAuth } from './use-auth';
+export { useUnauth } from './use-unauth';

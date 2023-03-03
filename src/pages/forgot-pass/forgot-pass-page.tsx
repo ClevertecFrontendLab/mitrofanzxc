@@ -1,10 +1,8 @@
-import { LocalStorage } from 'constants/local-storage';
 import { Path } from 'constants/path';
 import { REGEX_WITH_EMAIL, REGEX_WITH_PASSWORD } from 'constants/regex';
 
 import { FC, Fragment } from 'react';
 import { FieldErrors, useForm } from 'react-hook-form';
-import { Navigate } from 'react-router-dom';
 import { ButtonLogin, ButtonPrimary, Loader, TextField, Toast } from 'components';
 import { ButtonLoginTitle } from 'components/buttons/button-login/button-login.types';
 import { ButtonPrimaryTitle, ButtonPrimaryType } from 'components/buttons/button-primary/button-primary.types';
@@ -15,9 +13,8 @@ import {
   TextFieldPlaceholder,
   TextFieldType,
 } from 'components/text-field/text-field.types';
-import { useAppDispatch, useAppSelector } from 'hooks';
+import { useAppDispatch, useAppSelector, useAuth } from 'hooks';
 import { forgotPassSelector } from 'store/selectors';
-import { getLocalStorage } from 'utils';
 
 export const ForgotPassPage: FC = () => {
   const { isError, isLoading, isLetterReceived, isPasswordRecovery } = useAppSelector(forgotPassSelector);
@@ -36,11 +33,7 @@ export const ForgotPassPage: FC = () => {
     console.log('FORM_ERRORS ===', error);
   };
 
-  const isAuth = getLocalStorage(LocalStorage.Token);
-
-  if (isAuth) {
-    return <Navigate to={Path.Main} />;
-  }
+  useAuth(Path.Main);
 
   return (
     <Fragment>

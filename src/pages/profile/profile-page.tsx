@@ -1,23 +1,17 @@
-import { LocalStorage } from 'constants/local-storage';
 import { Path } from 'constants/path';
 
 import { FC } from 'react';
-import { Navigate } from 'react-router-dom';
 import unauthorizedImg from 'assets/unauthorized.png';
 import { ButtonPrimary, Sprite, TextField } from 'components';
 import { ButtonPrimaryTitle, ButtonPrimaryType } from 'components/buttons/button-primary/button-primary.types';
 import { SpriteId } from 'components/sprite/sprite.types';
 import { TextFieldId, TextFieldPlaceholder, TextFieldType } from 'components/text-field/text-field.types';
-import { getLocalStorage } from 'utils';
+import { useUnauth } from 'hooks';
 
 import './profile-page.scss';
 
 export const ProfilePage: FC = () => {
-  const isAuth = getLocalStorage(LocalStorage.Token);
-
-  if (!isAuth) {
-    return <Navigate to={Path.Authorization} />;
-  }
+  useUnauth(Path.Authorization);
 
   return (
     <section className='profile-page'>
