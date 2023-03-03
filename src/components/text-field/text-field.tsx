@@ -1,7 +1,7 @@
 import { Path } from 'constants/path';
 
 import { forwardRef, useState } from 'react';
-import { UseFormRegister } from 'react-hook-form/dist/types';
+import { FieldErrors, UseFormRegister } from 'react-hook-form/dist/types';
 import { useLocation } from 'react-router-dom';
 import sprite from 'assets/sprite.svg';
 import { Sprite } from 'components';
@@ -18,9 +18,10 @@ export const TextField = forwardRef<
     id: TextFieldId;
     placeholder: TextFieldPlaceholder;
     message?: TextFieldMessage;
+    error?: FieldErrors;
   } & ReturnType<UseFormRegister<FormValues>>
->(({ onChange, name, type, id, placeholder, message }, ref) => {
-  console.log('onError ===');
+>(({ onChange, name, type, id, placeholder, message, error }, ref) => {
+  console.log('error ===', error);
   const { pathname } = useLocation();
   const [isEyeOpened, setIsEyeOpened] = useState(false);
 
@@ -67,7 +68,7 @@ export const TextField = forwardRef<
           </svg>
         </div>
       )}
-      {message && (
+      {message && error && error[name] && (
         <p className='text-field__message info_large' data-test-id='hint'>
           {message}
         </p>
