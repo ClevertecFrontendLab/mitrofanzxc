@@ -1,7 +1,7 @@
 import { Path } from 'constants/path';
 import { REGEX_WITH_PASSWORD, REGEX_WITH_USERNAME } from 'constants/regex';
 
-import { FC, Fragment, useState } from 'react';
+import { FC, Fragment } from 'react';
 import { FieldErrors, useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { ButtonLogin, ButtonPrimary, Loader, TextField, Toast } from 'components';
@@ -27,7 +27,6 @@ export const AuthorizationPage: FC = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<AuthorizationRequest>();
-  const [formErrors, setFormErrors] = useState<FieldErrors>();
   const dispatch = useAppDispatch();
 
   const onSubmit = (data: AuthorizationRequest) => {
@@ -36,7 +35,7 @@ export const AuthorizationPage: FC = () => {
   };
 
   const onError = (error: FieldErrors<AuthorizationRequest>) => {
-    setFormErrors(error);
+    console.log('FORM_ERRORS ===', error);
   };
 
   useAuth(Path.Main);
@@ -44,7 +43,7 @@ export const AuthorizationPage: FC = () => {
   return (
     <Fragment>
       {isLoading && <Loader />}
-      {isError && <Toast dataTestId='123' />}
+      {isError && <Toast dataTestId='status-block' />}
       <div className='registration-bg' data-test-id='auth'>
         <h3 className='h3'>Cleverland</h3>
         <form className='registration' onSubmit={handleSubmit(onSubmit, onError)} data-test-id='auth-form'>
@@ -57,7 +56,6 @@ export const AuthorizationPage: FC = () => {
                 type={TextFieldType.Text}
                 id={TextFieldId.Identifier}
                 placeholder={TextFieldPlaceholder.Login}
-                error={formErrors}
                 {...register(TextFieldId.Identifier, { required: true, pattern: REGEX_WITH_USERNAME })}
               />
               <TextField
@@ -65,7 +63,6 @@ export const AuthorizationPage: FC = () => {
                 id={TextFieldId.Password}
                 placeholder={TextFieldPlaceholder.Password}
                 message={TextFieldMessage.Password}
-                error={formErrors}
                 {...register(TextFieldId.Password, { required: true, pattern: REGEX_WITH_PASSWORD })}
               />
               <Link to={Path.ForgotPass} className='info_large'>

@@ -6,9 +6,10 @@ import './highlight.scss';
 export type HighLightProps = {
   inputSearchValue: string;
   title: string;
+  dataTestId: string;
 };
 
-export const HighLight: FC<HighLightProps> = ({ inputSearchValue, title }) => {
+export const HighLight: FC<HighLightProps> = ({ inputSearchValue, title, dataTestId }) => {
   if (!inputSearchValue) {
     return <span>{title}</span>;
   }
@@ -26,7 +27,7 @@ export const HighLight: FC<HighLightProps> = ({ inputSearchValue, title }) => {
             return (
               <Fragment key={uuidv4()}>
                 {str}
-                <mark data-test-id='highlight-matches'>{firstMatch}</mark>
+                <mark data-test-id={dataTestId}>{firstMatch}</mark>
               </Fragment>
             );
           }
