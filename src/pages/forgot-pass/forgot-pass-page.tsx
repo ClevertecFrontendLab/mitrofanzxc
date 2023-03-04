@@ -38,7 +38,7 @@ export const ForgotPassPage: FC = () => {
   return (
     <Fragment>
       {isLoading && <Loader />}
-      {isError && <Toast dataTestId='123' />}
+      {isError && <Toast dataTestId='status-block' />}
       <div className='registration-bg' data-test-id='auth'>
         <h3 className='h3'>Cleverland</h3>
         {/* Для восстановления пароля */}
@@ -50,13 +50,13 @@ export const ForgotPassPage: FC = () => {
                 <legend className='h4'>Восстановление пароля</legend>
               </div>
               <div className='registration__section'>
-                <TextField
-                  type={TextFieldType.Email}
-                  id={TextFieldId.Email}
-                  placeholder={TextFieldPlaceholder.Email}
-                  message={TextFieldMessage.Email}
+                {/* <TextField
+                  // type={TextFieldType.Email}
+                  // id={TextFieldId.Email}
+                  // placeholder={TextFieldPlaceholder.Email}
+                  // message={TextFieldMessage.Email}
                   {...register(TextFieldId.Email, { required: true, pattern: REGEX_WITH_EMAIL })}
-                />
+                /> */}
               </div>
               <div className='registration__section'>
                 <ButtonPrimary
@@ -81,19 +81,19 @@ export const ForgotPassPage: FC = () => {
                 <legend className='h4'>Восстановление пароля</legend>
               </div>
               <div className='registration__section'>
-                <TextField
-                  type={TextFieldType.Password}
-                  id={TextFieldId.Password}
-                  placeholder={TextFieldPlaceholder.NewPassword}
-                  message={TextFieldMessage.Password}
+                {/* <TextField
+                  // type={TextFieldType.Password}
+                  // id={TextFieldId.Password}
+                  // placeholder={TextFieldPlaceholder.NewPassword}
+                  // message={TextFieldMessage.Password}
                   {...register(TextFieldId.Password, { required: true, pattern: REGEX_WITH_PASSWORD })}
                 />
                 <TextField
-                  type={TextFieldType.Password}
-                  id={TextFieldId.Password}
-                  placeholder={TextFieldPlaceholder.RepeatPassword}
+                  // type={TextFieldType.Password}
+                  // id={TextFieldId.Password}
+                  // placeholder={TextFieldPlaceholder.RepeatPassword}
                   {...register(TextFieldId.PasswordConfirmation, { required: true, pattern: REGEX_WITH_PASSWORD })}
-                />
+                /> */}
               </div>
               <div className='registration__section'>
                 <ButtonPrimary

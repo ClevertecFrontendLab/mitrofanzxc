@@ -52,15 +52,30 @@ export type FormTextField = {
   contractOwner: string;
 };
 
-export type FormValues = {
-  email: 'email';
-  username: 'username';
-  identifier: 'identifier';
-  password: 'password';
-  passwordConfirmation: 'passwordConfirmation';
-  firstName: 'firstName';
-  lastName: 'lastName';
-  phone: 'phone';
-  contractNumber: 'contractNumber';
-  contractOwner: 'contractOwner';
+export type FormAuthorizationValues = {
+  firstName: string;
+  password: string;
 };
+
+export type FormRegistrationValues = {
+  firstName: string;
+  password: string;
+};
+
+export type FormForgotPassValues = {
+  firstName: string;
+  password: string;
+};
+
+// export type FormValues = {
+//   email: 'email';
+//   username: 'username';
+//   identifier: 'identifier';
+//   password: 'password';
+//   passwordConfirmation: 'passwordConfirmation';
+//   firstName: 'firstName';
+//   lastName: 'lastName';
+//   phone: 'phone';
+//   contractNumber: 'contractNumber';
+//   contractOwner: 'contractOwner';
+// };

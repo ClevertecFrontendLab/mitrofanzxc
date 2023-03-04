@@ -45,7 +45,11 @@ export const ButtonPrimary: FC<ButtonPrimaryProps> = ({
           {untilDate && <span>{` ${untilDate}`}</span>}
         </button>
       )}
-      {type === ButtonPrimaryType.Submit && <input className={buttonPrimaryClass} type='submit' value={title} />}
+      {type === ButtonPrimaryType.Submit && (
+        <button className={buttonPrimaryClass} type='submit'>
+          {title}
+        </button>
+      )}
     </Fragment>
   );
 };

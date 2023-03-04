@@ -8,6 +8,7 @@ import { ButtonLogin, ButtonPrimary, Loader, TextField, Toast } from 'components
 import { ButtonLoginTitle } from 'components/buttons/button-login/button-login.types';
 import { ButtonPrimaryTitle, ButtonPrimaryType } from 'components/buttons/button-primary/button-primary.types';
 import {
+  FormAuthorizationValues,
   TextFieldId,
   TextFieldMessage,
   TextFieldPlaceholder,
@@ -20,21 +21,28 @@ import { AuthorizationRequest } from 'store/slices/slices.types';
 
 import './authorization-page.scss';
 
+type FormValues = {
+  firstName: string;
+  password: string;
+};
+
 export const AuthorizationPage: FC = () => {
   const { isError, isLoading } = useAppSelector(authorizationSelector);
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<AuthorizationRequest>();
+  const { handleSubmit, control } = useForm<FormValues>({
+    defaultValues: {
+      firstName: '',
+      password: '',
+    },
+    mode: 'onChange',
+  });
   const dispatch = useAppDispatch();
 
-  const onSubmit = (data: AuthorizationRequest) => {
+  const onSubmit = (data: FormValues) => {
     console.log('FORM_DATA ===', data);
-    dispatch(authorizationRequest(data));
+    // dispatch(authorizationRequest(data));
   };
 
-  const onError = (error: FieldErrors<AuthorizationRequest>) => {
+  const onError = (error: FieldErrors) => {
     console.log('FORM_ERRORS ===', error);
   };
 
@@ -53,17 +61,23 @@ export const AuthorizationPage: FC = () => {
             </div>
             <div className='registration__section'>
               <TextField
+                control={control}
+                name={TextFieldId.Identifier}
+                rules={{ required: true, pattern: REGEX_WITH_USERNAME }}
                 type={TextFieldType.Text}
                 id={TextFieldId.Identifier}
                 placeholder={TextFieldPlaceholder.Login}
-                {...register(TextFieldId.Identifier, { required: true, pattern: REGEX_WITH_USERNAME })}
+                // {...register(TextFieldId.Identifier, { required: true, pattern: REGEX_WITH_USERNAME })}
               />
               <TextField
+                control={control}
+                name='password'
+                rules={{ required: true, pattern: REGEX_WITH_PASSWORD }}
                 type={TextFieldType.Password}
                 id={TextFieldId.Password}
                 placeholder={TextFieldPlaceholder.Password}
-                message={TextFieldMessage.Password}
-                {...register(TextFieldId.Password, { required: true, pattern: REGEX_WITH_PASSWORD })}
+                // message={TextFieldMessage.Password}
+                // {...register(TextFieldId.Password, { required: true, pattern: REGEX_WITH_PASSWORD })}
               />
               <Link to={Path.ForgotPass} className='info_large'>
                 Забыли логин или пароль?
