@@ -6,6 +6,7 @@ import { ButtonLoginTitle } from 'components/buttons/button-login/button-login.t
 import { FormToastMessage, FormToastTitle } from 'components/form-toast/form-toast.types';
 
 import {
+  openNewPassword,
   passwordRecoveryRequest,
   passwordRecoveryRequestError,
   passwordRecoveryRequestSuccess,
@@ -23,6 +24,7 @@ function* passwordRecoveryRequestWorker(action: { payload: PasswordRecoveryReque
 
     yield console.log('response ===', data);
     yield put(passwordRecoveryRequestSuccess(data));
+    yield put(openNewPassword());
   } catch {
     yield put(passwordRecoveryRequestError());
     yield put(

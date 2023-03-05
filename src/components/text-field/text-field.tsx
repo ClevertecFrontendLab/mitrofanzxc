@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useController, UseControllerProps } from 'react-hook-form';
-import { Sprite } from 'components';
+import { HighLight, Sprite } from 'components';
 import { SpriteId } from 'components/sprite/sprite.types';
 
 import { FormTextField, TextFieldId, TextFieldMessage, TextFieldPlaceholder, TextFieldType } from './text-field.types';
@@ -11,15 +11,27 @@ export const TextField = ({
   type,
   id,
   placeholder,
+  message,
   ...props
-}: { type: TextFieldType; id: TextFieldId; placeholder: TextFieldPlaceholder } & UseControllerProps<FormTextField>) => {
+}: {
+  type: TextFieldType;
+  id: TextFieldId;
+  placeholder: TextFieldPlaceholder;
+  message?: TextFieldMessage;
+} & UseControllerProps<FormTextField>) => {
   const { field, fieldState } = useController(props);
   console.log('field ===', field);
   console.log('fieldState ===', fieldState);
   const [isEyeOpened, setIsEyeOpened] = useState(false);
+  const [isBlur, setIsBlur] = useState(false);
 
   const handleSetIsEyeOpened = () => {
     setIsEyeOpened(!isEyeOpened);
+  };
+
+  const handleBlur = () => {
+    setIsBlur(true);
+    field.onBlur();
   };
 
   return (
@@ -34,6 +46,7 @@ export const TextField = ({
         disabled={false}
         autoComplete='off'
         // ref={props.ref}
+        onBlur={handleBlur}
         // onChange={props.onChange}
       />
       <label htmlFor={id} data-content={placeholder} className='text-field__label'>
@@ -50,11 +63,11 @@ export const TextField = ({
           />
         </div>
       )}
-      {/* {props.message && (
+      {message && (
         <p className='text-field__message info_large' data-test-id='hint'>
-          {props.message}
+          <HighLight value={message} title={message} />
         </p>
-      )} */}
+      )}
     </div>
   );
 };

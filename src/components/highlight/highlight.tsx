@@ -4,17 +4,17 @@ import { v4 as uuidv4 } from 'uuid';
 import './highlight.scss';
 
 export type HighLightProps = {
-  inputSearchValue: string;
+  value: string;
   title: string;
-  dataTestId: string;
+  dataTestId?: string;
 };
 
-export const HighLight: FC<HighLightProps> = ({ inputSearchValue, title, dataTestId }) => {
-  if (!inputSearchValue) {
+export const HighLight: FC<HighLightProps> = ({ value, title, dataTestId }) => {
+  if (!value) {
     return <span>{title}</span>;
   }
 
-  const regexp = new RegExp(inputSearchValue, 'gi');
+  const regexp = new RegExp(value, 'gi');
   const matchValue = title.match(regexp);
 
   if (matchValue) {

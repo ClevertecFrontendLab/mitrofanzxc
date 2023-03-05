@@ -46,7 +46,7 @@ export const ButtonPrimary: FC<ButtonPrimaryProps> = ({
         </button>
       )}
       {type === ButtonPrimaryType.Submit && (
-        <button className={buttonPrimaryClass} type='submit'>
+        <button className={buttonPrimaryClass} type='submit' disabled={disabled || false}>
           {title}
         </button>
       )}

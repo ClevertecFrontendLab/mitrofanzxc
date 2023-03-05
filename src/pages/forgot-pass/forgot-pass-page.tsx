@@ -63,7 +63,7 @@ export const ForgotPassPage: FC = () => {
                   type={TextFieldType.Email}
                   id={TextFieldId.Email}
                   placeholder={TextFieldPlaceholder.Email}
-                  // message={TextFieldMessage.Email}
+                  message={TextFieldMessage.Email}
                 />
               </div>
               <div className='registration__section'>
@@ -96,7 +96,7 @@ export const ForgotPassPage: FC = () => {
                   type={TextFieldType.Password}
                   id={TextFieldId.Password}
                   placeholder={TextFieldPlaceholder.NewPassword}
-                  // message={TextFieldMessage.Password}
+                  message={TextFieldMessage.Password}
                 />
                 <TextField
                   control={control}

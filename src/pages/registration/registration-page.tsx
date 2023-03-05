@@ -35,14 +35,17 @@ export const RegistrationPage: FC = () => {
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState<RegistrationRequest>(REGISTRATION_REQUEST_WITH_INITIAL_DATA);
   console.log('formData ===', formData);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const dispatch = useAppDispatch();
 
   const handleForm = (data: FormTextField) => {
     if (step < 3) {
       setFormData({ ...formData, ...data });
+      setIsButtonDisabled(false);
       setStep(step + 1);
     } else {
       setFormData({ ...formData, ...data });
+      setIsButtonDisabled(false);
       dispatch(registrationRequest(formData));
     }
   };
@@ -54,6 +57,7 @@ export const RegistrationPage: FC = () => {
 
   const onError = (error: FieldErrors) => {
     console.log('onError ===', error);
+    setIsButtonDisabled(true);
   };
 
   const buttonPrimaryTitle =
@@ -85,7 +89,7 @@ export const RegistrationPage: FC = () => {
                     type={TextFieldType.Text}
                     id={TextFieldId.Username}
                     placeholder={TextFieldPlaceholder.CreateUserName}
-                    // message={TextFieldMessage.CreateUserName}
+                    message={TextFieldMessage.CreateUserName}
                   />
                   <TextField
                     control={control}
@@ -94,7 +98,7 @@ export const RegistrationPage: FC = () => {
                     type={TextFieldType.Password}
                     id={TextFieldId.Password}
                     placeholder={TextFieldPlaceholder.Password}
-                    // message={TextFieldMessage.Password}
+                    message={TextFieldMessage.Password}
                   />
                 </Fragment>
               )}
@@ -127,7 +131,7 @@ export const RegistrationPage: FC = () => {
                     type={TextFieldType.Tel}
                     id={TextFieldId.Phone}
                     placeholder={TextFieldPlaceholder.Phone}
-                    // message={TextFieldMessage.Phone}
+                    message={TextFieldMessage.Phone}
                   />
                   <TextField
                     control={control}
@@ -141,7 +145,12 @@ export const RegistrationPage: FC = () => {
               )}
             </div>
             <div className='registration__section'>
-              <ButtonPrimary type={ButtonPrimaryType.Submit} title={buttonPrimaryTitle} className='button_large' />
+              <ButtonPrimary
+                type={ButtonPrimaryType.Submit}
+                title={buttonPrimaryTitle}
+                className='button_large'
+                disabled={isButtonDisabled}
+              />
               <p className='body_large'>
                 <span>Есть учётная запись?</span>
                 <ButtonLogin title={ButtonLoginTitle.Enter} path={Path.Authorization} />

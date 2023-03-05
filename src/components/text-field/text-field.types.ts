@@ -37,6 +37,7 @@ export enum TextFieldMessage {
   Password = 'Пароль не менее 8 символов, с заглавной буквой и цифрой',
   Phone = 'В формате +375 (xx) xxx-xx-xx',
   Email = 'На это email будет отправлено письмо с инструкциями по восстановлению пароля',
+  EmptyField = 'Поле не может быть пустым',
 }
 
 export type FormTextField = {

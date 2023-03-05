@@ -69,7 +69,7 @@ export const AuthorizationPage: FC = () => {
                 type={TextFieldType.Password}
                 id={TextFieldId.Password}
                 placeholder={TextFieldPlaceholder.Password}
-                // message={TextFieldMessage.Password}
+                message={TextFieldMessage.Password}
               />
               <Link to={Path.ForgotPass} className='info_large'>
                 Забыли логин или пароль?

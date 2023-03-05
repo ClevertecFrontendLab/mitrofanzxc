@@ -120,7 +120,7 @@ export const Card: FC<CardProps> = ({
         )}
         <div>
           <p className={cardTitleClass}>
-            <HighLight inputSearchValue={inputSearchValue} title={title} dataTestId='highlight-matches' />
+            <HighLight value={inputSearchValue} title={title} dataTestId='highlight-matches' />
           </p>
           <p className='body_small card-list__author'>{`${handleAuthors(authors)}, ${issueYear}`}</p>
         </div>
