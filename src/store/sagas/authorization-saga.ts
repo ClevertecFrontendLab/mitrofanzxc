@@ -3,10 +3,11 @@ import { LocalStorage } from 'constants/local-storage';
 
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { AxiosResponse } from 'axios';
-import { ToastMessage, ToastType } from 'components/toast/toast.types';
+import { ButtonLoginTitle } from 'components/buttons/button-login/button-login.types';
+import { FormToastMessage, FormToastTitle } from 'components/form-toast/form-toast.types';
 import { setLocalStorage } from 'utils';
 
-import { authorizationRequest, authorizationRequestError, authorizationRequestSuccess, setToast } from '../slices';
+import { authorizationRequest, authorizationRequestError, authorizationRequestSuccess, setFormToast } from '../slices';
 import { AuthorizationRequest, AuthorizationResponse } from '../slices/slices.types';
 
 function* authorizationRequestWorker(action: { payload: AuthorizationRequest; type: string }) {
@@ -22,7 +23,13 @@ function* authorizationRequestWorker(action: { payload: AuthorizationRequest; ty
     yield put(authorizationRequestSuccess(data));
   } catch {
     yield put(authorizationRequestError());
-    yield put(setToast({ type: ToastType.Error, message: ToastMessage.ConnectionError }));
+    yield put(
+      setFormToast({
+        title: FormToastTitle.AuthorizationError,
+        message: FormToastMessage.AuthorizationError,
+        button: ButtonLoginTitle.Repeat,
+      })
+    );
   }
 }
 

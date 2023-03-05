@@ -2,13 +2,14 @@ import { API, cleverlandConfig } from 'constants/axios';
 
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { AxiosResponse } from 'axios';
-import { ToastMessage, ToastType } from 'components/toast/toast.types';
+import { ButtonLoginTitle } from 'components/buttons/button-login/button-login.types';
+import { FormToastMessage, FormToastTitle } from 'components/form-toast/form-toast.types';
 
 import {
   passwordRecoveryRequest,
   passwordRecoveryRequestError,
   passwordRecoveryRequestSuccess,
-  setToast,
+  setFormToast,
 } from '../slices';
 import { PasswordRecoveryRequest, PasswordRecoveryResponse } from '../slices/slices.types';
 
@@ -24,7 +25,13 @@ function* passwordRecoveryRequestWorker(action: { payload: PasswordRecoveryReque
     yield put(passwordRecoveryRequestSuccess(data));
   } catch {
     yield put(passwordRecoveryRequestError());
-    yield put(setToast({ type: ToastType.Error, message: ToastMessage.ConnectionError }));
+    yield put(
+      setFormToast({
+        title: FormToastTitle.RegistrationError,
+        message: FormToastMessage.RegistrationError,
+        button: ButtonLoginTitle.Enter,
+      })
+    );
   }
 }
 

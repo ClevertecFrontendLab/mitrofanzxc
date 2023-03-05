@@ -2,25 +2,25 @@ import { Path } from 'constants/path';
 
 import { FC } from 'react';
 import { ButtonLogin } from 'components';
-import { ButtonLoginTitle } from 'components/buttons/button-login/button-login.types';
-
-import { FormToastMessage, FormToastTitle } from './form-toast.types';
+import { useAppSelector } from 'hooks';
+import { formToastSelector } from 'store/selectors';
 
 export type FormToastProps = {
-  title: FormToastTitle;
-  message: FormToastMessage;
   dataTestId: string;
-  buttonTitle?: ButtonLoginTitle;
   path?: Path;
 };
 
-export const FormToast: FC<FormToastProps> = ({ title, message, dataTestId, buttonTitle, path }) => (
-  <div className='registration-bg'>
-    <h3 className='h3'>Cleverland</h3>
-    <div className='registration' data-test-id={dataTestId}>
-      <h4 className='h4'>{title}</h4>
-      <h3 className='h3'>{message}</h3>
-      {buttonTitle && path && <ButtonLogin path={path} title={buttonTitle} />}
+export const FormToast: FC<FormToastProps> = ({ dataTestId, path }) => {
+  const { formToastTitle, formToastMessage, formToastButton } = useAppSelector(formToastSelector);
+
+  return (
+    <div className='registration-bg'>
+      <h3 className='h3'>Cleverland</h3>
+      <div className='registration' data-test-id={dataTestId}>
+        <h4 className='h4'>{formToastTitle}</h4>
+        <h3 className='h3'>{formToastMessage}</h3>
+        {formToastButton && path && <ButtonLogin path={path} title={formToastButton} />}
+      </div>
     </div>
-  </div>
-);
+  );
+};

@@ -6,8 +6,8 @@ import { FieldErrors, useForm } from 'react-hook-form';
 import { ButtonLogin, ButtonPrimary, FormToast, Loader, TextField } from 'components';
 import { ButtonLoginTitle } from 'components/buttons/button-login/button-login.types';
 import { ButtonPrimaryTitle, ButtonPrimaryType } from 'components/buttons/button-primary/button-primary.types';
-import { FormToastMessage, FormToastTitle } from 'components/form-toast/form-toast.types';
 import {
+  FormTextField,
   TextFieldId,
   TextFieldMessage,
   TextFieldPlaceholder,
@@ -21,17 +21,23 @@ import { RegistrationRequest } from 'store/slices/slices.types';
 
 export const RegistrationPage: FC = () => {
   const { isError, isLoading } = useAppSelector(registrationSelector);
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<RegistrationRequest>();
+  const { handleSubmit, control } = useForm<FormTextField>({
+    defaultValues: {
+      username: '',
+      password: '',
+      firstName: '',
+      lastName: '',
+      phone: '',
+      email: '',
+    },
+    mode: 'onChange',
+  });
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState<RegistrationRequest>(REGISTRATION_REQUEST_WITH_INITIAL_DATA);
   console.log('formData ===', formData);
   const dispatch = useAppDispatch();
 
-  const handleForm = (data: RegistrationRequest) => {
+  const handleForm = (data: FormTextField) => {
     if (step < 3) {
       setFormData({ ...formData, ...data });
       setStep(step + 1);
@@ -41,12 +47,12 @@ export const RegistrationPage: FC = () => {
     }
   };
 
-  const onSubmit = (data: RegistrationRequest) => {
+  const onSubmit = (data: FormTextField) => {
     console.log('onSubmit_DATA ===', data);
     handleForm(data);
   };
 
-  const onError = (error: FieldErrors<RegistrationRequest>) => {
+  const onError = (error: FieldErrors) => {
     console.log('onError ===', error);
   };
 
@@ -58,13 +64,7 @@ export const RegistrationPage: FC = () => {
   return (
     <Fragment>
       {isLoading && <Loader />}
-      {isError && (
-        <FormToast
-          title={FormToastTitle.RegistrationError}
-          message={FormToastMessage.RegistrationError}
-          dataTestId='status-block'
-        />
-      )}
+      {isError && <FormToast dataTestId='status-block' />}
       <div className='registration-bg' data-test-id='auth'>
         <h3 className='h3'>Cleverland</h3>
         <form className='registration' onSubmit={handleSubmit(onSubmit, onError)} data-test-id='register-form'>
@@ -76,57 +76,69 @@ export const RegistrationPage: FC = () => {
               </p>
             </div>
             <div className='registration__section'>
-              {/* {step === 1 && (
+              {step === 1 && (
                 <Fragment>
                   <TextField
-                    // type={TextFieldType.Text}
-                    // id={TextFieldId.Username}
-                    // placeholder={TextFieldPlaceholder.CreateUserName}
+                    control={control}
+                    name={TextFieldId.Username}
+                    rules={{ required: true, pattern: REGEX_WITH_USERNAME }}
+                    type={TextFieldType.Text}
+                    id={TextFieldId.Username}
+                    placeholder={TextFieldPlaceholder.CreateUserName}
                     // message={TextFieldMessage.CreateUserName}
-                    {...register(TextFieldId.Username, { required: true, pattern: REGEX_WITH_USERNAME })}
                   />
                   <TextField
-                    // type={TextFieldType.Password}
-                    // id={TextFieldId.Password}
-                    // placeholder={TextFieldPlaceholder.Password}
+                    control={control}
+                    name={TextFieldId.Password}
+                    rules={{ required: true, pattern: REGEX_WITH_PASSWORD }}
+                    type={TextFieldType.Password}
+                    id={TextFieldId.Password}
+                    placeholder={TextFieldPlaceholder.Password}
                     // message={TextFieldMessage.Password}
-                    {...register(TextFieldId.Password, { required: true, pattern: REGEX_WITH_PASSWORD })}
                   />
                 </Fragment>
               )}
               {step === 2 && (
                 <Fragment>
                   <TextField
-                    // type={TextFieldType.Text}
-                    // id={TextFieldId.FirstName}
-                    // placeholder={TextFieldPlaceholder.FirstName}
-                    {...register(TextFieldId.FirstName, { required: true, pattern: REGEX_WITH_USERNAME })}
+                    control={control}
+                    name={TextFieldId.FirstName}
+                    rules={{ required: true, pattern: REGEX_WITH_USERNAME }}
+                    type={TextFieldType.Text}
+                    id={TextFieldId.FirstName}
+                    placeholder={TextFieldPlaceholder.FirstName}
                   />
                   <TextField
-                    // type={TextFieldType.Text}
-                    // id={TextFieldId.LastName}
-                    // placeholder={TextFieldPlaceholder.LastName}
-                    {...register(TextFieldId.LastName, { required: true, pattern: REGEX_WITH_USERNAME })}
+                    control={control}
+                    name={TextFieldId.LastName}
+                    rules={{ required: true, pattern: REGEX_WITH_USERNAME }}
+                    type={TextFieldType.Text}
+                    id={TextFieldId.LastName}
+                    placeholder={TextFieldPlaceholder.LastName}
                   />
                 </Fragment>
               )}
               {step === 3 && (
                 <Fragment>
                   <TextField
-                    // type={TextFieldType.Tel}
-                    // id={TextFieldId.Phone}
-                    // placeholder={TextFieldPlaceholder.Phone}
+                    control={control}
+                    name={TextFieldId.Phone}
+                    rules={{ required: true, pattern: REGEX_WITH_PHONE }}
+                    type={TextFieldType.Tel}
+                    id={TextFieldId.Phone}
+                    placeholder={TextFieldPlaceholder.Phone}
                     // message={TextFieldMessage.Phone}
-                    {...register(TextFieldId.Phone, { required: true, pattern: REGEX_WITH_PHONE })}
                   />
                   <TextField
-                    // type={TextFieldType.Email}
-                    // id={TextFieldId.Email}
-                    // placeholder={TextFieldPlaceholder.Email}
-                    {...register(TextFieldId.Email, { required: true, pattern: REGEX_WITH_EMAIL })}
+                    control={control}
+                    name={TextFieldId.Email}
+                    rules={{ required: true, pattern: REGEX_WITH_EMAIL }}
+                    type={TextFieldType.Email}
+                    id={TextFieldId.Email}
+                    placeholder={TextFieldPlaceholder.Email}
                   />
                 </Fragment>
-              )} */}
+              )}
             </div>
             <div className='registration__section'>
               <ButtonPrimary type={ButtonPrimaryType.Submit} title={buttonPrimaryTitle} className='button_large' />

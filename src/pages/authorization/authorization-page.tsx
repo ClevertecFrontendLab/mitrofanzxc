@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom';
 import { ButtonLogin, ButtonPrimary, FormToast, Loader, TextField } from 'components';
 import { ButtonLoginTitle } from 'components/buttons/button-login/button-login.types';
 import { ButtonPrimaryTitle, ButtonPrimaryType } from 'components/buttons/button-primary/button-primary.types';
-import { FormToastMessage, FormToastTitle } from 'components/form-toast/form-toast.types';
 import {
   FormTextField,
   TextFieldId,
@@ -18,14 +17,8 @@ import {
 import { useAppDispatch, useAppSelector, useAuth } from 'hooks';
 import { authorizationSelector } from 'store/selectors';
 import { authorizationRequest } from 'store/slices';
-import { AuthorizationRequest } from 'store/slices/slices.types';
 
 import './authorization-page.scss';
-
-// type FormValues = {
-//   firstName: string;
-//   password: string;
-// };
 
 export const AuthorizationPage: FC = () => {
   const { isError, isLoading } = useAppSelector(authorizationSelector);
@@ -52,13 +45,7 @@ export const AuthorizationPage: FC = () => {
   return (
     <Fragment>
       {isLoading && <Loader />}
-      {isError && (
-        <FormToast
-          title={FormToastTitle.AuthorizationError}
-          message={FormToastMessage.AuthorizationError}
-          dataTestId='status-block'
-        />
-      )}
+      {isError && <FormToast dataTestId='status-block' />}
       <div className='registration-bg' data-test-id='auth'>
         <h3 className='h3'>Cleverland</h3>
         <form className='registration' onSubmit={handleSubmit(onSubmit, onError)} data-test-id='auth-form'>
@@ -74,7 +61,6 @@ export const AuthorizationPage: FC = () => {
                 type={TextFieldType.Text}
                 id={TextFieldId.Identifier}
                 placeholder={TextFieldPlaceholder.Login}
-                // {...register(TextFieldId.Identifier, { required: true, pattern: REGEX_WITH_USERNAME })}
               />
               <TextField
                 control={control}
@@ -84,7 +70,6 @@ export const AuthorizationPage: FC = () => {
                 id={TextFieldId.Password}
                 placeholder={TextFieldPlaceholder.Password}
                 // message={TextFieldMessage.Password}
-                // {...register(TextFieldId.Password, { required: true, pattern: REGEX_WITH_PASSWORD })}
               />
               <Link to={Path.ForgotPass} className='info_large'>
                 Забыли логин или пароль?

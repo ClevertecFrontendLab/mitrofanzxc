@@ -3,10 +3,10 @@ import { REGEX_WITH_EMAIL, REGEX_WITH_PASSWORD } from 'constants/regex';
 
 import { FC, Fragment } from 'react';
 import { FieldErrors, useForm } from 'react-hook-form';
+import { useLocation } from 'react-router-dom';
 import { ButtonLogin, ButtonPrimary, FormToast, Loader, TextField } from 'components';
 import { ButtonLoginTitle } from 'components/buttons/button-login/button-login.types';
 import { ButtonPrimaryTitle, ButtonPrimaryType } from 'components/buttons/button-primary/button-primary.types';
-import { FormToastMessage, FormToastTitle } from 'components/form-toast/form-toast.types';
 import {
   FormTextField,
   TextFieldId,
@@ -14,16 +14,20 @@ import {
   TextFieldPlaceholder,
   TextFieldType,
 } from 'components/text-field/text-field.types';
-import { useAppDispatch, useAppSelector, useAuth } from 'hooks';
+import { useAppDispatch, useAppSelector, useAuth, useRedirect } from 'hooks';
 import { forgotPassSelector } from 'store/selectors';
 
 export const ForgotPassPage: FC = () => {
+  const { search } = useLocation();
   const { isError, isLoading, isLetterReceived, isPasswordRecovery } = useAppSelector(forgotPassSelector);
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormTextField>();
+  const { handleSubmit, control } = useForm<FormTextField>({
+    defaultValues: {
+      email: '',
+      password: '',
+      passwordConfirmation: '',
+    },
+    mode: 'onChange',
+  });
   const dispatch = useAppDispatch();
 
   const onSubmit = (data: FormTextField) => {
@@ -35,17 +39,12 @@ export const ForgotPassPage: FC = () => {
   };
 
   useAuth(Path.Main);
+  useRedirect(Path.ForgotPass, search);
 
   return (
     <Fragment>
       {isLoading && <Loader />}
-      {isError && (
-        <FormToast
-          title={FormToastTitle.RegistrationError}
-          message={FormToastMessage.RegistrationError}
-          dataTestId='status-block'
-        />
-      )}
+      {isError && <FormToast dataTestId='status-block' />}
       <div className='registration-bg' data-test-id='auth'>
         <h3 className='h3'>Cleverland</h3>
         {/* Для восстановления пароля */}
@@ -57,13 +56,15 @@ export const ForgotPassPage: FC = () => {
                 <legend className='h4'>Восстановление пароля</legend>
               </div>
               <div className='registration__section'>
-                {/* <TextField
-                  // type={TextFieldType.Email}
-                  // id={TextFieldId.Email}
-                  // placeholder={TextFieldPlaceholder.Email}
+                <TextField
+                  control={control}
+                  name={TextFieldId.Email}
+                  rules={{ required: true, pattern: REGEX_WITH_EMAIL }}
+                  type={TextFieldType.Email}
+                  id={TextFieldId.Email}
+                  placeholder={TextFieldPlaceholder.Email}
                   // message={TextFieldMessage.Email}
-                  {...register(TextFieldId.Email, { required: true, pattern: REGEX_WITH_EMAIL })}
-                /> */}
+                />
               </div>
               <div className='registration__section'>
                 <ButtonPrimary
@@ -88,19 +89,23 @@ export const ForgotPassPage: FC = () => {
                 <legend className='h4'>Восстановление пароля</legend>
               </div>
               <div className='registration__section'>
-                {/* <TextField
-                  // type={TextFieldType.Password}
-                  // id={TextFieldId.Password}
-                  // placeholder={TextFieldPlaceholder.NewPassword}
+                <TextField
+                  control={control}
+                  name={TextFieldId.Password}
+                  rules={{ required: true, pattern: REGEX_WITH_PASSWORD }}
+                  type={TextFieldType.Password}
+                  id={TextFieldId.Password}
+                  placeholder={TextFieldPlaceholder.NewPassword}
                   // message={TextFieldMessage.Password}
-                  {...register(TextFieldId.Password, { required: true, pattern: REGEX_WITH_PASSWORD })}
                 />
                 <TextField
-                  // type={TextFieldType.Password}
-                  // id={TextFieldId.Password}
-                  // placeholder={TextFieldPlaceholder.RepeatPassword}
-                  {...register(TextFieldId.PasswordConfirmation, { required: true, pattern: REGEX_WITH_PASSWORD })}
-                /> */}
+                  control={control}
+                  name={TextFieldId.PasswordConfirmation}
+                  rules={{ required: true, pattern: REGEX_WITH_PASSWORD }}
+                  type={TextFieldType.Password}
+                  id={TextFieldId.PasswordConfirmation}
+                  placeholder={TextFieldPlaceholder.RepeatPassword}
+                />
               </div>
               <div className='registration__section'>
                 <ButtonPrimary
