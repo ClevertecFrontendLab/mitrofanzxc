@@ -21,3 +21,4 @@ export { TextField } from './text-field';
 export { Toast } from './toast';
 export { HighLight } from './highlight';
 export { RateBookRating } from './rate-book-rating';
+export { FormToast } from './form-toast';

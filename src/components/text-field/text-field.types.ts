@@ -40,42 +40,14 @@ export enum TextFieldMessage {
 }
 
 export type FormTextField = {
-  email: string;
-  username: string;
-  identifier: string;
-  password: string;
-  passwordConfirmation: string;
-  firstName: string;
-  lastName: string;
-  phone: string;
-  contractNumber: string;
-  contractOwner: string;
+  email?: string;
+  username?: string;
+  identifier?: string;
+  password?: string;
+  passwordConfirmation?: string;
+  firstName?: string;
+  lastName?: string;
+  phone?: string;
+  contractNumber?: string;
+  contractOwner?: string;
 };
-
-export type FormAuthorizationValues = {
-  firstName: string;
-  password: string;
-};
-
-export type FormRegistrationValues = {
-  firstName: string;
-  password: string;
-};
-
-export type FormForgotPassValues = {
-  firstName: string;
-  password: string;
-};
-
-// export type FormValues = {
-//   email: 'email';
-//   username: 'username';
-//   identifier: 'identifier';
-//   password: 'password';
-//   passwordConfirmation: 'passwordConfirmation';
-//   firstName: 'firstName';
-//   lastName: 'lastName';
-//   phone: 'phone';
-//   contractNumber: 'contractNumber';
-//   contractOwner: 'contractOwner';
-// };

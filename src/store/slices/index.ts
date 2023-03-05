@@ -41,3 +41,4 @@ export {
   openNewPassword,
   openPasswordRecovery,
 } from './forgot-pass/forgot-pass-slice';
+export { closeFormToast, setFormToast } from './form-toast/form-toast-slice';

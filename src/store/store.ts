@@ -6,6 +6,7 @@ import bookReducer from './slices/book/book-slice';
 import catalogReducer from './slices/catalog/catalog-slice';
 import categoriesReducer from './slices/categories/categories-slice';
 import forgotPassReducer from './slices/forgot-pass/forgot-pass-slice';
+import formToastReducer from './slices/form-toast/form-toast-slice';
 import mobileMenuReducer from './slices/mobile-menu/mobile-menu-slice';
 import registrationReducer from './slices/registration/registration-slice';
 import toastReducer from './slices/toast/toast-slice';
@@ -20,6 +21,7 @@ export const store = configureStore({
     catalog: catalogReducer,
     categories: categoriesReducer,
     forgotPass: forgotPassReducer,
+    formToast: formToastReducer,
     mobileMenu: mobileMenuReducer,
     registration: registrationReducer,
     toast: toastReducer,

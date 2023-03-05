@@ -3,9 +3,10 @@ import { REGEX_WITH_EMAIL, REGEX_WITH_PASSWORD, REGEX_WITH_PHONE, REGEX_WITH_USE
 
 import { FC, Fragment, useState } from 'react';
 import { FieldErrors, useForm } from 'react-hook-form';
-import { ButtonLogin, ButtonPrimary, Loader, TextField, Toast } from 'components';
+import { ButtonLogin, ButtonPrimary, FormToast, Loader, TextField } from 'components';
 import { ButtonLoginTitle } from 'components/buttons/button-login/button-login.types';
 import { ButtonPrimaryTitle, ButtonPrimaryType } from 'components/buttons/button-primary/button-primary.types';
+import { FormToastMessage, FormToastTitle } from 'components/form-toast/form-toast.types';
 import {
   TextFieldId,
   TextFieldMessage,
@@ -57,7 +58,13 @@ export const RegistrationPage: FC = () => {
   return (
     <Fragment>
       {isLoading && <Loader />}
-      {isError && <Toast dataTestId='status-block' />}
+      {isError && (
+        <FormToast
+          title={FormToastTitle.RegistrationError}
+          message={FormToastMessage.RegistrationError}
+          dataTestId='status-block'
+        />
+      )}
       <div className='registration-bg' data-test-id='auth'>
         <h3 className='h3'>Cleverland</h3>
         <form className='registration' onSubmit={handleSubmit(onSubmit, onError)} data-test-id='register-form'>

@@ -4,11 +4,12 @@ import { REGEX_WITH_PASSWORD, REGEX_WITH_USERNAME } from 'constants/regex';
 import { FC, Fragment } from 'react';
 import { FieldErrors, useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
-import { ButtonLogin, ButtonPrimary, Loader, TextField, Toast } from 'components';
+import { ButtonLogin, ButtonPrimary, FormToast, Loader, TextField } from 'components';
 import { ButtonLoginTitle } from 'components/buttons/button-login/button-login.types';
 import { ButtonPrimaryTitle, ButtonPrimaryType } from 'components/buttons/button-primary/button-primary.types';
+import { FormToastMessage, FormToastTitle } from 'components/form-toast/form-toast.types';
 import {
-  FormAuthorizationValues,
+  FormTextField,
   TextFieldId,
   TextFieldMessage,
   TextFieldPlaceholder,
@@ -21,14 +22,14 @@ import { AuthorizationRequest } from 'store/slices/slices.types';
 
 import './authorization-page.scss';
 
-type FormValues = {
-  firstName: string;
-  password: string;
-};
+// type FormValues = {
+//   firstName: string;
+//   password: string;
+// };
 
 export const AuthorizationPage: FC = () => {
   const { isError, isLoading } = useAppSelector(authorizationSelector);
-  const { handleSubmit, control } = useForm<FormValues>({
+  const { handleSubmit, control } = useForm<FormTextField>({
     defaultValues: {
       firstName: '',
       password: '',
@@ -37,9 +38,9 @@ export const AuthorizationPage: FC = () => {
   });
   const dispatch = useAppDispatch();
 
-  const onSubmit = (data: FormValues) => {
+  const onSubmit = (data: FormTextField) => {
     console.log('FORM_DATA ===', data);
-    // dispatch(authorizationRequest(data));
+    dispatch(authorizationRequest(data));
   };
 
   const onError = (error: FieldErrors) => {
@@ -51,7 +52,13 @@ export const AuthorizationPage: FC = () => {
   return (
     <Fragment>
       {isLoading && <Loader />}
-      {isError && <Toast dataTestId='status-block' />}
+      {isError && (
+        <FormToast
+          title={FormToastTitle.AuthorizationError}
+          message={FormToastMessage.AuthorizationError}
+          dataTestId='status-block'
+        />
+      )}
       <div className='registration-bg' data-test-id='auth'>
         <h3 className='h3'>Cleverland</h3>
         <form className='registration' onSubmit={handleSubmit(onSubmit, onError)} data-test-id='auth-form'>
