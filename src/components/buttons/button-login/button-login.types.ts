@@ -4,4 +4,6 @@ export enum ButtonLoginTitle {
   Login = 'Вход в личный кабинет',
   Registration = 'Регистрация',
   Repeat = 'Повторить',
+  Restore = 'Восстановить?',
+  Forget = 'Забыли логин или пароль?',
 }

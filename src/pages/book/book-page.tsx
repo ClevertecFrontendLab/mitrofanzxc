@@ -53,7 +53,7 @@ export const BookPage: FC = () => {
   return (
     <section>
       <BreadCrumbs bookData={bookData} isSuccess={isSuccess} currentCategory={category} />
-      {isLoading && <Loader />}
+      {isLoading && <Loader dataTestId='loader' />}
       {isError && <Toast dataTestId='error' />}
       {isSuccess && (
         <Fragment>

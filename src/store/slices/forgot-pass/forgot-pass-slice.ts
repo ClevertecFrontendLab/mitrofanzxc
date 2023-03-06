@@ -22,6 +22,7 @@ export const forgotPassSlice = createSlice({
   initialState,
   reducers: {
     passwordRecoveryRequest: (state, action: PayloadAction<PasswordRecoveryRequest>) => {
+      state.passwordRecoveryRequest = action.payload;
       state.passwordRecoveryResponse = PASSWORD_RECOVERY_RESPONSE_WITH_INITIAL_DATA;
       state.passwordResetRequest = PASSWORD_RESET_REQUEST_WITH_INITIAL_DATA;
       state.passwordResetResponse = PASSWORD_RESET_RESPONSE_WITH_INITIAL_DATA;
@@ -48,6 +49,7 @@ export const forgotPassSlice = createSlice({
       state.isError = true;
     },
     passwordResetRequest: (state, action: PayloadAction<PasswordResetRequest>) => {
+      state.passwordResetRequest = action.payload;
       state.passwordRecoveryRequest = PASSWORD_RECOVERY_REQUEST_WITH_INITIAL_DATA;
       state.passwordRecoveryResponse = PASSWORD_RECOVERY_RESPONSE_WITH_INITIAL_DATA;
       state.passwordResetResponse = PASSWORD_RESET_RESPONSE_WITH_INITIAL_DATA;

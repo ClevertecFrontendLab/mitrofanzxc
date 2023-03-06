@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { ChangeEvent, FC, useState } from 'react';
 import { useController, UseControllerProps } from 'react-hook-form';
+import classNames from 'classnames';
 import { HighLight, Sprite } from 'components';
 import { SpriteId } from 'components/sprite/sprite.types';
 
@@ -7,32 +8,61 @@ import { FormTextField, TextFieldId, TextFieldMessage, TextFieldPlaceholder, Tex
 
 import './text-field.scss';
 
-export const TextField = ({
+export type TextFieldProps = {
+  type: TextFieldType;
+  id: TextFieldId;
+  placeholder: TextFieldPlaceholder;
+  isError: boolean;
+  message?: TextFieldMessage;
+};
+
+export const TextField: FC<TextFieldProps & UseControllerProps<FormTextField>> = ({
   type,
   id,
   placeholder,
   message,
+  isError,
   ...props
-}: {
-  type: TextFieldType;
-  id: TextFieldId;
-  placeholder: TextFieldPlaceholder;
-  message?: TextFieldMessage;
-} & UseControllerProps<FormTextField>) => {
+}) => {
   const { field, fieldState } = useController(props);
-  console.log('field ===', field);
-  console.log('fieldState ===', fieldState);
   const [isEyeOpened, setIsEyeOpened] = useState(false);
-  const [isBlur, setIsBlur] = useState(false);
+  const [isEyeVisible, setIsEyeVisible] = useState(false);
+  const [isEmptyValue, setIsEmptyValue] = useState(false);
+
+  console.log('field ===', field);
+  console.log('field.value ===', field.value);
+  console.log('fieldState ===', fieldState);
+  console.log('fieldState.error ===', fieldState.error);
+  console.log('isEmptyValue ===', isEmptyValue);
 
   const handleSetIsEyeOpened = () => {
     setIsEyeOpened(!isEyeOpened);
   };
 
+  const handleEmptyValue = () => {
+    if (field.value && field.value.length) {
+      setIsEmptyValue(false);
+      setIsEyeVisible(true);
+    } else {
+      setIsEmptyValue(true);
+      setIsEyeVisible(false);
+    }
+  };
+
   const handleBlur = () => {
-    setIsBlur(true);
+    handleEmptyValue();
     field.onBlur();
   };
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    handleEmptyValue();
+    field.onChange(event);
+  };
+
+  const inputClass = classNames('text-field__input', { 'text-field__input_error': fieldState.error || isError });
+  const messageClass = classNames('mark text-field__message info_large', {
+    color_negative: fieldState.error || isError,
+  });
 
   return (
     <div className='text-field'>
@@ -42,19 +72,22 @@ export const TextField = ({
         name={props.name}
         id={id}
         placeholder={placeholder}
-        className='text-field__input'
+        className={inputClass}
         disabled={false}
         autoComplete='off'
-        // ref={props.ref}
         onBlur={handleBlur}
-        // onChange={props.onChange}
+        onChange={handleChange}
       />
       <label htmlFor={id} data-content={placeholder} className='text-field__label'>
         <span className='text-field__label_hidden'>{placeholder}</span>
       </label>
-      {type === TextFieldType.Password && (
+      {type === TextFieldType.Password && isEyeVisible && (
         <div className='text-field__logo-wrapper'>
-          <Sprite id={SpriteId.Check} className='text-field__logo text-field__logo_check' dataTestId='checkmark' />
+          <Sprite
+            id={SpriteId.Checkmark}
+            className='text-field__logo text-field__logo_check'
+            dataTestId={SpriteId.Checkmark}
+          />
           <Sprite
             id={isEyeOpened ? SpriteId.EyeOpened : SpriteId.EyeClosed}
             className='text-field__logo text-field__logo_eye'
@@ -63,11 +96,19 @@ export const TextField = ({
           />
         </div>
       )}
-      {message && (
-        <p className='text-field__message info_large' data-test-id='hint'>
-          <HighLight value={message} title={message} />
-        </p>
+      {/* <p className={messageClass} data-test-id='hint'> */}
+      {isEmptyValue && (
+        <HighLight
+          className={messageClass}
+          value={TextFieldMessage.EmptyField}
+          title={TextFieldMessage.EmptyField}
+          dataTestId='hint'
+        />
       )}
+      {!isEmptyValue && message && (
+        <HighLight className={messageClass} value={message} title={message} dataTestId='hint' />
+      )}
+      {/* </p> */}
     </div>
   );
 };

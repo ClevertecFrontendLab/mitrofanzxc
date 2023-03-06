@@ -1,6 +1,5 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
-import { FormTextField } from 'components/text-field/text-field.types';
 
 import { AuthorizationRequest, AuthorizationResponse } from '../slices.types';
 
@@ -15,7 +14,8 @@ export const authorizationSlice = createSlice({
   name: 'authorization',
   initialState,
   reducers: {
-    authorizationRequest: (state, action: PayloadAction<FormTextField>) => {
+    authorizationRequest: (state, action: PayloadAction<AuthorizationRequest>) => {
+      state.authorizationRequest = action.payload;
       state.authorizationResponse = AUTHORIZATION_RESPONSE_WITH_INITIAL_DATA;
       state.isAuth = false;
       state.isLoading = true;

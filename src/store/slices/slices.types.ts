@@ -1,7 +1,7 @@
 import { BookData, TCatalogData, TCategories } from 'constants/constants.types';
 
 import { CatalogView } from 'components/buttons/button-catalog-view/button-catalog-view.types';
-import { ButtonLoginTitle } from 'components/buttons/button-login/button-login.types';
+import { ButtonPrimaryTitle } from 'components/buttons/button-primary/button-primary.types';
 import { FormToastMessage, FormToastTitle } from 'components/form-toast/form-toast.types';
 import { ToastMessage, ToastType } from 'components/toast/toast.types';
 import { Sort } from 'utils/utils.types';
@@ -45,7 +45,7 @@ export type ToastState = {
 export type FormToastState = {
   formToastTitle: FormToastTitle;
   formToastMessage: FormToastMessage;
-  formToastButton: ButtonLoginTitle;
+  formToastButton: ButtonPrimaryTitle;
   isFormToastOpen: boolean;
 };
 

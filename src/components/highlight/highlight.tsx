@@ -6,10 +6,11 @@ import './highlight.scss';
 export type HighLightProps = {
   value: string;
   title: string;
+  className?: string;
   dataTestId?: string;
 };
 
-export const HighLight: FC<HighLightProps> = ({ value, title, dataTestId }) => {
+export const HighLight: FC<HighLightProps> = ({ value, title, className, dataTestId }) => {
   if (!value) {
     return <span>{title}</span>;
   }
@@ -27,7 +28,9 @@ export const HighLight: FC<HighLightProps> = ({ value, title, dataTestId }) => {
             return (
               <Fragment key={uuidv4()}>
                 {str}
-                <mark data-test-id={dataTestId}>{firstMatch}</mark>
+                <mark className={className} data-test-id={dataTestId}>
+                  {firstMatch}
+                </mark>
               </Fragment>
             );
           }

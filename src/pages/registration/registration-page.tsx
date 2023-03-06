@@ -67,98 +67,106 @@ export const RegistrationPage: FC = () => {
 
   return (
     <Fragment>
-      {isLoading && <Loader />}
+      {isLoading && <Loader dataTestId='loader' />}
       {isError && <FormToast dataTestId='status-block' />}
-      <div className='registration-bg' data-test-id='auth'>
-        <h3 className='h3'>Cleverland</h3>
-        <form className='registration' onSubmit={handleSubmit(onSubmit, onError)} data-test-id='register-form'>
-          <fieldset className='registration__fieldset'>
-            <div className='registration__section'>
-              <legend className='h4'>Регистрация</legend>
-              <p className='subtitle_small'>
-                <span>{step}</span> шаг из 3
-              </p>
-            </div>
-            <div className='registration__section'>
-              {step === 1 && (
-                <Fragment>
-                  <TextField
-                    control={control}
-                    name={TextFieldId.Username}
-                    rules={{ required: true, pattern: REGEX_WITH_USERNAME }}
-                    type={TextFieldType.Text}
-                    id={TextFieldId.Username}
-                    placeholder={TextFieldPlaceholder.CreateUserName}
-                    message={TextFieldMessage.CreateUserName}
-                  />
-                  <TextField
-                    control={control}
-                    name={TextFieldId.Password}
-                    rules={{ required: true, pattern: REGEX_WITH_PASSWORD }}
-                    type={TextFieldType.Password}
-                    id={TextFieldId.Password}
-                    placeholder={TextFieldPlaceholder.Password}
-                    message={TextFieldMessage.Password}
-                  />
-                </Fragment>
-              )}
-              {step === 2 && (
-                <Fragment>
-                  <TextField
-                    control={control}
-                    name={TextFieldId.FirstName}
-                    rules={{ required: true, pattern: REGEX_WITH_USERNAME }}
-                    type={TextFieldType.Text}
-                    id={TextFieldId.FirstName}
-                    placeholder={TextFieldPlaceholder.FirstName}
-                  />
-                  <TextField
-                    control={control}
-                    name={TextFieldId.LastName}
-                    rules={{ required: true, pattern: REGEX_WITH_USERNAME }}
-                    type={TextFieldType.Text}
-                    id={TextFieldId.LastName}
-                    placeholder={TextFieldPlaceholder.LastName}
-                  />
-                </Fragment>
-              )}
-              {step === 3 && (
-                <Fragment>
-                  <TextField
-                    control={control}
-                    name={TextFieldId.Phone}
-                    rules={{ required: true, pattern: REGEX_WITH_PHONE }}
-                    type={TextFieldType.Tel}
-                    id={TextFieldId.Phone}
-                    placeholder={TextFieldPlaceholder.Phone}
-                    message={TextFieldMessage.Phone}
-                  />
-                  <TextField
-                    control={control}
-                    name={TextFieldId.Email}
-                    rules={{ required: true, pattern: REGEX_WITH_EMAIL }}
-                    type={TextFieldType.Email}
-                    id={TextFieldId.Email}
-                    placeholder={TextFieldPlaceholder.Email}
-                  />
-                </Fragment>
-              )}
-            </div>
-            <div className='registration__section'>
-              <ButtonPrimary
-                type={ButtonPrimaryType.Submit}
-                title={buttonPrimaryTitle}
-                className='button_large'
-                disabled={isButtonDisabled}
-              />
-              <p className='body_large'>
-                <span>Есть учётная запись?</span>
-                <ButtonLogin title={ButtonLoginTitle.Enter} path={Path.Authorization} />
-              </p>
-            </div>
-          </fieldset>
-        </form>
-      </div>
+      {!isError && (
+        <div className='registration-bg' data-test-id='auth'>
+          <h3 className='h3'>Cleverland</h3>
+          <form className='registration' onSubmit={handleSubmit(onSubmit, onError)} data-test-id='register-form'>
+            <fieldset className='registration__fieldset'>
+              <div className='registration__section'>
+                <legend className='h4'>Регистрация</legend>
+                <p className='subtitle_small'>
+                  <span>{step}</span> шаг из 3
+                </p>
+              </div>
+              <div className='registration__section'>
+                {step === 1 && (
+                  <Fragment>
+                    <TextField
+                      control={control}
+                      name={TextFieldId.Username}
+                      rules={{ required: true, pattern: REGEX_WITH_USERNAME }}
+                      type={TextFieldType.Text}
+                      id={TextFieldId.Username}
+                      placeholder={TextFieldPlaceholder.CreateUserName}
+                      isError={isError}
+                      message={TextFieldMessage.CreateUserName}
+                    />
+                    <TextField
+                      control={control}
+                      name={TextFieldId.Password}
+                      rules={{ required: true, pattern: REGEX_WITH_PASSWORD }}
+                      type={TextFieldType.Password}
+                      id={TextFieldId.Password}
+                      placeholder={TextFieldPlaceholder.Password}
+                      isError={isError}
+                      message={TextFieldMessage.Password}
+                    />
+                  </Fragment>
+                )}
+                {step === 2 && (
+                  <Fragment>
+                    <TextField
+                      control={control}
+                      name={TextFieldId.FirstName}
+                      rules={{ required: true, pattern: REGEX_WITH_USERNAME }}
+                      type={TextFieldType.Text}
+                      id={TextFieldId.FirstName}
+                      placeholder={TextFieldPlaceholder.FirstName}
+                      isError={isError}
+                    />
+                    <TextField
+                      control={control}
+                      name={TextFieldId.LastName}
+                      rules={{ required: true, pattern: REGEX_WITH_USERNAME }}
+                      type={TextFieldType.Text}
+                      id={TextFieldId.LastName}
+                      placeholder={TextFieldPlaceholder.LastName}
+                      isError={isError}
+                    />
+                  </Fragment>
+                )}
+                {step === 3 && (
+                  <Fragment>
+                    <TextField
+                      control={control}
+                      name={TextFieldId.Phone}
+                      rules={{ required: true, pattern: REGEX_WITH_PHONE }}
+                      type={TextFieldType.Tel}
+                      id={TextFieldId.Phone}
+                      placeholder={TextFieldPlaceholder.Phone}
+                      isError={isError}
+                      message={TextFieldMessage.Phone}
+                    />
+                    <TextField
+                      control={control}
+                      name={TextFieldId.Email}
+                      rules={{ required: true, pattern: REGEX_WITH_EMAIL }}
+                      type={TextFieldType.Email}
+                      id={TextFieldId.Email}
+                      placeholder={TextFieldPlaceholder.Email}
+                      isError={isError}
+                    />
+                  </Fragment>
+                )}
+              </div>
+              <div className='registration__section'>
+                <ButtonPrimary
+                  type={ButtonPrimaryType.Submit}
+                  title={buttonPrimaryTitle}
+                  className='button_large'
+                  disabled={isButtonDisabled}
+                />
+                <p className='body_large'>
+                  <span>Есть учётная запись?</span>
+                  <ButtonLogin title={ButtonLoginTitle.Enter} path={Path.Authorization} />
+                </p>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+      )}
     </Fragment>
   );
 };

@@ -15,6 +15,7 @@ export const registrationSlice = createSlice({
   initialState,
   reducers: {
     registrationRequest: (state, action: PayloadAction<RegistrationRequest>) => {
+      state.registrationRequest = action.payload;
       state.registrationResponse = REGISTRATION_RESPONSE_WITH_INITIAL_DATA;
       state.isLoading = true;
       state.isError = false;

@@ -1,6 +1,6 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
-import { ButtonLoginTitle } from 'components/buttons/button-login/button-login.types';
+import { ButtonPrimaryTitle } from 'components/buttons/button-primary/button-primary.types';
 import { FormToastMessage, FormToastTitle } from 'components/form-toast/form-toast.types';
 
 import { initialState } from './initial-state';
@@ -15,7 +15,7 @@ export const formToastSlice = createSlice({
     },
     setFormToast: (
       state,
-      action: PayloadAction<{ title: FormToastTitle; message: FormToastMessage; button: ButtonLoginTitle }>
+      action: PayloadAction<{ title: FormToastTitle; message: FormToastMessage; button: ButtonPrimaryTitle }>
     ) => {
       state.formToastTitle = action.payload.title;
       state.formToastMessage = action.payload.message;

@@ -15,6 +15,7 @@ export enum ButtonPrimaryTitle {
   Rate = 'Оценить',
   RateTheBook = 'Оценить книгу',
   Register = 'Зарегистрироваться',
+  Repeat = 'Повторить',
   Restore = 'Восстановить',
   SaveChanges = 'Сохранить изменения',
   ViewContract = 'Посмотреть договор',

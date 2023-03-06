@@ -3,7 +3,7 @@ import { LocalStorage } from 'constants/local-storage';
 
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { AxiosResponse } from 'axios';
-import { ButtonLoginTitle } from 'components/buttons/button-login/button-login.types';
+import { ButtonPrimaryTitle } from 'components/buttons/button-primary/button-primary.types';
 import { FormToastMessage, FormToastTitle } from 'components/form-toast/form-toast.types';
 import { setLocalStorage } from 'utils';
 
@@ -24,7 +24,7 @@ function* registrationRequestWorker(action: { payload: RegistrationRequest; type
       setFormToast({
         title: FormToastTitle.RegistrationSuccess,
         message: FormToastMessage.RegistrationSuccess,
-        button: ButtonLoginTitle.Enter,
+        button: ButtonPrimaryTitle.Entrance,
       })
     );
     yield put(registrationRequestSuccess(data));
@@ -34,7 +34,7 @@ function* registrationRequestWorker(action: { payload: RegistrationRequest; type
       setFormToast({
         title: FormToastTitle.RegistrationError,
         message: FormToastMessage.RegistrationError,
-        button: ButtonLoginTitle.Repeat,
+        button: ButtonPrimaryTitle.Repeat,
       })
     );
   }

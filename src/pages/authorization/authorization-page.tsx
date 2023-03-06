@@ -14,17 +14,17 @@ import {
   TextFieldPlaceholder,
   TextFieldType,
 } from 'components/text-field/text-field.types';
-import { useAppDispatch, useAppSelector, useAuth } from 'hooks';
+import { useAppDispatch, useAppSelector, useAuth, useRedirect } from 'hooks';
 import { authorizationSelector } from 'store/selectors';
 import { authorizationRequest } from 'store/slices';
 
 import './authorization-page.scss';
 
 export const AuthorizationPage: FC = () => {
-  const { isError, isLoading } = useAppSelector(authorizationSelector);
+  const { isError, isLoading, authorizationRequest: formData } = useAppSelector(authorizationSelector);
   const { handleSubmit, control } = useForm<FormTextField>({
     defaultValues: {
-      firstName: '',
+      identifier: '',
       password: '',
     },
     mode: 'onChange',
@@ -33,62 +33,75 @@ export const AuthorizationPage: FC = () => {
 
   const onSubmit = (data: FormTextField) => {
     console.log('FORM_DATA ===', data);
-    dispatch(authorizationRequest(data));
+    if (data.identifier && data.password) {
+      dispatch(authorizationRequest({ identifier: data.identifier, password: data.password }));
+    }
   };
 
   const onError = (error: FieldErrors) => {
     console.log('FORM_ERRORS ===', error);
   };
 
+  const onRepeat = () => {
+    dispatch(authorizationRequest({ identifier: formData.identifier, password: formData.password }));
+  };
+
   useAuth(Path.Main);
+  // useRedirect({ path: Path.Main, isSuccess: true });
 
   return (
     <Fragment>
-      {isLoading && <Loader />}
-      {isError && <FormToast dataTestId='status-block' />}
-      <div className='registration-bg' data-test-id='auth'>
-        <h3 className='h3'>Cleverland</h3>
-        <form className='registration' onSubmit={handleSubmit(onSubmit, onError)} data-test-id='auth-form'>
-          <fieldset className='registration__fieldset'>
+      {isLoading && <Loader dataTestId='loader' />}
+      {isError && <FormToast dataTestId='status-block' onClick={onRepeat} />}
+      {!isError && (
+        <div className='registration-bg' data-test-id='auth'>
+          <h3 className='h3'>Cleverland</h3>
+          <div className='registration'>
             <div className='registration__section'>
               <legend className='h4'>Вход в личный кабинет</legend>
             </div>
-            <div className='registration__section'>
-              <TextField
-                control={control}
-                name={TextFieldId.Identifier}
-                rules={{ required: true, pattern: REGEX_WITH_USERNAME }}
-                type={TextFieldType.Text}
-                id={TextFieldId.Identifier}
-                placeholder={TextFieldPlaceholder.Login}
-              />
-              <TextField
-                control={control}
-                name='password'
-                rules={{ required: true, pattern: REGEX_WITH_PASSWORD }}
-                type={TextFieldType.Password}
-                id={TextFieldId.Password}
-                placeholder={TextFieldPlaceholder.Password}
-                message={TextFieldMessage.Password}
-              />
-              <Link to={Path.ForgotPass} className='info_large'>
-                Забыли логин или пароль?
-              </Link>
-            </div>
-            <div className='registration__section'>
-              <ButtonPrimary
-                type={ButtonPrimaryType.Submit}
-                title={ButtonPrimaryTitle.Entrance}
-                className='button_large'
-              />
-              <p className='body_large'>
-                <span>Нет учётной записи</span>
-                <ButtonLogin title={ButtonLoginTitle.Registration} path={Path.Registration} />
-              </p>
-            </div>
-          </fieldset>
-        </form>
-      </div>
+            <form onSubmit={handleSubmit(onSubmit, onError)} data-test-id='auth-form'>
+              <fieldset className='registration__fieldset'>
+                <div className='registration__section'>
+                  <TextField
+                    control={control}
+                    name={TextFieldId.Identifier}
+                    rules={{ required: true, pattern: REGEX_WITH_USERNAME }}
+                    type={TextFieldType.Text}
+                    id={TextFieldId.Identifier}
+                    placeholder={TextFieldPlaceholder.Login}
+                    isError={isError}
+                  />
+                  <TextField
+                    control={control}
+                    name='password'
+                    rules={{ required: true, pattern: REGEX_WITH_PASSWORD }}
+                    type={TextFieldType.Password}
+                    id={TextFieldId.Password}
+                    placeholder={TextFieldPlaceholder.Password}
+                    message={isError ? TextFieldMessage.WrongLoginOrPassword : TextFieldMessage.Password}
+                    isError={isError}
+                  />
+                  <Link to={Path.ForgotPass} className='info_large'>
+                    {isError ? ButtonLoginTitle.Restore : ButtonLoginTitle.Forget}
+                  </Link>
+                </div>
+                <div className='registration__section'>
+                  <ButtonPrimary
+                    type={ButtonPrimaryType.Submit}
+                    title={ButtonPrimaryTitle.Entrance}
+                    className='button_large'
+                  />
+                  <p className='body_large'>
+                    <span>Нет учётной записи</span>
+                    <ButtonLogin title={ButtonLoginTitle.Registration} path={Path.Registration} />
+                  </p>
+                </div>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+      )}
     </Fragment>
   );
 };

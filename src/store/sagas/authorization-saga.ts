@@ -3,7 +3,7 @@ import { LocalStorage } from 'constants/local-storage';
 
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { AxiosResponse } from 'axios';
-import { ButtonLoginTitle } from 'components/buttons/button-login/button-login.types';
+import { ButtonPrimaryTitle } from 'components/buttons/button-primary/button-primary.types';
 import { FormToastMessage, FormToastTitle } from 'components/form-toast/form-toast.types';
 import { setLocalStorage } from 'utils';
 
@@ -27,7 +27,7 @@ function* authorizationRequestWorker(action: { payload: AuthorizationRequest; ty
       setFormToast({
         title: FormToastTitle.AuthorizationError,
         message: FormToastMessage.AuthorizationError,
-        button: ButtonLoginTitle.Repeat,
+        button: ButtonPrimaryTitle.Repeat,
       })
     );
   }

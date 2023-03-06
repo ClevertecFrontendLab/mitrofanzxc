@@ -42,7 +42,7 @@ export const MainPage: FC = () => {
   return (
     <ContextMainPage.Provider value={store}>
       <section className='main-page'>
-        {isLoading && <Loader />}
+        {isLoading && <Loader dataTestId='loader' />}
         {isError && <Toast dataTestId='error' />}
         {isSuccess && (
           <Fragment>

@@ -13,7 +13,7 @@
     <path d="M5.13829 12.6858L2.98956 16.4075" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
     <path d="M2.99994 10.5862C4.57611 12.5372 7.46564 15.0041 12 15.0041C16.5343 15.0041 19.4239 12.5372 21 10.5862" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
   </symbol>
-  <symbol fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="check">
+  <symbol fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="checkmark">
     <path d="M17.5 8.5L11 15.5L8 12.5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
   </symbol>
   <symbol fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" id="camera">

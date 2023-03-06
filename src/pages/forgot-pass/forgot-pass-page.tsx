@@ -39,88 +39,97 @@ export const ForgotPassPage: FC = () => {
   };
 
   useAuth(Path.Main);
-  useRedirect(Path.ForgotPass, search);
+  useRedirect({ path: Path.ForgotPass, searchParams: search });
 
   return (
     <Fragment>
-      {isLoading && <Loader />}
+      {isLoading && <Loader dataTestId='loader' />}
       {isError && <FormToast dataTestId='status-block' />}
-      <div className='registration-bg' data-test-id='auth'>
-        <h3 className='h3'>Cleverland</h3>
-        {/* Для восстановления пароля */}
-        {isPasswordRecovery && (
-          <form className='registration' onSubmit={handleSubmit(onSubmit, onError)} data-test-id='send-email-form'>
-            <fieldset className='registration__fieldset'>
-              <ButtonLogin title={ButtonLoginTitle.Login} path={Path.Authorization} />
-              <div className='registration__section'>
-                <legend className='h4'>Восстановление пароля</legend>
-              </div>
-              <div className='registration__section'>
-                <TextField
-                  control={control}
-                  name={TextFieldId.Email}
-                  rules={{ required: true, pattern: REGEX_WITH_EMAIL }}
-                  type={TextFieldType.Email}
-                  id={TextFieldId.Email}
-                  placeholder={TextFieldPlaceholder.Email}
-                  message={TextFieldMessage.Email}
-                />
-              </div>
-              <div className='registration__section'>
-                <ButtonPrimary
-                  type={ButtonPrimaryType.Primary}
-                  title={ButtonPrimaryTitle.Restore}
-                  className='button_large'
-                />
-                <p className='body_large'>
-                  <span>Нет учётной записи</span>
-                  <ButtonLogin title={ButtonLoginTitle.Registration} path={Path.Registration} />
-                </p>
-              </div>
-            </fieldset>
-          </form>
-        )}
+      {!isError && (
+        <div className='registration-bg' data-test-id='auth'>
+          <h3 className='h3'>Cleverland</h3>
+          {/* Для восстановления пароля */}
+          {isPasswordRecovery && (
+            <form className='registration' onSubmit={handleSubmit(onSubmit, onError)} data-test-id='send-email-form'>
+              <fieldset className='registration__fieldset'>
+                <ButtonLogin title={ButtonLoginTitle.Login} path={Path.Authorization} />
+                <div className='registration__section'>
+                  <legend className='h4'>Восстановление пароля</legend>
+                </div>
+                <div className='registration__section'>
+                  <TextField
+                    control={control}
+                    name={TextFieldId.Email}
+                    rules={{ required: true, pattern: REGEX_WITH_EMAIL }}
+                    type={TextFieldType.Email}
+                    id={TextFieldId.Email}
+                    placeholder={TextFieldPlaceholder.Email}
+                    isError={isError}
+                    message={TextFieldMessage.Email}
+                  />
+                </div>
+                <div className='registration__section'>
+                  <ButtonPrimary
+                    type={ButtonPrimaryType.Primary}
+                    title={ButtonPrimaryTitle.Restore}
+                    className='button_large'
+                  />
+                  <p className='body_large'>
+                    <span>Нет учётной записи</span>
+                    <ButtonLogin title={ButtonLoginTitle.Registration} path={Path.Registration} />
+                  </p>
+                </div>
+              </fieldset>
+            </form>
+          )}
 
-        {/* Для нового пароля по ссылке из почты */}
-        {isLetterReceived && (
-          <form className='registration' onSubmit={handleSubmit(onSubmit, onError)} data-test-id='reset-password-form'>
-            <fieldset className='registration__fieldset'>
-              <div className='registration__section'>
-                <legend className='h4'>Восстановление пароля</legend>
-              </div>
-              <div className='registration__section'>
-                <TextField
-                  control={control}
-                  name={TextFieldId.Password}
-                  rules={{ required: true, pattern: REGEX_WITH_PASSWORD }}
-                  type={TextFieldType.Password}
-                  id={TextFieldId.Password}
-                  placeholder={TextFieldPlaceholder.NewPassword}
-                  message={TextFieldMessage.Password}
-                />
-                <TextField
-                  control={control}
-                  name={TextFieldId.PasswordConfirmation}
-                  rules={{ required: true, pattern: REGEX_WITH_PASSWORD }}
-                  type={TextFieldType.Password}
-                  id={TextFieldId.PasswordConfirmation}
-                  placeholder={TextFieldPlaceholder.RepeatPassword}
-                />
-              </div>
-              <div className='registration__section'>
-                <ButtonPrimary
-                  type={ButtonPrimaryType.Primary}
-                  title={ButtonPrimaryTitle.SaveChanges}
-                  className='button_large'
-                />
-                <p className='body_large'>
-                  <span>После сохранения войдите в библиотеку, используя новый пароль</span>
-                </p>
-              </div>
-            </fieldset>
-          </form>
-        )}
-      </div>
+          {/* Для нового пароля по ссылке из почты */}
+          {isLetterReceived && (
+            <form
+              className='registration'
+              onSubmit={handleSubmit(onSubmit, onError)}
+              data-test-id='reset-password-form'
+            >
+              <fieldset className='registration__fieldset'>
+                <div className='registration__section'>
+                  <legend className='h4'>Восстановление пароля</legend>
+                </div>
+                <div className='registration__section'>
+                  <TextField
+                    control={control}
+                    name={TextFieldId.Password}
+                    rules={{ required: true, pattern: REGEX_WITH_PASSWORD }}
+                    type={TextFieldType.Password}
+                    id={TextFieldId.Password}
+                    placeholder={TextFieldPlaceholder.NewPassword}
+                    isError={isError}
+                    message={TextFieldMessage.Password}
+                  />
+                  <TextField
+                    control={control}
+                    name={TextFieldId.PasswordConfirmation}
+                    rules={{ required: true, pattern: REGEX_WITH_PASSWORD }}
+                    type={TextFieldType.Password}
+                    id={TextFieldId.PasswordConfirmation}
+                    placeholder={TextFieldPlaceholder.RepeatPassword}
+                    isError={isError}
+                  />
+                </div>
+                <div className='registration__section'>
+                  <ButtonPrimary
+                    type={ButtonPrimaryType.Primary}
+                    title={ButtonPrimaryTitle.SaveChanges}
+                    className='button_large'
+                  />
+                  <p className='body_large'>
+                    <span>После сохранения войдите в библиотеку, используя новый пароль</span>
+                  </p>
+                </div>
+              </fieldset>
+            </form>
+          )}
+        </div>
+      )}
     </Fragment>
   );
 };

@@ -2,7 +2,7 @@ import { API, cleverlandConfig } from 'constants/axios';
 
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { AxiosResponse } from 'axios';
-import { ButtonLoginTitle } from 'components/buttons/button-login/button-login.types';
+import { ButtonPrimaryTitle } from 'components/buttons/button-primary/button-primary.types';
 import { FormToastMessage, FormToastTitle } from 'components/form-toast/form-toast.types';
 
 import {
@@ -31,7 +31,7 @@ function* passwordRecoveryRequestWorker(action: { payload: PasswordRecoveryReque
       setFormToast({
         title: FormToastTitle.RegistrationError,
         message: FormToastMessage.RegistrationError,
-        button: ButtonLoginTitle.Enter,
+        button: ButtonPrimaryTitle.Entrance,
       })
     );
   }

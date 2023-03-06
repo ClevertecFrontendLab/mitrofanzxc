@@ -3,12 +3,18 @@ import { Path } from 'constants/path';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export const useRedirect = (path: Path, searchParams?: string) => {
+export type UseRedirectProps = {
+  path: Path;
+  isSuccess?: boolean;
+  searchParams?: string;
+};
+
+export const useRedirect = ({ path, isSuccess, searchParams }: UseRedirectProps) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (searchParams) {
+    if (isSuccess || searchParams) {
       navigate(path);
     }
-  }, [navigate, path, searchParams]);
+  }, [navigate, path, isSuccess, searchParams]);
 };

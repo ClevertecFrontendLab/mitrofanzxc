@@ -30,6 +30,10 @@
     width: 288px;
     padding: 24px 16px 24px 16px;
   }
+
+  form {
+    margin-top: 8px;
+  }
 }
 
 .registration__fieldset {
@@ -45,12 +49,12 @@
   align-items: flex-start;
   justify-content: space-between;
   flex-direction: column;
-  row-gap: $base * 4;
+  row-gap: $base * 2;
   width: 100%;
 
-  &:nth-child(1) {
-    row-gap: $base * 2;
-  }
+  // &:nth-child(1) {
+  //   row-gap: $base * 2;
+  // }
 
   button.info_large {
     margin-left: $base * 3;

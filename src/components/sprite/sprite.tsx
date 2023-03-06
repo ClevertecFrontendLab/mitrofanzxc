@@ -11,7 +11,7 @@ export type SpriteProps = {
 };
 
 export const Sprite: FC<SpriteProps> = ({ id, className, onClick, dataTestId }) => (
-  <svg className={className} onClick={onClick} data-testid={dataTestId}>
+  <svg className={className} onClick={onClick} data-test-id={dataTestId}>
     <use xlinkHref={`${sprite}#${id}`} />
   </svg>
 );
