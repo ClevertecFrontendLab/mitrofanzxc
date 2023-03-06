@@ -1,5 +1,8 @@
-import { ChangeEvent, FC, useState } from 'react';
+import { MASK_PHONE } from 'constants/regex';
+
+import { ChangeEvent, FC, Fragment, useState } from 'react';
 import { useController, UseControllerProps } from 'react-hook-form';
+import MaskedInput from 'react-text-mask';
 import classNames from 'classnames';
 import { HighLight, Sprite } from 'components';
 import { SpriteId } from 'components/sprite/sprite.types';
@@ -66,21 +69,45 @@ export const TextField: FC<TextFieldProps & UseControllerProps<FormTextField>> =
 
   return (
     <div className='text-field'>
-      <input
-        {...field}
-        type={isEyeOpened ? TextFieldType.Text : type}
-        name={props.name}
-        id={id}
-        placeholder={placeholder}
-        className={inputClass}
-        disabled={false}
-        autoComplete='off'
-        onBlur={handleBlur}
-        onChange={handleChange}
-      />
-      <label htmlFor={id} data-content={placeholder} className='text-field__label'>
-        <span className='text-field__label_hidden'>{placeholder}</span>
-      </label>
+      {type === TextFieldType.Tel && (
+        <Fragment>
+          <MaskedInput
+            name={props.name}
+            id={id}
+            placeholder={placeholder}
+            className={inputClass}
+            disabled={false}
+            autoComplete='off'
+            mask={MASK_PHONE}
+            value={field.value}
+            onChange={field.onChange}
+            onBlur={field.onBlur}
+          />
+          <label htmlFor={id} data-content={placeholder} className='text-field__label'>
+            <span className='text-field__label_hidden'>{placeholder}</span>
+          </label>
+        </Fragment>
+      )}
+      {type !== TextFieldType.Tel && (
+        <Fragment>
+          <input
+            {...field}
+            type={isEyeOpened ? TextFieldType.Text : type}
+            name={props.name}
+            id={id}
+            placeholder={placeholder}
+            className={inputClass}
+            disabled={false}
+            autoComplete='off'
+            onBlur={handleBlur}
+            onChange={handleChange}
+          />
+          <label htmlFor={id} data-content={placeholder} className='text-field__label'>
+            <span className='text-field__label_hidden'>{placeholder}</span>
+          </label>
+        </Fragment>
+      )}
+
       {type === TextFieldType.Password && isEyeVisible && (
         <div className='text-field__logo-wrapper'>
           <Sprite

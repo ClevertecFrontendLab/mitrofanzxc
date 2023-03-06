@@ -1,15 +1,8 @@
 import { Path } from 'constants/path';
-import {
-  MASK_PHONE,
-  REGEX_WITH_EMAIL,
-  REGEX_WITH_PASSWORD,
-  REGEX_WITH_PHONE,
-  REGEX_WITH_USERNAME,
-} from 'constants/regex';
+import { REGEX_WITH_EMAIL, REGEX_WITH_PASSWORD, REGEX_WITH_PHONE, REGEX_WITH_USERNAME } from 'constants/regex';
 
 import { FC, Fragment, useState } from 'react';
 import { Controller, FieldErrors, useForm } from 'react-hook-form';
-import MaskedInput from 'react-text-mask';
 import { ButtonLogin, ButtonPrimary, FormToast, Loader, TextField } from 'components';
 import { ButtonLoginTitle } from 'components/buttons/button-login/button-login.types';
 import { ButtonPrimaryTitle, ButtonPrimaryType } from 'components/buttons/button-primary/button-primary.types';
@@ -141,8 +134,18 @@ export const RegistrationPage: FC = () => {
                     <Controller
                       control={control}
                       name={TextFieldId.Phone}
-                      render={({ field: { onChange, onBlur, value, ref } }) => (
-                        <MaskedInput mask={MASK_PHONE} value={value} onChange={onChange} onBlur={onBlur} />
+                      render={({ field }) => (
+                        <TextField
+                          {...field}
+                          control={control}
+                          name={TextFieldId.Phone}
+                          rules={{ required: true, pattern: REGEX_WITH_PHONE }}
+                          type={TextFieldType.Tel}
+                          id={TextFieldId.Phone}
+                          placeholder={TextFieldPlaceholder.Phone}
+                          isError={isError}
+                          message={TextFieldMessage.Phone}
+                        />
                       )}
                     />
                     <TextField
