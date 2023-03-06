@@ -1,8 +1,15 @@
 import { Path } from 'constants/path';
-import { REGEX_WITH_EMAIL, REGEX_WITH_PASSWORD, REGEX_WITH_PHONE, REGEX_WITH_USERNAME } from 'constants/regex';
+import {
+  MASK_PHONE,
+  REGEX_WITH_EMAIL,
+  REGEX_WITH_PASSWORD,
+  REGEX_WITH_PHONE,
+  REGEX_WITH_USERNAME,
+} from 'constants/regex';
 
 import { FC, Fragment, useState } from 'react';
-import { FieldErrors, useForm } from 'react-hook-form';
+import { Controller, FieldErrors, useForm } from 'react-hook-form';
+import MaskedInput from 'react-text-mask';
 import { ButtonLogin, ButtonPrimary, FormToast, Loader, TextField } from 'components';
 import { ButtonLoginTitle } from 'components/buttons/button-login/button-login.types';
 import { ButtonPrimaryTitle, ButtonPrimaryType } from 'components/buttons/button-primary/button-primary.types';
@@ -19,19 +26,11 @@ import { registrationRequest } from 'store/slices';
 import { REGISTRATION_REQUEST_WITH_INITIAL_DATA } from 'store/slices/registration/initial-state';
 import { RegistrationRequest } from 'store/slices/slices.types';
 
+import { initialState } from './initial-state';
+
 export const RegistrationPage: FC = () => {
   const { isError, isLoading } = useAppSelector(registrationSelector);
-  const { handleSubmit, control } = useForm<FormTextField>({
-    defaultValues: {
-      username: '',
-      password: '',
-      firstName: '',
-      lastName: '',
-      phone: '',
-      email: '',
-    },
-    mode: 'onChange',
-  });
+  const { handleSubmit, control } = useForm<FormTextField>(initialState);
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState<RegistrationRequest>(REGISTRATION_REQUEST_WITH_INITIAL_DATA);
   console.log('formData ===', formData);
@@ -129,7 +128,7 @@ export const RegistrationPage: FC = () => {
                 )}
                 {step === 3 && (
                   <Fragment>
-                    <TextField
+                    {/* <TextField
                       control={control}
                       name={TextFieldId.Phone}
                       rules={{ required: true, pattern: REGEX_WITH_PHONE }}
@@ -138,6 +137,13 @@ export const RegistrationPage: FC = () => {
                       placeholder={TextFieldPlaceholder.Phone}
                       isError={isError}
                       message={TextFieldMessage.Phone}
+                    /> */}
+                    <Controller
+                      control={control}
+                      name={TextFieldId.Phone}
+                      render={({ field: { onChange, onBlur, value, ref } }) => (
+                        <MaskedInput mask={MASK_PHONE} value={value} onChange={onChange} onBlur={onBlur} />
+                      )}
                     />
                     <TextField
                       control={control}

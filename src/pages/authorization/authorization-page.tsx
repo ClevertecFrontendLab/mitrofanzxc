@@ -14,21 +14,17 @@ import {
   TextFieldPlaceholder,
   TextFieldType,
 } from 'components/text-field/text-field.types';
-import { useAppDispatch, useAppSelector, useAuth, useRedirect } from 'hooks';
+import { useAppDispatch, useAppSelector, useAuth } from 'hooks';
 import { authorizationSelector } from 'store/selectors';
 import { authorizationRequest } from 'store/slices';
+
+import { initialState } from './initial-state';
 
 import './authorization-page.scss';
 
 export const AuthorizationPage: FC = () => {
   const { isError, isLoading, authorizationRequest: formData } = useAppSelector(authorizationSelector);
-  const { handleSubmit, control } = useForm<FormTextField>({
-    defaultValues: {
-      identifier: '',
-      password: '',
-    },
-    mode: 'onChange',
-  });
+  const { handleSubmit, control } = useForm<FormTextField>(initialState);
   const dispatch = useAppDispatch();
 
   const onSubmit = (data: FormTextField) => {
@@ -47,7 +43,6 @@ export const AuthorizationPage: FC = () => {
   };
 
   useAuth(Path.Main);
-  // useRedirect({ path: Path.Main, isSuccess: true });
 
   return (
     <Fragment>
@@ -74,7 +69,7 @@ export const AuthorizationPage: FC = () => {
                   />
                   <TextField
                     control={control}
-                    name='password'
+                    name={TextFieldId.Password}
                     rules={{ required: true, pattern: REGEX_WITH_PASSWORD }}
                     type={TextFieldType.Password}
                     id={TextFieldId.Password}

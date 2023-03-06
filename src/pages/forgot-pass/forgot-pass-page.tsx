@@ -17,17 +17,12 @@ import {
 import { useAppDispatch, useAppSelector, useAuth, useRedirect } from 'hooks';
 import { forgotPassSelector } from 'store/selectors';
 
+import { initialState } from './initial-state';
+
 export const ForgotPassPage: FC = () => {
   const { search } = useLocation();
   const { isError, isLoading, isLetterReceived, isPasswordRecovery } = useAppSelector(forgotPassSelector);
-  const { handleSubmit, control } = useForm<FormTextField>({
-    defaultValues: {
-      email: '',
-      password: '',
-      passwordConfirmation: '',
-    },
-    mode: 'onChange',
-  });
+  const { handleSubmit, control } = useForm<FormTextField>(initialState);
   const dispatch = useAppDispatch();
 
   const onSubmit = (data: FormTextField) => {

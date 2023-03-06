@@ -96,7 +96,6 @@ export const TextField: FC<TextFieldProps & UseControllerProps<FormTextField>> =
           />
         </div>
       )}
-      {/* <p className={messageClass} data-test-id='hint'> */}
       {isEmptyValue && (
         <HighLight
           className={messageClass}
@@ -108,7 +107,6 @@ export const TextField: FC<TextFieldProps & UseControllerProps<FormTextField>> =
       {!isEmptyValue && message && (
         <HighLight className={messageClass} value={message} title={message} dataTestId='hint' />
       )}
-      {/* </p> */}
     </div>
   );
 };
