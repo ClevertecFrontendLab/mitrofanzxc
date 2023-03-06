@@ -14,7 +14,7 @@ import {
   TextFieldPlaceholder,
   TextFieldType,
 } from 'components/text-field/text-field.types';
-import { useAppDispatch, useAppSelector, useAuth } from 'hooks';
+import { useAppDispatch, useAppSelector, useAuth, useRedirect } from 'hooks';
 import { authorizationSelector } from 'store/selectors';
 import { authorizationRequest } from 'store/slices';
 

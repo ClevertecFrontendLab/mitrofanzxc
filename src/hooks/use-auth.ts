@@ -9,7 +9,9 @@ export const useAuth = (path: Path) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const isAuth = getLocalStorage(LocalStorage.Token);
+    console.log('xyu');
+    // const isAuth = getLocalStorage(LocalStorage.Token);
+    const isAuth = localStorage.getItem(LocalStorage.Token) || null;
 
     if (isAuth) {
       navigate(path);

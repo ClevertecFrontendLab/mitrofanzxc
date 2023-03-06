@@ -21,9 +21,10 @@ export const cleverlandConfig = axios.create({
 
 cleverlandConfig.interceptors.request.use((config) => {
   /* eslint-disable no-param-reassign */
-  const token: string | null = getLocalStorage(LocalStorage.Token);
+  // const token = getLocalStorage(LocalStorage.Token);
+  const token = localStorage.getItem(LocalStorage.Token) || null;
 
-  console.log('token ===', token);
+  console.log(token);
 
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;

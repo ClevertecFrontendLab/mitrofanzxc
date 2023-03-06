@@ -52,14 +52,14 @@ export const TextField: FC<TextFieldProps & UseControllerProps<FormTextField>> =
     }
   };
 
-  const handleBlur = () => {
-    handleEmptyValue();
-    field.onBlur();
-  };
-
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     handleEmptyValue();
     field.onChange(event);
+  };
+
+  const handleBlur = () => {
+    handleEmptyValue();
+    field.onBlur();
   };
 
   const inputClass = classNames('text-field__input', { 'text-field__input_error': fieldState.error || isError });
@@ -80,8 +80,8 @@ export const TextField: FC<TextFieldProps & UseControllerProps<FormTextField>> =
             autoComplete='off'
             mask={MASK_PHONE}
             value={field.value}
-            onChange={field.onChange}
-            onBlur={field.onBlur}
+            onChange={handleChange}
+            onBlur={handleBlur}
           />
           <label htmlFor={id} data-content={placeholder} className='text-field__label'>
             <span className='text-field__label_hidden'>{placeholder}</span>
@@ -99,15 +99,14 @@ export const TextField: FC<TextFieldProps & UseControllerProps<FormTextField>> =
             className={inputClass}
             disabled={false}
             autoComplete='off'
-            onBlur={handleBlur}
             onChange={handleChange}
+            onBlur={handleBlur}
           />
           <label htmlFor={id} data-content={placeholder} className='text-field__label'>
             <span className='text-field__label_hidden'>{placeholder}</span>
           </label>
         </Fragment>
       )}
-
       {type === TextFieldType.Password && isEyeVisible && (
         <div className='text-field__logo-wrapper'>
           <Sprite
