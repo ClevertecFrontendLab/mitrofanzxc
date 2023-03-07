@@ -1,3 +1,5 @@
+import { DataTestId } from 'constants/data-test-id';
+
 import { FC } from 'react';
 import { ButtonPrimary } from 'components';
 import { ButtonPrimaryType } from 'components/buttons/button-primary/button-primary.types';
@@ -7,7 +9,7 @@ import { formToastSelector } from 'store/selectors';
 import './form-toast.scss';
 
 export type FormToastProps = {
-  dataTestId: string;
+  dataTestId: DataTestId;
   onClick?: () => void;
 };
 

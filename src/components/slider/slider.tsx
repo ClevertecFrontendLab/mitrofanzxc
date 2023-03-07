@@ -1,5 +1,6 @@
 import { API } from 'constants/axios';
 import { BookData } from 'constants/constants.types';
+import { DataTestId } from 'constants/data-test-id';
 
 import { FC, Fragment, useState } from 'react';
 import { Sprite } from 'components';
@@ -41,7 +42,7 @@ export const Slider: FC<SliderProps> = ({ data }) => {
                   spaceBetween: 30,
                 },
               }}
-              data-test-id='slide-big'
+              data-test-id={DataTestId.SlideBig}
             >
               {data.images.map(({ url }) => (
                 <SwiperSlide key={url}>
@@ -77,7 +78,7 @@ export const Slider: FC<SliderProps> = ({ data }) => {
                 }}
               >
                 {data.images.map(({ url }) => (
-                  <SwiperSlide key={url} className='thumbs__item' data-test-id='slide-mini'>
+                  <SwiperSlide key={url} className='thumbs__item' data-test-id={DataTestId.SlideMini}>
                     <img src={`${API.BaseUrl}${url}`} alt='card-img' className='thumbs__img' />
                   </SwiperSlide>
                 ))}

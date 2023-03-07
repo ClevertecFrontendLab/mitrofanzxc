@@ -34,9 +34,15 @@ export enum TextFieldPlaceholder {
 
 export enum TextFieldMessage {
   CreateUserName = 'Используйте для логина латинский алфавит и цифры',
+  CreateUserNameLatinAlphabet = 'латинский алфавит',
+  CreateUserNameDigits = 'цифры',
   Password = 'Пароль не менее 8 символов, с заглавной буквой и цифрой',
+  PasswordCharaters = 'не менее 8 символов',
+  PasswordCapitalLetter = 'заглавной буквой',
+  PasswordDigit = 'цифрой',
   Phone = 'В формате +375 (xx) xxx-xx-xx',
   Email = 'На это email будет отправлено письмо с инструкциями по восстановлению пароля',
+  EmailError = 'Введите корректный e-mail',
   EmptyField = 'Поле не может быть пустым',
   WrongLoginOrPassword = 'Неверный логин или пароль!',
 }

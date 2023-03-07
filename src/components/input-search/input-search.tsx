@@ -1,3 +1,5 @@
+import { DataTestId } from 'constants/data-test-id';
+
 import { ChangeEvent, FC, FocusEvent, KeyboardEvent, useContext, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import classNames from 'classnames';
@@ -78,7 +80,12 @@ export const InputSearch: FC = () => {
 
   return (
     <div className={inputSearchClass}>
-      <button type='button' className='button-search' onClick={handleButtonSearch} data-test-id='button-search-open'>
+      <button
+        type='button'
+        className='button-search'
+        onClick={handleButtonSearch}
+        data-test-id={DataTestId.ButtonSearchOpen}
+      >
         <Sprite id={SpriteId.Search} className='button-search__logo' />
       </button>
       <input
@@ -93,9 +100,14 @@ export const InputSearch: FC = () => {
         onKeyDown={handleKeyboardInputSearch}
         onBlur={blurInputSearch}
         ref={inputSearchRef}
-        data-test-id='input-search'
+        data-test-id={DataTestId.InputSearch}
       />
-      <button type='button' className='button-cancel' onClick={handleButtonCancel} data-test-id='button-search-close'>
+      <button
+        type='button'
+        className='button-cancel'
+        onClick={handleButtonCancel}
+        data-test-id={DataTestId.ButtonSearchClose}
+      >
         <Sprite id={SpriteId.Close} className='button-cancel__logo' />
       </button>
     </div>

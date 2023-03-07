@@ -1,3 +1,5 @@
+import { DataTestId } from 'constants/data-test-id';
+
 import { FC } from 'react';
 import classNames from 'classnames';
 import { Sprite } from 'components';
@@ -11,7 +13,7 @@ import { ToastType } from './toast.types';
 import './toast.scss';
 
 export type ToastProps = {
-  dataTestId: string;
+  dataTestId: DataTestId;
 };
 
 export const Toast: FC<ToastProps> = ({ dataTestId }) => {

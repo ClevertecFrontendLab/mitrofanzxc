@@ -1,9 +1,11 @@
+import { DataTestId } from 'constants/data-test-id';
+
 import { FC } from 'react';
 
 import './loader.scss';
 
 export type LoaderProps = {
-  dataTestId: string;
+  dataTestId: DataTestId;
 };
 
 export const Loader: FC<LoaderProps> = ({ dataTestId }) => (

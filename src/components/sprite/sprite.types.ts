@@ -12,6 +12,7 @@ export enum SpriteId {
   Instagram = 'instagram',
   Linkedin = 'linkedin',
   List = 'menu',
+  Loader = 'loader',
   Logo = 'logo',
   Search = 'search',
   Sort = 'sort-ascending',

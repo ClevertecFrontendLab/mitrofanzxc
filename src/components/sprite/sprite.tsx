@@ -1,3 +1,5 @@
+import { DataTestId } from 'constants/data-test-id';
+
 import { FC } from 'react';
 import sprite from 'assets/sprite.svg';
 
@@ -7,7 +9,7 @@ export type SpriteProps = {
   id: SpriteId;
   className: string;
   onClick?: () => void;
-  dataTestId?: string;
+  dataTestId?: DataTestId;
 };
 
 export const Sprite: FC<SpriteProps> = ({ id, className, onClick, dataTestId }) => (

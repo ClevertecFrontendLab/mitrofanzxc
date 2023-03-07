@@ -1,3 +1,4 @@
+import { DataTestId } from 'constants/data-test-id';
 import { Path } from 'constants/path';
 import { REGEX_WITH_EMAIL, REGEX_WITH_PASSWORD } from 'constants/regex';
 
@@ -38,14 +39,18 @@ export const ForgotPassPage: FC = () => {
 
   return (
     <Fragment>
-      {isLoading && <Loader dataTestId='loader' />}
-      {isError && <FormToast dataTestId='status-block' />}
+      {isLoading && <Loader dataTestId={DataTestId.Loader} />}
+      {isError && <FormToast dataTestId={DataTestId.StatusBlock} />}
       {!isError && (
-        <div className='registration-bg' data-test-id='auth'>
+        <div className='registration-bg' data-test-id={DataTestId.Auth}>
           <h3 className='h3'>Cleverland</h3>
           {/* Для восстановления пароля */}
           {isPasswordRecovery && (
-            <form className='registration' onSubmit={handleSubmit(onSubmit, onError)} data-test-id='send-email-form'>
+            <form
+              className='registration'
+              onSubmit={handleSubmit(onSubmit, onError)}
+              data-test-id={DataTestId.SendEmailForm}
+            >
               <fieldset className='registration__fieldset'>
                 <ButtonLogin title={ButtonLoginTitle.Login} path={Path.Authorization} />
                 <div className='registration__section'>
@@ -60,7 +65,7 @@ export const ForgotPassPage: FC = () => {
                     id={TextFieldId.Email}
                     placeholder={TextFieldPlaceholder.Email}
                     isError={isError}
-                    message={TextFieldMessage.Email}
+                    message={TextFieldMessage.EmailError}
                   />
                 </div>
                 <div className='registration__section'>
@@ -83,7 +88,7 @@ export const ForgotPassPage: FC = () => {
             <form
               className='registration'
               onSubmit={handleSubmit(onSubmit, onError)}
-              data-test-id='reset-password-form'
+              data-test-id={DataTestId.ResetPasswordForm}
             >
               <fieldset className='registration__fieldset'>
                 <div className='registration__section'>

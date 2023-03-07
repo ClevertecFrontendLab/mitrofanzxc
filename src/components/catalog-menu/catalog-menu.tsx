@@ -1,3 +1,5 @@
+import { DataTestId } from 'constants/data-test-id';
+
 import { FC, useContext } from 'react';
 import classNames from 'classnames';
 import { ButtonCatalogView, ButtonSort, InputSearch } from 'components';
@@ -20,8 +22,12 @@ export const CatalogMenu: FC = () => {
         <ButtonSort />
       </div>
       <div className={catalogMenuItemClass}>
-        <ButtonCatalogView id={CatalogView.Grid} value={CatalogView.Grid} dataTestId='button-menu-view-window' />
-        <ButtonCatalogView id={CatalogView.List} value={CatalogView.List} dataTestId='button-menu-view-list' />
+        <ButtonCatalogView
+          id={CatalogView.Grid}
+          value={CatalogView.Grid}
+          dataTestId={DataTestId.ButtonMenuViewWindow}
+        />
+        <ButtonCatalogView id={CatalogView.List} value={CatalogView.List} dataTestId={DataTestId.ButtonMenuViewList} />
       </div>
     </section>
   );

@@ -1,3 +1,4 @@
+import { DataTestId } from 'constants/data-test-id';
 import { Path } from 'constants/path';
 
 import { FC, Fragment, useState } from 'react';
@@ -53,8 +54,8 @@ export const BookPage: FC = () => {
   return (
     <section>
       <BreadCrumbs bookData={bookData} isSuccess={isSuccess} currentCategory={category} />
-      {isLoading && <Loader dataTestId='loader' />}
-      {isError && <Toast dataTestId='error' />}
+      {isLoading && <Loader dataTestId={DataTestId.Loader} />}
+      {isError && <Toast dataTestId={DataTestId.Error} />}
       {isSuccess && (
         <Fragment>
           <div className='wrapper'>
@@ -62,7 +63,7 @@ export const BookPage: FC = () => {
             <div className='book-page'>
               <Slider data={bookData} />
               <div className='book-page__info'>
-                <h3 className='h3' data-test-id='book-title'>
+                <h3 className='h3' data-test-id={DataTestId.BookTitle}>
                   {bookData.title}
                 </h3>
                 <h5 className='h5 color-grey-black-40 book-page__author'>{handleAuthors(bookData.authors)}</h5>
@@ -124,7 +125,7 @@ export const BookPage: FC = () => {
                     className={accordionButtonClass}
                     aria-label='button-accordion'
                     onClick={toggleAccordionReviews}
-                    data-test-id='button-hide-reviews'
+                    data-test-id={DataTestId.ButtonHideReviews}
                   />
                 </div>
                 <ul className={reviewListClass}>
@@ -138,7 +139,7 @@ export const BookPage: FC = () => {
                 type={ButtonPrimaryType.Primary}
                 title={ButtonPrimaryTitle.RateTheBook}
                 onClick={() => handleModal(true)}
-                dataTestId='button-rating'
+                dataTestId={DataTestId.ButtonRating}
               />
             </div>
           </div>

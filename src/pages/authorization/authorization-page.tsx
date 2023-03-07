@@ -1,3 +1,4 @@
+import { DataTestId } from 'constants/data-test-id';
 import { Path } from 'constants/path';
 import { REGEX_WITH_PASSWORD, REGEX_WITH_USERNAME } from 'constants/regex';
 
@@ -14,7 +15,7 @@ import {
   TextFieldPlaceholder,
   TextFieldType,
 } from 'components/text-field/text-field.types';
-import { useAppDispatch, useAppSelector, useAuth, useRedirect } from 'hooks';
+import { useAppDispatch, useAppSelector, useAuth } from 'hooks';
 import { authorizationSelector } from 'store/selectors';
 import { authorizationRequest } from 'store/slices';
 
@@ -46,16 +47,16 @@ export const AuthorizationPage: FC = () => {
 
   return (
     <Fragment>
-      {isLoading && <Loader dataTestId='loader' />}
-      {isError && <FormToast dataTestId='status-block' onClick={onRepeat} />}
+      {isLoading && <Loader dataTestId={DataTestId.Loader} />}
+      {isError && <FormToast dataTestId={DataTestId.StatusBlock} onClick={onRepeat} />}
       {!isError && (
-        <div className='registration-bg' data-test-id='auth'>
+        <div className='registration-bg' data-test-id={DataTestId.Auth}>
           <h3 className='h3'>Cleverland</h3>
           <div className='registration'>
             <div className='registration__section'>
               <legend className='h4'>Вход в личный кабинет</legend>
             </div>
-            <form onSubmit={handleSubmit(onSubmit, onError)} data-test-id='auth-form'>
+            <form onSubmit={handleSubmit(onSubmit, onError)} data-test-id={DataTestId.AuthForm}>
               <fieldset className='registration__fieldset'>
                 <div className='registration__section'>
                   <TextField

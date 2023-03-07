@@ -1,3 +1,4 @@
+import { DataTestId } from 'constants/data-test-id';
 import { Path } from 'constants/path';
 
 import { createContext, Dispatch, FC, Fragment, SetStateAction, useMemo, useState } from 'react';
@@ -42,8 +43,8 @@ export const MainPage: FC = () => {
   return (
     <ContextMainPage.Provider value={store}>
       <section className='main-page'>
-        {isLoading && <Loader dataTestId='loader' />}
-        {isError && <Toast dataTestId='error' />}
+        {isLoading && <Loader dataTestId={DataTestId.Loader} />}
+        {isError && <Toast dataTestId={DataTestId.Error} />}
         {isSuccess && (
           <Fragment>
             <CatalogMenu />

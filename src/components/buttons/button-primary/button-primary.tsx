@@ -1,4 +1,5 @@
 import { StringAble } from 'constants/constants.types';
+import { DataTestId } from 'constants/data-test-id';
 
 import { FC, Fragment } from 'react';
 import classNames from 'classnames';
@@ -14,7 +15,7 @@ export type ButtonPrimaryProps = {
   className?: string;
   disabled?: boolean;
   onClick?: () => void;
-  dataTestId?: string;
+  dataTestId?: DataTestId;
 };
 
 export const ButtonPrimary: FC<ButtonPrimaryProps> = ({

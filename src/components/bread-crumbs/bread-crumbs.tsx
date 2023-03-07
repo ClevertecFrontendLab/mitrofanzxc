@@ -1,4 +1,5 @@
 import { BookData } from 'constants/constants.types';
+import { DataTestId } from 'constants/data-test-id';
 
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
@@ -34,7 +35,7 @@ export const BreadCrumbs: FC<BreadCrumbsProps> = ({ bookData, isSuccess, current
             to={`/books/${translateCategoryTitle(categoriesData, Language.Ru, categoryResult)}`}
             className='body_small display_inline-block'
             onClick={() => handleBreadCrumbCategory}
-            data-test-id='breadcrumbs-link'
+            data-test-id={DataTestId.BreadcrumbsLink}
           >
             {categoryResult}
           </Link>
@@ -42,7 +43,7 @@ export const BreadCrumbs: FC<BreadCrumbsProps> = ({ bookData, isSuccess, current
             <Link
               to={`/books/${translateCategoryTitle(categoriesData, Language.Ru, categoryResult)}/${bookData.id}`}
               className='body_small display_inline'
-              data-test-id='book-name'
+              data-test-id={DataTestId.BookName}
             >
               {bookData.title}
             </Link>

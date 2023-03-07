@@ -1,3 +1,5 @@
+import { DataTestId } from 'constants/data-test-id';
+
 import { FC, Fragment } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -7,7 +9,7 @@ export type HighLightProps = {
   value: string;
   title: string;
   className?: string;
-  dataTestId?: string;
+  dataTestId?: DataTestId;
 };
 
 export const HighLight: FC<HighLightProps> = ({ value, title, className, dataTestId }) => {

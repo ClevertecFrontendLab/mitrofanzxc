@@ -1,3 +1,4 @@
+import { DataTestId } from 'constants/data-test-id';
 import { Path } from 'constants/path';
 import { REGEX_WITH_EMAIL, REGEX_WITH_PASSWORD, REGEX_WITH_PHONE, REGEX_WITH_USERNAME } from 'constants/regex';
 
@@ -59,12 +60,16 @@ export const RegistrationPage: FC = () => {
 
   return (
     <Fragment>
-      {isLoading && <Loader dataTestId='loader' />}
-      {isError && <FormToast dataTestId='status-block' />}
+      {isLoading && <Loader dataTestId={DataTestId.Loader} />}
+      {isError && <FormToast dataTestId={DataTestId.StatusBlock} />}
       {!isError && (
-        <div className='registration-bg' data-test-id='auth'>
+        <div className='registration-bg' data-test-id={DataTestId.Auth}>
           <h3 className='h3'>Cleverland</h3>
-          <form className='registration' onSubmit={handleSubmit(onSubmit, onError)} data-test-id='register-form'>
+          <form
+            className='registration'
+            onSubmit={handleSubmit(onSubmit, onError)}
+            data-test-id={DataTestId.RegisterForm}
+          >
             <fieldset className='registration__fieldset'>
               <div className='registration__section'>
                 <legend className='h4'>Регистрация</legend>
@@ -156,6 +161,7 @@ export const RegistrationPage: FC = () => {
                       id={TextFieldId.Email}
                       placeholder={TextFieldPlaceholder.Email}
                       isError={isError}
+                      message={TextFieldMessage.EmailError}
                     />
                   </Fragment>
                 )}

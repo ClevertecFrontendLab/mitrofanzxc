@@ -1,3 +1,5 @@
+import { DataTestId } from 'constants/data-test-id';
+
 import { FC, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import classNames from 'classnames';
@@ -47,7 +49,7 @@ export const ButtonSort: FC = () => {
       className='button-sort filter-shadow'
       type='button'
       onClick={handleButtonSort}
-      data-test-id='sort-rating-button'
+      data-test-id={DataTestId.SortRatingButton}
     >
       <Sprite id={SpriteId.Sort} className={spriteClass} />
       <span className='body_small'>По рейтингу</span>

@@ -1,3 +1,5 @@
+import { DataTestId } from 'constants/data-test-id';
+
 import { FC, Fragment } from 'react';
 import classNames from 'classnames';
 import { useAppDispatch, useAppSelector, useBodyOverflow } from 'hooks';
@@ -26,7 +28,12 @@ const ButtonBurger: FC = () => {
   return (
     <Fragment>
       <div role='presentation' className={shadowClass} onClick={handleShadow} />
-      <button className='button-burger' type='button' onClick={handleButtonBurger} data-test-id='button-burger'>
+      <button
+        className='button-burger'
+        type='button'
+        onClick={handleButtonBurger}
+        data-test-id={DataTestId.ButtonBurger}
+      >
         <span className={buttonBurgerBarClass} />
         <span className={buttonBurgerBarClass} />
         <span className={buttonBurgerBarClass} />

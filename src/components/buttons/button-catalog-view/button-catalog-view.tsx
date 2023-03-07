@@ -1,3 +1,5 @@
+import { DataTestId } from 'constants/data-test-id';
+
 import { ChangeEvent, FC } from 'react';
 import { Sprite } from 'components';
 import { SpriteId } from 'components/sprite/sprite.types';
@@ -12,7 +14,7 @@ import './button-catalog-view.scss';
 export type ButtonCatalogViewProps = {
   id: CatalogView;
   value: CatalogView;
-  dataTestId?: string;
+  dataTestId?: DataTestId;
 };
 
 export const ButtonCatalogView: FC<ButtonCatalogViewProps> = ({ id, value, dataTestId }) => {

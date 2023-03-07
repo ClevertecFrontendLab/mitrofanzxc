@@ -1,6 +1,7 @@
+import { DataTestId } from 'constants/data-test-id';
 import { MASK_PHONE } from 'constants/regex';
 
-import { ChangeEvent, FC, Fragment, useState } from 'react';
+import { ChangeEvent, FC, useState } from 'react';
 import { useController, UseControllerProps } from 'react-hook-form';
 import MaskedInput from 'react-text-mask';
 import classNames from 'classnames';
@@ -70,55 +71,48 @@ export const TextField: FC<TextFieldProps & UseControllerProps<FormTextField>> =
   return (
     <div className='text-field'>
       {type === TextFieldType.Tel && (
-        <Fragment>
-          <MaskedInput
-            name={props.name}
-            id={id}
-            placeholder={placeholder}
-            className={inputClass}
-            disabled={false}
-            autoComplete='off'
-            mask={MASK_PHONE}
-            value={field.value}
-            onChange={handleChange}
-            onBlur={handleBlur}
-          />
-          <label htmlFor={id} data-content={placeholder} className='text-field__label'>
-            <span className='text-field__label_hidden'>{placeholder}</span>
-          </label>
-        </Fragment>
+        <MaskedInput
+          name={props.name}
+          id={id}
+          placeholder={placeholder}
+          className={inputClass}
+          disabled={false}
+          autoComplete='off'
+          mask={MASK_PHONE}
+          value={field.value}
+          onChange={handleChange}
+          onBlur={handleBlur}
+        />
       )}
       {type !== TextFieldType.Tel && (
-        <Fragment>
-          <input
-            {...field}
-            type={isEyeOpened ? TextFieldType.Text : type}
-            name={props.name}
-            id={id}
-            placeholder={placeholder}
-            className={inputClass}
-            disabled={false}
-            autoComplete='off'
-            onChange={handleChange}
-            onBlur={handleBlur}
-          />
-          <label htmlFor={id} data-content={placeholder} className='text-field__label'>
-            <span className='text-field__label_hidden'>{placeholder}</span>
-          </label>
-        </Fragment>
+        <input
+          {...field}
+          type={isEyeOpened ? TextFieldType.Text : type}
+          name={props.name}
+          id={id}
+          placeholder={placeholder}
+          className={inputClass}
+          disabled={false}
+          autoComplete='off'
+          onChange={handleChange}
+          onBlur={handleBlur}
+        />
       )}
+      <label htmlFor={id} data-content={placeholder} className='text-field__label'>
+        <span className='text-field__label_hidden'>{placeholder}</span>
+      </label>
       {type === TextFieldType.Password && isEyeVisible && (
         <div className='text-field__logo-wrapper'>
           <Sprite
             id={SpriteId.Checkmark}
             className='text-field__logo text-field__logo_check'
-            dataTestId={SpriteId.Checkmark}
+            dataTestId={DataTestId.Checkmark}
           />
           <Sprite
             id={isEyeOpened ? SpriteId.EyeOpened : SpriteId.EyeClosed}
             className='text-field__logo text-field__logo_eye'
             onClick={handleSetIsEyeOpened}
-            dataTestId={isEyeOpened ? SpriteId.EyeOpened : SpriteId.EyeClosed}
+            dataTestId={isEyeOpened ? DataTestId.EyeOpened : DataTestId.EyeClosed}
           />
         </div>
       )}
@@ -127,11 +121,11 @@ export const TextField: FC<TextFieldProps & UseControllerProps<FormTextField>> =
           className={messageClass}
           value={TextFieldMessage.EmptyField}
           title={TextFieldMessage.EmptyField}
-          dataTestId='hint'
+          dataTestId={DataTestId.Hint}
         />
       )}
       {!isEmptyValue && message && (
-        <HighLight className={messageClass} value={message} title={message} dataTestId='hint' />
+        <HighLight className={messageClass} value={message} title={message} dataTestId={DataTestId.Hint} />
       )}
     </div>
   );

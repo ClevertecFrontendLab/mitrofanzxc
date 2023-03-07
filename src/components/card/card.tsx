@@ -1,5 +1,6 @@
 import { API } from 'constants/axios';
 import { Booking, Delivery, Histories, NumberAble, StringAble, TImage } from 'constants/constants.types';
+import { DataTestId } from 'constants/data-test-id';
 
 import { FC, useContext } from 'react';
 import { Link } from 'react-router-dom';
@@ -87,7 +88,7 @@ export const Card: FC<CardProps> = ({
   });
 
   return (
-    <Link to={`/books/${categoryResult}/${id}`} className={cardClass} data-test-id='card'>
+    <Link to={`/books/${categoryResult}/${id}`} className={cardClass} data-test-id={DataTestId.Card}>
       <div className={placeholderClass}>
         {(!image || image.url.length <= 0) && <Sprite id={SpriteId.Cat} className={spriteClass} />}
         {image && image.url.length > 0 && (
@@ -120,7 +121,7 @@ export const Card: FC<CardProps> = ({
         )}
         <div>
           <p className={cardTitleClass}>
-            <HighLight value={inputSearchValue} title={title} dataTestId='highlight-matches' />
+            <HighLight value={inputSearchValue} title={title} dataTestId={DataTestId.HighlightMatches} />
           </p>
           <p className='body_small card-list__author'>{`${handleAuthors(authors)}, ${issueYear}`}</p>
         </div>

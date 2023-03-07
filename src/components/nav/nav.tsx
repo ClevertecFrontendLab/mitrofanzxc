@@ -1,3 +1,4 @@
+import { DataTestId } from 'constants/data-test-id';
 import { LocalStorage } from 'constants/local-storage';
 import { Path } from 'constants/path';
 
@@ -58,13 +59,13 @@ export const Nav: FC = () => {
   });
 
   return (
-    <nav className={navClass} data-test-id={`${isMobileMenuOpen ? 'burger-navigation' : ''}`}>
+    <nav className={navClass} data-test-id={`${isMobileMenuOpen ? DataTestId.BurgerNavigation : ''}`}>
       <div className='nav__wrapper'>
         <button
           type='button'
           className='h5 nav__item accordion'
           onClick={handleAccordionMenu}
-          data-test-id={`${matchScreenWidth ? 'burger-showcase' : 'navigation-showcase'}`}
+          data-test-id={`${matchScreenWidth ? DataTestId.BurgerShowcase : DataTestId.NavigationShowcase}`}
         >
           <NavLink to={Path.BooksAll}>Витрина книг</NavLink>
           {categoriesData && categoriesData.length > 0 && <Sprite id={SpriteId.ArrowShort} className={spriteClass} />}
@@ -75,7 +76,7 @@ export const Nav: FC = () => {
               to={Path.BooksAll}
               className='nav-list__link'
               onClick={handleMobileMenu}
-              data-test-id={`${matchScreenWidth ? 'burger-books' : 'navigation-books'}`}
+              data-test-id={`${matchScreenWidth ? DataTestId.BurgerBooks : DataTestId.NavigationBooks}`}
             >
               Все книги
             </NavLink>
@@ -85,14 +86,18 @@ export const Nav: FC = () => {
                   to={`/books/${path}`}
                   className='nav-list__link body_large'
                   onClick={handleMobileMenu}
-                  data-test-id={`${matchScreenWidth ? `burger-${path}` : `navigation-${path}`}`}
+                  data-test-id={`${
+                    matchScreenWidth ? `${DataTestId.Burger}${path}` : `${DataTestId.Navigation}${path}`
+                  }`}
                 >
                   {name}
                 </NavLink>
                 <span
                   className='body_small'
                   data-test-id={`${
-                    matchScreenWidth ? `burger-book-count-for-${path}` : `navigation-book-count-for-${path}`
+                    matchScreenWidth
+                      ? `${DataTestId.BurgerBookCountFor}${path}`
+                      : `${DataTestId.NavigationBookCountFor}${path}`
                   }`}
                 >
                   {initialData && initialData.length > 0 && getAmountOfBooks(initialData, name)}
@@ -105,7 +110,7 @@ export const Nav: FC = () => {
           to={Path.Terms}
           className='h5 nav__item'
           onClick={handleTerms}
-          data-test-id={`${matchScreenWidth ? 'burger-terms' : 'navigation-terms'}`}
+          data-test-id={`${matchScreenWidth ? DataTestId.BurgerTerms : DataTestId.NavigationTerms}`}
         >
           Правила пользования
         </NavLink>
@@ -113,7 +118,7 @@ export const Nav: FC = () => {
           to={Path.Contract}
           className='h5 nav__item'
           onClick={handleTerms}
-          data-test-id={`${matchScreenWidth ? 'burger-contract' : 'navigation-contract'}`}
+          data-test-id={`${matchScreenWidth ? DataTestId.BurgerContract : DataTestId.NavigationContract}`}
         >
           Договор оферты
         </NavLink>
@@ -122,7 +127,7 @@ export const Nav: FC = () => {
         <NavLink to={Path.Profile} className='h5 nav__item' onClick={handleMobileMenu}>
           Профиль
         </NavLink>
-        <button type='button' className='h5 nav__item' onClick={handleLogout} data-test-id='exit-button'>
+        <button type='button' className='h5 nav__item' onClick={handleLogout} data-test-id={DataTestId.ExitButton}>
           Выход
         </button>
       </div>
