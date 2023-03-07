@@ -64,8 +64,8 @@ export const ForgotPassPage: FC = () => {
                     type={TextFieldType.Email}
                     id={TextFieldId.Email}
                     placeholder={TextFieldPlaceholder.Email}
-                    isError={isError}
                     message={TextFieldMessage.EmailError}
+                    isError={isError}
                   />
                 </div>
                 <div className='registration__section'>
@@ -102,8 +102,8 @@ export const ForgotPassPage: FC = () => {
                     type={TextFieldType.Password}
                     id={TextFieldId.Password}
                     placeholder={TextFieldPlaceholder.NewPassword}
-                    isError={isError}
                     message={TextFieldMessage.Password}
+                    isError={isError}
                   />
                   <TextField
                     control={control}
@@ -112,6 +112,7 @@ export const ForgotPassPage: FC = () => {
                     type={TextFieldType.Password}
                     id={TextFieldId.PasswordConfirmation}
                     placeholder={TextFieldPlaceholder.RepeatPassword}
+                    message={TextFieldMessage.EmptyField}
                     isError={isError}
                   />
                 </div>

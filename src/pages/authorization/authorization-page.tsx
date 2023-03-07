@@ -66,6 +66,7 @@ export const AuthorizationPage: FC = () => {
                     type={TextFieldType.Text}
                     id={TextFieldId.Identifier}
                     placeholder={TextFieldPlaceholder.Login}
+                    message={TextFieldMessage.EmptyField}
                     isError={isError}
                   />
                   <TextField

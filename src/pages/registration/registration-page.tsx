@@ -27,7 +27,6 @@ export const RegistrationPage: FC = () => {
   const { handleSubmit, control } = useForm<FormTextField>(initialState);
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState<RegistrationRequest>(REGISTRATION_REQUEST_WITH_INITIAL_DATA);
-  console.log('formData ===', formData);
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const dispatch = useAppDispatch();
 
@@ -42,6 +41,8 @@ export const RegistrationPage: FC = () => {
       dispatch(registrationRequest(formData));
     }
   };
+
+  console.log('formData ===', formData);
 
   const onSubmit = (data: FormTextField) => {
     console.log('onSubmit_DATA ===', data);
@@ -87,8 +88,8 @@ export const RegistrationPage: FC = () => {
                       type={TextFieldType.Text}
                       id={TextFieldId.Username}
                       placeholder={TextFieldPlaceholder.CreateUserName}
-                      isError={isError}
                       message={TextFieldMessage.CreateUserName}
+                      isError={isError}
                     />
                     <TextField
                       control={control}
@@ -97,8 +98,8 @@ export const RegistrationPage: FC = () => {
                       type={TextFieldType.Password}
                       id={TextFieldId.Password}
                       placeholder={TextFieldPlaceholder.Password}
-                      isError={isError}
                       message={TextFieldMessage.Password}
+                      isError={isError}
                     />
                   </Fragment>
                 )}
@@ -111,6 +112,7 @@ export const RegistrationPage: FC = () => {
                       type={TextFieldType.Text}
                       id={TextFieldId.FirstName}
                       placeholder={TextFieldPlaceholder.FirstName}
+                      message={TextFieldMessage.EmptyField}
                       isError={isError}
                     />
                     <TextField
@@ -120,22 +122,13 @@ export const RegistrationPage: FC = () => {
                       type={TextFieldType.Text}
                       id={TextFieldId.LastName}
                       placeholder={TextFieldPlaceholder.LastName}
+                      message={TextFieldMessage.EmptyField}
                       isError={isError}
                     />
                   </Fragment>
                 )}
                 {step === 3 && (
                   <Fragment>
-                    {/* <TextField
-                      control={control}
-                      name={TextFieldId.Phone}
-                      rules={{ required: true, pattern: REGEX_WITH_PHONE }}
-                      type={TextFieldType.Tel}
-                      id={TextFieldId.Phone}
-                      placeholder={TextFieldPlaceholder.Phone}
-                      isError={isError}
-                      message={TextFieldMessage.Phone}
-                    /> */}
                     <Controller
                       control={control}
                       name={TextFieldId.Phone}
@@ -148,8 +141,8 @@ export const RegistrationPage: FC = () => {
                           type={TextFieldType.Tel}
                           id={TextFieldId.Phone}
                           placeholder={TextFieldPlaceholder.Phone}
-                          isError={isError}
                           message={TextFieldMessage.Phone}
+                          isError={isError}
                         />
                       )}
                     />
@@ -160,8 +153,8 @@ export const RegistrationPage: FC = () => {
                       type={TextFieldType.Email}
                       id={TextFieldId.Email}
                       placeholder={TextFieldPlaceholder.Email}
-                      isError={isError}
                       message={TextFieldMessage.EmailError}
+                      isError={isError}
                     />
                   </Fragment>
                 )}

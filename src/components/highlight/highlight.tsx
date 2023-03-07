@@ -1,12 +1,13 @@
 import { DataTestId } from 'constants/data-test-id';
 
 import { FC, Fragment } from 'react';
+import { TextFieldMessage } from 'components/text-field/text-field.types';
 import { v4 as uuidv4 } from 'uuid';
 
 import './highlight.scss';
 
 export type HighLightProps = {
-  value: string;
+  value: string | TextFieldMessage;
   title: string;
   className?: string;
   dataTestId?: DataTestId;
