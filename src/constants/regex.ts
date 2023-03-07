@@ -5,6 +5,7 @@ export const REGEX_WITH_PHONE = /^(?:\+375|375|80)\s?\(?(?:25|29|33|44)\)?\s?\d{
 export const REGEX_WITH_ONE_CAPITAL_LETTER = /^(?=.*[A-Z]).*$/;
 export const REGEX_WITH_ONE_DIGIT = /^(?=.*\d).*$/;
 export const REGEX_WITH_MIN_8_CHARACTERS = /^.{8,}.*$/;
+export const REGEX_WITH_LATIN_ALPHABET = /^([A-Za-z\u00C0-\u00D6\u00D8-\u00f6\u00f8-\u00ff\s]*)$/;
 export const MASK_PHONE = [
   '+',
   '3',

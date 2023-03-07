@@ -2,6 +2,7 @@ import { DataTestId } from 'constants/data-test-id';
 import {
   MASK_PHONE,
   REGEX_WITH_EMAIL,
+  REGEX_WITH_LATIN_ALPHABET,
   REGEX_WITH_MIN_8_CHARACTERS,
   REGEX_WITH_ONE_CAPITAL_LETTER,
   REGEX_WITH_ONE_DIGIT,
@@ -40,11 +41,12 @@ export const TextField: FC<TextFieldProps & UseControllerProps<FormTextField>> =
   const { field, fieldState } = useController(props);
   const [isEyeOpened, setIsEyeOpened] = useState(false);
   const [isEyeVisible, setIsEyeVisible] = useState(false);
+  const [isCheckmarkVisible, setIsCheckmarkVisible] = useState(false);
   const [isEmptyValue, setIsEmptyValue] = useState<boolean | null>(null);
   const [validationMessage, setValidationMessage] = useState('');
 
   // console.log('message ===', message);
-  // console.log('validationMessage ===', validationMessage);
+  console.log('validationMessage ===', validationMessage);
 
   // console.log('field ===', field);
   // console.log('field.value ===', field.value);
@@ -57,6 +59,7 @@ export const TextField: FC<TextFieldProps & UseControllerProps<FormTextField>> =
   };
 
   const handleEmptyValue = (value: string) => {
+    console.log('value ===', value);
     if (value) {
       setIsEmptyValue(false);
       setIsEyeVisible(true);
@@ -67,26 +70,122 @@ export const TextField: FC<TextFieldProps & UseControllerProps<FormTextField>> =
   };
 
   const handleValidate = (value: string) => {
-    if (type === TextFieldType.Password) {
-      const matchCharacters = REGEX_WITH_MIN_8_CHARACTERS.test(value);
-      const matchCapital = REGEX_WITH_ONE_CAPITAL_LETTER.test(value);
-      const matchDigit = REGEX_WITH_ONE_DIGIT.test(value);
-      console.log('XYU');
+    const matchCapital = REGEX_WITH_ONE_CAPITAL_LETTER.test(value);
+    const matchCharacters = REGEX_WITH_MIN_8_CHARACTERS.test(value);
+    const matchDigit = REGEX_WITH_ONE_DIGIT.test(value);
+    const matchLatinAlphabet = REGEX_WITH_LATIN_ALPHABET.test(value);
+
+    const matchUsername = matchLatinAlphabet && matchDigit;
+    const matchCharactersAndCapital = matchCharacters && matchCapital && !matchDigit;
+    const matchCharactersAndDigit = matchCharacters && matchDigit && !matchCapital;
+    const matchCapitalAndDigit = matchCapital && matchDigit && !matchCharacters;
+    const matchPassword = matchCharacters && matchCapital && matchDigit;
+
+    switch (id) {
+      case TextFieldId.Username:
+        if (matchUsername) {
+          setValidationMessage('');
+          break;
+        }
+
+        if (!matchUsername) {
+          setValidationMessage(message);
+          break;
+        }
+        break;
+      case TextFieldId.Password:
+        if (matchPassword) {
+          setValidationMessage('');
+          setIsCheckmarkVisible(true);
+          break;
+        }
+
+        if (!matchPassword) {
+          setValidationMessage(message);
+          setIsCheckmarkVisible(false);
+          break;
+        }
+
+        if (!matchCharactersAndCapital) {
+          setValidationMessage(`${TextFieldMessage.PasswordCharaters} ${TextFieldMessage.PasswordCapitalLetter}`);
+          setIsCheckmarkVisible(false);
+          break;
+        }
+
+        if (!matchCharactersAndDigit) {
+          setValidationMessage(`${TextFieldMessage.PasswordCharaters} ${TextFieldMessage.PasswordDigit}`);
+          setIsCheckmarkVisible(false);
+          break;
+        }
+
+        if (!matchCapitalAndDigit) {
+          setValidationMessage(`${TextFieldMessage.PasswordCapitalLetter} ${TextFieldMessage.PasswordDigit}`);
+          setIsCheckmarkVisible(false);
+          break;
+        }
+
+        if (matchCharactersAndCapital) {
+          setValidationMessage(TextFieldMessage.PasswordDigit);
+          setIsCheckmarkVisible(false);
+          break;
+        }
+
+        if (matchCharactersAndDigit) {
+          setValidationMessage(TextFieldMessage.PasswordCapitalLetter);
+          setIsCheckmarkVisible(false);
+          break;
+        }
+
+        if (matchCapitalAndDigit) {
+          setValidationMessage(TextFieldMessage.PasswordCharaters);
+          setIsCheckmarkVisible(false);
+          break;
+        }
+
+        if (!matchCharacters) {
+          setValidationMessage(TextFieldMessage.PasswordCharaters);
+          setIsCheckmarkVisible(false);
+          break;
+        }
+
+        if (!matchCapital) {
+          setValidationMessage(TextFieldMessage.PasswordCapitalLetter);
+          setIsCheckmarkVisible(false);
+          break;
+        }
+
+        if (!matchDigit) {
+          setValidationMessage(TextFieldMessage.PasswordDigit);
+          setIsCheckmarkVisible(false);
+          break;
+        }
+
+        if (matchCharacters) {
+          setValidationMessage(`${TextFieldMessage.PasswordCapitalLetter} ${TextFieldMessage.PasswordDigit}`);
+          setIsCheckmarkVisible(false);
+          break;
+        }
+
+        if (matchCapital) {
+          setValidationMessage(`${TextFieldMessage.PasswordCharaters} ${TextFieldMessage.PasswordDigit}`);
+          setIsCheckmarkVisible(false);
+          break;
+        }
+
+        if (matchDigit) {
+          setValidationMessage(`${TextFieldMessage.PasswordCharaters} ${TextFieldMessage.PasswordCapitalLetter}`);
+          setIsCheckmarkVisible(false);
+          break;
+        }
+        break;
+      default:
+        break;
+    }
+
+    if (id === TextFieldId.Password) {
       console.log('matchCharacters ===', matchCharacters);
       console.log('matchCapital ===', matchCapital);
       console.log('matchDigit ===', matchDigit);
-
-      if (!matchCharacters) {
-        setValidationMessage(TextFieldMessage.PasswordCharaters);
-      }
-
-      if (!matchCapital) {
-        setValidationMessage(TextFieldMessage.PasswordCapitalLetter);
-      }
-
-      if (!matchDigit) {
-        setValidationMessage(TextFieldMessage.PasswordDigit);
-      }
     }
   };
 
@@ -149,11 +248,13 @@ export const TextField: FC<TextFieldProps & UseControllerProps<FormTextField>> =
       </label>
       {type === TextFieldType.Password && isEyeVisible && (
         <div className='text-field__logo-wrapper'>
-          <Sprite
-            id={SpriteId.Checkmark}
-            className='text-field__logo text-field__logo_check'
-            dataTestId={DataTestId.Checkmark}
-          />
+          {isCheckmarkVisible && (
+            <Sprite
+              id={SpriteId.Checkmark}
+              className='text-field__logo text-field__logo_check'
+              dataTestId={DataTestId.Checkmark}
+            />
+          )}
           <Sprite
             id={isEyeOpened ? SpriteId.EyeOpened : SpriteId.EyeClosed}
             className='text-field__logo text-field__logo_eye'
