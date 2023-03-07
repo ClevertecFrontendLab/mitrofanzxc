@@ -2,6 +2,7 @@ export { convertToDate } from './convert-to-date';
 export { divideTableData } from './divide-table-data';
 export { getAmountOfBooks } from './get-amount-of-books';
 export { getLocalStorage } from './get-local-storage';
+export { getToken } from './get-token';
 export { handleAuthors } from './handle-authors';
 export { handleCategory } from './handle-category';
 export { handleFilter } from './handle-filter';

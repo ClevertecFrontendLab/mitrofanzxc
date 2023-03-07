@@ -1,7 +1,5 @@
 import axios from 'axios';
-import { getLocalStorage } from 'utils';
-
-import { LocalStorage } from './local-storage';
+import { getToken } from 'utils';
 
 export enum API {
   BaseUrl = 'https://strapi.cleverland.by',
@@ -21,8 +19,7 @@ export const cleverlandConfig = axios.create({
 
 cleverlandConfig.interceptors.request.use((config) => {
   /* eslint-disable no-param-reassign */
-  // const token = getLocalStorage(LocalStorage.Token);
-  const token = localStorage.getItem(LocalStorage.Token) || null;
+  const token = getToken();
 
   console.log(token);
 

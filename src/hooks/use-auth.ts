@@ -1,17 +1,14 @@
-import { LocalStorage } from 'constants/local-storage';
 import { Path } from 'constants/path';
 
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getLocalStorage } from 'utils';
+import { getToken } from 'utils';
 
 export const useAuth = (path: Path) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log('xyu');
-    // const isAuth = getLocalStorage(LocalStorage.Token);
-    const isAuth = localStorage.getItem(LocalStorage.Token) || null;
+    const isAuth = getToken();
 
     if (isAuth) {
       navigate(path);
