@@ -31,7 +31,7 @@ export const TextField: FC<TextFieldProps & UseControllerProps<FormTextField>> =
   const { field, fieldState } = useController(props);
   const [isEyeOpened, setIsEyeOpened] = useState(false);
   const [isEyeVisible, setIsEyeVisible] = useState(false);
-  const [isEmptyValue, setIsEmptyValue] = useState(false);
+  const [isEmptyValue, setIsEmptyValue] = useState<boolean | null>(null);
 
   console.log('field ===', field);
   console.log('field.value ===', field.value);
@@ -64,9 +64,10 @@ export const TextField: FC<TextFieldProps & UseControllerProps<FormTextField>> =
   };
 
   const inputClass = classNames('text-field__input', { 'text-field__input_error': fieldState.error || isError });
-  const messageClass = classNames('mark text-field__message info_large', {
-    color_negative: fieldState.error || isError,
-  });
+  // const messageClass = classNames('mark text-field__message info_large', {
+  //   color_negative: fieldState.error || isError,
+  // });
+  const messageClass = classNames('mark text-field__message info_large');
 
   return (
     <div className='text-field'>
@@ -116,17 +117,24 @@ export const TextField: FC<TextFieldProps & UseControllerProps<FormTextField>> =
           />
         </div>
       )}
-      {isEmptyValue && (
-        <HighLight
-          className={messageClass}
-          value={TextFieldMessage.EmptyField}
-          title={TextFieldMessage.EmptyField}
-          dataTestId={DataTestId.Hint}
-        />
-      )}
-      {!isEmptyValue && message && (
-        <HighLight className={messageClass} value={message} title={message} dataTestId={DataTestId.Hint} />
-      )}
+      <p className={messageClass}>
+        {isEmptyValue && (
+          <HighLight
+            className='color_negative'
+            value={TextFieldMessage.EmptyField}
+            title={TextFieldMessage.EmptyField}
+            dataTestId={DataTestId.Hint}
+          />
+        )}
+        {!isEmptyValue && message && (
+          <HighLight
+            className='color_negative'
+            value={TextFieldMessage.PasswordCharaters}
+            title={message}
+            dataTestId={DataTestId.Hint}
+          />
+        )}
+      </p>
     </div>
   );
 };
