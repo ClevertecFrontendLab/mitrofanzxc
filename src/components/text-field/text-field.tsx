@@ -45,6 +45,14 @@ export const TextField: FC<TextFieldProps & UseControllerProps<FormTextField>> =
   const [isEmptyValue, setIsEmptyValue] = useState<boolean | null>(null);
   const [validationMessage, setValidationMessage] = useState('');
 
+  const handleCheckmark = (value: boolean) => {
+    setIsCheckmarkVisible(value);
+  };
+
+  const handleValidationMessage = (value: string) => {
+    setValidationMessage(value);
+  };
+
   // console.log('message ===', message);
   console.log('validationMessage ===', validationMessage);
 
@@ -69,7 +77,7 @@ export const TextField: FC<TextFieldProps & UseControllerProps<FormTextField>> =
     }
   };
 
-  const handleValidate = (value: string) => {
+  const handleValidate = (value: string, id: TextFieldId, message: TextFieldMessage) => {
     const matchCapital = REGEX_WITH_ONE_CAPITAL_LETTER.test(value);
     const matchCharacters = REGEX_WITH_MIN_8_CHARACTERS.test(value);
     const matchDigit = REGEX_WITH_ONE_DIGIT.test(value);
@@ -180,12 +188,6 @@ export const TextField: FC<TextFieldProps & UseControllerProps<FormTextField>> =
         break;
       default:
         break;
-    }
-
-    if (id === TextFieldId.Password) {
-      console.log('matchCharacters ===', matchCharacters);
-      console.log('matchCapital ===', matchCapital);
-      console.log('matchDigit ===', matchDigit);
     }
   };
 
