@@ -17,15 +17,43 @@ export const cleverlandConfig = axios.create({
   withCredentials: true,
 });
 
-cleverlandConfig.interceptors.request.use((config) => {
-  /* eslint-disable no-param-reassign */
-  const token = getToken();
+cleverlandConfig.interceptors.request.use(
+  (config) => {
+    /* eslint-disable no-param-reassign */
+    const token = getToken();
 
-  console.log(token);
+    console.log(token);
 
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
+
+cleverlandConfig.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    console.log('error ===', error);
+    const originalRequest = error.config;
+
+    if (error.response.status === 400) {
+      console.log('Неверный логин или пароль');
+    }
+
+    // if (error.response.status === 401 && error.config && !error.config._isRetry) {
+    //   originalRequest._isRetry = true;
+    //   try {
+    //     const response = await axios.get<AuthResponse>(`${API_URL}/refresh`, { withCredentials: true });
+    //     localStorage.setItem('token', response.data.accessToken);
+    //     return $api.request(originalRequest);
+    //   } catch (e) {
+    //     console.log('НЕ АВТОРИЗОВАН');
+    //   }
+    // }
+
+    return Promise.reject(error);
   }
-
-  return config;
-});
+);

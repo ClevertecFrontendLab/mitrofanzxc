@@ -147,7 +147,7 @@ export const TextField: FC<TextFieldProps & UseControllerProps<FormTextField>> =
           />
         </div>
       )}
-      <p className={messageClass}>
+      <p className={messageClass} data-test-id={DataTestId.Hint}>
         {validationMessage && pathname !== Path.Authorization && (
           <HighLight
             className='color_negative'

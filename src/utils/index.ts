@@ -1,4 +1,5 @@
 export { convertToDate } from './convert-to-date';
+export { CustomError } from './custom-error';
 export { divideTableData } from './divide-table-data';
 export { getAmountOfBooks } from './get-amount-of-books';
 export { getLocalStorage } from './get-local-storage';
