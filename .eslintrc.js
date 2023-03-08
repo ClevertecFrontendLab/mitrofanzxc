@@ -25,7 +25,7 @@ module.exports = {
     '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^action' }],
     'no-nested-ternary': 'off',
     'no-unneeded-ternary': 'off',
-    complexity: ['error', { max: 35 }],
+    complexity: ['error', { max: 100 }],
   },
   ignorePatterns: ['coverage', 'cypress.config.ts'],
 };

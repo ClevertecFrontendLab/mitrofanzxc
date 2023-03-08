@@ -1,22 +1,15 @@
 import { DataTestId } from 'constants/data-test-id';
-import {
-  MASK_PHONE,
-  REGEX_WITH_EMAIL,
-  REGEX_WITH_LATIN_ALPHABET,
-  REGEX_WITH_MIN_8_CHARACTERS,
-  REGEX_WITH_ONE_CAPITAL_LETTER,
-  REGEX_WITH_ONE_DIGIT,
-  REGEX_WITH_PASSWORD,
-  REGEX_WITH_PHONE,
-  REGEX_WITH_USERNAME,
-} from 'constants/regex';
+import { Path } from 'constants/path';
+import { MASK_PHONE } from 'constants/regex';
 
 import { ChangeEvent, FC, FocusEvent, useState } from 'react';
 import { useController, UseControllerProps } from 'react-hook-form';
+import { useLocation } from 'react-router-dom';
 import MaskedInput from 'react-text-mask';
 import classNames from 'classnames';
 import { HighLight, Sprite } from 'components';
 import { SpriteId } from 'components/sprite/sprite.types';
+import { validate } from 'utils';
 
 import { FormTextField, TextFieldId, TextFieldMessage, TextFieldPlaceholder, TextFieldType } from './text-field.types';
 
@@ -39,22 +32,20 @@ export const TextField: FC<TextFieldProps & UseControllerProps<FormTextField>> =
   ...props
 }) => {
   const { field, fieldState } = useController(props);
+  const { pathname } = useLocation();
   const [isEyeOpened, setIsEyeOpened] = useState(false);
   const [isEyeVisible, setIsEyeVisible] = useState(false);
   const [isCheckmarkVisible, setIsCheckmarkVisible] = useState(false);
-  const [isEmptyValue, setIsEmptyValue] = useState<boolean | null>(null);
-  const [validationMessage, setValidationMessage] = useState('');
+  const [validationMessage, setValidationMessage] = useState<string[]>(['']);
+  const [validationTitle, setValidationTitle] = useState(message);
 
   const handleCheckmark = (value: boolean) => {
     setIsCheckmarkVisible(value);
   };
 
-  const handleValidationMessage = (value: string) => {
+  const handleValidationMessage = (value: string[]) => {
     setValidationMessage(value);
   };
-
-  // console.log('message ===', message);
-  console.log('validationMessage ===', validationMessage);
 
   // console.log('field ===', field);
   // console.log('field.value ===', field.value);
@@ -67,127 +58,13 @@ export const TextField: FC<TextFieldProps & UseControllerProps<FormTextField>> =
   };
 
   const handleEmptyValue = (value: string) => {
-    console.log('value ===', value);
     if (value) {
-      setIsEmptyValue(false);
       setIsEyeVisible(true);
+      setValidationTitle(message);
     } else {
-      setIsEmptyValue(true);
       setIsEyeVisible(false);
-    }
-  };
-
-  const handleValidate = (value: string, id: TextFieldId, message: TextFieldMessage) => {
-    const matchCapital = REGEX_WITH_ONE_CAPITAL_LETTER.test(value);
-    const matchCharacters = REGEX_WITH_MIN_8_CHARACTERS.test(value);
-    const matchDigit = REGEX_WITH_ONE_DIGIT.test(value);
-    const matchLatinAlphabet = REGEX_WITH_LATIN_ALPHABET.test(value);
-
-    const matchUsername = matchLatinAlphabet && matchDigit;
-    const matchCharactersAndCapital = matchCharacters && matchCapital && !matchDigit;
-    const matchCharactersAndDigit = matchCharacters && matchDigit && !matchCapital;
-    const matchCapitalAndDigit = matchCapital && matchDigit && !matchCharacters;
-    const matchPassword = matchCharacters && matchCapital && matchDigit;
-
-    switch (id) {
-      case TextFieldId.Username:
-        if (matchUsername) {
-          setValidationMessage('');
-          break;
-        }
-
-        if (!matchUsername) {
-          setValidationMessage(message);
-          break;
-        }
-        break;
-      case TextFieldId.Password:
-        if (matchPassword) {
-          setValidationMessage('');
-          setIsCheckmarkVisible(true);
-          break;
-        }
-
-        if (!matchPassword) {
-          setValidationMessage(message);
-          setIsCheckmarkVisible(false);
-          break;
-        }
-
-        if (!matchCharactersAndCapital) {
-          setValidationMessage(`${TextFieldMessage.PasswordCharaters} ${TextFieldMessage.PasswordCapitalLetter}`);
-          setIsCheckmarkVisible(false);
-          break;
-        }
-
-        if (!matchCharactersAndDigit) {
-          setValidationMessage(`${TextFieldMessage.PasswordCharaters} ${TextFieldMessage.PasswordDigit}`);
-          setIsCheckmarkVisible(false);
-          break;
-        }
-
-        if (!matchCapitalAndDigit) {
-          setValidationMessage(`${TextFieldMessage.PasswordCapitalLetter} ${TextFieldMessage.PasswordDigit}`);
-          setIsCheckmarkVisible(false);
-          break;
-        }
-
-        if (matchCharactersAndCapital) {
-          setValidationMessage(TextFieldMessage.PasswordDigit);
-          setIsCheckmarkVisible(false);
-          break;
-        }
-
-        if (matchCharactersAndDigit) {
-          setValidationMessage(TextFieldMessage.PasswordCapitalLetter);
-          setIsCheckmarkVisible(false);
-          break;
-        }
-
-        if (matchCapitalAndDigit) {
-          setValidationMessage(TextFieldMessage.PasswordCharaters);
-          setIsCheckmarkVisible(false);
-          break;
-        }
-
-        if (!matchCharacters) {
-          setValidationMessage(TextFieldMessage.PasswordCharaters);
-          setIsCheckmarkVisible(false);
-          break;
-        }
-
-        if (!matchCapital) {
-          setValidationMessage(TextFieldMessage.PasswordCapitalLetter);
-          setIsCheckmarkVisible(false);
-          break;
-        }
-
-        if (!matchDigit) {
-          setValidationMessage(TextFieldMessage.PasswordDigit);
-          setIsCheckmarkVisible(false);
-          break;
-        }
-
-        if (matchCharacters) {
-          setValidationMessage(`${TextFieldMessage.PasswordCapitalLetter} ${TextFieldMessage.PasswordDigit}`);
-          setIsCheckmarkVisible(false);
-          break;
-        }
-
-        if (matchCapital) {
-          setValidationMessage(`${TextFieldMessage.PasswordCharaters} ${TextFieldMessage.PasswordDigit}`);
-          setIsCheckmarkVisible(false);
-          break;
-        }
-
-        if (matchDigit) {
-          setValidationMessage(`${TextFieldMessage.PasswordCharaters} ${TextFieldMessage.PasswordCapitalLetter}`);
-          setIsCheckmarkVisible(false);
-          break;
-        }
-        break;
-      default:
-        break;
+      setValidationMessage([TextFieldMessage.EmptyField]);
+      setValidationTitle(TextFieldMessage.EmptyField);
     }
   };
 
@@ -196,8 +73,11 @@ export const TextField: FC<TextFieldProps & UseControllerProps<FormTextField>> =
     const { value } = target;
 
     field.onChange(event);
-    handleValidate(value);
-    handleEmptyValue(value);
+
+    if (pathname !== Path.Authorization) {
+      validate(value, id, message, handleCheckmark, handleValidationMessage);
+      handleEmptyValue(value);
+    }
   };
 
   const handleBlur = (event: FocusEvent<HTMLInputElement>) => {
@@ -205,14 +85,16 @@ export const TextField: FC<TextFieldProps & UseControllerProps<FormTextField>> =
     const { value } = target;
 
     field.onBlur();
-    handleValidate(value);
-    handleEmptyValue(value);
+
+    if (pathname !== Path.Authorization) {
+      validate(value, id, message, handleCheckmark, handleValidationMessage);
+      handleEmptyValue(value);
+    }
   };
 
-  const inputClass = classNames('text-field__input', { 'text-field__input_error': fieldState.error || isError });
-  // const messageClass = classNames('mark text-field__message info_large', {
-  //   color_negative: fieldState.error || isError,
-  // });
+  const inputClass = classNames('text-field__input', {
+    'text-field__input_error': (fieldState.error || isError) && pathname !== Path.Authorization,
+  });
   const messageClass = classNames('mark text-field__message info_large');
 
   return (
@@ -266,17 +148,14 @@ export const TextField: FC<TextFieldProps & UseControllerProps<FormTextField>> =
         </div>
       )}
       <p className={messageClass}>
-        {/* {isEmptyValue && (
+        {validationMessage && pathname !== Path.Authorization && (
           <HighLight
             className='color_negative'
-            value={TextFieldMessage.EmptyField}
-            title={TextFieldMessage.EmptyField}
+            value={validationMessage}
+            title={validationTitle}
             dataTestId={DataTestId.Hint}
           />
-        )} */}
-        {/* {isEmptyValue === false && message && ( */}
-        <HighLight className='color_negative' value={validationMessage} title={message} dataTestId={DataTestId.Hint} />
-        {/* )} */}
+        )}
       </p>
     </div>
   );

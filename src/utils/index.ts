@@ -14,4 +14,4 @@ export { removeLocalStorage } from './remove-local-storage';
 export { setLocalStorage } from './set-local-storage';
 export { sortData } from './sort-data';
 export { translateCategoryTitle } from './translate-category-title';
-export { validateTextField } from './validate-text-field';
+export { validate } from './validate';

@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 import './highlight.scss';
 
 export type HighLightProps = {
-  value: string | TextFieldMessage;
+  value: string[] | TextFieldMessage[];
   title: string;
   className?: string;
   dataTestId?: DataTestId;
@@ -18,27 +18,23 @@ export const HighLight: FC<HighLightProps> = ({ value, title, className, dataTes
     return <span>{title}</span>;
   }
 
-  const regexp = new RegExp(value, 'gi');
-  const matchValue = title.match(regexp);
+  const regexp = RegExp(value.join('|'), 'ig');
+  const matchValue = Array.from(title.matchAll(regexp));
 
   if (matchValue) {
     return (
       <Fragment>
-        {title.split(regexp).map((str, index, array) => {
-          if (index < array.length - 1) {
-            const firstMatch = matchValue.shift();
-
+        {title.split(regexp).map((nonBoldText, index, arr) => {
+          if (index + 1 !== arr.length) {
             return (
               <Fragment key={uuidv4()}>
-                {str}
-                <mark className={className} data-test-id={dataTestId}>
-                  {firstMatch}
-                </mark>
+                {nonBoldText}
+                <mark className={className}>{matchValue[index]}</mark>
               </Fragment>
             );
           }
 
-          return <Fragment key={uuidv4()}>{str}</Fragment>;
+          return <Fragment key={uuidv4()}>{nonBoldText}</Fragment>;
         })}
       </Fragment>
     );
