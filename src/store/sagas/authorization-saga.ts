@@ -5,9 +5,16 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 import { AxiosResponse } from 'axios';
 import { ButtonPrimaryTitle } from 'components/buttons/button-primary/button-primary.types';
 import { FormToastMessage, FormToastTitle } from 'components/form-toast/form-toast.types';
-import { setLocalStorage } from 'utils';
+import { TextFieldMessage } from 'components/text-field/text-field.types';
+import { CustomError, setLocalStorage } from 'utils';
 
-import { authorizationRequest, authorizationRequestError, authorizationRequestSuccess, setFormToast } from '../slices';
+import {
+  authorizationRequest,
+  authorizationRequestError,
+  authorizationRequestSuccess,
+  setErrorMessage,
+  setFormToast,
+} from '../slices';
 import { AuthorizationRequest, AuthorizationResponse } from '../slices/slices.types';
 
 function* authorizationRequestWorker(action: { payload: AuthorizationRequest; type: string }) {
@@ -20,16 +27,23 @@ function* authorizationRequestWorker(action: { payload: AuthorizationRequest; ty
 
     yield console.log('response ===', data);
     yield setLocalStorage(LocalStorage.Token, data.jwt);
+    yield put(setErrorMessage(''));
     yield put(authorizationRequestSuccess(data));
-  } catch {
-    yield put(authorizationRequestError());
-    yield put(
-      setFormToast({
-        title: FormToastTitle.AuthorizationError,
-        message: FormToastMessage.AuthorizationError,
-        button: ButtonPrimaryTitle.Repeat,
-      })
-    );
+  } catch (error) {
+    if (error instanceof CustomError) {
+      yield put(setErrorMessage(TextFieldMessage.WrongLoginOrPassword));
+    }
+
+    if (!(error instanceof CustomError)) {
+      yield put(authorizationRequestError());
+      yield put(
+        setFormToast({
+          title: FormToastTitle.AuthorizationError,
+          message: FormToastMessage.AuthorizationError,
+          button: ButtonPrimaryTitle.Repeat,
+        })
+      );
+    }
   }
 }
 

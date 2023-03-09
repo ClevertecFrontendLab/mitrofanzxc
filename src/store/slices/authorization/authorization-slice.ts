@@ -1,5 +1,6 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
+import { TextFieldMessage } from 'components/text-field/text-field.types';
 
 import { AuthorizationRequest, AuthorizationResponse } from '../slices.types';
 
@@ -42,10 +43,18 @@ export const authorizationSlice = createSlice({
       state.isLoading = false;
       state.isError = false;
     },
+    setErrorMessage: (state, action: PayloadAction<string | TextFieldMessage>) => {
+      state.authorizationRequest = AUTHORIZATION_REQUEST_WITH_INITIAL_DATA;
+      state.authorizationResponse = AUTHORIZATION_RESPONSE_WITH_INITIAL_DATA;
+      state.errorMessage = action.payload;
+      state.isAuth = false;
+      state.isLoading = false;
+      state.isError = false;
+    },
   },
 });
 
-export const { authorizationRequest, authorizationRequestSuccess, authorizationRequestError, logout } =
+export const { authorizationRequest, authorizationRequestSuccess, authorizationRequestError, logout, setErrorMessage } =
   authorizationSlice.actions;
 /* eslint-disable-next-line import/no-default-export */
 export default authorizationSlice.reducer;

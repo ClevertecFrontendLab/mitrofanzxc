@@ -52,6 +52,8 @@ export const TextField: FC<TextFieldProps & UseControllerProps<FormTextField>> =
   // console.log('fieldState ===', fieldState);
   // console.log('fieldState.error ===', fieldState.error);
   // console.log('isEmptyValue ===', isEmptyValue);
+  console.log('validationMessage ===', validationMessage);
+  console.log('validationMessage[0].length > 0 ===', validationMessage[0].length > 0);
 
   const handleSetIsEyeOpened = () => {
     setIsEyeOpened(!isEyeOpened);
@@ -74,10 +76,11 @@ export const TextField: FC<TextFieldProps & UseControllerProps<FormTextField>> =
 
     field.onChange(event);
 
-    if (pathname !== Path.Authorization) {
-      validate(value, id, message, handleCheckmark, handleValidationMessage);
-      handleEmptyValue(value);
-    }
+    // if (pathname !== Path.Authorization) {
+    validate(value, id, message, handleCheckmark, handleValidationMessage);
+    // }
+
+    handleEmptyValue(value);
   };
 
   const handleBlur = (event: FocusEvent<HTMLInputElement>) => {
@@ -86,14 +89,16 @@ export const TextField: FC<TextFieldProps & UseControllerProps<FormTextField>> =
 
     field.onBlur();
 
-    if (pathname !== Path.Authorization) {
-      validate(value, id, message, handleCheckmark, handleValidationMessage);
-      handleEmptyValue(value);
-    }
+    // if (pathname !== Path.Authorization) {
+    validate(value, id, message, handleCheckmark, handleValidationMessage);
+    // }
+
+    handleEmptyValue(value);
   };
 
   const inputClass = classNames('text-field__input', {
-    'text-field__input_error': (fieldState.error || isError) && pathname !== Path.Authorization,
+    // 'text-field__input_error': (fieldState.error || isError) && pathname !== Path.Authorization,
+    'text-field__input_error': fieldState.error || isError,
   });
   const messageClass = classNames('mark text-field__message info_large');
 
@@ -132,7 +137,7 @@ export const TextField: FC<TextFieldProps & UseControllerProps<FormTextField>> =
       </label>
       {type === TextFieldType.Password && isEyeVisible && (
         <div className='text-field__logo-wrapper'>
-          {isCheckmarkVisible && (
+          {isCheckmarkVisible && pathname !== Path.Authorization && (
             <Sprite
               id={SpriteId.Checkmark}
               className='text-field__logo text-field__logo_check'
@@ -148,7 +153,7 @@ export const TextField: FC<TextFieldProps & UseControllerProps<FormTextField>> =
         </div>
       )}
       <p className={messageClass} data-test-id={DataTestId.Hint}>
-        {validationMessage && pathname !== Path.Authorization && (
+        {validationMessage[0].length > 0 && (
           <HighLight
             className='color_negative'
             value={validationMessage}

@@ -1,3 +1,5 @@
+// import { TextFieldMessage } from 'components/text-field/text-field.types';
+
 import { AuthorizationState } from '../slices.types';
 
 export const AUTHORIZATION_REQUEST_WITH_INITIAL_DATA = {
@@ -25,6 +27,7 @@ export const AUTHORIZATION_RESPONSE_WITH_INITIAL_DATA = {
 export const initialState: AuthorizationState = {
   authorizationRequest: AUTHORIZATION_REQUEST_WITH_INITIAL_DATA,
   authorizationResponse: AUTHORIZATION_RESPONSE_WITH_INITIAL_DATA,
+  errorMessage: '',
   isAuth: false,
   isLoading: false,
   isError: false,

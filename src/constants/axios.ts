@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { getToken } from 'utils';
+import { TextFieldMessage } from 'components/text-field/text-field.types';
+import { CustomError, getToken } from 'utils';
 
 export enum API {
   BaseUrl = 'https://strapi.cleverland.by',
@@ -22,7 +23,7 @@ cleverlandConfig.interceptors.request.use(
     /* eslint-disable no-param-reassign */
     const token = getToken();
 
-    console.log(token);
+    console.log('token ===', token);
 
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
@@ -35,24 +36,13 @@ cleverlandConfig.interceptors.request.use(
 
 cleverlandConfig.interceptors.response.use(
   (response) => response,
-  async (error) => {
+  (error) => {
     console.log('error ===', error);
-    const originalRequest = error.config;
 
     if (error.response.status === 400) {
-      console.log('Неверный логин или пароль');
+      console.log('TextFieldMessage.WrongLoginOrPassword ===', TextFieldMessage.WrongLoginOrPassword);
+      throw new CustomError(TextFieldMessage.WrongLoginOrPassword);
     }
-
-    // if (error.response.status === 401 && error.config && !error.config._isRetry) {
-    //   originalRequest._isRetry = true;
-    //   try {
-    //     const response = await axios.get<AuthResponse>(`${API_URL}/refresh`, { withCredentials: true });
-    //     localStorage.setItem('token', response.data.accessToken);
-    //     return $api.request(originalRequest);
-    //   } catch (e) {
-    //     console.log('НЕ АВТОРИЗОВАН');
-    //   }
-    // }
 
     return Promise.reject(error);
   }

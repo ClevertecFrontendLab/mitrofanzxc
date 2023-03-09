@@ -23,6 +23,7 @@ export {
   authorizationRequestSuccess,
   authorizationRequestError,
   logout,
+  setErrorMessage,
 } from './authorization/authorization-slice';
 export {
   registrationRequest,

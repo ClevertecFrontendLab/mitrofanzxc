@@ -3,6 +3,7 @@ import { BookData, TCatalogData, TCategories } from 'constants/constants.types';
 import { CatalogView } from 'components/buttons/button-catalog-view/button-catalog-view.types';
 import { ButtonPrimaryTitle } from 'components/buttons/button-primary/button-primary.types';
 import { FormToastMessage, FormToastTitle } from 'components/form-toast/form-toast.types';
+import { TextFieldMessage } from 'components/text-field/text-field.types';
 import { ToastMessage, ToastType } from 'components/toast/toast.types';
 import { Sort } from 'utils/utils.types';
 
@@ -90,6 +91,7 @@ export type AuthorizationError = {
 export type AuthorizationState = {
   authorizationRequest: AuthorizationRequest;
   authorizationResponse: AuthorizationResponse;
+  errorMessage: string | TextFieldMessage;
   isAuth: boolean;
   isLoading: boolean;
   isError: boolean;

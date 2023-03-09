@@ -24,9 +24,10 @@ import { initialState } from './initial-state';
 import './authorization-page.scss';
 
 export const AuthorizationPage: FC = () => {
-  const { isError, isLoading, authorizationRequest: formData } = useAppSelector(authorizationSelector);
+  const { isError, isLoading, authorizationRequest: formData, errorMessage } = useAppSelector(authorizationSelector);
   const { handleSubmit, control } = useForm<FormTextField>(initialState);
   const dispatch = useAppDispatch();
+  console.log('errorMessage ===', errorMessage);
 
   const onSubmit = (data: FormTextField) => {
     console.log('FORM_DATA ===', data);
@@ -35,9 +36,9 @@ export const AuthorizationPage: FC = () => {
     }
   };
 
-  const onError = (error: FieldErrors) => {
-    console.log('FORM_ERRORS ===', error);
-  };
+  // const onError = (error: FieldErrors) => {
+  //   console.log('FORM_ERRORS ===', error);
+  // };
 
   const onRepeat = () => {
     dispatch(authorizationRequest({ identifier: formData.identifier, password: formData.password }));
@@ -48,7 +49,7 @@ export const AuthorizationPage: FC = () => {
   return (
     <Fragment>
       {isLoading && <Loader dataTestId={DataTestId.Loader} />}
-      {isError && <FormToast dataTestId={DataTestId.StatusBlock} onClick={onRepeat} />}
+      {/* {isError && <FormToast dataTestId={DataTestId.StatusBlock} onClick={onRepeat} />} */}
       {!isError && (
         <div className='registration-bg' data-test-id={DataTestId.Auth}>
           <h3 className='h3'>Cleverland</h3>
@@ -56,13 +57,13 @@ export const AuthorizationPage: FC = () => {
             <div className='registration__section'>
               <legend className='h4'>Вход в личный кабинет</legend>
             </div>
-            <form onSubmit={handleSubmit(onSubmit, onError)} data-test-id={DataTestId.AuthForm}>
+            <form onSubmit={handleSubmit(onSubmit)} data-test-id={DataTestId.AuthForm}>
               <fieldset className='registration__fieldset'>
                 <div className='registration__section'>
                   <TextField
                     control={control}
                     name={TextFieldId.Identifier}
-                    rules={{ required: true, pattern: REGEX_WITH_USERNAME }}
+                    rules={{ required: true }}
                     type={TextFieldType.Text}
                     id={TextFieldId.Identifier}
                     placeholder={TextFieldPlaceholder.Login}
@@ -72,11 +73,12 @@ export const AuthorizationPage: FC = () => {
                   <TextField
                     control={control}
                     name={TextFieldId.Password}
-                    rules={{ required: true, pattern: REGEX_WITH_PASSWORD }}
+                    rules={{ required: true }}
                     type={TextFieldType.Password}
                     id={TextFieldId.Password}
                     placeholder={TextFieldPlaceholder.Password}
-                    message={isError ? TextFieldMessage.WrongLoginOrPassword : TextFieldMessage.Password}
+                    // message={errorMessage ? TextFieldMessage.WrongLoginOrPassword : TextFieldMessage.Password}
+                    message={errorMessage ? TextFieldMessage.WrongLoginOrPassword : TextFieldMessage.EmptyField}
                     isError={isError}
                   />
                   <Link to={Path.ForgotPass} className='info_large'>
