@@ -5,6 +5,7 @@ export enum ButtonPrimaryType {
 }
 
 export enum ButtonPrimaryTitle {
+  BackToRegistration = 'Назад к регистрации',
   Book = 'Забронировать',
   Booked = 'Забронирована',
   BusyUntil = 'Занята до',

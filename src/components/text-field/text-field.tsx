@@ -20,7 +20,7 @@ export type TextFieldProps = {
   id: TextFieldId;
   placeholder: TextFieldPlaceholder;
   message: string | TextFieldMessage;
-  isError: boolean;
+  isError?: boolean;
 };
 
 export const TextField: FC<TextFieldProps & UseControllerProps<FormTextField>> = ({
@@ -105,7 +105,7 @@ export const TextField: FC<TextFieldProps & UseControllerProps<FormTextField>> =
 
   const inputClass = classNames('text-field__input', {
     // 'text-field__input_error': (fieldState.error || isError) && pathname !== Path.Authorization,
-    'text-field__input_error': fieldState.error || isError,
+    'text-field__input_error': fieldState.error || message === TextFieldMessage.WrongLoginOrPassword,
   });
   const messageClass = classNames('mark text-field__message info_large');
 

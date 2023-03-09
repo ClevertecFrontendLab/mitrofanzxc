@@ -47,13 +47,12 @@
   align-items: center;
   column-gap: 16px;
 
-  // Пока непонятно, надо ли это вообще будет, но на макете в ui kit присутствует
-  // &:hover {
-  //   .nav__profile {
-  //     top: 100%;
-  //     opacity: 1;
-  //   }
-  // }
+  &:hover {
+    .nav__profile {
+      top: 100%;
+      opacity: 1;
+    }
+  }
 
   @media (max-width: $breakpoint-lg-min) {
     display: none;

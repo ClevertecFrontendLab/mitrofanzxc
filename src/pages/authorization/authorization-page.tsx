@@ -1,9 +1,8 @@
 import { DataTestId } from 'constants/data-test-id';
 import { Path } from 'constants/path';
-import { REGEX_WITH_PASSWORD, REGEX_WITH_USERNAME } from 'constants/regex';
 
 import { FC, Fragment } from 'react';
-import { FieldErrors, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { ButtonLogin, ButtonPrimary, FormToast, Loader, TextField } from 'components';
 import { ButtonLoginTitle } from 'components/buttons/button-login/button-login.types';
@@ -36,10 +35,6 @@ export const AuthorizationPage: FC = () => {
     }
   };
 
-  // const onError = (error: FieldErrors) => {
-  //   console.log('FORM_ERRORS ===', error);
-  // };
-
   const onRepeat = () => {
     dispatch(authorizationRequest({ identifier: formData.identifier, password: formData.password }));
   };
@@ -68,7 +63,7 @@ export const AuthorizationPage: FC = () => {
                     id={TextFieldId.Identifier}
                     placeholder={TextFieldPlaceholder.Login}
                     message={errorMessage ? '' : TextFieldMessage.EmptyField}
-                    isError={isError}
+                    // isError={isError}
                   />
                   <TextField
                     control={control}
@@ -79,7 +74,7 @@ export const AuthorizationPage: FC = () => {
                     placeholder={TextFieldPlaceholder.Password}
                     // message={errorMessage ? TextFieldMessage.WrongLoginOrPassword : TextFieldMessage.Password}
                     message={errorMessage ? TextFieldMessage.WrongLoginOrPassword : TextFieldMessage.EmptyField}
-                    isError={isError}
+                    // isError={isError}
                   />
                   <Link to={Path.ForgotPass} className='info_large'>
                     {errorMessage ? ButtonLoginTitle.Restore : ButtonLoginTitle.Forget}
