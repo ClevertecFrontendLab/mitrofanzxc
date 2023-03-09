@@ -19,7 +19,7 @@ export type TextFieldProps = {
   type: TextFieldType;
   id: TextFieldId;
   placeholder: TextFieldPlaceholder;
-  message: TextFieldMessage;
+  message: string | TextFieldMessage;
   isError: boolean;
 };
 
@@ -37,7 +37,7 @@ export const TextField: FC<TextFieldProps & UseControllerProps<FormTextField>> =
   const [isEyeVisible, setIsEyeVisible] = useState(false);
   const [isCheckmarkVisible, setIsCheckmarkVisible] = useState(false);
   const [validationMessage, setValidationMessage] = useState<string[]>(['']);
-  const [validationTitle, setValidationTitle] = useState(message);
+  const [validationTitle, setValidationTitle] = useState<string | TextFieldMessage>(message);
 
   const handleCheckmark = (value: boolean) => {
     setIsCheckmarkVisible(value);
@@ -52,7 +52,7 @@ export const TextField: FC<TextFieldProps & UseControllerProps<FormTextField>> =
   // console.log('fieldState ===', fieldState);
   // console.log('fieldState.error ===', fieldState.error);
   // console.log('isEmptyValue ===', isEmptyValue);
-  console.log('validationMessage ===', validationMessage);
+  // console.log('validationMessage ===', validationMessage);
   console.log('validationMessage[0].length > 0 ===', validationMessage[0].length > 0);
 
   const handleSetIsEyeOpened = () => {
@@ -61,8 +61,13 @@ export const TextField: FC<TextFieldProps & UseControllerProps<FormTextField>> =
 
   const handleEmptyValue = (value: string) => {
     if (value) {
-      setIsEyeVisible(true);
-      setValidationTitle(message);
+      if (pathname === Path.Authorization) {
+        setIsEyeVisible(true);
+        setValidationTitle('');
+      } else {
+        setIsEyeVisible(true);
+        setValidationTitle(message);
+      }
     } else {
       setIsEyeVisible(false);
       setValidationMessage([TextFieldMessage.EmptyField]);
@@ -75,10 +80,11 @@ export const TextField: FC<TextFieldProps & UseControllerProps<FormTextField>> =
     const { value } = target;
 
     field.onChange(event);
+    console.log('ON_CHAGE');
 
-    // if (pathname !== Path.Authorization) {
-    validate(value, id, message, handleCheckmark, handleValidationMessage);
-    // }
+    if (pathname !== Path.Authorization) {
+      validate(value, id, message, handleCheckmark, handleValidationMessage);
+    }
 
     handleEmptyValue(value);
   };
@@ -88,10 +94,11 @@ export const TextField: FC<TextFieldProps & UseControllerProps<FormTextField>> =
     const { value } = target;
 
     field.onBlur();
+    console.log('ON_BLUR');
 
-    // if (pathname !== Path.Authorization) {
-    validate(value, id, message, handleCheckmark, handleValidationMessage);
-    // }
+    if (pathname !== Path.Authorization) {
+      validate(value, id, message, handleCheckmark, handleValidationMessage);
+    }
 
     handleEmptyValue(value);
   };

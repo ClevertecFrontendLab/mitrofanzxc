@@ -30,6 +30,7 @@ function* authorizationRequestWorker(action: { payload: AuthorizationRequest; ty
     yield put(setErrorMessage(''));
     yield put(authorizationRequestSuccess(data));
   } catch (error) {
+    console.log('error instanceof CustomError ===', error instanceof CustomError);
     if (error instanceof CustomError) {
       yield put(setErrorMessage(TextFieldMessage.WrongLoginOrPassword));
     }

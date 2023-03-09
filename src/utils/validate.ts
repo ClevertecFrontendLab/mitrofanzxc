@@ -12,7 +12,7 @@ import { TextFieldId, TextFieldMessage } from 'components/text-field/text-field.
 export const validate = (
   value: string,
   id: TextFieldId,
-  message: TextFieldMessage,
+  message: string | TextFieldMessage,
   handleCheckmark: (value: boolean) => void,
   handleValidationMessage: (value: string[]) => void
 ) => {

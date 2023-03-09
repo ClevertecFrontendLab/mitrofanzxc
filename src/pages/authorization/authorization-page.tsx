@@ -49,7 +49,7 @@ export const AuthorizationPage: FC = () => {
   return (
     <Fragment>
       {isLoading && <Loader dataTestId={DataTestId.Loader} />}
-      {/* {isError && <FormToast dataTestId={DataTestId.StatusBlock} onClick={onRepeat} />} */}
+      {isError && <FormToast dataTestId={DataTestId.StatusBlock} onClick={onRepeat} />}
       {!isError && (
         <div className='registration-bg' data-test-id={DataTestId.Auth}>
           <h3 className='h3'>Cleverland</h3>
@@ -67,7 +67,7 @@ export const AuthorizationPage: FC = () => {
                     type={TextFieldType.Text}
                     id={TextFieldId.Identifier}
                     placeholder={TextFieldPlaceholder.Login}
-                    message={TextFieldMessage.EmptyField}
+                    message={errorMessage ? '' : TextFieldMessage.EmptyField}
                     isError={isError}
                   />
                   <TextField
@@ -82,7 +82,7 @@ export const AuthorizationPage: FC = () => {
                     isError={isError}
                   />
                   <Link to={Path.ForgotPass} className='info_large'>
-                    {isError ? ButtonLoginTitle.Restore : ButtonLoginTitle.Forget}
+                    {errorMessage ? ButtonLoginTitle.Restore : ButtonLoginTitle.Forget}
                   </Link>
                 </div>
                 <div className='registration__section'>
