@@ -1,3 +1,4 @@
+export { clearLocalStorage } from './clear-local-storage';
 export { convertToDate } from './convert-to-date';
 export { CustomError } from './custom-error';
 export { divideTableData } from './divide-table-data';
@@ -11,7 +12,7 @@ export { handleSearch } from './handle-search';
 export { handleSort } from './handle-sort';
 export { handleStatus } from './handle-status';
 export { handleTitle } from './handle-title';
-export { removeLocalStorage } from './remove-local-storage';
+export { removeFromLocalStorage } from './remove-from-local-storage';
 export { setLocalStorage } from './set-local-storage';
 export { sortData } from './sort-data';
 export { translateCategoryTitle } from './translate-category-title';

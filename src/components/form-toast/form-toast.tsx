@@ -17,7 +17,7 @@ export const FormToast: FC<FormToastProps> = ({ dataTestId, onClick }) => {
   const { formToastTitle, formToastMessage, formToastButton } = useAppSelector(formToastSelector);
 
   return (
-    <div className='registration-bg'>
+    <div className='registration-bg' data-test-id={DataTestId.Auth}>
       <h3 className='h3'>Cleverland</h3>
       <div className='registration form-toast' data-test-id={dataTestId}>
         <h4 className='h4'>{formToastTitle}</h4>

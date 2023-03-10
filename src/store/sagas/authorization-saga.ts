@@ -26,7 +26,7 @@ function* authorizationRequestWorker(action: { payload: AuthorizationRequest; ty
     );
 
     console.log('response ===', data);
-    setLocalStorage(LocalStorage.Token, data.jwt);
+    yield setLocalStorage(LocalStorage.Token, data.jwt);
     yield put(setErrorMessage(''));
     yield put(authorizationRequestSuccess(data));
   } catch (error) {

@@ -1,5 +1,5 @@
 import { LocalStorage } from 'constants/local-storage';
 
-export const removeLocalStorage = (key: LocalStorage) => {
+export const removeFromLocalStorage = (key: LocalStorage) => {
   localStorage.removeItem(key);
 };

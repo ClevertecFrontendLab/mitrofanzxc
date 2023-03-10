@@ -1,5 +1,4 @@
 import { DataTestId } from 'constants/data-test-id';
-import { LocalStorage } from 'constants/local-storage';
 import { Path } from 'constants/path';
 import { TITLE_LIST } from 'constants/title-list';
 
@@ -11,7 +10,7 @@ import { SpriteId } from 'components/sprite/sprite.types';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { authorizationSelector } from 'store/selectors';
 import { logout } from 'store/slices';
-import { removeLocalStorage, translateCategoryTitle } from 'utils';
+import { clearLocalStorage, translateCategoryTitle } from 'utils';
 import { Language } from 'utils/utils.types';
 
 import './header.scss';
@@ -26,7 +25,7 @@ export const Header: FC = () => {
 
   const handleLogout = () => {
     dispatch(logout());
-    removeLocalStorage(LocalStorage.Token);
+    clearLocalStorage();
   };
 
   return (

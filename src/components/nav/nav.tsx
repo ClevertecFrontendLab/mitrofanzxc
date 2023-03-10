@@ -1,5 +1,4 @@
 import { DataTestId } from 'constants/data-test-id';
-import { LocalStorage } from 'constants/local-storage';
 import { Path } from 'constants/path';
 
 import { FC, useState } from 'react';
@@ -10,7 +9,7 @@ import { SpriteId } from 'components/sprite/sprite.types';
 import { useAppDispatch, useAppSelector, useMatchScreenWidth } from 'hooks';
 import { catalogSelector, categoriesSelector, mobileMenuSelector } from 'store/selectors';
 import { closeAccordionMenu, closeMobileMenu, closeToast, logout, toggleAccordionMenu } from 'store/slices';
-import { getAmountOfBooks, removeLocalStorage } from 'utils';
+import { clearLocalStorage, getAmountOfBooks } from 'utils';
 
 import './nav.scss';
 
@@ -32,7 +31,7 @@ export const Nav: FC = () => {
   const handleLogout = () => {
     dispatch(logout());
     dispatch(closeMobileMenu());
-    removeLocalStorage(LocalStorage.Token);
+    clearLocalStorage();
   };
 
   const handleTerms = () => {
