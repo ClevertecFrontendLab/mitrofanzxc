@@ -23,7 +23,7 @@ cleverlandConfig.interceptors.request.use(
     /* eslint-disable no-param-reassign */
     const token = getToken();
 
-    console.log('token ===', token);
+    config.headers = config.headers ?? {};
 
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
@@ -40,7 +40,6 @@ cleverlandConfig.interceptors.response.use(
     console.log('error ===', error);
 
     if (error.response.status === 400) {
-      console.log('TextFieldMessage.WrongLoginOrPassword ===', TextFieldMessage.WrongLoginOrPassword);
       throw new CustomError(TextFieldMessage.WrongLoginOrPassword);
     }
 

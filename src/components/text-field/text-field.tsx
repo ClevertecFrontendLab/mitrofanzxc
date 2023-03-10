@@ -51,9 +51,10 @@ export const TextField: FC<TextFieldProps & UseControllerProps<FormTextField>> =
   // console.log('field.value ===', field.value);
   // console.log('fieldState ===', fieldState);
   // console.log('fieldState.error ===', fieldState.error);
-  // console.log('isEmptyValue ===', isEmptyValue);
   // console.log('validationMessage ===', validationMessage);
-  console.log('validationMessage[0].length > 0 ===', validationMessage[0].length > 0);
+  // console.log('validationMessage[0].length > 0 ===', validationMessage[0].length > 0);
+  // console.log('validationTitle ===', validationTitle);
+  // console.log('message ===', message);
 
   const handleSetIsEyeOpened = () => {
     setIsEyeOpened(!isEyeOpened);
@@ -80,7 +81,6 @@ export const TextField: FC<TextFieldProps & UseControllerProps<FormTextField>> =
     const { value } = target;
 
     field.onChange(event);
-    console.log('ON_CHAGE');
 
     if (pathname !== Path.Authorization) {
       validate(value, id, message, handleCheckmark, handleValidationMessage);
@@ -94,7 +94,6 @@ export const TextField: FC<TextFieldProps & UseControllerProps<FormTextField>> =
     const { value } = target;
 
     field.onBlur();
-    console.log('ON_BLUR');
 
     if (pathname !== Path.Authorization) {
       validate(value, id, message, handleCheckmark, handleValidationMessage);
@@ -104,10 +103,17 @@ export const TextField: FC<TextFieldProps & UseControllerProps<FormTextField>> =
   };
 
   const inputClass = classNames('text-field__input', {
-    // 'text-field__input_error': (fieldState.error || isError) && pathname !== Path.Authorization,
-    'text-field__input_error': fieldState.error || message === TextFieldMessage.WrongLoginOrPassword,
+    'text-field__input_error':
+      // (fieldState.error && validationTitle === TextFieldMessage.EmptyField) ||
+      // message === TextFieldMessage.WrongLoginOrPassword,
+      !field.value && validationMessage[0].length > 0,
   });
-  const messageClass = classNames('mark text-field__message info_large');
+  const messageClass = classNames('mark text-field__message info_large', {
+    color_negative:
+      // (fieldState.error && validationTitle === TextFieldMessage.EmptyField) ||
+      // message === TextFieldMessage.WrongLoginOrPassword,
+      !field.value && validationMessage[0].length > 0,
+  });
 
   return (
     <div className='text-field'>

@@ -4,7 +4,7 @@ import { Path } from 'constants/path';
 import { createContext, Dispatch, FC, Fragment, SetStateAction, useMemo, useState } from 'react';
 import { Catalog, CatalogMenu, Loader, Toast } from 'components';
 import { useAppSelector, useRequest, useUnauth } from 'hooks';
-import { catalogSelector, categoriesSelector, toastSelector } from 'store/selectors';
+import { authorizationSelector, catalogSelector, categoriesSelector, toastSelector } from 'store/selectors';
 import { Connection } from 'store/slices/slices.types';
 
 export type Context = {
@@ -22,6 +22,7 @@ export const ContextMainPage = createContext<Context>({
 });
 
 export const MainPage: FC = () => {
+  const { isAuth } = useAppSelector(authorizationSelector);
   const { isLoading: isLoadingCatalog, isError: isErrorCatalog } = useAppSelector(catalogSelector);
   const { isLoading: isLoadingCategories, isError: isErrorCategories } = useAppSelector(categoriesSelector);
   const { isToastOpen } = useAppSelector(toastSelector);
@@ -37,7 +38,7 @@ export const MainPage: FC = () => {
     [inputSearchValue, isInputSearchOpen]
   );
 
-  useUnauth(Path.Authorization);
+  useUnauth(Path.Authorization, isAuth);
   useRequest({ connectionType: Connection.Catalog });
 
   return (

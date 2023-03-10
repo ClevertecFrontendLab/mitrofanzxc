@@ -6,12 +6,15 @@ import { ButtonPrimary, Sprite, TextField } from 'components';
 import { ButtonPrimaryTitle, ButtonPrimaryType } from 'components/buttons/button-primary/button-primary.types';
 import { SpriteId } from 'components/sprite/sprite.types';
 import { TextFieldId, TextFieldPlaceholder, TextFieldType } from 'components/text-field/text-field.types';
-import { useUnauth } from 'hooks';
+import { useAppSelector, useUnauth } from 'hooks';
+import { authorizationSelector } from 'store/selectors';
 
 import './profile-page.scss';
 
 export const ProfilePage: FC = () => {
-  useUnauth(Path.Authorization);
+  const { isAuth } = useAppSelector(authorizationSelector);
+
+  useUnauth(Path.Authorization, isAuth);
 
   return (
     <section className='profile-page'>

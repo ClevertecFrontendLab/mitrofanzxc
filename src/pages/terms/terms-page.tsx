@@ -1,7 +1,8 @@
 import { Path } from 'constants/path';
 
 import { FC } from 'react';
-import { useUnauth } from 'hooks';
+import { useAppSelector, useUnauth } from 'hooks';
+import { authorizationSelector } from 'store/selectors';
 
 import { ContentView } from './terms-page.types';
 
@@ -12,7 +13,9 @@ export type TermsPageProps = {
 };
 
 export const TermsPage: FC<TermsPageProps> = ({ contentView }) => {
-  useUnauth(Path.Authorization);
+  const { isAuth } = useAppSelector(authorizationSelector);
+
+  useUnauth(Path.Authorization, isAuth);
 
   return (
     <section className='terms-page'>

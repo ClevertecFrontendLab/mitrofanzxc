@@ -15,14 +15,16 @@ import {
   TextFieldType,
 } from 'components/text-field/text-field.types';
 import { useAppDispatch, useAppSelector, useAuth } from 'hooks';
-import { registrationSelector } from 'store/selectors';
+import { authorizationSelector, registrationSelector } from 'store/selectors';
 import { registrationRequest } from 'store/slices';
 import { REGISTRATION_REQUEST_WITH_INITIAL_DATA } from 'store/slices/registration/initial-state';
 import { RegistrationRequest } from 'store/slices/slices.types';
+import { getToken } from 'utils';
 
 import { initialState } from './initial-state';
 
 export const RegistrationPage: FC = () => {
+  const { isAuth } = useAppSelector(authorizationSelector);
   const { isError, isLoading } = useAppSelector(registrationSelector);
   const { handleSubmit, control } = useForm<FormTextField>(initialState);
   const [step, setStep] = useState(1);
@@ -57,7 +59,9 @@ export const RegistrationPage: FC = () => {
   const buttonPrimaryTitle =
     step === 1 ? ButtonPrimaryTitle.NextStep : step === 2 ? ButtonPrimaryTitle.LastStep : ButtonPrimaryTitle.Register;
 
-  useAuth(Path.Main);
+  // const isAuth = getToken();
+
+  useAuth(Path.Main, isAuth);
 
   return (
     <Fragment>

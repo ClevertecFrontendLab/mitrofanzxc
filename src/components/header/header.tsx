@@ -25,8 +25,8 @@ export const Header: FC = () => {
   const finalPathname = indexOfSecondSlash === -1 ? pathname.slice(1) : pathname.slice(1, indexOfSecondSlash);
 
   const handleLogout = () => {
-    removeLocalStorage(LocalStorage.Token);
     dispatch(logout());
+    removeLocalStorage(LocalStorage.Token);
   };
 
   return (

@@ -16,12 +16,14 @@ import {
   TextFieldType,
 } from 'components/text-field/text-field.types';
 import { useAppDispatch, useAppSelector, useAuth, useRedirect } from 'hooks';
-import { forgotPassSelector } from 'store/selectors';
+import { authorizationSelector, forgotPassSelector } from 'store/selectors';
+import { getToken } from 'utils';
 
 import { initialState } from './initial-state';
 
 export const ForgotPassPage: FC = () => {
   const { search } = useLocation();
+  const { isAuth } = useAppSelector(authorizationSelector);
   const { isError, isLoading, isLetterReceived, isPasswordRecovery } = useAppSelector(forgotPassSelector);
   const { handleSubmit, control } = useForm<FormTextField>(initialState);
   const dispatch = useAppDispatch();
@@ -34,7 +36,9 @@ export const ForgotPassPage: FC = () => {
     console.log('FORM_ERRORS ===', error);
   };
 
-  useAuth(Path.Main);
+  // const isAuth = getToken();
+
+  useAuth(Path.Main, isAuth);
   useRedirect({ path: Path.ForgotPass, searchParams: search });
 
   return (

@@ -30,9 +30,9 @@ export const Nav: FC = () => {
   };
 
   const handleLogout = () => {
-    removeLocalStorage(LocalStorage.Token);
     dispatch(logout());
     dispatch(closeMobileMenu());
+    removeLocalStorage(LocalStorage.Token);
   };
 
   const handleTerms = () => {

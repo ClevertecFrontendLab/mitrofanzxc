@@ -7,15 +7,16 @@ import classNames from 'classnames';
 import { BreadCrumbs, ButtonPrimary, Loader, Nav, RateBook, Rating, Review, Slider, Table, Toast } from 'components';
 import { ButtonPrimaryTitle, ButtonPrimaryType } from 'components/buttons/button-primary/button-primary.types';
 import { useAppSelector, useAuth, useBodyOverflow, useRequest } from 'hooks';
-import { bookSelector, categoriesSelector } from 'store/selectors';
+import { authorizationSelector, bookSelector, categoriesSelector } from 'store/selectors';
 import { Connection } from 'store/slices/slices.types';
-import { convertToDate, divideTableData, handleAuthors, handleStatus } from 'utils';
+import { convertToDate, divideTableData, getToken, handleAuthors, handleStatus } from 'utils';
 import { DateType, Part, Status } from 'utils/utils.types';
 
 import './book-page.scss';
 
 export const BookPage: FC = () => {
   const { category, bookId } = useParams();
+  const { isAuth } = useAppSelector(authorizationSelector);
   const { bookData, isLoading: isLoadingBook, isError: isErrorBook } = useAppSelector(bookSelector);
   const { isLoading: isLoadingCategories, isError: isErrorCategories } = useAppSelector(categoriesSelector);
   const [isRateBookOpen, setIsRateBookOpen] = useState<boolean>(false);
@@ -49,7 +50,9 @@ export const BookPage: FC = () => {
     'review-list_active': isAccordionReviewsOpen,
   });
 
-  useAuth(Path.Authorization);
+  // const isAuth = getToken();
+
+  useAuth(Path.Authorization, isAuth);
 
   return (
     <section>
