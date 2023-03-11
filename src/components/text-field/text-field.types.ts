@@ -40,6 +40,7 @@ export enum TextFieldMessage {
   PasswordCharaters = 'не менее 8 символов',
   PasswordCapitalLetter = 'заглавной буквой',
   PasswordDigit = 'цифрой',
+  PasswordMismatch = 'Пароли не совпадают',
   Phone = 'В формате +375 (xx) xxx-xx-xx',
   Email = 'На это email будет отправлено письмо с инструкциями по восстановлению пароля',
   EmailError = 'Введите корректный e-mail',

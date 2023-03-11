@@ -15,7 +15,7 @@ import {
   TextFieldType,
 } from 'components/text-field/text-field.types';
 import { useAppDispatch, useAppSelector, useAuth } from 'hooks';
-import { authorizationSelector } from 'store/selectors';
+import { authorizationSelector, formToastSelector } from 'store/selectors';
 import { authorizationRequest } from 'store/slices';
 
 import { initialState } from './initial-state';
@@ -23,19 +23,15 @@ import { initialState } from './initial-state';
 import './authorization-page.scss';
 
 export const AuthorizationPage: FC = () => {
-  const {
-    isError,
-    isLoading,
-    authorizationRequest: formData,
-    errorMessage,
-    isAuth,
-  } = useAppSelector(authorizationSelector);
+  const { isError, isLoading, authorizationRequest: formData, isAuth } = useAppSelector(authorizationSelector);
+  const { errorMessage } = useAppSelector(formToastSelector);
   const { handleSubmit, control } = useForm<FormTextField>(initialState);
   const dispatch = useAppDispatch();
-  // console.log('errorMessage ===', errorMessage);
+
+  console.log('errorMessage ===', errorMessage);
 
   const onSubmit = (data: FormTextField) => {
-    // console.log('FORM_DATA ===', data);
+    console.log('AUTHORIZATION_FORM_DATA ===', data);
     if (data.identifier && data.password) {
       dispatch(authorizationRequest({ identifier: data.identifier, password: data.password }));
     }

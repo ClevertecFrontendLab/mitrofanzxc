@@ -2,6 +2,7 @@ export enum ButtonPrimaryType {
   Primary = 'primary',
   Secondary = 'secondary',
   Submit = 'submit',
+  Link = 'link',
 }
 
 export enum ButtonPrimaryTitle {

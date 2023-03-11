@@ -2,7 +2,7 @@ import { DataTestId } from 'constants/data-test-id';
 import { Path } from 'constants/path';
 import { MASK_PHONE } from 'constants/regex';
 
-import { ChangeEvent, FC, FocusEvent, useState } from 'react';
+import { ChangeEvent, FC, FocusEvent, useEffect, useState } from 'react';
 import { useController, UseControllerProps } from 'react-hook-form';
 import { useLocation } from 'react-router-dom';
 import MaskedInput from 'react-text-mask';
@@ -38,6 +38,7 @@ export const TextField: FC<TextFieldProps & UseControllerProps<FormTextField>> =
   const [isCheckmarkVisible, setIsCheckmarkVisible] = useState(false);
   const [validationMessage, setValidationMessage] = useState<string[]>(['']);
   const [validationTitle, setValidationTitle] = useState<string | TextFieldMessage>(message);
+  console.log('message in textfield ===', message);
 
   const handleCheckmark = (value: boolean) => {
     setIsCheckmarkVisible(value);
@@ -51,9 +52,9 @@ export const TextField: FC<TextFieldProps & UseControllerProps<FormTextField>> =
   // console.log('field.value ===', field.value);
   // console.log('fieldState ===', fieldState);
   // console.log('fieldState.error ===', fieldState.error);
-  // console.log('validationMessage ===', validationMessage);
+  console.log('validationMessage ===', validationMessage);
   // console.log('validationMessage[0].length > 0 ===', validationMessage[0].length > 0);
-  // console.log('validationTitle ===', validationTitle);
+  console.log('validationTitle ===', validationTitle);
   // console.log('message ===', message);
 
   const handleSetIsEyeOpened = () => {
@@ -103,17 +104,19 @@ export const TextField: FC<TextFieldProps & UseControllerProps<FormTextField>> =
   };
 
   const inputClass = classNames('text-field__input', {
-    'text-field__input_error':
-      // (fieldState.error && validationTitle === TextFieldMessage.EmptyField) ||
-      // message === TextFieldMessage.WrongLoginOrPassword,
-      !field.value && validationMessage[0].length > 0,
+    'text-field__input_error': !field.value && validationMessage[0].length > 0,
   });
   const messageClass = classNames('mark text-field__message info_large', {
     color_negative:
-      // (fieldState.error && validationTitle === TextFieldMessage.EmptyField) ||
-      // message === TextFieldMessage.WrongLoginOrPassword,
-      !field.value && validationMessage[0].length > 0,
+      (!field.value && validationMessage[0].length > 0) || message === TextFieldMessage.WrongLoginOrPassword,
   });
+
+  useEffect(() => {
+    if (message === TextFieldMessage.WrongLoginOrPassword) {
+      setValidationMessage([TextFieldMessage.WrongLoginOrPassword]);
+      setValidationTitle(TextFieldMessage.WrongLoginOrPassword);
+    }
+  }, [message]);
 
   return (
     <div className='text-field'>

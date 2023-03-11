@@ -46,8 +46,9 @@ export type ToastState = {
 export type FormToastState = {
   formToastTitle: FormToastTitle;
   formToastMessage: FormToastMessage;
-  formToastButton: ButtonPrimaryTitle;
+  formToastButton: ButtonPrimaryTitle | null;
   isFormToastOpen: boolean;
+  errorMessage: string | TextFieldMessage;
 };
 
 export type CategoriesState = {
@@ -91,7 +92,6 @@ export type AuthorizationError = {
 export type AuthorizationState = {
   authorizationRequest: AuthorizationRequest;
   authorizationResponse: AuthorizationResponse;
-  errorMessage: string | TextFieldMessage;
   isAuth: boolean;
   isLoading: boolean;
   isError: boolean;
@@ -138,6 +138,7 @@ export type RegistrationState = {
   registrationResponse: RegistrationResponse;
   isLoading: boolean;
   isError: boolean;
+  isSuccess: boolean;
 };
 
 export type PasswordResetRequest = {

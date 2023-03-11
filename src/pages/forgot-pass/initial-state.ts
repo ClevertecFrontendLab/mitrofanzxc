@@ -1,17 +1,29 @@
 import { ValidationMode } from 'react-hook-form';
 
-type InitialState = {
+type InitialStateEmail = {
   defaultValues?: {
     email?: string;
+  };
+  mode?: keyof ValidationMode;
+};
+
+type InitialStatePassword = {
+  defaultValues?: {
     password?: string;
     passwordConfirmation?: string;
   };
   mode?: keyof ValidationMode;
 };
 
-export const initialState: InitialState = {
+export const initialStateEmail: InitialStateEmail = {
   defaultValues: {
     email: '',
+  },
+  mode: 'onChange',
+};
+
+export const initialStatePassword: InitialStatePassword = {
+  defaultValues: {
     password: '',
     passwordConfirmation: '',
   },

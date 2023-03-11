@@ -29,7 +29,9 @@ export const HighLight: FC<HighLightProps> = ({ value, title, className, dataTes
             return (
               <Fragment key={uuidv4()}>
                 {nonBoldText}
-                <mark className={className}>{matchValue[index]}</mark>
+                <span className={className}>
+                  <mark className={className}>{matchValue[index]}</mark>
+                </span>
               </Fragment>
             );
           }

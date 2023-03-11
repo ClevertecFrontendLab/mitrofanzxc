@@ -27,6 +27,7 @@ function* registrationRequestWorker(action: { payload: RegistrationRequest; type
 
     yield console.log('response ===', data);
     yield setLocalStorage(LocalStorage.Token, data.jwt);
+    yield put(setErrorMessage(''));
     yield put(
       setFormToast({
         title: FormToastTitle.RegistrationSuccess,
@@ -38,6 +39,7 @@ function* registrationRequestWorker(action: { payload: RegistrationRequest; type
   } catch (error) {
     console.log('error instanceof CustomError ===', error instanceof CustomError);
     if (error instanceof CustomError) {
+      yield put(registrationRequestError());
       yield put(
         setFormToast({
           title: FormToastTitle.RegistrationError,
@@ -45,9 +47,7 @@ function* registrationRequestWorker(action: { payload: RegistrationRequest; type
           button: ButtonPrimaryTitle.BackToRegistration,
         })
       );
-    }
-
-    if (!(error instanceof CustomError)) {
+    } else {
       yield put(registrationRequestError());
       yield put(
         setFormToast({

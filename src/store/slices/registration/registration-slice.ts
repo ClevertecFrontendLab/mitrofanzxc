@@ -19,18 +19,21 @@ export const registrationSlice = createSlice({
       state.registrationResponse = REGISTRATION_RESPONSE_WITH_INITIAL_DATA;
       state.isLoading = true;
       state.isError = false;
+      state.isSuccess = false;
     },
     registrationRequestSuccess: (state, action: PayloadAction<RegistrationResponse>) => {
       state.registrationRequest = REGISTRATION_REQUEST_WITH_INITIAL_DATA;
       state.registrationResponse = action.payload;
       state.isLoading = false;
       state.isError = false;
+      state.isSuccess = true;
     },
     registrationRequestError: (state) => {
       state.registrationRequest = REGISTRATION_REQUEST_WITH_INITIAL_DATA;
       state.registrationResponse = REGISTRATION_RESPONSE_WITH_INITIAL_DATA;
       state.isLoading = false;
       state.isError = true;
+      state.isSuccess = false;
     },
   },
 });

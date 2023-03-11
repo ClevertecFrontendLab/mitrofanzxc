@@ -1,6 +1,5 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
-import { TextFieldMessage } from 'components/text-field/text-field.types';
 
 import { AuthorizationRequest, AuthorizationResponse } from '../slices.types';
 
@@ -18,7 +17,6 @@ export const authorizationSlice = createSlice({
     authorizationRequest: (state, action: PayloadAction<AuthorizationRequest>) => {
       state.authorizationRequest = action.payload;
       state.authorizationResponse = AUTHORIZATION_RESPONSE_WITH_INITIAL_DATA;
-      state.errorMessage = '';
       state.isAuth = false;
       state.isLoading = true;
       state.isError = false;
@@ -26,7 +24,6 @@ export const authorizationSlice = createSlice({
     authorizationRequestSuccess: (state, action: PayloadAction<AuthorizationResponse>) => {
       state.authorizationRequest = AUTHORIZATION_REQUEST_WITH_INITIAL_DATA;
       state.authorizationResponse = action.payload;
-      state.errorMessage = '';
       state.isAuth = true;
       state.isLoading = false;
       state.isError = false;
@@ -34,7 +31,6 @@ export const authorizationSlice = createSlice({
     authorizationRequestError: (state) => {
       state.authorizationRequest = AUTHORIZATION_REQUEST_WITH_INITIAL_DATA;
       state.authorizationResponse = AUTHORIZATION_RESPONSE_WITH_INITIAL_DATA;
-      state.errorMessage = '';
       state.isAuth = false;
       state.isLoading = false;
       state.isError = true;
@@ -42,15 +38,6 @@ export const authorizationSlice = createSlice({
     logout: (state) => {
       state.authorizationRequest = AUTHORIZATION_REQUEST_WITH_INITIAL_DATA;
       state.authorizationResponse = AUTHORIZATION_RESPONSE_WITH_INITIAL_DATA;
-      state.errorMessage = '';
-      state.isAuth = false;
-      state.isLoading = false;
-      state.isError = false;
-    },
-    setErrorMessage: (state, action: PayloadAction<string | TextFieldMessage>) => {
-      state.authorizationRequest = AUTHORIZATION_REQUEST_WITH_INITIAL_DATA;
-      state.authorizationResponse = AUTHORIZATION_RESPONSE_WITH_INITIAL_DATA;
-      state.errorMessage = action.payload;
       state.isAuth = false;
       state.isLoading = false;
       state.isError = false;
@@ -58,7 +45,7 @@ export const authorizationSlice = createSlice({
   },
 });
 
-export const { authorizationRequest, authorizationRequestSuccess, authorizationRequestError, logout, setErrorMessage } =
+export const { authorizationRequest, authorizationRequestSuccess, authorizationRequestError, logout } =
   authorizationSlice.actions;
 /* eslint-disable-next-line import/no-default-export */
 export default authorizationSlice.reducer;

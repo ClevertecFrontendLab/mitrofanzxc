@@ -19,13 +19,12 @@ import { authorizationSelector, registrationSelector } from 'store/selectors';
 import { registrationRequest } from 'store/slices';
 import { REGISTRATION_REQUEST_WITH_INITIAL_DATA } from 'store/slices/registration/initial-state';
 import { RegistrationRequest } from 'store/slices/slices.types';
-import { getToken } from 'utils';
 
 import { initialState } from './initial-state';
 
 export const RegistrationPage: FC = () => {
   const { isAuth } = useAppSelector(authorizationSelector);
-  const { isError, isLoading } = useAppSelector(registrationSelector);
+  const { isError, isLoading, isSuccess } = useAppSelector(registrationSelector);
   const { handleSubmit, control } = useForm<FormTextField>(initialState);
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState<RegistrationRequest>(REGISTRATION_REQUEST_WITH_INITIAL_DATA);
@@ -56,18 +55,20 @@ export const RegistrationPage: FC = () => {
     setIsButtonDisabled(true);
   };
 
+  const onRepeat = () => {
+    dispatch(registrationRequest(formData));
+  };
+
   const buttonPrimaryTitle =
     step === 1 ? ButtonPrimaryTitle.NextStep : step === 2 ? ButtonPrimaryTitle.LastStep : ButtonPrimaryTitle.Register;
-
-  // const isAuth = getToken();
 
   useAuth(Path.Main, isAuth);
 
   return (
     <Fragment>
       {isLoading && <Loader dataTestId={DataTestId.Loader} />}
-      {isError && <FormToast dataTestId={DataTestId.StatusBlock} />}
-      {!isError && (
+      {(isError || isSuccess) && <FormToast dataTestId={DataTestId.StatusBlock} />}
+      {!isError && !isSuccess && (
         <div className='registration-bg' data-test-id={DataTestId.Auth}>
           <h3 className='h3'>Cleverland</h3>
           <form

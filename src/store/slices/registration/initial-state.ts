@@ -31,4 +31,5 @@ export const initialState: RegistrationState = {
   registrationResponse: REGISTRATION_RESPONSE_WITH_INITIAL_DATA,
   isLoading: false,
   isError: false,
+  isSuccess: false,
 };

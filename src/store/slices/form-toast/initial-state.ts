@@ -8,4 +8,5 @@ export const initialState: FormToastState = {
   formToastMessage: FormToastMessage.AuthorizationError,
   formToastButton: ButtonPrimaryTitle.Repeat,
   isFormToastOpen: false,
+  errorMessage: '',
 };

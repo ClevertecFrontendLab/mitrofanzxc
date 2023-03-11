@@ -23,7 +23,6 @@ export {
   authorizationRequestSuccess,
   authorizationRequestError,
   logout,
-  setErrorMessage,
 } from './authorization/authorization-slice';
 export {
   registrationRequest,
@@ -42,4 +41,4 @@ export {
   openNewPassword,
   openPasswordRecovery,
 } from './forgot-pass/forgot-pass-slice';
-export { closeFormToast, setFormToast } from './form-toast/form-toast-slice';
+export { closeFormToast, setFormToast, setErrorMessage } from './form-toast/form-toast-slice';

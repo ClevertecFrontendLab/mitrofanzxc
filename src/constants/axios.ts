@@ -18,6 +18,8 @@ export const cleverlandConfig = axios.create({
   withCredentials: true,
 });
 
+cleverlandConfig.defaults.headers.common.Authorization = getToken();
+
 cleverlandConfig.interceptors.request.use(
   (config) => {
     /* eslint-disable no-param-reassign */
@@ -26,7 +28,7 @@ cleverlandConfig.interceptors.request.use(
     config.headers = config.headers ?? {};
 
     if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
+      config.headers.Authorization = token;
     }
 
     return config;
@@ -39,7 +41,7 @@ cleverlandConfig.interceptors.response.use(
   (error) => {
     console.log('error ===', error);
 
-    if (error.response.status === 400) {
+    if (error.response.status === 400 || error.response.status === 500) {
       throw new CustomError(TextFieldMessage.WrongLoginOrPassword);
     }
 

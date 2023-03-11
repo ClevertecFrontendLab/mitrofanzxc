@@ -15,31 +15,49 @@ import {
   TextFieldPlaceholder,
   TextFieldType,
 } from 'components/text-field/text-field.types';
-import { useAppDispatch, useAppSelector, useAuth, useRedirect } from 'hooks';
-import { authorizationSelector, forgotPassSelector } from 'store/selectors';
-import { getToken } from 'utils';
+import { useAppDispatch, useAppSelector, useAuth } from 'hooks';
+import { authorizationSelector, forgotPassSelector, formToastSelector } from 'store/selectors';
+import { passwordRecoveryRequest, passwordResetRequest } from 'store/slices';
 
-import { initialState } from './initial-state';
+import { initialStateEmail, initialStatePassword } from './initial-state';
 
 export const ForgotPassPage: FC = () => {
   const { search } = useLocation();
   const { isAuth } = useAppSelector(authorizationSelector);
   const { isError, isLoading, isLetterReceived, isPasswordRecovery } = useAppSelector(forgotPassSelector);
-  const { handleSubmit, control } = useForm<FormTextField>(initialState);
+  const { errorMessage } = useAppSelector(formToastSelector);
+  const { handleSubmit: handleSubmitEmail, control: controlEmail } = useForm<FormTextField>(initialStateEmail);
+  const { handleSubmit: handleSubmitPassword, control: controlPassword } = useForm<FormTextField>(initialStatePassword);
   const dispatch = useAppDispatch();
 
-  const onSubmit = (data: FormTextField) => {
-    console.log('FORM_DATA ===', data);
+  const onSubmitEmail = (data: FormTextField) => {
+    console.log('EMAIL_FORM_DATA ===', data);
+    const { email } = data;
+
+    if (email) {
+      dispatch(passwordResetRequest({ email }));
+    }
   };
 
-  const onError = (error: FieldErrors<FormTextField>) => {
-    console.log('FORM_ERRORS ===', error);
+  const onErrorEmail = (error: FieldErrors<FormTextField>) => {
+    console.log('EMAIL_FORM_ERRORS ===', error);
   };
 
-  // const isAuth = getToken();
+  const onSubmitPassword = (data: FormTextField) => {
+    console.log('PASSWORD_FORM_DATA ===', data);
+    const { password, passwordConfirmation } = data;
+    const code = search.slice(6);
+
+    if (password === passwordConfirmation && password && passwordConfirmation) {
+      dispatch(passwordRecoveryRequest({ password, passwordConfirmation, code }));
+    }
+  };
+
+  const onErrorPassword = (error: FieldErrors<FormTextField>) => {
+    console.log('PASSWORD_FORM_ERRORS ===', error);
+  };
 
   useAuth(Path.Main, isAuth);
-  useRedirect({ path: Path.ForgotPass, searchParams: search });
 
   return (
     <Fragment>
@@ -52,7 +70,7 @@ export const ForgotPassPage: FC = () => {
           {isPasswordRecovery && (
             <form
               className='registration'
-              onSubmit={handleSubmit(onSubmit, onError)}
+              onSubmit={handleSubmitEmail(onSubmitEmail, onErrorEmail)}
               data-test-id={DataTestId.SendEmailForm}
             >
               <fieldset className='registration__fieldset'>
@@ -62,13 +80,13 @@ export const ForgotPassPage: FC = () => {
                 </div>
                 <div className='registration__section'>
                   <TextField
-                    control={control}
+                    control={controlEmail}
                     name={TextFieldId.Email}
                     rules={{ required: true, pattern: REGEX_WITH_EMAIL }}
                     type={TextFieldType.Email}
                     id={TextFieldId.Email}
                     placeholder={TextFieldPlaceholder.Email}
-                    message={TextFieldMessage.EmailError}
+                    message={TextFieldMessage.Email}
                     isError={isError}
                   />
                 </div>
@@ -91,7 +109,7 @@ export const ForgotPassPage: FC = () => {
           {isLetterReceived && (
             <form
               className='registration'
-              onSubmit={handleSubmit(onSubmit, onError)}
+              onSubmit={handleSubmitPassword(onSubmitPassword, onErrorPassword)}
               data-test-id={DataTestId.ResetPasswordForm}
             >
               <fieldset className='registration__fieldset'>
@@ -100,29 +118,29 @@ export const ForgotPassPage: FC = () => {
                 </div>
                 <div className='registration__section'>
                   <TextField
-                    control={control}
+                    control={controlPassword}
                     name={TextFieldId.Password}
                     rules={{ required: true, pattern: REGEX_WITH_PASSWORD }}
                     type={TextFieldType.Password}
                     id={TextFieldId.Password}
                     placeholder={TextFieldPlaceholder.NewPassword}
-                    message={TextFieldMessage.Password}
+                    message={errorMessage ? '' : TextFieldMessage.Password}
                     isError={isError}
                   />
                   <TextField
-                    control={control}
+                    control={controlPassword}
                     name={TextFieldId.PasswordConfirmation}
                     rules={{ required: true, pattern: REGEX_WITH_PASSWORD }}
                     type={TextFieldType.Password}
                     id={TextFieldId.PasswordConfirmation}
                     placeholder={TextFieldPlaceholder.RepeatPassword}
-                    message={TextFieldMessage.EmptyField}
+                    message={errorMessage ? TextFieldMessage.PasswordMismatch : TextFieldMessage.EmptyField}
                     isError={isError}
                   />
                 </div>
                 <div className='registration__section'>
                   <ButtonPrimary
-                    type={ButtonPrimaryType.Primary}
+                    type={ButtonPrimaryType.Submit}
                     title={ButtonPrimaryTitle.SaveChanges}
                     className='button_large'
                   />
