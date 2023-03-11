@@ -28,6 +28,13 @@ export const authorizationSlice = createSlice({
       state.isLoading = false;
       state.isError = false;
     },
+    authorizationRequestWarning: (state) => {
+      state.authorizationRequest = AUTHORIZATION_REQUEST_WITH_INITIAL_DATA;
+      state.authorizationResponse = AUTHORIZATION_RESPONSE_WITH_INITIAL_DATA;
+      state.isAuth = false;
+      state.isLoading = false;
+      state.isError = false;
+    },
     authorizationRequestError: (state) => {
       state.authorizationRequest = AUTHORIZATION_REQUEST_WITH_INITIAL_DATA;
       state.authorizationResponse = AUTHORIZATION_RESPONSE_WITH_INITIAL_DATA;
@@ -45,7 +52,12 @@ export const authorizationSlice = createSlice({
   },
 });
 
-export const { authorizationRequest, authorizationRequestSuccess, authorizationRequestError, logout } =
-  authorizationSlice.actions;
+export const {
+  authorizationRequest,
+  authorizationRequestSuccess,
+  authorizationRequestError,
+  authorizationRequestWarning,
+  logout,
+} = authorizationSlice.actions;
 /* eslint-disable-next-line import/no-default-export */
 export default authorizationSlice.reducer;

@@ -22,12 +22,14 @@ export {
   authorizationRequest,
   authorizationRequestSuccess,
   authorizationRequestError,
+  authorizationRequestWarning,
   logout,
 } from './authorization/authorization-slice';
 export {
   registrationRequest,
   registrationRequestSuccess,
   registrationRequestError,
+  registrationReset,
 } from './registration/registration-slice';
 export {
   passwordRecoveryRequest,

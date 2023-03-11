@@ -5,10 +5,9 @@ import { AxiosResponse } from 'axios';
 import { ButtonPrimaryTitle } from 'components/buttons/button-primary/button-primary.types';
 import { FormToastMessage, FormToastTitle } from 'components/form-toast/form-toast.types';
 import { TextFieldMessage } from 'components/text-field/text-field.types';
-import { CustomError } from 'utils';
+import { CustomError400 } from 'utils';
 
 import {
-  openNewPassword,
   passwordRecoveryRequest,
   passwordRecoveryRequestError,
   passwordRecoveryRequestSuccess,
@@ -26,6 +25,7 @@ function* passwordRecoveryRequestWorker(action: { payload: PasswordRecoveryReque
     );
 
     yield console.log('PasswordRecoveryResponse ===', data);
+    yield put(passwordRecoveryRequestSuccess(data));
     yield put(setErrorMessage(''));
     yield put(
       setFormToast({
@@ -33,10 +33,9 @@ function* passwordRecoveryRequestWorker(action: { payload: PasswordRecoveryReque
         message: FormToastMessage.PasswordResetSuccess,
       })
     );
-    yield put(passwordRecoveryRequestSuccess(data));
   } catch (error) {
-    console.log('error instanceof CustomError ===', error instanceof CustomError);
-    if (error instanceof CustomError) {
+    console.log('error instanceof CustomError400 ===', error instanceof CustomError400);
+    if (error instanceof CustomError400) {
       yield put(setErrorMessage(TextFieldMessage.WrongLoginOrPassword));
     } else {
       yield put(passwordRecoveryRequestError());

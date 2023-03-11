@@ -30,6 +30,8 @@ export const ForgotPassPage: FC = () => {
   const { handleSubmit: handleSubmitPassword, control: controlPassword } = useForm<FormTextField>(initialStatePassword);
   const dispatch = useAppDispatch();
 
+  console.log('FORGOTPASSPAGE_ERROR_MESSAGE ===', errorMessage);
+
   const onSubmitEmail = (data: FormTextField) => {
     console.log('EMAIL_FORM_DATA ===', data);
     const { email } = data;
@@ -86,8 +88,7 @@ export const ForgotPassPage: FC = () => {
                     type={TextFieldType.Email}
                     id={TextFieldId.Email}
                     placeholder={TextFieldPlaceholder.Email}
-                    message={TextFieldMessage.Email}
-                    isError={isError}
+                    message={TextFieldMessage.EmailError}
                   />
                 </div>
                 <div className='registration__section'>
@@ -125,7 +126,6 @@ export const ForgotPassPage: FC = () => {
                     id={TextFieldId.Password}
                     placeholder={TextFieldPlaceholder.NewPassword}
                     message={errorMessage ? '' : TextFieldMessage.Password}
-                    isError={isError}
                   />
                   <TextField
                     control={controlPassword}
@@ -135,7 +135,6 @@ export const ForgotPassPage: FC = () => {
                     id={TextFieldId.PasswordConfirmation}
                     placeholder={TextFieldPlaceholder.RepeatPassword}
                     message={errorMessage ? TextFieldMessage.PasswordMismatch : TextFieldMessage.EmptyField}
-                    isError={isError}
                   />
                 </div>
                 <div className='registration__section'>

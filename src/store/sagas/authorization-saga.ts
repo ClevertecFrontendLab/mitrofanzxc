@@ -6,12 +6,13 @@ import { AxiosResponse } from 'axios';
 import { ButtonPrimaryTitle } from 'components/buttons/button-primary/button-primary.types';
 import { FormToastMessage, FormToastTitle } from 'components/form-toast/form-toast.types';
 import { TextFieldMessage } from 'components/text-field/text-field.types';
-import { CustomError, setLocalStorage } from 'utils';
+import { CustomError400, CustomError500, setLocalStorage } from 'utils';
 
 import {
   authorizationRequest,
   authorizationRequestError,
   authorizationRequestSuccess,
+  authorizationRequestWarning,
   setErrorMessage,
   setFormToast,
 } from '../slices';
@@ -25,15 +26,19 @@ function* authorizationRequestWorker(action: { payload: AuthorizationRequest; ty
       action.payload
     );
 
-    console.log('response ===', data);
+    console.log('AuthorizationResponse ===', data);
+    yield put(authorizationRequestSuccess(data));
     yield setLocalStorage(LocalStorage.Token, data.jwt);
     yield put(setErrorMessage(''));
-    yield put(authorizationRequestSuccess(data));
   } catch (error) {
-    console.log('error instanceof CustomError ===', error instanceof CustomError);
-    if (error instanceof CustomError) {
+    console.log('error instanceof CustomError400 ===', error instanceof CustomError400);
+    console.log('error instanceof CustomError500 ===', error instanceof CustomError500);
+    if (error instanceof CustomError400) {
+      yield put(authorizationRequestWarning());
       yield put(setErrorMessage(TextFieldMessage.WrongLoginOrPassword));
-    } else {
+    }
+
+    if (error instanceof CustomError500) {
       yield put(authorizationRequestError());
       yield put(
         setFormToast({

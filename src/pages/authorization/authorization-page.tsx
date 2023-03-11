@@ -28,7 +28,7 @@ export const AuthorizationPage: FC = () => {
   const { handleSubmit, control } = useForm<FormTextField>(initialState);
   const dispatch = useAppDispatch();
 
-  console.log('errorMessage ===', errorMessage);
+  console.log('AUTHORIZATION_PAGE_ERROR_MESSAGE ===', errorMessage);
 
   const onSubmit = (data: FormTextField) => {
     console.log('AUTHORIZATION_FORM_DATA ===', data);
@@ -65,7 +65,6 @@ export const AuthorizationPage: FC = () => {
                     id={TextFieldId.Identifier}
                     placeholder={TextFieldPlaceholder.Login}
                     message={errorMessage ? '' : TextFieldMessage.EmptyField}
-                    // isError={isError}
                   />
                   <TextField
                     control={control}
@@ -74,9 +73,7 @@ export const AuthorizationPage: FC = () => {
                     type={TextFieldType.Password}
                     id={TextFieldId.Password}
                     placeholder={TextFieldPlaceholder.Password}
-                    // message={errorMessage ? TextFieldMessage.WrongLoginOrPassword : TextFieldMessage.Password}
                     message={errorMessage ? TextFieldMessage.WrongLoginOrPassword : TextFieldMessage.EmptyField}
-                    // isError={isError}
                   />
                   <Link to={Path.ForgotPass} className='info_large'>
                     {errorMessage ? ButtonLoginTitle.Restore : ButtonLoginTitle.Forget}

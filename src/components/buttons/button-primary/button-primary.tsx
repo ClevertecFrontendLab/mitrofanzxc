@@ -16,7 +16,7 @@ export type ButtonPrimaryProps = {
   className?: string;
   path?: Path;
   untilDate?: StringAble;
-  disabled?: boolean;
+  disabled?: boolean | null;
   onClick?: () => void;
   dataTestId?: DataTestId;
 };

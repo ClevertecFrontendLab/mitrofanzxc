@@ -1,9 +1,16 @@
 import { DataTestId } from 'constants/data-test-id';
 import { Path } from 'constants/path';
-import { REGEX_WITH_EMAIL, REGEX_WITH_PASSWORD, REGEX_WITH_PHONE, REGEX_WITH_USERNAME } from 'constants/regex';
+import {
+  REGEX_WITH_EMAIL,
+  REGEX_WITH_NON_EMPTY,
+  REGEX_WITH_PASSWORD,
+  REGEX_WITH_PHONE,
+  REGEX_WITH_USERNAME,
+} from 'constants/regex';
 
 import { FC, Fragment, useState } from 'react';
 import { Controller, FieldErrors, useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { ButtonLogin, ButtonPrimary, FormToast, Loader, TextField } from 'components';
 import { ButtonLoginTitle } from 'components/buttons/button-login/button-login.types';
 import { ButtonPrimaryTitle, ButtonPrimaryType } from 'components/buttons/button-primary/button-primary.types';
@@ -15,8 +22,8 @@ import {
   TextFieldType,
 } from 'components/text-field/text-field.types';
 import { useAppDispatch, useAppSelector, useAuth } from 'hooks';
-import { authorizationSelector, registrationSelector } from 'store/selectors';
-import { registrationRequest } from 'store/slices';
+import { authorizationSelector, formToastSelector, registrationSelector } from 'store/selectors';
+import { registrationRequest, registrationReset } from 'store/slices';
 import { REGISTRATION_REQUEST_WITH_INITIAL_DATA } from 'store/slices/registration/initial-state';
 import { RegistrationRequest } from 'store/slices/slices.types';
 
@@ -25,38 +32,52 @@ import { initialState } from './initial-state';
 export const RegistrationPage: FC = () => {
   const { isAuth } = useAppSelector(authorizationSelector);
   const { isError, isLoading, isSuccess } = useAppSelector(registrationSelector);
+  const { formToastButton } = useAppSelector(formToastSelector);
   const { handleSubmit, control } = useForm<FormTextField>(initialState);
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState<RegistrationRequest>(REGISTRATION_REQUEST_WITH_INITIAL_DATA);
-  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const [isButtonDisabled, setIsButtonDisabled] = useState<boolean | null>(false);
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
+
+  const handleButton = (value: boolean) => {
+    setIsButtonDisabled(value);
+  };
 
   const handleForm = (data: FormTextField) => {
     if (step < 3) {
       setFormData({ ...formData, ...data });
-      setIsButtonDisabled(false);
+      handleButton(false);
       setStep(step + 1);
     } else {
       setFormData({ ...formData, ...data });
-      setIsButtonDisabled(false);
+      handleButton(false);
       dispatch(registrationRequest(formData));
     }
   };
 
-  console.log('formData ===', formData);
-
   const onSubmit = (data: FormTextField) => {
-    console.log('onSubmit_DATA ===', data);
+    console.log('ON_SUBMIT_REGISTRATION_DATA ===', data);
     handleForm(data);
   };
 
   const onError = (error: FieldErrors) => {
-    console.log('onError ===', error);
-    setIsButtonDisabled(true);
+    console.log('ON_ERROR_REGISTRATION ===', error);
+    handleButton(true);
   };
 
-  const onRepeat = () => {
-    dispatch(registrationRequest(formData));
+  const handleFormToast = () => {
+    switch (formToastButton) {
+      case ButtonPrimaryTitle.Entrance:
+        navigate(Path.Authorization);
+        break;
+      case ButtonPrimaryTitle.BackToRegistration:
+        dispatch(registrationReset());
+        break;
+      default:
+        dispatch(registrationRequest(formData));
+        break;
+    }
   };
 
   const buttonPrimaryTitle =
@@ -67,7 +88,7 @@ export const RegistrationPage: FC = () => {
   return (
     <Fragment>
       {isLoading && <Loader dataTestId={DataTestId.Loader} />}
-      {(isError || isSuccess) && <FormToast dataTestId={DataTestId.StatusBlock} />}
+      {(isError || isSuccess) && <FormToast dataTestId={DataTestId.StatusBlock} onClick={handleFormToast} />}
       {!isError && !isSuccess && (
         <div className='registration-bg' data-test-id={DataTestId.Auth}>
           <h3 className='h3'>Cleverland</h3>
@@ -94,7 +115,7 @@ export const RegistrationPage: FC = () => {
                       id={TextFieldId.Username}
                       placeholder={TextFieldPlaceholder.CreateUserName}
                       message={TextFieldMessage.CreateUserName}
-                      isError={isError}
+                      handleButton={handleButton}
                     />
                     <TextField
                       control={control}
@@ -104,7 +125,7 @@ export const RegistrationPage: FC = () => {
                       id={TextFieldId.Password}
                       placeholder={TextFieldPlaceholder.Password}
                       message={TextFieldMessage.Password}
-                      isError={isError}
+                      handleButton={handleButton}
                     />
                   </Fragment>
                 )}
@@ -113,22 +134,22 @@ export const RegistrationPage: FC = () => {
                     <TextField
                       control={control}
                       name={TextFieldId.FirstName}
-                      rules={{ required: true, pattern: REGEX_WITH_USERNAME }}
+                      rules={{ required: true, pattern: REGEX_WITH_NON_EMPTY }}
                       type={TextFieldType.Text}
                       id={TextFieldId.FirstName}
                       placeholder={TextFieldPlaceholder.FirstName}
                       message={TextFieldMessage.EmptyField}
-                      isError={isError}
+                      handleButton={handleButton}
                     />
                     <TextField
                       control={control}
                       name={TextFieldId.LastName}
-                      rules={{ required: true, pattern: REGEX_WITH_USERNAME }}
+                      rules={{ required: true, pattern: REGEX_WITH_NON_EMPTY }}
                       type={TextFieldType.Text}
                       id={TextFieldId.LastName}
                       placeholder={TextFieldPlaceholder.LastName}
                       message={TextFieldMessage.EmptyField}
-                      isError={isError}
+                      handleButton={handleButton}
                     />
                   </Fragment>
                 )}
@@ -147,7 +168,7 @@ export const RegistrationPage: FC = () => {
                           id={TextFieldId.Phone}
                           placeholder={TextFieldPlaceholder.Phone}
                           message={TextFieldMessage.Phone}
-                          isError={isError}
+                          handleButton={handleButton}
                         />
                       )}
                     />
@@ -159,7 +180,7 @@ export const RegistrationPage: FC = () => {
                       id={TextFieldId.Email}
                       placeholder={TextFieldPlaceholder.Email}
                       message={TextFieldMessage.EmailError}
-                      isError={isError}
+                      handleButton={handleButton}
                     />
                   </Fragment>
                 )}

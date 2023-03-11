@@ -35,9 +35,17 @@ export const registrationSlice = createSlice({
       state.isError = true;
       state.isSuccess = false;
     },
+    registrationReset: (state) => {
+      state.registrationRequest = REGISTRATION_REQUEST_WITH_INITIAL_DATA;
+      state.registrationResponse = REGISTRATION_RESPONSE_WITH_INITIAL_DATA;
+      state.isLoading = false;
+      state.isError = false;
+      state.isSuccess = false;
+    },
   },
 });
 
-export const { registrationRequest, registrationRequestSuccess, registrationRequestError } = registrationSlice.actions;
+export const { registrationRequest, registrationRequestSuccess, registrationRequestError, registrationReset } =
+  registrationSlice.actions;
 /* eslint-disable-next-line import/no-default-export */
 export default registrationSlice.reducer;

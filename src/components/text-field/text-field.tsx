@@ -20,7 +20,7 @@ export type TextFieldProps = {
   id: TextFieldId;
   placeholder: TextFieldPlaceholder;
   message: string | TextFieldMessage;
-  isError?: boolean;
+  handleButton?: (value: boolean) => void;
 };
 
 export const TextField: FC<TextFieldProps & UseControllerProps<FormTextField>> = ({
@@ -28,7 +28,7 @@ export const TextField: FC<TextFieldProps & UseControllerProps<FormTextField>> =
   id,
   placeholder,
   message,
-  isError,
+  handleButton,
   ...props
 }) => {
   const { field, fieldState } = useController(props);
@@ -38,7 +38,7 @@ export const TextField: FC<TextFieldProps & UseControllerProps<FormTextField>> =
   const [isCheckmarkVisible, setIsCheckmarkVisible] = useState(false);
   const [validationMessage, setValidationMessage] = useState<string[]>(['']);
   const [validationTitle, setValidationTitle] = useState<string | TextFieldMessage>(message);
-  console.log('message in textfield ===', message);
+  // console.log('MESSAGE_IN_TEXTFIELD ===', message);
 
   const handleCheckmark = (value: boolean) => {
     setIsCheckmarkVisible(value);
@@ -52,9 +52,9 @@ export const TextField: FC<TextFieldProps & UseControllerProps<FormTextField>> =
   // console.log('field.value ===', field.value);
   // console.log('fieldState ===', fieldState);
   // console.log('fieldState.error ===', fieldState.error);
-  console.log('validationMessage ===', validationMessage);
+  // console.log('validationMessage ===', validationMessage);
   // console.log('validationMessage[0].length > 0 ===', validationMessage[0].length > 0);
-  console.log('validationTitle ===', validationTitle);
+  // console.log('validationTitle ===', validationTitle);
   // console.log('message ===', message);
 
   const handleSetIsEyeOpened = () => {
@@ -74,6 +74,16 @@ export const TextField: FC<TextFieldProps & UseControllerProps<FormTextField>> =
       setIsEyeVisible(false);
       setValidationMessage([TextFieldMessage.EmptyField]);
       setValidationTitle(TextFieldMessage.EmptyField);
+    }
+  };
+
+  const handleSubmitButton = () => {
+    if (handleButton) {
+      if (fieldState.error || !field.value) {
+        handleButton(true);
+      } else {
+        handleButton(false);
+      }
     }
   };
 
@@ -98,6 +108,7 @@ export const TextField: FC<TextFieldProps & UseControllerProps<FormTextField>> =
 
     if (pathname !== Path.Authorization) {
       validate(value, id, message, handleCheckmark, handleValidationMessage);
+      handleSubmitButton();
     }
 
     handleEmptyValue(value);
@@ -108,7 +119,9 @@ export const TextField: FC<TextFieldProps & UseControllerProps<FormTextField>> =
   });
   const messageClass = classNames('mark text-field__message info_large', {
     color_negative:
-      (!field.value && validationMessage[0].length > 0) || message === TextFieldMessage.WrongLoginOrPassword,
+      (!field.value && validationMessage[0].length > 0) ||
+      message === TextFieldMessage.WrongLoginOrPassword ||
+      message === TextFieldMessage.EmailError,
   });
 
   useEffect(() => {

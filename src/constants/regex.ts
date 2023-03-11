@@ -6,6 +6,7 @@ export const REGEX_WITH_ONE_CAPITAL_LETTER = /^(?=.*[A-Z]).*$/;
 export const REGEX_WITH_ONE_DIGIT = /^(?=.*\d).*$/;
 export const REGEX_WITH_MIN_8_CHARACTERS = /^.{8,}.*$/;
 export const REGEX_WITH_LATIN_ALPHABET = /^(?=.*[A-Za-z]).*$/;
+export const REGEX_WITH_NON_EMPTY = /[\S\s]+[\S]+/;
 export const MASK_PHONE = [
   '+',
   '3',

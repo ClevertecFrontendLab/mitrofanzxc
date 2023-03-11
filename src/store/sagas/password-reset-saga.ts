@@ -4,8 +4,7 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 import { AxiosResponse } from 'axios';
 import { ButtonPrimaryTitle } from 'components/buttons/button-primary/button-primary.types';
 import { FormToastMessage, FormToastTitle } from 'components/form-toast/form-toast.types';
-import { TextFieldMessage } from 'components/text-field/text-field.types';
-import { CustomError } from 'utils';
+import { CustomError400 } from 'utils';
 
 import {
   passwordResetRequest,
@@ -25,6 +24,7 @@ function* passwordResetRequestWorker(action: { payload: PasswordResetRequest; ty
     );
 
     yield console.log('PasswordResetResponse ===', data);
+    yield put(passwordResetRequestSuccess(data));
     yield put(setErrorMessage(''));
     yield put(
       setFormToast({
@@ -32,7 +32,6 @@ function* passwordResetRequestWorker(action: { payload: PasswordResetRequest; ty
         message: FormToastMessage.PasswordResetSuccess,
       })
     );
-    yield put(passwordResetRequestSuccess(data));
   } catch {
     yield put(passwordResetRequestError());
     yield put(

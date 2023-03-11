@@ -1,6 +1,5 @@
 import axios from 'axios';
-import { TextFieldMessage } from 'components/text-field/text-field.types';
-import { CustomError, getToken } from 'utils';
+import { CustomError400, CustomError500, getToken } from 'utils';
 
 export enum API {
   BaseUrl = 'https://strapi.cleverland.by',
@@ -25,9 +24,8 @@ cleverlandConfig.interceptors.request.use(
     /* eslint-disable no-param-reassign */
     const token = getToken();
 
-    config.headers = config.headers ?? {};
-
     if (token) {
+      config.headers = config.headers ?? {};
       config.headers.Authorization = token;
     }
 
@@ -41,8 +39,12 @@ cleverlandConfig.interceptors.response.use(
   (error) => {
     console.log('error ===', error);
 
-    if (error.response.status === 400 || error.response.status === 500) {
-      throw new CustomError(TextFieldMessage.WrongLoginOrPassword);
+    if (error.response.status === 400) {
+      throw new CustomError400('ERROR_400');
+    }
+
+    if (error.response.status === 500) {
+      throw new CustomError500('ERROR_500');
     }
 
     return Promise.reject(error);

@@ -1,6 +1,7 @@
 export { clearLocalStorage } from './clear-local-storage';
 export { convertToDate } from './convert-to-date';
-export { CustomError } from './custom-error';
+export { CustomError400 } from './custom-error-400';
+export { CustomError500 } from './custom-error-500';
 export { divideTableData } from './divide-table-data';
 export { getAmountOfBooks } from './get-amount-of-books';
 export { getLocalStorage } from './get-local-storage';

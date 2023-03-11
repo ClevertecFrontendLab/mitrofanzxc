@@ -5,16 +5,9 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 import { AxiosResponse } from 'axios';
 import { ButtonPrimaryTitle } from 'components/buttons/button-primary/button-primary.types';
 import { FormToastMessage, FormToastTitle } from 'components/form-toast/form-toast.types';
-import { TextFieldMessage } from 'components/text-field/text-field.types';
-import { CustomError, setLocalStorage } from 'utils';
+import { CustomError400, CustomError500, setLocalStorage } from 'utils';
 
-import {
-  registrationRequest,
-  registrationRequestError,
-  registrationRequestSuccess,
-  setErrorMessage,
-  setFormToast,
-} from '../slices';
+import { registrationRequest, registrationRequestError, registrationRequestSuccess, setFormToast } from '../slices';
 import { RegistrationRequest, RegistrationResponse } from '../slices/slices.types';
 
 function* registrationRequestWorker(action: { payload: RegistrationRequest; type: string }) {
@@ -25,9 +18,9 @@ function* registrationRequestWorker(action: { payload: RegistrationRequest; type
       action.payload
     );
 
-    yield console.log('response ===', data);
+    yield console.log('RegistrationResponse ===', data);
+    yield put(registrationRequestSuccess(data));
     yield setLocalStorage(LocalStorage.Token, data.jwt);
-    yield put(setErrorMessage(''));
     yield put(
       setFormToast({
         title: FormToastTitle.RegistrationSuccess,
@@ -35,10 +28,10 @@ function* registrationRequestWorker(action: { payload: RegistrationRequest; type
         button: ButtonPrimaryTitle.Entrance,
       })
     );
-    yield put(registrationRequestSuccess(data));
   } catch (error) {
-    console.log('error instanceof CustomError ===', error instanceof CustomError);
-    if (error instanceof CustomError) {
+    console.log('error instanceof CustomError400 ===', error instanceof CustomError400);
+    console.log('error instanceof CustomError500 ===', error instanceof CustomError500);
+    if (error instanceof CustomError400) {
       yield put(registrationRequestError());
       yield put(
         setFormToast({
@@ -47,7 +40,9 @@ function* registrationRequestWorker(action: { payload: RegistrationRequest; type
           button: ButtonPrimaryTitle.BackToRegistration,
         })
       );
-    } else {
+    }
+
+    if (error instanceof CustomError500) {
       yield put(registrationRequestError());
       yield put(
         setFormToast({
