@@ -1,12 +1,12 @@
 import { API, cleverlandConfig } from 'constants/axios';
 import { LocalStorage } from 'constants/local-storage';
 
-import { call, put, takeLatest } from 'redux-saga/effects';
+import { call, delay, put, takeLatest } from 'redux-saga/effects';
 import { AxiosResponse } from 'axios';
 import { ButtonPrimaryTitle } from 'components/buttons/button-primary/button-primary.types';
 import { FormToastMessage, FormToastTitle } from 'components/form-toast/form-toast.types';
 import { TextFieldMessage } from 'components/text-field/text-field.types';
-import { CustomError400, CustomError500, setLocalStorage } from 'utils';
+import { CustomError400, CustomError500, setLocalStorage, setToken } from 'utils';
 
 import {
   authorizationRequest,
@@ -26,13 +26,11 @@ function* authorizationRequestWorker(action: { payload: AuthorizationRequest; ty
       action.payload
     );
 
-    console.log('AuthorizationResponse ===', data);
-    yield put(authorizationRequestSuccess(data));
-    yield setLocalStorage(LocalStorage.Token, data.jwt);
+    yield call(setToken, data.jwt);
+    yield delay(1000);
     yield put(setErrorMessage(''));
+    yield put(authorizationRequestSuccess(data));
   } catch (error) {
-    console.log('error instanceof CustomError400 ===', error instanceof CustomError400);
-    console.log('error instanceof CustomError500 ===', error instanceof CustomError500);
     if (error instanceof CustomError400) {
       yield put(authorizationRequestWarning());
       yield put(setErrorMessage(TextFieldMessage.WrongLoginOrPassword));

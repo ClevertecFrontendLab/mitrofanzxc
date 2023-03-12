@@ -1,10 +1,10 @@
 import { API, cleverlandConfig } from 'constants/axios';
+import { LocalStorage } from 'constants/local-storage';
 
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { AxiosResponse } from 'axios';
-import { ButtonPrimaryTitle } from 'components/buttons/button-primary/button-primary.types';
 import { FormToastMessage, FormToastTitle } from 'components/form-toast/form-toast.types';
-import { CustomError400 } from 'utils';
+import { setLocalStorage } from 'utils';
 
 import {
   passwordResetRequest,
@@ -25,6 +25,7 @@ function* passwordResetRequestWorker(action: { payload: PasswordResetRequest; ty
 
     yield console.log('PasswordResetResponse ===', data);
     yield put(passwordResetRequestSuccess(data));
+    yield setLocalStorage(LocalStorage.IsLetterReceived, JSON.stringify(true));
     yield put(setErrorMessage(''));
     yield put(
       setFormToast({
@@ -34,13 +35,7 @@ function* passwordResetRequestWorker(action: { payload: PasswordResetRequest; ty
     );
   } catch {
     yield put(passwordResetRequestError());
-    yield put(
-      setFormToast({
-        title: FormToastTitle.RegistrationError,
-        message: FormToastMessage.AuthorizationError,
-        button: ButtonPrimaryTitle.Repeat,
-      })
-    );
+    yield put(setErrorMessage('error'));
   }
 }
 

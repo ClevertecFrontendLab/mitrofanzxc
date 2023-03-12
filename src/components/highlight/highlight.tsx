@@ -28,15 +28,16 @@ export const HighLight: FC<HighLightProps> = ({ value, title, className, dataTes
           if (index + 1 !== arr.length) {
             return (
               <Fragment key={uuidv4()}>
-                {nonBoldText}
-                <span className={className}>
+                <span>{nonBoldText}</span>
+                {/* <span className={className}> */}
+                <span>
                   <mark className={className}>{matchValue[index]}</mark>
                 </span>
               </Fragment>
             );
           }
 
-          return <Fragment key={uuidv4()}>{nonBoldText}</Fragment>;
+          return <span key={uuidv4()}>{nonBoldText}</span>;
         })}
       </Fragment>
     );

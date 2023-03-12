@@ -15,6 +15,7 @@ export { handleStatus } from './handle-status';
 export { handleTitle } from './handle-title';
 export { removeFromLocalStorage } from './remove-from-local-storage';
 export { setLocalStorage } from './set-local-storage';
+export { setToken } from './set-token';
 export { sortData } from './sort-data';
 export { translateCategoryTitle } from './translate-category-title';
 export { validate } from './validate';

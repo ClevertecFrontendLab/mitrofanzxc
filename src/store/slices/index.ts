@@ -38,9 +38,5 @@ export {
   passwordResetRequest,
   passwordResetRequestSuccess,
   passwordResetRequestError,
-  closeNewPassword,
-  closePasswordRecovery,
-  openNewPassword,
-  openPasswordRecovery,
 } from './forgot-pass/forgot-pass-slice';
 export { closeFormToast, setFormToast, setErrorMessage } from './form-toast/form-toast-slice';

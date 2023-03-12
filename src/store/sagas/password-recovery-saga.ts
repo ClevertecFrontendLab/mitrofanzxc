@@ -1,11 +1,12 @@
 import { API, cleverlandConfig } from 'constants/axios';
+import { LocalStorage } from 'constants/local-storage';
 
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { AxiosResponse } from 'axios';
 import { ButtonPrimaryTitle } from 'components/buttons/button-primary/button-primary.types';
 import { FormToastMessage, FormToastTitle } from 'components/form-toast/form-toast.types';
 import { TextFieldMessage } from 'components/text-field/text-field.types';
-import { CustomError400 } from 'utils';
+import { CustomError400, removeFromLocalStorage } from 'utils';
 
 import {
   passwordRecoveryRequest,
@@ -26,6 +27,7 @@ function* passwordRecoveryRequestWorker(action: { payload: PasswordRecoveryReque
 
     yield console.log('PasswordRecoveryResponse ===', data);
     yield put(passwordRecoveryRequestSuccess(data));
+    yield removeFromLocalStorage(LocalStorage.IsLetterReceived);
     yield put(setErrorMessage(''));
     yield put(
       setFormToast({

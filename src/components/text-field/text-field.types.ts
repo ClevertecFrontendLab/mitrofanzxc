@@ -45,6 +45,7 @@ export enum TextFieldMessage {
   Email = 'На это email будет отправлено письмо с инструкциями по восстановлению пароля',
   EmailError = 'Введите корректный e-mail',
   EmptyField = 'Поле не может быть пустым',
+  Error = 'error',
   WrongLoginOrPassword = 'Неверный логин или пароль!',
 }
 

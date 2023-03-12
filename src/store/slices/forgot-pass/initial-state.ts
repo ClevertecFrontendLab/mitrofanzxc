@@ -37,7 +37,7 @@ export const initialState: ForgotPassState = {
   passwordResetRequest: PASSWORD_RESET_REQUEST_WITH_INITIAL_DATA,
   passwordResetResponse: PASSWORD_RESET_RESPONSE_WITH_INITIAL_DATA,
   isLetterReceived: false,
-  isPasswordRecovery: true,
   isLoading: false,
   isError: false,
+  isSuccess: false,
 };

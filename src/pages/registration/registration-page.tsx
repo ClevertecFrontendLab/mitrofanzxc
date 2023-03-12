@@ -138,7 +138,8 @@ export const RegistrationPage: FC = () => {
                       type={TextFieldType.Text}
                       id={TextFieldId.FirstName}
                       placeholder={TextFieldPlaceholder.FirstName}
-                      message={TextFieldMessage.EmptyField}
+                      // message={TextFieldMessage.EmptyField}
+                      message=''
                       handleButton={handleButton}
                     />
                     <TextField
@@ -148,7 +149,8 @@ export const RegistrationPage: FC = () => {
                       type={TextFieldType.Text}
                       id={TextFieldId.LastName}
                       placeholder={TextFieldPlaceholder.LastName}
-                      message={TextFieldMessage.EmptyField}
+                      // message={TextFieldMessage.EmptyField}
+                      message=''
                       handleButton={handleButton}
                     />
                   </Fragment>

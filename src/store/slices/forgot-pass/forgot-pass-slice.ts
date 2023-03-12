@@ -26,9 +26,10 @@ export const forgotPassSlice = createSlice({
       state.passwordRecoveryResponse = PASSWORD_RECOVERY_RESPONSE_WITH_INITIAL_DATA;
       state.passwordResetRequest = PASSWORD_RESET_REQUEST_WITH_INITIAL_DATA;
       state.passwordResetResponse = PASSWORD_RESET_RESPONSE_WITH_INITIAL_DATA;
-      state.isLetterReceived = false;
+      state.isLetterReceived = true;
       state.isLoading = true;
       state.isError = false;
+      state.isSuccess = false;
     },
     passwordRecoveryRequestSuccess: (state, action: PayloadAction<PasswordRecoveryResponse>) => {
       state.passwordRecoveryRequest = PASSWORD_RECOVERY_REQUEST_WITH_INITIAL_DATA;
@@ -38,15 +39,17 @@ export const forgotPassSlice = createSlice({
       state.isLetterReceived = false;
       state.isLoading = false;
       state.isError = false;
+      state.isSuccess = true;
     },
     passwordRecoveryRequestError: (state) => {
       state.passwordRecoveryRequest = PASSWORD_RECOVERY_REQUEST_WITH_INITIAL_DATA;
       state.passwordRecoveryResponse = PASSWORD_RECOVERY_RESPONSE_WITH_INITIAL_DATA;
       state.passwordResetRequest = PASSWORD_RESET_REQUEST_WITH_INITIAL_DATA;
       state.passwordResetResponse = PASSWORD_RESET_RESPONSE_WITH_INITIAL_DATA;
-      state.isLetterReceived = false;
+      state.isLetterReceived = true;
       state.isLoading = false;
       state.isError = true;
+      state.isSuccess = false;
     },
     passwordResetRequest: (state, action: PayloadAction<PasswordResetRequest>) => {
       state.passwordResetRequest = action.payload;
@@ -56,6 +59,7 @@ export const forgotPassSlice = createSlice({
       state.isLetterReceived = false;
       state.isLoading = true;
       state.isError = false;
+      state.isSuccess = false;
     },
     passwordResetRequestSuccess: (state, action: PayloadAction<PasswordResetResponse>) => {
       state.passwordRecoveryRequest = PASSWORD_RECOVERY_REQUEST_WITH_INITIAL_DATA;
@@ -65,6 +69,7 @@ export const forgotPassSlice = createSlice({
       state.isLetterReceived = true;
       state.isLoading = false;
       state.isError = false;
+      state.isSuccess = true;
     },
     passwordResetRequestError: (state) => {
       state.passwordRecoveryRequest = PASSWORD_RECOVERY_REQUEST_WITH_INITIAL_DATA;
@@ -73,19 +78,8 @@ export const forgotPassSlice = createSlice({
       state.passwordResetResponse = PASSWORD_RESET_RESPONSE_WITH_INITIAL_DATA;
       state.isLetterReceived = false;
       state.isLoading = false;
-      state.isError = true;
-    },
-    openPasswordRecovery: (state) => {
-      state.isPasswordRecovery = true;
-    },
-    closePasswordRecovery: (state) => {
-      state.isPasswordRecovery = false;
-    },
-    openNewPassword: (state) => {
-      state.isLetterReceived = true;
-    },
-    closeNewPassword: (state) => {
-      state.isLetterReceived = false;
+      state.isError = false;
+      state.isSuccess = false;
     },
   },
 });
@@ -97,10 +91,6 @@ export const {
   passwordResetRequest,
   passwordResetRequestSuccess,
   passwordResetRequestError,
-  openPasswordRecovery,
-  closePasswordRecovery,
-  openNewPassword,
-  closeNewPassword,
 } = forgotPassSlice.actions;
 /* eslint-disable-next-line import/no-default-export */
 export default forgotPassSlice.reducer;

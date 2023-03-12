@@ -38,7 +38,7 @@ export const TextField: FC<TextFieldProps & UseControllerProps<FormTextField>> =
   const [isCheckmarkVisible, setIsCheckmarkVisible] = useState(false);
   const [validationMessage, setValidationMessage] = useState<string[]>(['']);
   const [validationTitle, setValidationTitle] = useState<string | TextFieldMessage>(message);
-  // console.log('MESSAGE_IN_TEXTFIELD ===', message);
+  console.log('MESSAGE_IN_TEXTFIELD ===', message);
 
   const handleCheckmark = (value: boolean) => {
     setIsCheckmarkVisible(value);
@@ -52,13 +52,23 @@ export const TextField: FC<TextFieldProps & UseControllerProps<FormTextField>> =
   // console.log('field.value ===', field.value);
   // console.log('fieldState ===', fieldState);
   // console.log('fieldState.error ===', fieldState.error);
-  // console.log('validationMessage ===', validationMessage);
+  console.log('validationMessage ===', validationMessage);
   // console.log('validationMessage[0].length > 0 ===', validationMessage[0].length > 0);
-  // console.log('validationTitle ===', validationTitle);
+  console.log('validationTitle ===', validationTitle);
   // console.log('message ===', message);
 
   const handleSetIsEyeOpened = () => {
     setIsEyeOpened(!isEyeOpened);
+  };
+
+  const handleSubmitButton = () => {
+    if (handleButton) {
+      if (fieldState.error || !field.value) {
+        handleButton(true);
+      } else {
+        handleButton(false);
+      }
+    }
   };
 
   const handleEmptyValue = (value: string) => {
@@ -70,19 +80,24 @@ export const TextField: FC<TextFieldProps & UseControllerProps<FormTextField>> =
         setIsEyeVisible(true);
         setValidationTitle(message);
       }
+
+      if (id === TextFieldId.FirstName || id === TextFieldId.LastName) {
+        setValidationTitle('');
+        handleSubmitButton();
+      }
+
+      if (id === TextFieldId.PasswordConfirmation) {
+        setValidationMessage(['']);
+      }
     } else {
       setIsEyeVisible(false);
-      setValidationMessage([TextFieldMessage.EmptyField]);
-      setValidationTitle(TextFieldMessage.EmptyField);
-    }
-  };
 
-  const handleSubmitButton = () => {
-    if (handleButton) {
-      if (fieldState.error || !field.value) {
-        handleButton(true);
+      if (id === TextFieldId.Password && pathname === Path.Registration) {
+        setValidationMessage([TextFieldMessage.Password]);
+        setValidationTitle(TextFieldMessage.Password);
       } else {
-        handleButton(false);
+        setValidationMessage([TextFieldMessage.EmptyField]);
+        setValidationTitle(TextFieldMessage.EmptyField);
       }
     }
   };
@@ -115,19 +130,39 @@ export const TextField: FC<TextFieldProps & UseControllerProps<FormTextField>> =
   };
 
   const inputClass = classNames('text-field__input', {
-    'text-field__input_error': !field.value && validationMessage[0].length > 0,
+    // 'text-field__input_error': !field.value && validationMessage[0].length > 0,
+    'text-field__input_error':
+      (!field.value && validationMessage[0].length > 0) ||
+      message === TextFieldMessage.WrongLoginOrPassword ||
+      message === TextFieldMessage.EmailError ||
+      message === TextFieldMessage.Error ||
+      message === TextFieldMessage.CreateUserName ||
+      message === TextFieldMessage.Phone,
   });
   const messageClass = classNames('mark text-field__message info_large', {
     color_negative:
       (!field.value && validationMessage[0].length > 0) ||
       message === TextFieldMessage.WrongLoginOrPassword ||
-      message === TextFieldMessage.EmailError,
+      message === TextFieldMessage.EmailError ||
+      message === TextFieldMessage.Error ||
+      message === TextFieldMessage.CreateUserName ||
+      message === TextFieldMessage.Phone,
   });
 
   useEffect(() => {
     if (message === TextFieldMessage.WrongLoginOrPassword) {
       setValidationMessage([TextFieldMessage.WrongLoginOrPassword]);
       setValidationTitle(TextFieldMessage.WrongLoginOrPassword);
+    }
+
+    if (message === TextFieldMessage.Error) {
+      setValidationMessage([TextFieldMessage.Error]);
+      setValidationTitle(TextFieldMessage.Error);
+    }
+
+    if (message === TextFieldMessage.PasswordMismatch) {
+      setValidationMessage([TextFieldMessage.PasswordMismatch]);
+      setValidationTitle(TextFieldMessage.PasswordMismatch);
     }
   }, [message]);
 
@@ -142,6 +177,8 @@ export const TextField: FC<TextFieldProps & UseControllerProps<FormTextField>> =
           disabled={false}
           autoComplete='off'
           mask={MASK_PHONE}
+          keepCharPositions={true}
+          placeholderChar={'\u0078'}
           value={field.value}
           onChange={handleChange}
           onBlur={handleBlur}

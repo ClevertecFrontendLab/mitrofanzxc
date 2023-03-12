@@ -177,8 +177,8 @@ export type ForgotPassState = {
   passwordRecoveryResponse: PasswordRecoveryResponse;
   passwordResetRequest: PasswordResetRequest;
   passwordResetResponse: PasswordResetResponse;
-  isPasswordRecovery: boolean;
   isLetterReceived: boolean;
   isLoading: boolean;
   isError: boolean;
+  isSuccess: boolean;
 };
