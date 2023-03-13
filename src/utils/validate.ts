@@ -26,8 +26,6 @@ export const validate = (
   switch (id) {
     case TextFieldId.Username:
     case TextFieldId.Identifier:
-      // case TextFieldId.FirstName:
-      // case TextFieldId.LastName:
       if (!matchLatinAlphabet && !matchDigit) {
         handleValidationMessage([message]);
         break;

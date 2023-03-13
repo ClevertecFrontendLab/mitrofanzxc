@@ -46,7 +46,7 @@ export const ForgotPassPage: FC = () => {
   };
 
   const onErrorEmail = (error: FieldErrors<FormTextField>) => {
-    console.log('onErrorEmail ===', onErrorEmail);
+    console.log('ON_ERROR_EMAIL ===', error);
   };
 
   const onSubmitPassword = (data: FormTextField) => {
@@ -61,7 +61,7 @@ export const ForgotPassPage: FC = () => {
   };
 
   const onErrorPassword = (error: FieldErrors<FormTextField>) => {
-    console.log('onErrorPassword ===', onErrorPassword);
+    console.log('ON_ERROR_PASSWORD ===', error);
   };
 
   const handlePasswordForm = () => {

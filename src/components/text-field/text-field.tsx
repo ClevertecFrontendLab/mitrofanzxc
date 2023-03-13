@@ -219,9 +219,7 @@ export const TextField: FC<TextFieldProps & UseControllerProps<FormTextField>> =
         </div>
       )}
       <p className={messageClass} data-test-id={DataTestId.Hint}>
-        {/* {validationMessage[0].length > 0 && ( */}
         <HighLight className='color_negative' value={validationMessage} title={validationTitle} />
-        {/* )} */}
       </p>
       {pathname === Path.ForgotPass && type === TextFieldType.Email && (
         <p className={messageClass} data-test-id={DataTestId.Hint}>

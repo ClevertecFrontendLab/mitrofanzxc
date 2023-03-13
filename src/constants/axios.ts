@@ -1,5 +1,4 @@
-// import axios from 'axios';
-import axios, { AxiosError, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
+import axios from 'axios';
 import { CustomError400, CustomError500, getToken } from 'utils';
 
 export enum API {
@@ -20,11 +19,10 @@ export const cleverlandConfig = axios.create({
 
 cleverlandConfig.interceptors.request.use(
   (config) => {
-    /* eslint-disable no-param-reassign */
     const token = getToken();
 
     if (token) {
-      config.headers.Authorization = token;
+      config.headers.set('Authorization', token);
     }
 
     return config;
@@ -35,8 +33,6 @@ cleverlandConfig.interceptors.request.use(
 cleverlandConfig.interceptors.response.use(
   (response) => response,
   (error) => {
-    console.log('error ===', error);
-
     if (error.response.status === 400) {
       throw new CustomError400('ERROR_400');
     }

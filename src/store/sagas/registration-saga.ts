@@ -28,8 +28,6 @@ function* registrationRequestWorker(action: { payload: RegistrationRequest; type
       })
     );
   } catch (error) {
-    console.log('error instanceof CustomError400 ===', error instanceof CustomError400);
-    console.log('error instanceof CustomError500 ===', error instanceof CustomError500);
     if (error instanceof CustomError400) {
       yield put(registrationRequestError());
       yield put(

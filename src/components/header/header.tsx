@@ -1,4 +1,3 @@
-import { DataTestId } from 'constants/data-test-id';
 import { Path } from 'constants/path';
 import { TITLE_LIST } from 'constants/title-list';
 
@@ -49,12 +48,7 @@ export const Header: FC = () => {
                 <Link to={Path.Profile} className='h5 nav__item'>
                   Профиль
                 </Link>
-                <button
-                  type='button'
-                  className='h5 nav__item'
-                  onClick={handleLogout}
-                  // data-test-id={DataTestId.ExitButton}
-                >
+                <button type='button' className='h5 nav__item' onClick={handleLogout}>
                   Выход
                 </button>
               </div>

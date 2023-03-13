@@ -87,18 +87,6 @@ export const RegistrationPage: FC = () => {
   const buttonPrimaryTitle =
     step === 1 ? ButtonPrimaryTitle.NextStep : step === 2 ? ButtonPrimaryTitle.LastStep : ButtonPrimaryTitle.Register;
 
-  // useEffect(() => {
-  //   if (errors.username?.type === 'required') {
-  //     // setIsFieldEmpty(true);
-  //     dispatch(setErrorMessage(TextFieldMessage.EmptyField));
-  //   }
-
-  //   if (errors.password?.type === 'required') {
-  //     // setIsFieldEmpty(true);
-  //     dispatch(setErrorMessage(TextFieldMessage.EmptyField));
-  //   }
-  // }, [errors.password?.type, errors.username?.type, dispatch]);
-
   useAuth(Path.Main, isAuth);
 
   return (
@@ -154,7 +142,6 @@ export const RegistrationPage: FC = () => {
                       type={TextFieldType.Text}
                       id={TextFieldId.FirstName}
                       placeholder={TextFieldPlaceholder.FirstName}
-                      // message={TextFieldMessage.EmptyField}
                       message=''
                       handleButton={handleButton}
                     />
@@ -165,7 +152,6 @@ export const RegistrationPage: FC = () => {
                       type={TextFieldType.Text}
                       id={TextFieldId.LastName}
                       placeholder={TextFieldPlaceholder.LastName}
-                      // message={TextFieldMessage.EmptyField}
                       message=''
                       handleButton={handleButton}
                     />

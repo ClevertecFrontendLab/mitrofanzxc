@@ -50,8 +50,6 @@ export const BookPage: FC = () => {
     'review-list_active': isAccordionReviewsOpen,
   });
 
-  // const isAuth = getToken();
-
   useAuth(Path.Authorization, isAuth);
 
   return (
