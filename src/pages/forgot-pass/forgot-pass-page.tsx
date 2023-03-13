@@ -1,9 +1,8 @@
 import { DataTestId } from 'constants/data-test-id';
-import { LocalStorage } from 'constants/local-storage';
 import { Path } from 'constants/path';
 import { REGEX_WITH_EMAIL, REGEX_WITH_PASSWORD } from 'constants/regex';
 
-import { FC, Fragment, useEffect, useState } from 'react';
+import { FC, Fragment } from 'react';
 import { FieldErrors, useForm } from 'react-hook-form';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ButtonLogin, ButtonPrimary, FormToast, Loader, TextField } from 'components';
@@ -19,7 +18,6 @@ import {
 import { useAppDispatch, useAppSelector, useAuth } from 'hooks';
 import { authorizationSelector, forgotPassSelector, formToastSelector } from 'store/selectors';
 import { passwordRecoveryRequest, passwordResetRequest, setErrorMessage } from 'store/slices';
-import { getLocalStorage } from 'utils';
 
 import { initialStateEmail, initialStatePassword } from './initial-state';
 
@@ -29,21 +27,17 @@ export const ForgotPassPage: FC = () => {
   const {
     isError,
     isLoading,
-    isLetterReceived,
     isSuccess,
     passwordRecoveryRequest: formPasswordData,
   } = useAppSelector(forgotPassSelector);
   const { errorMessage, formToastButton } = useAppSelector(formToastSelector);
   const { handleSubmit: handleSubmitEmail, control: controlEmail } = useForm<FormTextField>(initialStateEmail);
   const { handleSubmit: handleSubmitPassword, control: controlPassword } = useForm<FormTextField>(initialStatePassword);
-  console.log('errorMessage ===', errorMessage);
+
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  console.log('FORGOTPASSPAGE_ERROR_MESSAGE ===', errorMessage);
-
   const onSubmitEmail = (data: FormTextField) => {
-    console.log('EMAIL_FORM_DATA ===', data);
     const { email } = data;
 
     if (email) {
@@ -52,11 +46,10 @@ export const ForgotPassPage: FC = () => {
   };
 
   const onErrorEmail = (error: FieldErrors<FormTextField>) => {
-    console.log('EMAIL_FORM_ERRORS ===', error);
+    console.log('onErrorEmail ===', onErrorEmail);
   };
 
   const onSubmitPassword = (data: FormTextField) => {
-    console.log('PASSWORD_FORM_DATA ===', data);
     const { password, passwordConfirmation } = data;
     const code = search.slice(6);
 
@@ -64,8 +57,11 @@ export const ForgotPassPage: FC = () => {
       dispatch(passwordRecoveryRequest({ password, passwordConfirmation, code }));
     } else {
       dispatch(setErrorMessage(TextFieldMessage.PasswordMismatch));
-      console.log('errorMessage ===', errorMessage);
     }
+  };
+
+  const onErrorPassword = (error: FieldErrors<FormTextField>) => {
+    console.log('onErrorPassword ===', onErrorPassword);
   };
 
   const handlePasswordForm = () => {
@@ -129,7 +125,7 @@ export const ForgotPassPage: FC = () => {
           {search.slice(6) && (
             <form
               className='registration'
-              onSubmit={handleSubmitPassword(onSubmitPassword)}
+              onSubmit={handleSubmitPassword(onSubmitPassword, onErrorPassword)}
               data-test-id={DataTestId.ResetPasswordForm}
             >
               <fieldset className='registration__fieldset'>

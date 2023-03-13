@@ -38,7 +38,6 @@ export const TextField: FC<TextFieldProps & UseControllerProps<FormTextField>> =
   const [isCheckmarkVisible, setIsCheckmarkVisible] = useState(false);
   const [validationMessage, setValidationMessage] = useState<string[]>(['']);
   const [validationTitle, setValidationTitle] = useState<string | TextFieldMessage>(message);
-  console.log('MESSAGE_IN_TEXTFIELD ===', message);
 
   const handleCheckmark = (value: boolean) => {
     setIsCheckmarkVisible(value);
@@ -47,15 +46,6 @@ export const TextField: FC<TextFieldProps & UseControllerProps<FormTextField>> =
   const handleValidationMessage = (value: string[]) => {
     setValidationMessage(value);
   };
-
-  // console.log('field ===', field);
-  // console.log('field.value ===', field.value);
-  // console.log('fieldState ===', fieldState);
-  // console.log('fieldState.error ===', fieldState.error);
-  console.log('validationMessage ===', validationMessage);
-  // console.log('validationMessage[0].length > 0 ===', validationMessage[0].length > 0);
-  console.log('validationTitle ===', validationTitle);
-  // console.log('message ===', message);
 
   const handleSetIsEyeOpened = () => {
     setIsEyeOpened(!isEyeOpened);
@@ -113,6 +103,20 @@ export const TextField: FC<TextFieldProps & UseControllerProps<FormTextField>> =
     }
 
     handleEmptyValue(value);
+
+    if (pathname.includes(Path.ForgotPass) && id === TextFieldId.Password) {
+      if (!value) {
+        setValidationMessage(['']);
+        setValidationTitle(TextFieldMessage.Password);
+      }
+    }
+
+    if (pathname === Path.Registration && id === TextFieldId.Username) {
+      if (!value) {
+        setValidationMessage(['']);
+        setValidationTitle(TextFieldMessage.CreateUserName);
+      }
+    }
   };
 
   const handleBlur = (event: FocusEvent<HTMLInputElement>) => {
@@ -127,26 +131,21 @@ export const TextField: FC<TextFieldProps & UseControllerProps<FormTextField>> =
     }
 
     handleEmptyValue(value);
+
+    if (pathname === Path.Registration && id === TextFieldId.Username) {
+      if (value) {
+        setValidationMessage([TextFieldMessage.CreateUserName]);
+        setValidationTitle(TextFieldMessage.CreateUserName);
+      }
+    }
   };
 
   const inputClass = classNames('text-field__input', {
-    // 'text-field__input_error': !field.value && validationMessage[0].length > 0,
     'text-field__input_error':
-      (!field.value && validationMessage[0].length > 0) ||
-      message === TextFieldMessage.WrongLoginOrPassword ||
-      message === TextFieldMessage.EmailError ||
-      message === TextFieldMessage.Error ||
-      message === TextFieldMessage.CreateUserName ||
-      message === TextFieldMessage.Phone,
+      (!field.value && validationMessage[0].length > 0) || validationTitle === validationMessage[0],
   });
   const messageClass = classNames('mark text-field__message info_large', {
-    color_negative:
-      (!field.value && validationMessage[0].length > 0) ||
-      message === TextFieldMessage.WrongLoginOrPassword ||
-      message === TextFieldMessage.EmailError ||
-      message === TextFieldMessage.Error ||
-      message === TextFieldMessage.CreateUserName ||
-      message === TextFieldMessage.Phone,
+    color_negative: (!field.value && validationMessage[0].length > 0) || validationTitle === validationMessage[0],
   });
 
   useEffect(() => {
@@ -170,6 +169,7 @@ export const TextField: FC<TextFieldProps & UseControllerProps<FormTextField>> =
     <div className='text-field'>
       {type === TextFieldType.Tel && (
         <MaskedInput
+          {...field}
           name={props.name}
           id={id}
           placeholder={placeholder}
@@ -219,15 +219,15 @@ export const TextField: FC<TextFieldProps & UseControllerProps<FormTextField>> =
         </div>
       )}
       <p className={messageClass} data-test-id={DataTestId.Hint}>
-        {validationMessage[0].length > 0 && (
-          <HighLight
-            className='color_negative'
-            value={validationMessage}
-            title={validationTitle}
-            dataTestId={DataTestId.Hint}
-          />
-        )}
+        {/* {validationMessage[0].length > 0 && ( */}
+        <HighLight className='color_negative' value={validationMessage} title={validationTitle} />
+        {/* )} */}
       </p>
+      {pathname === Path.ForgotPass && type === TextFieldType.Email && (
+        <p className={messageClass} data-test-id={DataTestId.Hint}>
+          <span className='text-field__message info_large color_color-grey-black-40'>{TextFieldMessage.Email}</span>
+        </p>
+      )}
     </div>
   );
 };

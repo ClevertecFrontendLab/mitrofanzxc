@@ -28,10 +28,7 @@ export const AuthorizationPage: FC = () => {
   const { handleSubmit, control } = useForm<FormTextField>(initialState);
   const dispatch = useAppDispatch();
 
-  console.log('AUTHORIZATION_PAGE_ERROR_MESSAGE ===', errorMessage);
-
   const onSubmit = (data: FormTextField) => {
-    console.log('AUTHORIZATION_FORM_DATA ===', data);
     if (data.identifier && data.password) {
       dispatch(authorizationRequest({ identifier: data.identifier, password: data.password }));
     }

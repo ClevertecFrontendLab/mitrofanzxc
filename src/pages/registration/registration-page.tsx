@@ -8,7 +8,7 @@ import {
   REGEX_WITH_USERNAME,
 } from 'constants/regex';
 
-import { FC, Fragment, useState } from 'react';
+import { FC, Fragment, useEffect, useState } from 'react';
 import { Controller, FieldErrors, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { ButtonLogin, ButtonPrimary, FormToast, Loader, TextField } from 'components';
@@ -23,7 +23,7 @@ import {
 } from 'components/text-field/text-field.types';
 import { useAppDispatch, useAppSelector, useAuth } from 'hooks';
 import { authorizationSelector, formToastSelector, registrationSelector } from 'store/selectors';
-import { registrationRequest, registrationReset } from 'store/slices';
+import { registrationRequest, registrationReset, setErrorMessage } from 'store/slices';
 import { REGISTRATION_REQUEST_WITH_INITIAL_DATA } from 'store/slices/registration/initial-state';
 import { RegistrationRequest } from 'store/slices/slices.types';
 
@@ -32,11 +32,16 @@ import { initialState } from './initial-state';
 export const RegistrationPage: FC = () => {
   const { isAuth } = useAppSelector(authorizationSelector);
   const { isError, isLoading, isSuccess } = useAppSelector(registrationSelector);
-  const { formToastButton } = useAppSelector(formToastSelector);
-  const { handleSubmit, control } = useForm<FormTextField>(initialState);
+  const { formToastButton, errorMessage } = useAppSelector(formToastSelector);
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm<FormTextField>(initialState);
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState<RegistrationRequest>(REGISTRATION_REQUEST_WITH_INITIAL_DATA);
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean | null>(false);
+  const [isFieldEmpty, setIsFieldEmpty] = useState(false);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
@@ -57,7 +62,6 @@ export const RegistrationPage: FC = () => {
   };
 
   const onSubmit = (data: FormTextField) => {
-    console.log('ON_SUBMIT_REGISTRATION_DATA ===', data);
     handleForm(data);
   };
 
@@ -82,6 +86,18 @@ export const RegistrationPage: FC = () => {
 
   const buttonPrimaryTitle =
     step === 1 ? ButtonPrimaryTitle.NextStep : step === 2 ? ButtonPrimaryTitle.LastStep : ButtonPrimaryTitle.Register;
+
+  // useEffect(() => {
+  //   if (errors.username?.type === 'required') {
+  //     // setIsFieldEmpty(true);
+  //     dispatch(setErrorMessage(TextFieldMessage.EmptyField));
+  //   }
+
+  //   if (errors.password?.type === 'required') {
+  //     // setIsFieldEmpty(true);
+  //     dispatch(setErrorMessage(TextFieldMessage.EmptyField));
+  //   }
+  // }, [errors.password?.type, errors.username?.type, dispatch]);
 
   useAuth(Path.Main, isAuth);
 
@@ -114,7 +130,7 @@ export const RegistrationPage: FC = () => {
                       type={TextFieldType.Text}
                       id={TextFieldId.Username}
                       placeholder={TextFieldPlaceholder.CreateUserName}
-                      message={TextFieldMessage.CreateUserName}
+                      message={errorMessage ? TextFieldMessage.EmptyField : TextFieldMessage.CreateUserName}
                       handleButton={handleButton}
                     />
                     <TextField
@@ -124,7 +140,7 @@ export const RegistrationPage: FC = () => {
                       type={TextFieldType.Password}
                       id={TextFieldId.Password}
                       placeholder={TextFieldPlaceholder.Password}
-                      message={TextFieldMessage.Password}
+                      message={errorMessage ? TextFieldMessage.EmptyField : TextFieldMessage.Password}
                       handleButton={handleButton}
                     />
                   </Fragment>

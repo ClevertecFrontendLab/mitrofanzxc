@@ -18,7 +18,6 @@ function* registrationRequestWorker(action: { payload: RegistrationRequest; type
       action.payload
     );
 
-    yield console.log('RegistrationResponse ===', data);
     yield put(registrationRequestSuccess(data));
     yield setLocalStorage(LocalStorage.Token, data.jwt);
     yield put(

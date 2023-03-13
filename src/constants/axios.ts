@@ -16,21 +16,14 @@ export enum API {
 export const cleverlandConfig = axios.create({
   baseURL: API.BaseUrl,
   withCredentials: true,
-  headers: {
-    'Content-Type': 'application/json',
-  },
 });
-
-cleverlandConfig.defaults.headers.common.Authorization = getToken();
 
 cleverlandConfig.interceptors.request.use(
   (config) => {
     /* eslint-disable no-param-reassign */
     const token = getToken();
 
-    // config.headers.set('Authorization', `${token}`);
     if (token) {
-      // config.headers = config.headers ?? {};
       config.headers.Authorization = token;
     }
 
@@ -38,27 +31,6 @@ cleverlandConfig.interceptors.request.use(
   },
   (error) => Promise.reject(error)
 );
-
-// cleverlandConfig.interceptors.request.use(
-//   (config: InternalAxiosRequestConfig) => {
-//     // const token = Cookies.get('token');
-//     const token = getToken();
-
-//     if (token) {
-//       // return {
-//       //   ...config,
-//       //   headers: {
-//       //     ...config.headers,
-//       //     Authorization: `Bearer ${token}`,
-//       //   },
-//       // };
-//       config.headers.set('Authorization', `${token}`);
-//     }
-
-//     return config;
-//   },
-//   (error: Error & AxiosError) => Promise.reject(error)
-// );
 
 cleverlandConfig.interceptors.response.use(
   (response) => response,

@@ -26,10 +26,10 @@ function* authorizationRequestWorker(action: { payload: AuthorizationRequest; ty
       action.payload
     );
 
-    yield call(setToken, data.jwt);
-    yield delay(1000);
-    yield put(setErrorMessage(''));
     yield put(authorizationRequestSuccess(data));
+    yield call(setToken, data.jwt);
+    yield put(setErrorMessage(''));
+    // yield delay(1000);
   } catch (error) {
     if (error instanceof CustomError400) {
       yield put(authorizationRequestWarning());

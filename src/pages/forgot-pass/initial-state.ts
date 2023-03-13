@@ -27,5 +27,5 @@ export const initialStatePassword: InitialStatePassword = {
     password: '',
     passwordConfirmation: '',
   },
-  mode: 'onChange',
+  mode: 'all',
 };

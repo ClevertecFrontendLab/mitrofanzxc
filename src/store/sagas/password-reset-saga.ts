@@ -23,7 +23,6 @@ function* passwordResetRequestWorker(action: { payload: PasswordResetRequest; ty
       action.payload
     );
 
-    yield console.log('PasswordResetResponse ===', data);
     yield put(passwordResetRequestSuccess(data));
     yield setLocalStorage(LocalStorage.IsLetterReceived, JSON.stringify(true));
     yield put(setErrorMessage(''));

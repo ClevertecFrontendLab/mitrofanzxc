@@ -7,5 +7,5 @@ export const getToken = () => {
     return `Bearer ${token}`;
   }
 
-  return undefined;
+  return null;
 };

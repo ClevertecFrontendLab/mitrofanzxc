@@ -15,7 +15,11 @@ export type HighLightProps = {
 
 export const HighLight: FC<HighLightProps> = ({ value, title, className, dataTestId }) => {
   if (!value) {
-    return <span>{title}</span>;
+    return <span className='color_color-grey-black-40'>{title}</span>;
+  }
+
+  if (value[0] === title) {
+    return <span className='color_negative'>{title}</span>;
   }
 
   const regexp = RegExp(value.join('|'), 'ig');
@@ -28,10 +32,9 @@ export const HighLight: FC<HighLightProps> = ({ value, title, className, dataTes
           if (index + 1 !== arr.length) {
             return (
               <Fragment key={uuidv4()}>
-                <span>{nonBoldText}</span>
-                {/* <span className={className}> */}
-                <span>
-                  <mark className={className}>{matchValue[index]}</mark>
+                <span className='color_color-grey-black-40'>{nonBoldText}</span>
+                <span className={className} data-test-id={dataTestId}>
+                  {matchValue[index]}
                 </span>
               </Fragment>
             );
@@ -43,5 +46,5 @@ export const HighLight: FC<HighLightProps> = ({ value, title, className, dataTes
     );
   }
 
-  return <span>{title}</span>;
+  return <span className='color_color-grey-black-40'>{title}</span>;
 };

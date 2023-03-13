@@ -53,7 +53,7 @@ export const Header: FC = () => {
                   type='button'
                   className='h5 nav__item'
                   onClick={handleLogout}
-                  data-test-id={DataTestId.ExitButton}
+                  // data-test-id={DataTestId.ExitButton}
                 >
                   Выход
                 </button>
