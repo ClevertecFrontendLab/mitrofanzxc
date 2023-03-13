@@ -1,29 +1,31 @@
+import { DataTestId } from 'constants/data-test-id';
+
 import { FC, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import classNames from 'classnames';
-
-import { useAppDispatch, useAppSelector } from '../../../hooks';
-import { changeCatalogSortState, sortCatalogByRating } from '../../../store/slices';
-import { handleFilter, handleSort } from '../../../utils';
-import { ELanguage, ESort } from '../../../utils/utils.types';
-import { Sprite } from '../..';
-import { ESpriteId } from '../../sprite/sprite.types';
+import { Sprite } from 'components';
+import { SpriteId } from 'components/sprite/sprite.types';
+import { useAppDispatch, useAppSelector } from 'hooks';
+import { catalogSelector, categoriesSelector } from 'store/selectors';
+import { changeCatalogSortState, sortCatalogByRating } from 'store/slices';
+import { handleFilter, handleSort } from 'utils';
+import { Language, Sort } from 'utils/utils.types';
 
 import './button-sort.scss';
 
 export const ButtonSort: FC = () => {
   const { category } = useParams();
-  const { catalogSortState, initialData } = useAppSelector((state) => state.catalog);
-  const { categoriesData } = useAppSelector((state) => state.categories);
+  const { catalogSortState, initialData } = useAppSelector(catalogSelector);
+  const { categoriesData } = useAppSelector(categoriesSelector);
   const dispatch = useAppDispatch();
 
   const handleButtonSort = () => {
     switch (catalogSortState) {
-      case ESort.Descending:
-        dispatch(changeCatalogSortState(ESort.Ascending));
+      case Sort.Descending:
+        dispatch(changeCatalogSortState(Sort.Ascending));
         break;
-      case ESort.Ascending:
-        dispatch(changeCatalogSortState(ESort.Descending));
+      case Sort.Ascending:
+        dispatch(changeCatalogSortState(Sort.Descending));
         break;
       default:
         break;
@@ -33,13 +35,13 @@ export const ButtonSort: FC = () => {
   useEffect(() => {
     dispatch(
       sortCatalogByRating(
-        handleSort(catalogSortState, handleFilter(category, categoriesData, ELanguage.En, initialData))
+        handleSort(catalogSortState, handleFilter(categoriesData, Language.En, initialData, category))
       )
     );
   }, [catalogSortState, categoriesData, category, dispatch, initialData]);
 
   const spriteClass = classNames('button-sort__logo', {
-    'button-sort__logo_ascending': catalogSortState === ESort.Ascending,
+    'button-sort__logo_ascending': catalogSortState === Sort.Ascending,
   });
 
   return (
@@ -47,9 +49,9 @@ export const ButtonSort: FC = () => {
       className='button-sort filter-shadow'
       type='button'
       onClick={handleButtonSort}
-      data-test-id='sort-rating-button'
+      data-test-id={DataTestId.SortRatingButton}
     >
-      <Sprite id={ESpriteId.Sort} className={spriteClass} />
+      <Sprite id={SpriteId.Sort} className={spriteClass} />
       <span className='body_small'>По рейтингу</span>
     </button>
   );

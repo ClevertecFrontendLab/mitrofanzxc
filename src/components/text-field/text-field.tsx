@@ -1,77 +1,231 @@
-import { ChangeEvent, FC, useState } from 'react';
+import { DataTestId } from 'constants/data-test-id';
+import { Path } from 'constants/path';
+import { MASK_PHONE } from 'constants/regex';
 
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { setTextFieldError, setTextFieldValue } from '../../store/slices';
-import { TForm } from '../../store/slices/slices.types';
-import { validateTextField } from '../../utils';
-import { ESpriteId } from '../sprite/sprite.types';
-import { Sprite } from '..';
+import { ChangeEvent, FC, FocusEvent, useEffect, useState } from 'react';
+import { useController, UseControllerProps } from 'react-hook-form';
+import { useLocation } from 'react-router-dom';
+import MaskedInput from 'react-text-mask';
+import classNames from 'classnames';
+import { HighLight, Sprite } from 'components';
+import { SpriteId } from 'components/sprite/sprite.types';
+import { validate } from 'utils';
 
-import { ETextFieldType, TTextField } from './text-field.types';
+import { FormTextField, TextFieldId, TextFieldMessage, TextFieldPlaceholder, TextFieldType } from './text-field.types';
 
 import './text-field.scss';
 
-export const TextField: FC<TTextField> = ({ type, id, placeholder, message }) => {
-  const [isEyeOpen, setIsEyeOpen] = useState<boolean>(false);
-  const { form } = useAppSelector((state) => state.registration);
-  const dispatch = useAppDispatch();
+export type TextFieldProps = {
+  type: TextFieldType;
+  id: TextFieldId;
+  placeholder: TextFieldPlaceholder;
+  message: string | TextFieldMessage;
+  handleButton?: (value: boolean) => void;
+};
 
-  const handleTextFieldValue = (event: ChangeEvent<HTMLInputElement>) => {
-    const target = event.target as HTMLInputElement;
-    const { type: targetType, id: targetId, value } = target;
+export const TextField: FC<TextFieldProps & UseControllerProps<FormTextField>> = ({
+  type,
+  id,
+  placeholder,
+  message,
+  handleButton,
+  ...props
+}) => {
+  const { field, fieldState } = useController(props);
+  const { pathname } = useLocation();
+  const [isEyeOpened, setIsEyeOpened] = useState(false);
+  const [isEyeVisible, setIsEyeVisible] = useState(false);
+  const [isCheckmarkVisible, setIsCheckmarkVisible] = useState(false);
+  const [validationMessage, setValidationMessage] = useState<string[]>(['']);
+  const [validationTitle, setValidationTitle] = useState<string | TextFieldMessage>(message);
 
-    dispatch(setTextFieldValue({ value, id: targetId }));
+  const handleCheckmark = (value: boolean) => {
+    setIsCheckmarkVisible(value);
+  };
 
-    switch (targetType) {
-      case ETextFieldType.Tel:
-        dispatch(setTextFieldError({ value: validateTextField(value, id), id: targetId }));
-        break;
-      case ETextFieldType.Email:
-        dispatch(setTextFieldError({ value: validateTextField(value, id), id: targetId }));
-        break;
-      case ETextFieldType.Text:
-        dispatch(setTextFieldError({ value: validateTextField(value, id), id: targetId }));
-        break;
-      case ETextFieldType.Password:
-        dispatch(setTextFieldError({ value: validateTextField(value, id), id: targetId }));
-        break;
-      default:
-        break;
+  const handleValidationMessage = (value: string[]) => {
+    setValidationMessage(value);
+  };
+
+  const handleSetIsEyeOpened = () => {
+    setIsEyeOpened(!isEyeOpened);
+  };
+
+  const handleSubmitButton = () => {
+    if (handleButton) {
+      if (fieldState.error || !field.value) {
+        handleButton(true);
+      } else {
+        handleButton(false);
+      }
     }
   };
 
-  const handleSetIsEyeOpen = () => {
-    setIsEyeOpen(!isEyeOpen);
+  const handleEmptyValue = (value: string) => {
+    if (value) {
+      if (pathname === Path.Authorization) {
+        setIsEyeVisible(true);
+        setValidationTitle('');
+      } else {
+        setIsEyeVisible(true);
+        setValidationTitle(message);
+      }
+
+      if (id === TextFieldId.FirstName || id === TextFieldId.LastName) {
+        setValidationTitle('');
+        handleSubmitButton();
+      }
+
+      if (id === TextFieldId.PasswordConfirmation) {
+        setValidationMessage(['']);
+      }
+    } else {
+      setIsEyeVisible(false);
+
+      if (id === TextFieldId.Password && pathname === Path.Registration) {
+        setValidationMessage([TextFieldMessage.Password]);
+        setValidationTitle(TextFieldMessage.Password);
+      } else {
+        setValidationMessage([TextFieldMessage.EmptyField]);
+        setValidationTitle(TextFieldMessage.EmptyField);
+      }
+    }
   };
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const target = event.target as HTMLInputElement;
+    const { value } = target;
+
+    field.onChange(event);
+
+    if (pathname !== Path.Authorization) {
+      validate(value, id, message, handleCheckmark, handleValidationMessage);
+    }
+
+    handleEmptyValue(value);
+
+    if (pathname.includes(Path.ForgotPass) && id === TextFieldId.Password) {
+      if (!value) {
+        setValidationMessage(['']);
+        setValidationTitle(TextFieldMessage.Password);
+      }
+    }
+
+    if (pathname === Path.Registration && id === TextFieldId.Username) {
+      if (!value) {
+        setValidationMessage(['']);
+        setValidationTitle(TextFieldMessage.CreateUserName);
+      }
+    }
+  };
+
+  const handleBlur = (event: FocusEvent<HTMLInputElement>) => {
+    const target = event.target as HTMLInputElement;
+    const { value } = target;
+
+    field.onBlur();
+
+    if (pathname !== Path.Authorization) {
+      validate(value, id, message, handleCheckmark, handleValidationMessage);
+      handleSubmitButton();
+    }
+
+    handleEmptyValue(value);
+
+    if (pathname === Path.Registration && id === TextFieldId.Username) {
+      if (value) {
+        setValidationMessage([TextFieldMessage.CreateUserName]);
+        setValidationTitle(TextFieldMessage.CreateUserName);
+      }
+    }
+  };
+
+  const inputClass = classNames('text-field__input', {
+    'text-field__input_error':
+      (!field.value && validationMessage[0].length > 0) || validationTitle === validationMessage[0],
+  });
+  const messageClass = classNames('mark text-field__message info_large', {
+    color_negative: (!field.value && validationMessage[0].length > 0) || validationTitle === validationMessage[0],
+  });
+
+  useEffect(() => {
+    if (message === TextFieldMessage.WrongLoginOrPassword) {
+      setValidationMessage([TextFieldMessage.WrongLoginOrPassword]);
+      setValidationTitle(TextFieldMessage.WrongLoginOrPassword);
+    }
+
+    if (message === TextFieldMessage.Error) {
+      setValidationMessage([TextFieldMessage.Error]);
+      setValidationTitle(TextFieldMessage.Error);
+    }
+
+    if (message === TextFieldMessage.PasswordMismatch) {
+      setValidationMessage([TextFieldMessage.PasswordMismatch]);
+      setValidationTitle(TextFieldMessage.PasswordMismatch);
+    }
+  }, [message]);
 
   return (
     <div className='text-field'>
-      <input
-        type={isEyeOpen ? ETextFieldType.Text : type}
-        name={id}
-        id={id}
-        placeholder={placeholder}
-        className='text-field__input'
-        disabled={false}
-        autoComplete='off'
-        pattern='^.{1,}$'
-        value={form[id as keyof TForm].value}
-        onChange={handleTextFieldValue}
-      />
+      {type === TextFieldType.Tel && (
+        <MaskedInput
+          {...field}
+          name={props.name}
+          id={id}
+          placeholder={placeholder}
+          className={inputClass}
+          disabled={false}
+          autoComplete='off'
+          mask={MASK_PHONE}
+          keepCharPositions={true}
+          placeholderChar={'\u0078'}
+          value={field.value}
+          onChange={handleChange}
+          onBlur={handleBlur}
+        />
+      )}
+      {type !== TextFieldType.Tel && (
+        <input
+          {...field}
+          type={isEyeOpened ? TextFieldType.Text : type}
+          name={props.name}
+          id={id}
+          placeholder={placeholder}
+          className={inputClass}
+          disabled={false}
+          autoComplete='off'
+          onChange={handleChange}
+          onBlur={handleBlur}
+        />
+      )}
       <label htmlFor={id} data-content={placeholder} className='text-field__label'>
         <span className='text-field__label_hidden'>{placeholder}</span>
       </label>
-      {type === ETextFieldType.Password && (
+      {type === TextFieldType.Password && isEyeVisible && (
         <div className='text-field__logo-wrapper'>
-          <Sprite id={ESpriteId.Check} className='text-field__logo text-field__logo_check' />
+          {isCheckmarkVisible && pathname !== Path.Authorization && (
+            <Sprite
+              id={SpriteId.Checkmark}
+              className='text-field__logo text-field__logo_check'
+              dataTestId={DataTestId.Checkmark}
+            />
+          )}
           <Sprite
-            id={isEyeOpen ? ESpriteId.EyeOpen : ESpriteId.EyeClosed}
+            id={isEyeOpened ? SpriteId.EyeOpened : SpriteId.EyeClosed}
             className='text-field__logo text-field__logo_eye'
-            onClick={handleSetIsEyeOpen}
+            onClick={handleSetIsEyeOpened}
+            dataTestId={isEyeOpened ? DataTestId.EyeOpened : DataTestId.EyeClosed}
           />
         </div>
       )}
-      {message && <p className='text-field__message info_large'>{message}</p>}
+      <p className={messageClass} data-test-id={DataTestId.Hint}>
+        <HighLight className='color_negative' value={validationMessage} title={validationTitle} />
+      </p>
+      {pathname === Path.ForgotPass && type === TextFieldType.Email && (
+        <p className={messageClass} data-test-id={DataTestId.Hint}>
+          <span className='text-field__message info_large color_color-grey-black-40'>{TextFieldMessage.Email}</span>
+        </p>
+      )}
     </div>
   );
 };

@@ -1,13 +1,15 @@
+import { DataTestId } from 'constants/data-test-id';
+
 import { FC, Fragment } from 'react';
 import classNames from 'classnames';
-
-import { useAppDispatch, useAppSelector, useBodyOverflow } from '../../../hooks';
-import { closeMobileMenu, toggleMobileMenu } from '../../../store/slices';
+import { useAppDispatch, useAppSelector, useBodyOverflow } from 'hooks';
+import { mobileMenuSelector } from 'store/selectors';
+import { closeMobileMenu, toggleMobileMenu } from 'store/slices';
 
 import './button-burger.scss';
 
 const ButtonBurger: FC = () => {
-  const { isMobileMenuOpen } = useAppSelector((state) => state.mobileMenu);
+  const { isMobileMenuOpen } = useAppSelector(mobileMenuSelector);
   const dispatch = useAppDispatch();
 
   const handleButtonBurger = () => {
@@ -26,7 +28,12 @@ const ButtonBurger: FC = () => {
   return (
     <Fragment>
       <div role='presentation' className={shadowClass} onClick={handleShadow} />
-      <button className='button-burger' type='button' onClick={handleButtonBurger} data-test-id='button-burger'>
+      <button
+        className='button-burger'
+        type='button'
+        onClick={handleButtonBurger}
+        data-test-id={DataTestId.ButtonBurger}
+      >
         <span className={buttonBurgerBarClass} />
         <span className={buttonBurgerBarClass} />
         <span className={buttonBurgerBarClass} />

@@ -1,29 +1,30 @@
-import { ESpriteId } from '../components/sprite/sprite.types';
+import { ReviewProps } from 'components/review/review';
+import { SpriteId } from 'components/sprite/sprite.types';
 
-export type TStringAble = string | null | undefined;
+export type StringAble = string | null | undefined;
 
-export type TNumberAble = number | null | undefined;
+export type NumberAble = number | null | undefined;
 
-export type TBooking = {
+export type Booking = {
   id: number;
   order: boolean;
-  dateOrder: TStringAble;
+  dateOrder: StringAble;
   customerId: number;
-  customerFirstName: TStringAble;
-  customerLastName: TStringAble;
+  customerFirstName: StringAble;
+  customerLastName: StringAble;
 };
 
-export type TDelivery = {
+export type Delivery = {
   id: number;
   handed: boolean;
-  dateHandedFrom: TStringAble;
-  dateHandedTo: TStringAble;
+  dateHandedFrom: StringAble;
+  dateHandedTo: StringAble;
   recipientId: number;
-  recipientFirstName: TStringAble;
-  recipientLastName: TStringAble;
+  recipientFirstName: StringAble;
+  recipientLastName: StringAble;
 };
 
-export type THistory = {
+export type Histories = {
   id: number;
   userId: number;
 };
@@ -33,36 +34,23 @@ export type TImage = {
 };
 
 export type TCatalogData = {
-  issueYear: TStringAble;
-  rating: TNumberAble;
+  issueYear: StringAble;
+  rating: NumberAble;
   title: string;
   authors: string[];
   image: TImage | null;
   categories: string[];
   id: number;
-  booking: TBooking | null;
-  delivery: TDelivery | null;
-  histories: THistory[] | null;
+  booking: Booking | null;
+  delivery: Delivery | null;
+  histories: Histories[] | null;
 };
 
-export type TComments = {
-  id: string;
-  rating: TNumberAble;
-  text: TStringAble;
-  createdAt: string;
-  user: {
-    commentUserId: number;
-    firstName: string;
-    lastName: string;
-    avatarUrl: TStringAble;
-  };
-};
-
-export type TBookData = {
+export type BookData = {
   id: number;
-  title: TStringAble;
-  rating: TNumberAble;
-  issueYear: TStringAble;
+  title: StringAble;
+  rating: NumberAble;
+  issueYear: StringAble;
   description: string;
   publish: string;
   pages: string;
@@ -74,10 +62,10 @@ export type TBookData = {
   authors: string[];
   images: TImage[];
   categories: string[];
-  comments: TComments[] | null;
-  booking: TBooking | null;
-  delivery: TDelivery | null;
-  histories: THistory[];
+  comments: ReviewProps[] | null;
+  booking: Booking | null;
+  delivery: Delivery | null;
+  histories: Histories[];
 };
 
 export type TCategories = {
@@ -86,24 +74,13 @@ export type TCategories = {
   id: number;
 };
 
-export type TCategoryMockData = {
+export type CategoryList = {
   path: string;
   name: string;
 };
 
-export type TSocialsMockData = {
+export type SocialList = {
   id: string;
   link: string;
-  src: ESpriteId;
-};
-
-export type TPATHS = {
-  main: string;
-  booksAll: string;
-  booksCategory: string;
-  bookPage: string;
-  profile: string;
-  terms: string;
-  contract: string;
-  any: string;
+  src: SpriteId;
 };

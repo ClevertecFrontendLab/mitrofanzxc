@@ -1,22 +1,27 @@
 import { useEffect } from 'react';
+import { useAppDispatch } from 'hooks';
+import { bookRequest, catalogRequest, categoriesRequest } from 'store/slices';
+import { Connection } from 'store/slices/slices.types';
+import { getToken } from 'utils';
 
-import { bookRequest, catalogRequest, categoriesRequest } from '../store/slices';
-import { EConnectionType } from '../store/slices/slices.types';
+export type UseRequestProps = { connectionType: Connection; bookId?: string };
 
-import { useAppDispatch } from './use-app-dispatch';
-
-export const useRequest = (connectionType: EConnectionType, bookId?: string | undefined) => {
+export const useRequest = ({ connectionType, bookId }: UseRequestProps) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+    const token = getToken();
+
     switch (connectionType) {
-      case EConnectionType.Catalog:
-        dispatch(catalogRequest());
-        dispatch(categoriesRequest());
-        break;
-      case EConnectionType.Book:
-        if (bookId) {
+      case Connection.Book:
+        if (bookId && token) {
           dispatch(bookRequest(bookId));
+          dispatch(categoriesRequest());
+        }
+        break;
+      case Connection.Catalog:
+        if (token) {
+          dispatch(catalogRequest());
           dispatch(categoriesRequest());
         }
         break;

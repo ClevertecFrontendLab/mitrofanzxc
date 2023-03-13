@@ -1,14 +1,16 @@
+import { DataTestId } from 'constants/data-test-id';
+
 import { ChangeEvent, FC, FocusEvent, KeyboardEvent, useContext, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import classNames from 'classnames';
-
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { ContextMainPage } from '../../pages';
-import { filterCatalogByCategory, searchCatalogByTitle } from '../../store/slices';
-import { handleFilter, handleSearch } from '../../utils';
-import { ELanguage } from '../../utils/utils.types';
-import { ESpriteId } from '../sprite/sprite.types';
-import { Sprite } from '..';
+import { Sprite } from 'components';
+import { SpriteId } from 'components/sprite/sprite.types';
+import { useAppDispatch, useAppSelector } from 'hooks';
+import { ContextMainPage } from 'pages';
+import { catalogSelector, categoriesSelector } from 'store/selectors';
+import { filterCatalogByCategory, searchCatalogByTitle } from 'store/slices';
+import { handleFilter, handleSearch } from 'utils';
+import { Language } from 'utils/utils.types';
 
 import './input-search.scss';
 
@@ -16,8 +18,8 @@ export const InputSearch: FC = () => {
   const { category } = useParams();
   const { inputSearchValue, setInputSearchValue, isInputSearchOpen, setIsInputSearchOpen } =
     useContext(ContextMainPage);
-  const { categoriesData } = useAppSelector((state) => state.categories);
-  const { initialData } = useAppSelector((state) => state.catalog);
+  const { categoriesData } = useAppSelector(categoriesSelector);
+  const { initialData } = useAppSelector(catalogSelector);
   const inputSearchRef = useRef<HTMLInputElement>(null);
   const dispatch = useAppDispatch();
 
@@ -40,12 +42,12 @@ export const InputSearch: FC = () => {
   const handleKeyboardInputSearch = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
       if (category) {
-        dispatch(filterCatalogByCategory(handleFilter(category, categoriesData, ELanguage.En, initialData)));
+        dispatch(filterCatalogByCategory(handleFilter(categoriesData, Language.En, initialData, category)));
       }
 
       dispatch(
         searchCatalogByTitle(
-          handleSearch(inputSearchValue, handleFilter(category, categoriesData, ELanguage.En, initialData))
+          handleSearch(inputSearchValue, handleFilter(categoriesData, Language.En, initialData, category))
         )
       );
     }
@@ -64,10 +66,10 @@ export const InputSearch: FC = () => {
   };
 
   useEffect(() => {
-    dispatch(filterCatalogByCategory(handleFilter(category, categoriesData, ELanguage.En, initialData)));
+    dispatch(filterCatalogByCategory(handleFilter(categoriesData, Language.En, initialData, category)));
     dispatch(
       searchCatalogByTitle(
-        handleSearch(inputSearchValue, handleFilter(category, categoriesData, ELanguage.En, initialData))
+        handleSearch(inputSearchValue, handleFilter(categoriesData, Language.En, initialData, category))
       )
     );
   }, [categoriesData, category, dispatch, initialData, inputSearchValue]);
@@ -78,8 +80,13 @@ export const InputSearch: FC = () => {
 
   return (
     <div className={inputSearchClass}>
-      <button type='button' className='button-search' onClick={handleButtonSearch} data-test-id='button-search-open'>
-        <Sprite id={ESpriteId.Search} className='button-search__logo' />
+      <button
+        type='button'
+        className='button-search'
+        onClick={handleButtonSearch}
+        data-test-id={DataTestId.ButtonSearchOpen}
+      >
+        <Sprite id={SpriteId.Search} className='button-search__logo' />
       </button>
       <input
         className='input-search__field body_small'
@@ -93,10 +100,15 @@ export const InputSearch: FC = () => {
         onKeyDown={handleKeyboardInputSearch}
         onBlur={blurInputSearch}
         ref={inputSearchRef}
-        data-test-id='input-search'
+        data-test-id={DataTestId.InputSearch}
       />
-      <button type='button' className='button-cancel' onClick={handleButtonCancel} data-test-id='button-search-close'>
-        <Sprite id={ESpriteId.Close} className='button-cancel__logo' />
+      <button
+        type='button'
+        className='button-cancel'
+        onClick={handleButtonCancel}
+        data-test-id={DataTestId.ButtonSearchClose}
+      >
+        <Sprite id={SpriteId.Close} className='button-cancel__logo' />
       </button>
     </div>
   );

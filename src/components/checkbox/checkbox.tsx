@@ -1,11 +1,14 @@
 import { FC, useState } from 'react';
 import classNames from 'classnames';
 
-import { TCheckbox } from './checkbox.types';
-
 import './checkbox.scss';
 
-export const Checkbox: FC<TCheckbox> = ({ id, value }) => {
+export type CheckboxProps = {
+  id: string;
+  value: string;
+};
+
+export const Checkbox: FC<CheckboxProps> = ({ id, value }) => {
   const [isChecked, setIsChecked] = useState<boolean>(false);
   /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
   const [isDisabled, setIsDisabled] = useState<boolean>(false);

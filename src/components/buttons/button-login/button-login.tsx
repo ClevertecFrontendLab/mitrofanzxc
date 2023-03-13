@@ -1,15 +1,22 @@
+import { Path } from 'constants/path';
+
 import { FC } from 'react';
+import { Link } from 'react-router-dom';
+import { Sprite } from 'components';
+import { SpriteId } from 'components/sprite/sprite.types';
 
-import { Sprite } from '../..';
-import { ESpriteId } from '../../sprite/sprite.types';
-
-import { TButtonLogin } from './button-login.types';
+import { ButtonLoginTitle } from './button-login.types';
 
 import './button-login.scss';
 
-export const ButtonLogin: FC<TButtonLogin> = ({ title, onClick }) => (
-  <button type='button' className='button-login button_small_mobile' onClick={onClick}>
+export type ButtonLoginProps = {
+  title: ButtonLoginTitle;
+  path: Path;
+};
+
+export const ButtonLogin: FC<ButtonLoginProps> = ({ title, path }) => (
+  <Link to={path} type='button' className='button-login button_small_mobile'>
     <span>{title}</span>
-    <Sprite id={ESpriteId.ArrowLong} className='button-login__logo' />
-  </button>
+    <Sprite id={SpriteId.ArrowLong} className='button-login__logo' />
+  </Link>
 );

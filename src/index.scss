@@ -1,7 +1,7 @@
-@import './styles/normalize.scss';
-@import './styles/reset.scss';
-@import './styles/constants.scss';
-@import './styles/headers.scss';
+@import 'styles/normalize.scss';
+@import 'styles/reset.scss';
+@import 'styles/constants.scss';
+@import 'styles/headers.scss';
 
 body {
   @include montserrat;
@@ -63,10 +63,22 @@ body {
   color: $color-orange;
 }
 
+.display_none {
+  display: none;
+}
+
 .display_inline {
   display: inline;
 }
 
 .display_inline-block {
   display: inline-block;
+}
+
+.color_negative {
+  color: $color-negative;
+}
+
+.color_color-grey-black-40 {
+  color: $color-grey-black-40;
 }

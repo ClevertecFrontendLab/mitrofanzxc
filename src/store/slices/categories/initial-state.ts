@@ -1,6 +1,6 @@
-import { TCategoriesState } from '../slices.types';
+import { CategoriesState } from '../slices.types';
 
-export const initialState: TCategoriesState = {
+export const initialState: CategoriesState = {
   categoriesData: [],
   isLoading: false,
   isError: false,

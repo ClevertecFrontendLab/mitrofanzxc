@@ -11,25 +11,32 @@ export {
 } from './catalog/catalog-slice';
 export { categoriesRequest, categoriesRequestSuccess, categoriesRequestError } from './categories/categories-slice';
 export {
-  openMobileMenu,
-  closeMobileMenu,
-  toggleMobileMenu,
-  openAccordionMenu,
   closeAccordionMenu,
+  closeMobileMenu,
+  openAccordionMenu,
   toggleAccordionMenu,
+  toggleMobileMenu,
 } from './mobile-menu/mobile-menu-slice';
-export {
-  openFlow,
-  closeFlow,
-  openRegistration,
-  closeRegistration,
-  toggleRegistration,
-  openPasswordRecovery,
-  closePasswordRecovery,
-  openNewPassword,
-  closeNewPassword,
-  nextStep,
-  setTextFieldValue,
-  setTextFieldError,
-} from './registration/registration-slice';
 export { closeToast, setToast } from './toast/toast-slice';
+export {
+  authorizationRequest,
+  authorizationRequestSuccess,
+  authorizationRequestError,
+  authorizationRequestWarning,
+  logout,
+} from './authorization/authorization-slice';
+export {
+  registrationRequest,
+  registrationRequestSuccess,
+  registrationRequestError,
+  registrationReset,
+} from './registration/registration-slice';
+export {
+  passwordRecoveryRequest,
+  passwordRecoveryRequestSuccess,
+  passwordRecoveryRequestError,
+  passwordResetRequest,
+  passwordResetRequestSuccess,
+  passwordResetRequestError,
+} from './forgot-pass/forgot-pass-slice';
+export { closeFormToast, setFormToast, setErrorMessage } from './form-toast/form-toast-slice';

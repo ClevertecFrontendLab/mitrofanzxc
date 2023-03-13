@@ -1,9 +1,10 @@
+import { API, cleverlandConfig } from 'constants/axios';
+import { TCategories } from 'constants/constants.types';
+
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { AxiosResponse } from 'axios';
+import { ToastMessage, ToastType } from 'components/toast/toast.types';
 
-import { EToastMessage, EToastType } from '../../components/toast/toast.types';
-import { API, cleverlandConfig } from '../../constants/axios';
-import { TCategories } from '../../constants/constants.types';
 import { categoriesRequest, categoriesRequestError, categoriesRequestSuccess, setToast } from '../slices';
 
 function* categoriesRequestWorker() {
@@ -13,7 +14,7 @@ function* categoriesRequestWorker() {
     yield put(categoriesRequestSuccess(data));
   } catch {
     yield put(categoriesRequestError());
-    yield put(setToast({ type: EToastType.Error, message: EToastMessage.ConnectionError }));
+    yield put(setToast({ type: ToastType.Error, message: ToastMessage.ConnectionError }));
   }
 }
 

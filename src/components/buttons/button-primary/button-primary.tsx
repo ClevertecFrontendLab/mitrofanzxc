@@ -1,34 +1,66 @@
-import { FC } from 'react';
+import { StringAble } from 'constants/constants.types';
+import { DataTestId } from 'constants/data-test-id';
+import { Path } from 'constants/path';
+
+import { FC, Fragment } from 'react';
+import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 
-import { EButtonPrimaryType, TButtonPrimary } from './button-primary.types';
+import { ButtonPrimaryTitle, ButtonPrimaryType } from './button-primary.types';
 
 import './button-primary.scss';
 
-export const ButtonPrimary: FC<TButtonPrimary> = ({
+export type ButtonPrimaryProps = {
+  type: ButtonPrimaryType;
+  title: ButtonPrimaryTitle;
+  className?: string;
+  path?: Path;
+  untilDate?: StringAble;
+  disabled?: boolean | null;
+  onClick?: () => void;
+  dataTestId?: DataTestId;
+};
+
+export const ButtonPrimary: FC<ButtonPrimaryProps> = ({
   type,
   title,
-  untilDate,
   className,
+  path,
+  untilDate,
   disabled,
   onClick,
   dataTestId,
 }) => {
   const buttonPrimaryClass = classNames('button', {
-    'button-primary': type === EButtonPrimaryType.Primary,
-    'button-secondary': type !== EButtonPrimaryType.Primary,
+    'button-primary':
+      type === ButtonPrimaryType.Primary || type === ButtonPrimaryType.Submit || type === ButtonPrimaryType.Link,
+    'button-secondary': type === ButtonPrimaryType.Secondary,
   });
 
   return (
-    <button
-      className={`${buttonPrimaryClass} ${className || ''}`}
-      type='button'
-      disabled={disabled || false}
-      onClick={onClick}
-      data-test-id={dataTestId}
-    >
-      {title}
-      {untilDate && <span>{` ${untilDate}`}</span>}
-    </button>
+    <Fragment>
+      {(type === ButtonPrimaryType.Primary || type === ButtonPrimaryType.Secondary) && (
+        <button
+          className={`${buttonPrimaryClass} ${className || ''}`}
+          type='button'
+          disabled={disabled || false}
+          onClick={onClick}
+          data-test-id={dataTestId}
+        >
+          {title}
+          {untilDate && <span>{` ${untilDate}`}</span>}
+        </button>
+      )}
+      {type === ButtonPrimaryType.Submit && (
+        <button className={buttonPrimaryClass} type='submit' disabled={disabled || false}>
+          {title}
+        </button>
+      )}
+      {type === ButtonPrimaryType.Link && (
+        <button className={`${buttonPrimaryClass} ${className || ''}`} type='button'>
+          <Link to={path || Path.Authorization}>{title}</Link>
+        </button>
+      )}
+    </Fragment>
   );
 };

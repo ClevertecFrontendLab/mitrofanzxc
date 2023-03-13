@@ -1,0 +1,99 @@
+@import 'styles/constants.scss';
+
+.registration-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  row-gap: $base * 11;
+  width: 100vw;
+  height: 100vh;
+  background: -o-linear-gradient($color-hover);
+  background: linear-gradient($color-hover);
+
+  > .h3 {
+    color: $color-white;
+  }
+}
+
+.registration {
+  width: $base * 132;
+  padding: $base * 12 $base * 14 $base * 12 $base * 14;
+  background-color: $color-white;
+  border-radius: $base * 4;
+
+  @media (max-width: $breakpoint-sm-min) {
+    width: 288px;
+    padding: 24px 16px 24px 16px;
+  }
+
+  form {
+    margin-top: 8px;
+  }
+}
+
+.registration__fieldset {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  row-gap: $base * 8;
+  height: 100%;
+}
+
+.registration__section {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-direction: column;
+  row-gap: $base * 2;
+  width: 100%;
+
+  button.info_large {
+    margin-left: $base * 3;
+    color: $color-grey-black-20;
+  }
+
+  .button {
+    width: 100%;
+    height: $base * 13;
+    border-radius: $base * 8;
+    cursor: pointer;
+  }
+
+  .body_large {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    row-gap: 4px;
+    color: $color-grey-black-70;
+
+    .button_small_mobile {
+      margin-left: $base * 4;
+      color: $color-dark;
+      text-transform: uppercase;
+
+      @media (max-width: $breakpoint-sm-min) {
+        margin-left: 0;
+      }
+    }
+  }
+}
+
+.button-login {
+  display: flex;
+  align-items: center;
+  column-gap: $base * 3;
+}
+
+.button-login__logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: $base * 6;
+  height: $base * 6;
+  stroke: $color-dark;
+}

@@ -1,4 +1,4 @@
-@import '../../styles/constants.scss';
+@import 'styles/constants.scss';
 
 .nav:has(+ .book-page) {
   position: absolute;
@@ -68,7 +68,8 @@
 .nav__item {
   position: relative;
   display: block;
-  margin-top: 46px;
+  // margin-top: 46px;
+  margin-top: 10px;
   margin-right: $base * 6;
 
   &::after {
@@ -163,7 +164,8 @@
   padding-left: $base * 5;
 
   > a {
-    margin-top: $base * 6;
+    // margin-top: $base * 6;
+    margin-top: $base * 4;
     padding-left: 0;
   }
 }

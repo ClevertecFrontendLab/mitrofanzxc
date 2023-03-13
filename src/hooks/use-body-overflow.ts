@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
-
-import { useAppSelector } from './use-app-selector';
+import { useAppSelector } from 'hooks';
+import { bookSelector, catalogSelector, categoriesSelector, mobileMenuSelector } from 'store/selectors';
 
 const useBodyOverflow = (isModalOpen = false) => {
-  const { isMobileMenuOpen } = useAppSelector((state) => state.mobileMenu);
-  const { isLoading: isLoadingCatalog } = useAppSelector((state) => state.catalog);
-  const { isLoading: isLoadingCategories } = useAppSelector((state) => state.categories);
-  const { isLoading: isLoadingBook } = useAppSelector((state) => state.book);
+  const { isMobileMenuOpen } = useAppSelector(mobileMenuSelector);
+  const { isLoading: isLoadingCatalog } = useAppSelector(catalogSelector);
+  const { isLoading: isLoadingCategories } = useAppSelector(categoriesSelector);
+  const { isLoading: isLoadingBook } = useAppSelector(bookSelector);
 
   useEffect(() => {
     const BODY = document.querySelector('body') as HTMLBodyElement;

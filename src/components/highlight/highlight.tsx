@@ -1,38 +1,50 @@
-import { FC, Fragment } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import { DataTestId } from 'constants/data-test-id';
 
-import { THighLight } from './highlight.types';
+import { FC, Fragment } from 'react';
+import { TextFieldMessage } from 'components/text-field/text-field.types';
+import { v4 as uuidv4 } from 'uuid';
 
 import './highlight.scss';
 
-export const HighLight: FC<THighLight> = ({ inputSearchValue, title }) => {
-  if (!inputSearchValue) {
-    return <span>{title}</span>;
+export type HighLightProps = {
+  value: string[] | TextFieldMessage[];
+  title: string;
+  className?: string;
+  dataTestId?: DataTestId;
+};
+
+export const HighLight: FC<HighLightProps> = ({ value, title, className, dataTestId }) => {
+  if (!value) {
+    return <span className='color_color-grey-black-40'>{title}</span>;
   }
 
-  const regexp = new RegExp(inputSearchValue, 'gi');
-  const matchValue = title.match(regexp);
+  if (value[0] === title) {
+    return <span className='color_negative'>{title}</span>;
+  }
+
+  const regexp = RegExp(value.join('|'), 'ig');
+  const matchValue = Array.from(title.matchAll(regexp));
 
   if (matchValue) {
     return (
       <Fragment>
-        {title.split(regexp).map((str, index, array) => {
-          if (index < array.length - 1) {
-            const firstMatch = matchValue.shift();
-
+        {title.split(regexp).map((nonBoldText, index, arr) => {
+          if (index + 1 !== arr.length) {
             return (
               <Fragment key={uuidv4()}>
-                {str}
-                <mark data-test-id='highlight-matches'>{firstMatch}</mark>
+                <span className='color_color-grey-black-40'>{nonBoldText}</span>
+                <span className={className} data-test-id={dataTestId}>
+                  {matchValue[index]}
+                </span>
               </Fragment>
             );
           }
 
-          return <Fragment key={uuidv4()}>{str}</Fragment>;
+          return <span key={uuidv4()}>{nonBoldText}</span>;
         })}
       </Fragment>
     );
   }
 
-  return <span>{title}</span>;
+  return <span className='color_color-grey-black-40'>{title}</span>;
 };

@@ -1,9 +1,15 @@
+import { DataTestId } from 'constants/data-test-id';
+
 import { FC } from 'react';
 
 import './loader.scss';
 
-export const Loader: FC = () => (
-  <div className='loader' data-test-id='loader'>
+export type LoaderProps = {
+  dataTestId: DataTestId;
+};
+
+export const Loader: FC<LoaderProps> = ({ dataTestId }) => (
+  <div className='loader' data-test-id={dataTestId}>
     <div className='circle'>
       <svg viewBox='0 0 36 36' className='circle__wrapper stroke_orange'>
         <path

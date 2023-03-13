@@ -1,7 +1,9 @@
-import { handleAuthors } from './handle-authors';
-import { EPart, TArrayDivideTableData, TDivideTableData } from './utils.types';
+import { BookData } from 'constants/constants.types';
 
-export const divideTableData: TDivideTableData = (part, bookData) => {
+import { handleAuthors } from './handle-authors';
+import { Part, TArrayDivideTableData } from './utils.types';
+
+export const divideTableData = (part: Part, bookData: BookData): TArrayDivideTableData | null => {
   if (bookData) {
     const arr: TArrayDivideTableData = Array.of(
       Object.entries({ publish: bookData.publish }).flat(),
@@ -17,7 +19,7 @@ export const divideTableData: TDivideTableData = (part, bookData) => {
 
     const separator = Math.ceil(arr.length / 2);
 
-    if (part === EPart.First) {
+    if (part === Part.First) {
       return arr.slice(0, separator);
     }
 

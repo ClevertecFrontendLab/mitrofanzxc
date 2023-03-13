@@ -1,23 +1,31 @@
+import { DataTestId } from 'constants/data-test-id';
+
 import { ChangeEvent, FC } from 'react';
+import { Sprite } from 'components';
+import { SpriteId } from 'components/sprite/sprite.types';
+import { useAppDispatch, useAppSelector } from 'hooks';
+import { catalogSelector } from 'store/selectors';
+import { changeCatalogView } from 'store/slices';
 
-import { useAppDispatch, useAppSelector } from '../../../hooks';
-import { changeCatalogView } from '../../../store/slices';
-import { Sprite } from '../..';
-import { ESpriteId } from '../../sprite/sprite.types';
-
-import { ECatalogView, TButtonCatalogView } from './button-catalog-view.types';
+import { CatalogView } from './button-catalog-view.types';
 
 import './button-catalog-view.scss';
 
-export const ButtonCatalogView: FC<TButtonCatalogView> = ({ id, value, dataTestId }) => {
-  const { catalogView } = useAppSelector((state) => state.catalog);
+export type ButtonCatalogViewProps = {
+  id: CatalogView;
+  value: CatalogView;
+  dataTestId?: DataTestId;
+};
+
+export const ButtonCatalogView: FC<ButtonCatalogViewProps> = ({ id, value, dataTestId }) => {
+  const { catalogView } = useAppSelector(catalogSelector);
   const dispatch = useAppDispatch();
 
   const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
     const target = event.target as HTMLInputElement;
     const { value: inputValue } = target;
 
-    if (inputValue === ECatalogView.Grid || inputValue === ECatalogView.List) {
+    if (inputValue === CatalogView.Grid || inputValue === CatalogView.List) {
       dispatch(changeCatalogView(inputValue));
     }
   };
@@ -33,7 +41,7 @@ export const ButtonCatalogView: FC<TButtonCatalogView> = ({ id, value, dataTestI
         onChange={handleInput}
         data-test-id={dataTestId}
       />
-      <Sprite id={id === ECatalogView.Grid ? ESpriteId.Grid : ESpriteId.List} className='button-catalog-view__logo' />
+      <Sprite id={id === CatalogView.Grid ? SpriteId.Grid : SpriteId.List} className='button-catalog-view__logo' />
     </label>
   );
 };

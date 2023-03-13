@@ -1,6 +1,6 @@
-import { TGetAmountOfBooks } from './utils.types';
+import { TCatalogData } from 'constants/constants.types';
 
-export const getAmountOfBooks: TGetAmountOfBooks = (data, category) => {
+export const getAmountOfBooks = (data: TCatalogData[], category: string): number => {
   if (data && data.length > 0) {
     return data.filter((item) => item.categories.includes(category)).length;
   }

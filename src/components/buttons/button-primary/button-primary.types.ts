@@ -1,32 +1,24 @@
-import { TStringAble } from '../../../constants/constants.types';
-
-export enum EButtonPrimaryType {
+export enum ButtonPrimaryType {
   Primary = 'primary',
   Secondary = 'secondary',
+  Submit = 'submit',
+  Link = 'link',
 }
 
-export enum EButtonPrimaryTitle {
+export enum ButtonPrimaryTitle {
+  BackToRegistration = 'Назад к регистрации',
   Book = 'Забронировать',
   Booked = 'Забронирована',
   BusyUntil = 'Занята до',
-  RateTheBook = 'Оценить книгу',
-  Rate = 'Оценить',
-  Entrance = 'Вход',
-  NextStep = 'Следующий шаг',
-  LastStep = 'Последний шаг',
-  Restore = 'Восстановить',
   Edit = 'Редактировать',
-  ViewContract = 'Посмотреть договор',
-  SaveChanges = 'Сохранить изменения',
+  Entrance = 'Вход',
+  LastStep = 'Последний шаг',
+  NextStep = 'Следующий шаг',
+  Rate = 'Оценить',
+  RateTheBook = 'Оценить книгу',
   Register = 'Зарегистрироваться',
+  Repeat = 'Повторить',
+  Restore = 'Восстановить',
+  SaveChanges = 'Сохранить изменения',
+  ViewContract = 'Посмотреть договор',
 }
-
-export type TButtonPrimary = {
-  type: EButtonPrimaryType;
-  title: EButtonPrimaryTitle;
-  untilDate?: TStringAble;
-  className?: string;
-  disabled?: boolean;
-  onClick?: () => void;
-  dataTestId?: string;
-};

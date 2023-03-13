@@ -1,17 +1,19 @@
+import { NumberAble } from 'constants/constants.types';
+
 import { FC, Fragment, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { RatingStar } from 'components';
+import { SpriteId } from 'components/sprite/sprite.types';
 import { v4 as uuidv4 } from 'uuid';
-
-import { TNumberAble } from '../../constants/constants.types';
-import { ESpriteId } from '../sprite/sprite.types';
-import { RatingStar } from '..';
-
-import { TRating } from './rating.types';
 
 import './rating.scss';
 
-export const Rating: FC<TRating> = ({ rating }) => {
-  const [emptyStarsAmount, setEmptyStarsAmount] = useState<TNumberAble>(null);
+export type RatingProps = {
+  rating: NumberAble;
+};
+
+export const Rating: FC<RatingProps> = ({ rating }) => {
+  const [emptyStarsAmount, setEmptyStarsAmount] = useState<NumberAble>(null);
   const { bookId } = useParams();
 
   useEffect(() => {
@@ -28,17 +30,17 @@ export const Rating: FC<TRating> = ({ rating }) => {
       {!rating && bookId && (
         <Fragment>
           <ul className='rating'>
-            {Array.from(Array(5)).map(() => RatingStar({ id: uuidv4(), spriteId: ESpriteId.StarEmpty }))}
+            {Array.from(Array(5)).map(() => RatingStar({ id: uuidv4(), spriteId: SpriteId.StarEmpty }))}
           </ul>
           <p>ещё нет оценок</p>
         </Fragment>
       )}
       {rating !== null && rating !== undefined && rating > 0 && (
         <ul className='rating'>
-          {Array.from(Array(Math.trunc(rating))).map(() => RatingStar({ id: uuidv4(), spriteId: ESpriteId.StarFill }))}
+          {Array.from(Array(Math.trunc(rating))).map(() => RatingStar({ id: uuidv4(), spriteId: SpriteId.StarFill }))}
           {emptyStarsAmount !== null &&
             emptyStarsAmount !== undefined &&
-            Array.from(Array(emptyStarsAmount)).map(() => RatingStar({ id: uuidv4(), spriteId: ESpriteId.StarEmpty }))}
+            Array.from(Array(emptyStarsAmount)).map(() => RatingStar({ id: uuidv4(), spriteId: SpriteId.StarEmpty }))}
         </ul>
       )}
     </Fragment>

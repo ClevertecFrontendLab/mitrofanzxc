@@ -1,43 +1,35 @@
-import { TRegistrationState } from '../slices.types';
+import { RegistrationState } from '../slices.types';
 
-export const initialState: TRegistrationState = {
-  isFlowOpen: false,
-  isRegistration: false,
-  isPasswordRecovery: false,
-  isLetterReceived: false,
-  formStep: 1,
-  form: {
-    login: {
-      isError: false,
-      value: '',
-    },
-    password: {
-      isError: false,
-      value: '',
-    },
-    firstName: {
-      isError: false,
-      value: '',
-    },
-    lastName: {
-      isError: false,
-      value: '',
-    },
-    phone: {
-      isError: false,
-      value: '',
-    },
-    email: {
-      isError: false,
-      value: '',
-    },
-    contractNumber: {
-      isError: false,
-      value: '',
-    },
-    contractOwner: {
-      isError: false,
-      value: '',
-    },
+export const REGISTRATION_REQUEST_WITH_INITIAL_DATA = {
+  email: '',
+  username: '',
+  password: '',
+  firstName: '',
+  lastName: '',
+  phone: '',
+};
+
+export const REGISTRATION_RESPONSE_WITH_INITIAL_DATA = {
+  jwt: '',
+  user: {
+    id: 0,
+    username: '',
+    email: '',
+    provider: '',
+    confirmed: false,
+    blocked: true,
+    createdAt: '',
+    updatedAt: '',
+    firstName: '',
+    lastName: '',
+    phone: '',
   },
+};
+
+export const initialState: RegistrationState = {
+  registrationRequest: REGISTRATION_REQUEST_WITH_INITIAL_DATA,
+  registrationResponse: REGISTRATION_RESPONSE_WITH_INITIAL_DATA,
+  isLoading: false,
+  isError: false,
+  isSuccess: false,
 };

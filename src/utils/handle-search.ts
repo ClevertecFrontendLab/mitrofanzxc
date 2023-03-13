@@ -1,4 +1,4 @@
-import { TCatalogData } from '../constants/constants.types';
+import { TCatalogData } from 'constants/constants.types';
 
 export const handleSearch = (value: string, data: TCatalogData[]) => {
   const temporaryData: TCatalogData[] = JSON.parse(JSON.stringify(data));

@@ -1,9 +1,9 @@
+import { TCatalogData } from 'constants/constants.types';
+
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
-
-import { ECatalogView } from '../../../components/buttons/button-catalog-view/button-catalog-view.types';
-import { TCatalogData } from '../../../constants/constants.types';
-import { ESort } from '../../../utils/utils.types';
+import { CatalogView } from 'components/buttons/button-catalog-view/button-catalog-view.types';
+import { Sort } from 'utils/utils.types';
 
 import { initialState } from './initial-state';
 
@@ -13,24 +13,30 @@ export const catalogSlice = createSlice({
   initialState,
   reducers: {
     catalogRequest: (state) => {
+      state.initialData = [];
+      state.catalogData = [];
       state.isLoading = true;
+      state.isError = false;
     },
     catalogRequestSuccess: (state, action: PayloadAction<TCatalogData[]>) => {
       state.initialData = action.payload;
       state.catalogData = action.payload;
       state.isLoading = false;
+      state.isError = false;
     },
     catalogRequestError: (state) => {
+      state.initialData = [];
+      state.catalogData = [];
       state.isError = true;
       state.isLoading = false;
     },
-    changeCatalogView: (state, action: PayloadAction<ECatalogView>) => {
+    changeCatalogView: (state, action: PayloadAction<CatalogView>) => {
       state.catalogView = action.payload;
     },
     sortCatalogByRating: (state, action: PayloadAction<TCatalogData[]>) => {
       state.catalogData = action.payload;
     },
-    changeCatalogSortState: (state, action: PayloadAction<ESort>) => {
+    changeCatalogSortState: (state, action: PayloadAction<Sort>) => {
       state.catalogSortState = action.payload;
     },
     filterCatalogByCategory: (state, action: PayloadAction<TCatalogData[]>) => {

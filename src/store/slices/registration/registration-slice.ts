@@ -1,67 +1,51 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
-import { TForm } from '../slices.types';
+import { RegistrationRequest, RegistrationResponse } from '../slices.types';
 
-import { initialState } from './initial-state';
+import {
+  initialState,
+  REGISTRATION_REQUEST_WITH_INITIAL_DATA,
+  REGISTRATION_RESPONSE_WITH_INITIAL_DATA,
+} from './initial-state';
 
-export const loaderSlice = createSlice({
+export const registrationSlice = createSlice({
   /* eslint-disable no-param-reassign */
-  name: 'loader',
+  name: 'registration',
   initialState,
   reducers: {
-    openFlow: (state) => {
-      state.isFlowOpen = true;
+    registrationRequest: (state, action: PayloadAction<RegistrationRequest>) => {
+      state.registrationRequest = action.payload;
+      state.registrationResponse = REGISTRATION_RESPONSE_WITH_INITIAL_DATA;
+      state.isLoading = true;
+      state.isError = false;
+      state.isSuccess = false;
     },
-    closeFlow: (state) => {
-      state.isFlowOpen = false;
+    registrationRequestSuccess: (state, action: PayloadAction<RegistrationResponse>) => {
+      state.registrationRequest = REGISTRATION_REQUEST_WITH_INITIAL_DATA;
+      state.registrationResponse = action.payload;
+      state.isLoading = false;
+      state.isError = false;
+      state.isSuccess = true;
     },
-    openRegistration: (state) => {
-      state.isRegistration = true;
+    registrationRequestError: (state) => {
+      state.registrationRequest = REGISTRATION_REQUEST_WITH_INITIAL_DATA;
+      state.registrationResponse = REGISTRATION_RESPONSE_WITH_INITIAL_DATA;
+      state.isLoading = false;
+      state.isError = true;
+      state.isSuccess = false;
     },
-    closeRegistration: (state) => {
-      state.isRegistration = false;
-    },
-    toggleRegistration: (state) => {
-      state.isRegistration = !state.isRegistration;
-    },
-    openPasswordRecovery: (state) => {
-      state.isPasswordRecovery = true;
-    },
-    closePasswordRecovery: (state) => {
-      state.isPasswordRecovery = false;
-    },
-    openNewPassword: (state) => {
-      state.isLetterReceived = true;
-    },
-    closeNewPassword: (state) => {
-      state.isLetterReceived = false;
-    },
-    nextStep: (state) => {
-      state.formStep += 1;
-    },
-    setTextFieldValue: (state, action: PayloadAction<{ value: string; id: string }>) => {
-      state.form[action.payload.id as keyof TForm].value = action.payload.value;
-    },
-    setTextFieldError: (state, action: PayloadAction<{ value: boolean; id: string }>) => {
-      state.form[action.payload.id as keyof TForm].isError = action.payload.value;
+    registrationReset: (state) => {
+      state.registrationRequest = REGISTRATION_REQUEST_WITH_INITIAL_DATA;
+      state.registrationResponse = REGISTRATION_RESPONSE_WITH_INITIAL_DATA;
+      state.isLoading = false;
+      state.isError = false;
+      state.isSuccess = false;
     },
   },
 });
 
-export const {
-  openFlow,
-  closeFlow,
-  openRegistration,
-  closeRegistration,
-  toggleRegistration,
-  openPasswordRecovery,
-  closePasswordRecovery,
-  openNewPassword,
-  closeNewPassword,
-  nextStep,
-  setTextFieldValue,
-  setTextFieldError,
-} = loaderSlice.actions;
+export const { registrationRequest, registrationRequestSuccess, registrationRequestError, registrationReset } =
+  registrationSlice.actions;
 /* eslint-disable-next-line import/no-default-export */
-export default loaderSlice.reducer;
+export default registrationSlice.reducer;

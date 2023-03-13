@@ -1,30 +1,24 @@
-export enum ESpriteId {
-  Grid = 'square-four',
-  List = 'menu',
+export enum SpriteId {
   ArrowLong = 'arrow-long-right',
-  Sort = 'sort-ascending',
+  ArrowShort = 'arrow-down',
+  Camera = 'camera',
   Cat = 'cat',
+  Checkmark = 'checkmark',
+  Close = 'close',
+  EyeClosed = 'eye-closed',
+  EyeOpened = 'eye-opened',
+  Facebook = 'facebook',
+  Grid = 'square-four',
+  Instagram = 'instagram',
+  Linkedin = 'linkedin',
+  List = 'menu',
+  Loader = 'loader',
   Logo = 'logo',
   Search = 'search',
-  Close = 'close',
-  ArrowShort = 'arrow-down',
-  Check = 'check',
-  EyeOpen = 'eye-open',
-  EyeClosed = 'eye-closed',
-  Warning = 'warning-circle-fill',
-  Success = 'check-circle-fill',
-  Camera = 'camera',
-  Facebook = 'facebook',
-  Instagram = 'instagram',
-  Vk = 'vk',
-  Linkedin = 'linkedin',
+  Sort = 'sort-ascending',
   StarEmpty = 'star',
   StarFill = 'star-fill',
+  Success = 'check-circle-fill',
+  Vk = 'vk',
+  Warning = 'warning-circle-fill',
 }
-
-export type TSprite = {
-  id: ESpriteId;
-  className: string;
-  onClick?: () => void;
-  dataTestId?: string;
-};

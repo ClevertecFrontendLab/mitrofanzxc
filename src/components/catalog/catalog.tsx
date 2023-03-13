@@ -1,22 +1,22 @@
 import { FC, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import classNames from 'classnames';
-
-import { useAppSelector } from '../../hooks';
-import { ContextMainPage } from '../../pages';
-import { ECatalogView } from '../buttons/button-catalog-view/button-catalog-view.types';
-import { Card } from '..';
+import { Card } from 'components';
+import { CatalogView } from 'components/buttons/button-catalog-view/button-catalog-view.types';
+import { useAppSelector } from 'hooks';
+import { ContextMainPage } from 'pages';
+import { catalogSelector } from 'store/selectors';
 
 import './catalog.scss';
 
 export const Catalog: FC = () => {
   const { category } = useParams();
-  const { catalogView, catalogData } = useAppSelector((state) => state.catalog);
+  const { catalogView, catalogData } = useAppSelector(catalogSelector);
   const { inputSearchValue } = useContext(ContextMainPage);
 
   const sectionClass = classNames({
-    catalog: catalogView === ECatalogView.Grid,
-    catalog_list: catalogView !== ECatalogView.Grid,
+    catalog: catalogView === CatalogView.Grid,
+    catalog_list: catalogView !== CatalogView.Grid,
   });
 
   return (

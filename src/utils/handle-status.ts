@@ -1,16 +1,18 @@
-import { EStatus, THandleStatus } from './utils.types';
+import { Booking, Delivery } from 'constants/constants.types';
 
-export const handleStatus: THandleStatus = (booking, delivery) => {
+import { Status } from './utils.types';
+
+export const handleStatus = (booking: Booking | null, delivery: Delivery | null): Status => {
   const isBooking = booking ? booking.order : null;
   const isDelivery = delivery ? delivery.handed : null;
 
   if (!isBooking && isDelivery) {
-    return EStatus.Busy;
+    return Status.Busy;
   }
 
   if (isBooking && !isDelivery) {
-    return EStatus.Reserved;
+    return Status.Reserved;
   }
 
-  return EStatus.Free;
+  return Status.Free;
 };

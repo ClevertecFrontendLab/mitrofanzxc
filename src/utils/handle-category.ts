@@ -1,6 +1,4 @@
-import { THandleCategory } from './utils.types';
-
-export const handleCategory: THandleCategory = (currentCategory, categories) => {
+export const handleCategory = (categories: string[], currentCategory?: string): string => {
   if (currentCategory === 'all') {
     return 'Все книги';
   }

@@ -1,7 +1,7 @@
+import { TCategories } from 'constants/constants.types';
+
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
-
-import { TCategories } from '../../../constants/constants.types';
 
 import { initialState } from './initial-state';
 
@@ -11,15 +11,19 @@ export const categoriesSlice = createSlice({
   initialState,
   reducers: {
     categoriesRequest: (state) => {
+      state.categoriesData = [];
       state.isLoading = true;
+      state.isError = false;
     },
     categoriesRequestSuccess: (state, action: PayloadAction<TCategories[]>) => {
       state.categoriesData = action.payload;
       state.isLoading = false;
+      state.isError = false;
     },
     categoriesRequestError: (state) => {
-      state.isError = true;
+      state.categoriesData = [];
       state.isLoading = false;
+      state.isError = true;
     },
   },
 });
