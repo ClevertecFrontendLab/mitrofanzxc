@@ -5,8 +5,7 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 import { AxiosResponse } from 'axios';
 import { ButtonPrimaryTitle } from 'components/buttons/button-primary/button-primary.types';
 import { FormToastMessage, FormToastTitle } from 'components/form-toast/form-toast.types';
-import { TextFieldMessage } from 'components/text-field/text-field.types';
-import { CustomError400, removeFromLocalStorage } from 'utils';
+import { removeFromLocalStorage } from 'utils';
 
 import {
   passwordRecoveryRequest,
